@@ -1,4 +1,4 @@
-name: Jaban.ir
+name: Deploy
 
 # Trigger the workflow on push and
 # pull request events on the production branch
@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           password: ${{ secrets.PASSWORD }}
-          script: "cd /home/jaban/domains/jaban.ir/app && ./deployer.sh"
+          script: "cd /home/jaban/domains/jaban.ir/app/jaban.ir && ./deployer.sh"
