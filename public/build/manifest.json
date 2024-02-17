@@ -1,0 +1,27 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-BV9E3lfK.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/frontend/master/page-loading-styles.css": {
+    "file": "assets/page-loading-styles-bPBQ6o5E.css",
+    "src": "resources/css/frontend/master/page-loading-styles.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-l0sNRNKZ.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/frontend/master/auth-modals-scripts.js": {
+    "file": "assets/auth-modals-scripts-BV3Mee9M.js",
+    "src": "resources/js/frontend/master/auth-modals-scripts.js",
+    "isEntry": true
+  },
+  "resources/js/frontend/master/page-loading-scripts.js": {
+    "file": "assets/page-loading-scripts-DbXaYtrp.js",
+    "src": "resources/js/frontend/master/page-loading-scripts.js",
+    "isEntry": true
+  }
+}

@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Livewire\Frontend\Auth\Login;
+
+use App\Models\User;
+use Livewire\Component;
+use App\Models\ActiveCode;
+use App\Notifications\Auth\SmsVerification;
+use App\Rules\Auth\Login\ValidPhoneLoginValidation;
+
+class Login extends Component
+{
+    public $phone;
+    public $smsVerificationSectionVisible = false;
+
+    protected function rules()
+    {
+        return 
+        [
+            'phone' => ['required', new ValidPhoneLoginValidation(), config('phone-regex.ir.regex')],
+        ];
+	}
+    
+    protected $messages = [
+        'phone.required' => 'لطفا شماره تلفن همراه خود را وارد نمایید.',
+        'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید.',
+    ];
+
+    public function loginUser() {
+
+        // Validate user input
+        $this->validate();
+       
+        // Show SMS verification input section after user clicks on submit
+        $this->smsVerificationSectionVisible = true;
+
+        // Get user object by phone number
+        $user = User::where('phone', $this->phone)->where('phone_verified', 1)->first();
+
+        if(!$user) {
+            return;
+        }
+
+        // Save user_id in session
+        session()->put('user_id_for_login_verification', $user->id);
+
+        // Generate code and send via SMS
+        $code = ActiveCode::generateCode($user);
+        $user->notify(new SmsVerification($code, $user->phone));
+    }
+
+    public function render()
+    {
+        return view('frontend.layouts.header.auth-modals.login.login');
+    }
+}
