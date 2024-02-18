@@ -32,7 +32,8 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function homePage() {
+    public function homePage(Request $request) {
+        dd($request->getClientIp());
         return view('frontend.pages.home.index');
     }
 
