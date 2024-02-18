@@ -22,9 +22,9 @@ class WhiteListIpAddressMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if (!in_array($request->getClientIp(), $this->whitelistIps)) {
-        //     abort(403, "You are restricted to access the site.");
-        // }
+        if (!in_array($request->ip(), $this->whitelistIps)) {
+            abort(403, "You are restricted to access the site.");
+        }
 
         return $next($request);
     }
