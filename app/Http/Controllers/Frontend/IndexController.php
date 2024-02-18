@@ -33,7 +33,8 @@ class IndexController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
     public function homePage(Request $request) {
-        $ip = $request->ip();
+        $ip = $_SERVER['REMOTE_ADDR'];
+        
         return view('frontend.pages.home.index', compact('ip'));
     }
 

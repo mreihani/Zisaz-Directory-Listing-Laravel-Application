@@ -11,8 +11,8 @@ class WhiteListIpAddressMiddleware
 
     public $whitelistIps = [
         '127.0.0.1',
-        '2.180.134.170',
-        '91.107.184.91'
+        '77.237.66.139',
+        '95.179.164.111'
     ];
 
     /**
