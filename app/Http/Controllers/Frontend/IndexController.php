@@ -33,7 +33,7 @@ class IndexController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
     public function homePage(Request $request) {
-        
+        dd($request->ip());
         return view('frontend.pages.home.index');
     }
 
