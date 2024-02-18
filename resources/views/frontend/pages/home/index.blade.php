@@ -7,5 +7,7 @@
 
     @livewire('frontend.pages.home.components.main-content')
 </div>
+            
+{{$ip}}
 
 @endsection
