@@ -5,5 +5,5 @@
 @livewire('frontend.auth.register.register')  
 
 <!-- Navbar-->
-@livewire('frontend.layouts.navbar')  
+@livewire('frontend.layouts.nav-bar')  
 
