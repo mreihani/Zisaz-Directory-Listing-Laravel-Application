@@ -47,7 +47,12 @@
                             سوالات متداول
                         </a>
                     </li>
-                    <li class="nav-item d-lg-none"><a class="nav-link" href="#signin-modal" data-bs-toggle="modal"><i class="fi-user me-2"></i>ثبت نام</a></li>
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link" href="#signin-modal" data-bs-toggle="modal">
+                            <i class="fi-user me-2"></i>
+                            ورود
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
