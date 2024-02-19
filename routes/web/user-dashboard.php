@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\UserDashboardController;
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('dashboard', 'dashboard')->name('dashboard');
+Route::controller(UserDashboardController::class)->group(function () {
+    Route::get('/dashboard', 'index')->name('user.dashboard.index');
 });
+
+
