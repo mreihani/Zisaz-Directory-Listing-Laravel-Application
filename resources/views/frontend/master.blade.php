@@ -6,7 +6,9 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
-    <title>قالب Finder | قالب چند منظوره فایندر کاریابی | خانه - کارجویان</title>
+    <title>
+      سامانه جابان
+    </title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="">
     <meta name="keywords" content="">
