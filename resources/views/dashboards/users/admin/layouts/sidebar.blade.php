@@ -15,14 +15,38 @@
     </div>
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
+        
+        <!-- Beginnig of Dashboard -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                پیشخوان
+            </span>
+        </li>
+        <li class="menu-item
+        {{Route::currentRouteName() == 'admin.dashboard.index' ? 'active open' : ''}}
+        ">
+            <a class="menu-link" href="{{route('admin.dashboard.index')}}">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>
+                    پیشخوان
+                </div>
+            </a>
+        </li>
+        <!-- End of Dashboard -->
+
         <!-- Beginnig of User profile -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                حساب کاربری
+            </span>
+        </li>
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.profile.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.account-settings.account.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.account-settings.security.index' ? 'active open' : ''}}
         " style="">
             <a class="menu-link menu-toggle" href="javascript:void(0);">
-                <i class="menu-icon tf-icons ti ti-file"></i>
+                <i class="ti ti-user text-heading"></i>
                 <div>حساب کاربری</div>
             </a>
             <ul class="menu-sub">
