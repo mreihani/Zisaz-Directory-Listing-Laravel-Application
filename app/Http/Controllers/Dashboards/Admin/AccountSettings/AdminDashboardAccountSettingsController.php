@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Dashboards\Admin;
+namespace App\Http\Controllers\Dashboards\Admin\AccountSettings;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminDashboardController extends Controller
+class AdminDashboardAccountSettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class AdminDashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        return view('dashboards.users.admin.index', compact('user'));        
+        
+        return view('dashboards.users.admin.pages.account-settings.account.index', compact('user'));  
     }
 
     /**

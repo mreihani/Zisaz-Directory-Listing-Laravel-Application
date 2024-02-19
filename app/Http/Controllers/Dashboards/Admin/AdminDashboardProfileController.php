@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboards\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminDashboardController extends Controller
+class AdminDashboardProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class AdminDashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        return view('dashboards.users.admin.index', compact('user'));        
+        
+        return view('dashboards.users.admin.pages.profile.index', compact('user'));     
     }
 
     /**
