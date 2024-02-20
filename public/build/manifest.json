@@ -4,6 +4,11 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/frontend/master/jaban-custom-styles.css": {
+    "file": "assets/jaban-custom-styles-Cn6xSWoU.css",
+    "src": "resources/css/frontend/master/jaban-custom-styles.css",
+    "isEntry": true
+  },
   "resources/css/frontend/master/page-loading-styles.css": {
     "file": "assets/page-loading-styles-bPBQ6o5E.css",
     "src": "resources/css/frontend/master/page-loading-styles.css",
@@ -22,11 +27,6 @@
   "resources/js/frontend/master/page-loading-scripts.js": {
     "file": "assets/page-loading-scripts-DbXaYtrp.js",
     "src": "resources/js/frontend/master/page-loading-scripts.js",
-    "isEntry": true
-  },
-  "resources/js/frontend/master/toasts/success-toast.js": {
-    "file": "assets/success-toast-DVgeLOPs.js",
-    "src": "resources/js/frontend/master/toasts/success-toast.js",
     "isEntry": true
   }
 }
