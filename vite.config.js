@@ -10,6 +10,7 @@ export default defineConfig({
 
                 // Frontend, master page, preloading css file
                 'resources/css/frontend/master/page-loading-styles.css',
+                'resources/css/frontend/master/jaban-custom-styles.css',
 
                 // Frontend, master page, preloading js file
                 'resources/js/frontend/master/page-loading-scripts.js',

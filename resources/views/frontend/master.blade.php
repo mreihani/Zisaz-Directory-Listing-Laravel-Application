@@ -34,8 +34,14 @@
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.css')}}"/>
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/tiny-slider/dist/tiny-slider.css')}}"/>
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.css')}}"/>
+
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/css/theme.min.css')}}">
+
+    <!-- Jaban.ir Custom Styles -->
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/css/jaban-custom.css')}}">
+    @vite('resources/css/frontend/master/jaban-custom-styles.css')
+   
     <!-- jQuery 3.7 -->
     <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
 
@@ -49,11 +55,13 @@
         <div class="page-spinner"></div><span>لطفا منتظر باشید</span>
         </div>
     </div>
+
     <main class="page-wrapper">
         @include('frontend.layouts.header')
-        
+
         <!-- Page content-->
         @yield('main')
+
     </main>
 
     <!-- Footer-->

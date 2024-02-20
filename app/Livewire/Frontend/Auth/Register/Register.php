@@ -27,7 +27,7 @@ class Register extends Component
             'firstname' => 'required',
             'lastname' => 'required',
             'phone' => ['required', new IgnorePhoneRegistrationValidation(), config('phone-regex.ir.regex')],
-            'email' => ['email', new IgnoreEmailRegistrationValidation()],
+            'email' => ['email', 'required', new IgnoreEmailRegistrationValidation()],
             'terms_and_conditions' => 'required',
         ];
 	}
@@ -36,6 +36,7 @@ class Register extends Component
         'firstname.required' => 'لطفا نام خود را وارد نمایید.',
         'lastname.required' => 'لطفا نام خانوادگی خود را وارد نمایید.',
         'email.email' => 'لطفا آدرس ایمیل صحیح وارد نمایید.',
+        'email.required' => 'لطفا آدرس ایمیل خود را وارد نمایید.',
         'phone.required' => 'لطفا شماره تلفن همراه خود را وارد نمایید.',
         'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید.',
         'terms_and_conditions.required' => 'لطفا برای ادامه شرایط و ضوابط سامانه جابان را تأیید نمایید.',

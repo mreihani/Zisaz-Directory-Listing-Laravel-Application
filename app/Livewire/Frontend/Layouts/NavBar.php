@@ -8,6 +8,7 @@ class NavBar extends Component
 {
 
     public $myAccountHeaderAuth;
+    
 
     /**
      * Constructor for initializing class properties based on user authentication status.

@@ -54,7 +54,7 @@ class SmsVerification extends Component
                 $this->dispatch('hideModelAfterLogin');
 
                 // Show my account header for authenticated users
-                $this->dispatch('showMyAccountHeaderAuth');
+                $this->dispatch('showMyAccountHeaderAuth');           
             }
         }
     }

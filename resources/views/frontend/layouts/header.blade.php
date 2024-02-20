@@ -7,3 +7,4 @@
 <!-- Navbar-->
 @livewire('frontend.layouts.nav-bar')  
 
+

@@ -34,8 +34,8 @@
                                         @endif   
                                     </div>
                                     <div class="col-sm-6 mb-4">
-                                        <label class="form-label" for="js-email-email">پست الکترونیکی</label>
-                                        <input class="form-control" name="email" type="email" id="js-email-email" placeholder="example@gmail.com" wire:model="email">
+                                        <label class="form-label" for="js-email-email">پست الکترونیکی *</label>
+                                        <input class="form-control" name="email" type="email" id="js-email-email" placeholder="example@gmail.com" required wire:model="email">
                                         @if($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif  

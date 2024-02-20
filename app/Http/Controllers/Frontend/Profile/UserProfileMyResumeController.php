@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Profile;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserDashboardController extends Controller
+class UserProfileMyResumeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        echo "user dashboard";
+        return view('frontend.pages.profile.my-resume.index');
     }
 
     /**
@@ -62,5 +62,4 @@ class UserDashboardController extends Controller
     {
         //
     }
-
 }

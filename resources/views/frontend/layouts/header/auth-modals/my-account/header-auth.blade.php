@@ -4,10 +4,10 @@
         <ul class="dropdown-menu dropdown-menu-dark">
             <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">ناحیه کاربری</a>
             <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="job-board-account-profile.html">تنظیمات پروفایل من</a></li>
-                <li><a class="dropdown-item" href="job-board-account-my-resumes.html">روزمه من</a></li>
-                <li><a class="dropdown-item" href="job-board-account-saved-jobs.html">فرصت های شغلی من</a></li>
-                <li><a class="dropdown-item" href="job-board-account-notifications.html">ایمیل های اطلاع رسانی من</a></li>
+                <li><a class="dropdown-item" href="{{route('user.dashboard.profile-settings.index')}}">تنظیمات پروفایل من</a></li>
+                <li><a class="dropdown-item" href="{{route('user.dashboard.my-resume.index')}}">روزمه من</a></li>
+                <li><a class="dropdown-item" href="{{route('user.dashboard.saved-jobs.index')}}">فرصت های شغلی من</a></li>
+                <li><a class="dropdown-item" href="{{route('user.dashboard.account-notifications.index')}}">تنظیمات اطلاع رسانی</a></li>
             </ul>
             </li>
             <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">روزمه ساز</a>

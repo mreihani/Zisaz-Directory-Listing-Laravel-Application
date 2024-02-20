@@ -2,7 +2,7 @@
     <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-scroll-header>
         <div class="container">
             <a class="navbar-brand ms-0 ms-xl-4" href="{{route('home-page')}}">
-                <img class="d-block" src="{{asset('assets/frontend/img/logo/logo-light.svg')}}" width="116" alt="Finder">
+                <img class="d-block" src="{{asset('assets/frontend/img/logo/logo-light.svg')}}" width="90" alt="جابان">
             </a>
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,5 +56,10 @@
                 </ul>
             </div>
         </div>
+
+        <!-- toaster -->
+        @livewire('frontend.layouts.toast')
+
     </header>
 </div>
+

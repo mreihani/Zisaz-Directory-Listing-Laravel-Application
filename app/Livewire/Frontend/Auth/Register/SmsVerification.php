@@ -57,6 +57,13 @@ class SmsVerification extends Component
 
             // Show my account header for authenticated users
             $this->dispatch('showMyAccountHeaderAuth');
+
+            // Show Toaster
+            $this->dispatch('showToaster', 
+                title: 'خوش آمدید!', 
+                message: 'ثبت نام با موفقیت انجام شد.', 
+                type: 'bg-success'
+            );
             
         } else {
             auth()->logout();

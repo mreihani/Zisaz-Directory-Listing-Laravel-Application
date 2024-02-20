@@ -23,5 +23,10 @@
     "file": "assets/page-loading-scripts-DbXaYtrp.js",
     "src": "resources/js/frontend/master/page-loading-scripts.js",
     "isEntry": true
+  },
+  "resources/js/frontend/master/toasts/success-toast.js": {
+    "file": "assets/success-toast-DVgeLOPs.js",
+    "src": "resources/js/frontend/master/toasts/success-toast.js",
+    "isEntry": true
   }
 }
