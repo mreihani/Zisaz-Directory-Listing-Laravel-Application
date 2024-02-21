@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 
 require __DIR__.'/auth.php';
+
+// Route::get('/test', 
+//     function () {
+//         echo App\Models\User::find(1)->employerProfile;
+//     }
+// );

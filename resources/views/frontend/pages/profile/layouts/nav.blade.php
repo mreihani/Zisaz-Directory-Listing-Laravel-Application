@@ -1,6 +1,7 @@
 <div class="d-flex align-items-start justify-content-between pb-4 mb-2">
     <div class="d-flex align-items-start">
-        <div class="position-relative flex-shrink-0"><img class="rounded-circle" src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}" width="100" alt="">
+        <div class="position-relative flex-shrink-0">
+            <img class="rounded-circle" src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}" width="100" alt="">
             <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm position-absolute end-0 bottom-0" type="button" data-bs-toggle="tooltip" title="تغییر تصویر">
                 <i class="fi-pencil fs-xs"></i>
             </button>

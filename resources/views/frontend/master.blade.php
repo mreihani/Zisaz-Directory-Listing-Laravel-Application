@@ -39,7 +39,6 @@
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/css/theme.min.css')}}">
 
     <!-- Jaban.ir Custom Styles -->
-    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/css/jaban-custom.css')}}">
     @vite('resources/css/frontend/master/jaban-custom-styles.css')
    
     <!-- jQuery 3.7 -->
@@ -79,7 +78,8 @@
     <script src="{{asset('assets/frontend/js/theme.min.js')}}"></script>
     
     @vite('resources/js/frontend/master/auth-modals-scripts.js')
-
+    @vite('resources/js/frontend/profile/profile-settings-scripts.js')
+    
   </body>
 
 </html>

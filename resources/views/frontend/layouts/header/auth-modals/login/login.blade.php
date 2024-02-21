@@ -12,8 +12,8 @@
                         <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
                             <form wire:submit.prevent="loginUser" class="needs-validation" novalidate>
                                 <div class="mb-4">
-                                    <label class="form-label" for="js-phone-login">شماره تلفن *</label>
-                                    <input class="form-control" name="phone" type="phone" id="js-phone-login" placeholder="09123456789" required wire:model="phone">
+                                    <label class="form-label" for="user-login-phone">شماره تلفن *</label>
+                                    <input class="form-control" name="phone" type="phone" id="user-login-phone" placeholder="09123456789" required wire:model="phone">
                                     @if($errors->has('phone'))
                                         <span class="text-danger">{{ $errors->first('phone') }}</span>
                                     @endif   

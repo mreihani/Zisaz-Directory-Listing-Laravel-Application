@@ -211,56 +211,56 @@
             </div>
             <!-- Account settings-->
             <div class="row pt-4 mt-2">
-            <div class="col-lg-3">
-                <h2 class="h5 font-vazir">تنظیمات نوع اکانت</h2>
-            </div>
-            <div class="col-lg-9">
-                <div class="border rounded-3 p-3" id="account-settings">
-                <!-- Account type-->
-                <div class="border-bottom pb-3 mb-3">
-                    <div class="d-flex align-items-center justify-content-between">
-                    <div class="ps-2">
-                        <label class="form-label fw-bold">نوع اکانت</label>
-                        <div id="type-value">کارفرما</div>
+                <div class="col-lg-3">
+                    <h2 class="h5 font-vazir">تنظیمات نوع اکانت</h2>
+                </div>
+                <div class="col-lg-9">
+                    <div class="border rounded-3 p-3" id="account-settings">
+                    <!-- Account type-->
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="ps-2">
+                            <label class="form-label fw-bold">نوع اکانت</label>
+                            <div id="type-value">کارفرما</div>
+                        </div>
+                        <div class="me-n3" data-bs-toggle="tooltip" title="ویرایش"><a class="nav-link py-0" href="#type-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+                        </div>
+                        <div class="collapse" id="type-collapse" data-bs-parent="#account-settings">
+                        <select class="form-select mt-3" data-bs-binded-element="#type-value">
+                            <option value="" disabled>انتخاب نوع اکانت</option>
+                            <option value="Employer (looking for an employee)">کارفرما (به دنبال یک کارمند هستم)</option>
+                            <option value="Job seeker (looking for a job)" selected>کارجو (به دنبال شغل هستم)</option>
+                        </select>
+                        </div>
                     </div>
-                    <div class="me-n3" data-bs-toggle="tooltip" title="ویرایش"><a class="nav-link py-0" href="#type-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+                    <!-- Two-factor authentication-->
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="ps-2">
+                            <label class="form-label fw-bold">احراز هویت دو مرحله ای</label>
+                            <div id="auth-value">غیر فعال</div>
+                        </div>
+                        <div class="me-n3" data-bs-toggle="tooltip" title="ویرایش"><a class="nav-link py-0" href="#auth-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
+                        </div>
+                        <div class="collapse" id="auth-collapse" data-bs-parent="#account-settings">
+                        <select class="form-select mt-3" data-bs-binded-element="#auth-value">
+                            <option value="" disabled>فعال/ غیرفعال تایید دومرحله ای</option>
+                            <option value="Active">فعال</option>
+                            <option value="Inactive" selected>غیر فعال</option>
+                        </select>
+                        </div>
                     </div>
-                    <div class="collapse" id="type-collapse" data-bs-parent="#account-settings">
-                    <select class="form-select mt-3" data-bs-binded-element="#type-value">
-                        <option value="" disabled>انتخاب نوع اکانت</option>
-                        <option value="Employer (looking for an employee)">کارفرما (به دنبال یک کارمند هستم)</option>
-                        <option value="Job seeker (looking for a job)" selected>کارجو (به دنبال شغل هستم)</option>
-                    </select>
                     </div>
                 </div>
-                <!-- Two-factor authentication-->
-                <div>
-                    <div class="d-flex align-items-center justify-content-between">
-                    <div class="ps-2">
-                        <label class="form-label fw-bold">احراز هویت دو مرحله ای</label>
-                        <div id="auth-value">غیر فعال</div>
-                    </div>
-                    <div class="me-n3" data-bs-toggle="tooltip" title="ویرایش"><a class="nav-link py-0" href="#auth-collapse" data-bs-toggle="collapse"><i class="fi-edit"></i></a></div>
-                    </div>
-                    <div class="collapse" id="auth-collapse" data-bs-parent="#account-settings">
-                    <select class="form-select mt-3" data-bs-binded-element="#auth-value">
-                        <option value="" disabled>فعال/ غیرفعال تایید دومرحله ای</option>
-                        <option value="Active">فعال</option>
-                        <option value="Inactive" selected>غیر فعال</option>
-                    </select>
-                    </div>
-                </div>
-                </div>
-            </div>
             </div>
             <!-- Action buttons-->
             <div class="row pt-4 mt-2">
-            <div class="col-lg-9 offset-lg-3">
-                <div class="d-flex align-items-center justify-content-between">
-                <button class="btn btn-primary rounded-pill px-3 px-sm-4" type="button">ذخیره تغییرات</button>
-                <button class="btn btn-link btn-sm px-0" type="button"><i class="fi-trash me-2"></i>حذف اکانت</button>
+                <div class="col-lg-9 offset-lg-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                    <button class="btn btn-primary rounded-pill px-3 px-sm-4" type="button">ذخیره تغییرات</button>
+                    <button class="btn btn-link btn-sm px-0" type="button"><i class="fi-trash me-2"></i>حذف اکانت</button>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
