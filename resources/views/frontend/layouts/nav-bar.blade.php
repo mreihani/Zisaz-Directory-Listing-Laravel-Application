@@ -8,8 +8,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
     
-            <a class="btn btn-primary btn-sm rounded-pill ms-2 order-lg-3" href="{{route('resume-builder')}}">
-                <i class="fi-plus me-2"></i>رزومه ساز
+            <a class="btn btn-primary btn-sm rounded-pill ms-2 order-lg-3" href="">
+                <i class="fi-plus me-2"></i>
+                سایت من را بساز
             </a>
            
             <div class="collapse navbar-collapse order-lg-2" id="navbarNav">

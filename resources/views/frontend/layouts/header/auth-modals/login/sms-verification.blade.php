@@ -1,5 +1,5 @@
 <div wire:transition>
-    <div class="p-2 mt-4 mx-auto border-top" style="max-width: 734px;">
+    <div class="p-2 mt-4 mx-auto" style="max-width: 734px;">
         <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
         <div class="tab-content mt-4">
             <div class="tab-pane fade show active" id="job-seeker" role="tabpanel">

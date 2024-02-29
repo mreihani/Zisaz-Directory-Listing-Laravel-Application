@@ -23,11 +23,39 @@
                 @endif   
             </div>
             <div class="col-sm-6 mb-4">
-                <label class="form-label" for="user-registration-email">پست الکترونیکی *</label>
-                <input class="form-control" name="email" type="email" id="user-registration-email" placeholder="example@gmail.com" required wire:model="email" dir="ltr">
+                <label class="form-label" for="user-registration-email">پست الکترونیکی (اختیاری)</label>
+                <input class="form-control" name="email" type="email" id="user-registration-email" placeholder="example@gmail.com" wire:model="email" dir="ltr">
                 @if($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif  
+            </div>
+            <div class="col-sm-6 mb-4">
+                <label class="form-label" for="type_of_activity"> نوع فعالیت حساب کاربری را تعیین نمایید<span class="text-danger">*</span></label>
+                <select class="form-select form-select-md" wire:model="type_of_activity_id" wire:change="loadUserAccountOnChange($event.target.value)">
+                    <option value="" disabled>انتخاب نوع فعالیت</option>
+                    @foreach ($typeOfActivityObj as $typeOfActivityItem)
+                        <option value="{{$typeOfActivityItem->id}}">
+                            {{$typeOfActivityItem->title}}
+                        </option>
+                    @endforeach
+                </select>
+                @if($errors->has('type_of_activity_id'))
+                    <span class="text-danger">{{ $errors->first('type_of_activity_id') }}</span>
+                @endif   
+            </div>
+            <div class="col-sm-6 mb-4">
+                <label class="form-label" for="user_account_category">گروه بندی حساب کاربری را تعیین نمایید <span class="text-danger">*</span></label>
+                <select class="form-select form-select-md" wire:model="user_account_category_id">
+                    <option value="" selected="true" disabled>انتخاب گروه بندی حساب کاربری</option>
+                    @foreach ($userAccountCategoryObj as $userAccountCategoryItem)
+                        <option value="{{$userAccountCategoryItem->id}}">
+                            {{$userAccountCategoryItem->title}}
+                        </option>
+                    @endforeach
+                </select>
+                @if($errors->has('user_account_category_id'))
+                    <span class="text-danger">{{ $errors->first('user_account_category_id') }}</span>
+                @endif   
             </div>
         </div>
         <div class="form-check">
@@ -37,6 +65,21 @@
         @if($errors->has('terms_and_conditions'))
             <span class="text-danger mb-4">{{ $errors->first('terms_and_conditions') }}</span>
         @endif 
-        <button wire:key class="btn btn-primary btn-lg w-100 rounded-pill mt-4" type="submit">ثبت نام</button>
+
+        <div wire:loading.remove wire:target="registerUser">
+            <button wire:key class="btn btn-primary btn-lg w-100 rounded-pill mt-4" type="submit">
+                ثبت نام
+            </button>
+        </div>    
+
+        <div class="d-flex justify-content-center">
+            <div wire:loading wire:target="registerUser">
+                <button wire:key class="btn btn-primary btn-lg w-100">
+                    <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                    در حال ارسال پیامک
+                </button>
+            </div>
+        </div>
+
     </form>
 </div>

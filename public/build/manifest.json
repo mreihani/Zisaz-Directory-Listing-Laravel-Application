@@ -28,10 +28,5 @@
     "file": "assets/page-loading-scripts-DbXaYtrp.js",
     "src": "resources/js/frontend/master/page-loading-scripts.js",
     "isEntry": true
-  },
-  "resources/js/frontend/profile/profile-settings-scripts.js": {
-    "file": "assets/profile-settings-scripts-l0sNRNKZ.js",
-    "src": "resources/js/frontend/profile/profile-settings-scripts.js",
-    "isEntry": true
   }
 }

@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\UserProf;
-use App\Models\AdminProf;
+
 use App\Models\ActiveCode;
-use App\Models\EmployerProf;
+use App\Models\UserGrpType;
+use App\Models\Profile\UserProfile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -63,23 +63,14 @@ class User extends Authenticatable
         $this->attributes['email'] = strtolower($value);
     }
 
-    public function employerProfile()
+    public function UserProfile()
     {
-        return $this->hasMany(EmployerProf::class);
+        return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
 
-    public function adminProfile()
+    public function userGroupType()
     {
-        return $this->hasMany(AdminProf::class);
+        return $this->hasOne(UserGrpType::class, 'user_id', 'id');
     }
-
-    public function agentProfile()
-    {
-        return $this->hasMany(AgentProf::class);
-    }
-
-    public function userProfile()
-    {
-        return $this->hasMany(UserProf::class);
-    }
+   
 }

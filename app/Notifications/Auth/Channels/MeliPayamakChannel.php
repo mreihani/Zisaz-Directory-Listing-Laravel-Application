@@ -25,6 +25,6 @@ class MeliPayamakChannel
             "text" => array($code),
             "to" => $phone,
             "bodyId" => $patternCode);
-        $send_Result = $sms->SendByBaseNumber($data)->SendByBaseNumberResult;
+        $send_Result = $sms->SendByBaseNumber($data)->SendByBaseNumberResult;       
     }
 }

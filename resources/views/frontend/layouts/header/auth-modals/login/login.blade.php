@@ -10,16 +10,28 @@
                             <div class="mt-4 mt-sm-5">هنوز ثبت نام نکرده اید؟ <a href="#signup-modal" data-bs-toggle="modal" data-bs-dismiss="modal">ثبت نام</a></div>
                         </div>
                         <div class="col-md-6 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
-                            <form wire:submit.prevent="loginUser" class="needs-validation" novalidate>
-                                <div class="mb-4">
-                                    <label class="form-label" for="user-login-phone">شماره تلفن *</label>
-                                    <input class="form-control" name="phone" type="phone" id="user-login-phone" placeholder="09123456789" required wire:model="phone">
-                                    @if($errors->has('phone'))
-                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
-                                    @endif   
-                                </div>
-                                <button wire:key class="btn btn-primary btn-lg w-100" type="submit">ورود به حساب کاربری</button>
-                            </form>
+                            @if(!$smsVerificationSectionVisible)
+                                <form wire:submit.prevent="loginUser" class="needs-validation" novalidate>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="user-login-phone">شماره تلفن *</label>
+                                        <input class="form-control" name="phone" type="phone" id="user-login-phone" placeholder="09123456789" required wire:model="phone">
+                                        @if($errors->has('phone'))
+                                            <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                        @endif   
+                                    </div>
+                                    <div wire:loading.remove wire:target="loginUser">
+                                        <button wire:key class="btn btn-primary btn-lg w-100" type="submit">ورود به حساب کاربری</button>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div wire:loading wire:target="loginUser">
+                                            <button wire:key class="btn btn-primary btn-lg w-100">
+                                                <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                                                در حال ارسال پیامک
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            @endif
 
                             <!-- SMS Verification Modal-->
                             <div class="mb-4">
@@ -27,7 +39,6 @@
                                     @livewire('frontend.auth.login.sms-verification') 
                                 @endif
                             </div>
-                            
                         </div>
                     </div>
                 </div>

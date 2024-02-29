@@ -18,42 +18,33 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('username')->nullable();
             $table->string('phone');
             $table->boolean('phone_verified')->default(false);
-            $table->enum('role', ['admin', 'employer', 'estate_agent', 'user'])->default('user');
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
-            $table->enum('two_factor_auth', ['active', 'inactive'])->default('inactive');
+            $table->boolean('account_status')->default(false);
+            $table->boolean('two_factor_auth')->default(false);
+            $table->enum('role', ['admin', 'construction'])->default('construction');
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('admin_profs', function (Blueprint $table) {
+        Schema::create('con_acts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('type', ['admin', 'agency', 'development', 'jaban_empls'])->default('admin');
+            $table->string('title');
+        });
+
+        Schema::create('con_grps', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('con_act_id');
+            $table->foreign('con_act_id')->references('id')->on('con_acts')->onDelete('cascade');
+            $table->string('title');
         });
         
-        Schema::create('employer_profs', function (Blueprint $table) {
+        Schema::create('user_grp_types', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('business_name')->nullable();
-            $table->enum('type', ['business_owner', 'company', 'freelancer'])->default('business_owner');
-        });
-
-        Schema::create('agent_profs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('type', ['consultant', 'agent', 'subscriber'])->default('consultant');
-        });
-
-        Schema::create('user_profs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('groupable_id')->nullable();
+            $table->string('groupable_type')->nullable();
         });
 
         Schema::create('active_codes', function (Blueprint $table) {
@@ -72,10 +63,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('active_codes');
-        Schema::dropIfExists('user_profs');
-        Schema::dropIfExists('agent_profs');
-        Schema::dropIfExists('employer_profs');
-        Schema::dropIfExists('admin_profs');
+        Schema::dropIfExists('user_grp_types');
+        Schema::dropIfExists('con_grps');
+        Schema::dropIfExists('con_acts');
         Schema::dropIfExists('users');
     }
 };

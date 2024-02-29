@@ -1,30 +1,22 @@
 <div class="d-flex align-items-start justify-content-between pb-4 mb-2">
-    <div class="d-flex align-items-start">
+    <div class="d-flex align-items-center">
         <div class="position-relative flex-shrink-0">
             <img class="rounded-circle" src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}" width="100" alt="">
-            <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm position-absolute end-0 bottom-0" type="button" data-bs-toggle="tooltip" title="تغییر تصویر">
-                <i class="fi-pencil fs-xs"></i>
-            </button>
         </div>
         <div class="ps-3 ps-sm-4">
             <h3 class="h5">
                 {{auth()->user()->firstname}} {{auth()->user()->lastname}}
             </h3>
             <ul class="list-unstyled fs-sm mb-0">
-                <li class="d-flex text-nav text-break"><i class="fi-mail opacity-60 mt-1 me-2"></i>
-                    <span>
-                        {{auth()->user()->email}}
-                    </span>
-                </li>
                 <li class="d-flex text-nav text-break"><i class="fi-phone opacity-60 mt-1 me-2"></i>
                     <span>
-                        {{auth()->user()->phone}}
+                        @livewire('frontend.pages.profile.layouts.header.index')
                     </span>
                 </li>
             </ul>
         </div>
     </div>
-    <a class="nav-link p-0 d-none d-md-block" href="{{route('logout')}}">
+    <a class="btn btn-danger btn-sm rounded-pill" href="{{route('logout')}}">
         <i class="fi-logout mt-n1 me-2"></i>
         خروج
     </a>
@@ -39,22 +31,37 @@
         <li class="nav-item mb-md-0 me-md-2 pe-md-1">
             <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.profile-settings.index' ? 'active' : ''}}"
                 href="{{route('user.dashboard.profile-settings.index')}}" aria-current="page">
-                <i class="fi-settings mt-n1 me-2 fs-base"></i>
-                تنظیمات پروفایل من
+                <i class="fi-user mt-n1 me-2 fs-base"></i>
+                پروفایل من
+            </a>
+        </li>
+        <li class="nav-item mb-md-0 me-md-2 pe-md-1">
+            <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.contact-info.index' ? 'active' : ''}}"
+                href="{{route('user.dashboard.contact-info.index')}}" aria-current="page">
+                <i class="fi-phone mt-n1 me-2 fs-base"></i>
+                اطلاعات تماس
             </a>
         </li>
         <li class="nav-item mb-md-0 me-md-2 pe-md-1">
             <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-resume.index' ? 'active' : ''}}" 
                 href="{{route('user.dashboard.my-resume.index')}}">
                 <i class="fi-file mt-n1 me-2 fs-base"></i>
-                رزومه من
+                رزومه و سابقه کار
+            </a>
+        </li>
+        <li class="nav-item mb-md-0 me-md-2 pe-md-1">
+            <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.license.index' ? 'active' : ''}}" 
+                href="{{route('user.dashboard.license.index')}}">
+                <i class="fi-award mt-n1 me-2 fs-base"></i>
+                مجوز ها
             </a>
         </li>
         <li class="nav-item mb-md-0 me-md-2 pe-md-1">
             <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.saved-jobs.index' ? 'active' : ''}}" 
                 href="{{route('user.dashboard.saved-jobs.index')}}">
-                <i class="fi-heart mt-n1 me-2 fs-base"></i>
-                فرصت های شغلی نشان شده</a>
+                <i class="fi-bookmark mt-n1 me-2 fs-base"></i>
+                فرصت های شغلی نشان شده
+            </a>
         </li>
         <li class="nav-item mb-md-0">
             <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.account-notifications.index' ? 'active' : ''}}" 

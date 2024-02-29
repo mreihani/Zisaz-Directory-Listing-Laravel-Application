@@ -17,8 +17,21 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-// Route::get('/test', 
-//     function () {
-//         echo App\Models\User::find(1)->employerProfile;
-//     }
-// );
+Route::get('/test', 
+    function () {
+        // echo App\Models\User::find(1)->employerProfile;
+
+        $typeOfActivityArray = config('jaban.profile.sector.construction.type_of_activity');
+        foreach ($typeOfActivityArray as $typeOfActivityItem) {
+            $conActObj = App\Models\Construction\ConAct::create([
+                'title' => $typeOfActivityItem['title']
+            ]);
+            foreach ($typeOfActivityItem['value'] as $gpr) {
+                App\Models\Construction\ConGrp::insert([
+                    'con_act_id' => $conActObj->id,
+                    'title' => $gpr['title'],
+                ]);
+            }
+        }
+    }
+);

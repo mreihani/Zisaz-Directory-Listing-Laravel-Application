@@ -17,9 +17,6 @@ export default defineConfig({
 
                 // Frontend, master page, login and registraion modals scripts
                 'resources/js/frontend/master/auth-modals-scripts.js',
-
-                // Frontend, profile pages, profile settings scripts
-                'resources/js/frontend/profile/profile-settings-scripts.js',
             ],
             refresh: true,
         }),
