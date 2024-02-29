@@ -83,7 +83,15 @@ class Index extends Component
             // 'shop_name' => 'a',
             // 'shop_act_grps_id' => 1,
         ]);
-       
+
+        // Show Toaster
+        $this->dispatch('showToaster', 
+            title: '', 
+            message: '
+                اطلاعات با موفقیت ذخیره شد.
+            ', 
+            type: 'bg-success'
+        );
     }
 
     private function handleFileUpload() {
