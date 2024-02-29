@@ -8,7 +8,7 @@ use App\Models\ActiveCode;
 use Illuminate\Validation\Rule;
 use Stevebauman\Purify\Facades\Purify;
 use App\Notifications\Auth\SmsVerification;
-use App\Rules\profile\IgnorePhoneChangeValidation;
+use App\Rules\Profile\IgnorePhoneChangeValidation;
 
 class Index extends Component
 {
