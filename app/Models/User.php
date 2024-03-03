@@ -72,5 +72,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserGrpType::class, 'user_id', 'id');
     }
+
+    public function avatar() {
+        $avatar = 
+        (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->profile_image)
+        ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
+            asset('assets/dashboards/assets/img/jaban/user.png');
+
+        return $avatar;    
+    }
    
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\ProfileSettings;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\Profile\ShopActCat;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,13 +15,17 @@ class Index extends Component
     public $profile_image;
     public $gender;
     public $birth_date;
+    public $shop_name;
+    public $typeOfActivityObj;
+    public $type_of_activity_id;
+    public $activityGroupObj;
+    public $shop_act_grps_id;
 
     public function __construct() {
         $this->profile_image = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
         && auth()->user()->userProfile->userProfileInformation->profile_image)
         ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
-        // asset('assets/dashboards/assets/img/jaban/user.png');
         null;
         
         $this->gender = (auth()->user()->userProfile
@@ -32,6 +37,35 @@ class Index extends Component
         && auth()->user()->userProfile->userProfileInformation
         && auth()->user()->userProfile->userProfileInformation->birth_date)
         ? auth()->user()->userProfile->userProfileInformation->birth_date : '';   
+
+        $this->shop_name = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->shop_name)
+        ? auth()->user()->userProfile->userProfileInformation->shop_name : '';
+
+        $this->typeOfActivityObj = ShopActCat::all();
+
+        $this->type_of_activity_id = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->shopActivityGroup)
+        ? auth()->user()->userProfile->userProfileInformation->shopActivityGroup->shopActivityCategory->id : '';
+
+        $this->activityGroupObj = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->shopActivityGroup) 
+        ? auth()->user()->userProfile->userProfileInformation->shopActivityGroup->shopActivityCategory->shopActivityGroup
+        : [];
+
+        $this->shop_act_grps_id = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->shopActivityGroup)
+        ? auth()->user()->userProfile->userProfileInformation->shopActivityGroup->id : '';
+    }
+
+    public function loadShopActivityGrpOnChange() {
+        $typeOfActivityId = $this->type_of_activity_id;
+        $this->activityGroupObj = ShopActCat::find($typeOfActivityId)->shopActivityGroup;
+        $this->shop_act_grps_id = $this->activityGroupObj->first()->id;
     }
 
     protected function rules()
@@ -41,6 +75,9 @@ class Index extends Component
             'profile_image' => 'required|image|max:4096',
             'gender' => 'required',
             'birth_date' => 'required',
+            'shop_name' => 'required',
+            'type_of_activity_id' => 'required',
+            'shop_act_grps_id' => 'required',
         ];
 	}
     
@@ -50,6 +87,9 @@ class Index extends Component
         'profile_image.max' => 'حداکثر حجم مجاز تصویر پروفایل 4 مگابایت است.',
         'gender.required' => 'لطفا جنسیت را تعیین نماید.',
         'birth_date.required' => 'لطفا تاریخ تولد خود را تعیین نمایید.',
+        'shop_name.required' => 'لطفا نام فروشگاه خود را تعیین نمایید.',
+        'type_of_activity_id.required' => 'لطفا فعالیت صنفی فروشگاه خود را تعیین نمایید.',
+        'shop_act_grps_id.required' => 'لطفا زیر دسته فعالیت صنفی فروشگاه خود را تعیین نمایید.',
     ];
 
     public function saveProfile() {
@@ -79,9 +119,9 @@ class Index extends Component
         ],[
             'profile_image' => $profileImageAddress,
             'gender' => $this->gender,
-            'birth_date' => $this->birth_date
-            // 'shop_name' => 'a',
-            // 'shop_act_grps_id' => 1,
+            'birth_date' => $this->birth_date,
+            'shop_name' => $this->shop_name ?: null,
+            'shop_act_grps_id' => $this->shop_act_grps_id ?: null,
         ]);
 
         // Show Toaster
@@ -95,7 +135,6 @@ class Index extends Component
     }
 
     private function handleFileUpload() {
-
         $userId = auth()->user()->id;
         $dir = 'storage/upload/profile-images/' . $userId;
 

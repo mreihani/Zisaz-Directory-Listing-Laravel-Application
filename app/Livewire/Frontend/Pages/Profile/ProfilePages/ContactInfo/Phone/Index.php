@@ -24,17 +24,12 @@ class Index extends Component
     {
         return 
         [
-            'phone' => [
-                'required', 
-                new IgnorePhoneChangeValidation(),
-                config('phone-regex.ir.regex'),
-            ],
+            'phone' => ['required', new IgnorePhoneChangeValidation(), config('phone-regex.ir.regex')],
         ];
 	}
-    
+
     protected $messages = [
         'phone.required' => 'لطفا شماره تلفن همراه خود را وارد نمایید.',
-        'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید.',
     ];
 
     protected $listeners = [

@@ -5,8 +5,8 @@ namespace App\Models\Profile;
 use App\Models\User;
 use App\Models\Profile\ProfileInfo;
 use App\Models\Profile\ProfileContact;
-use App\Models\Profile\ProfileCompanySpec;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Profile\ProfileCompanySpec;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserProfile extends Model

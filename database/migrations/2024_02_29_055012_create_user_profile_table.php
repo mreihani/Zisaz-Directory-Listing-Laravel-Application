@@ -47,8 +47,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_profile_id');
             $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
             $table->string('landline_telephone')->nullable();
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
+            $table->string('city_id')->nullable();
             $table->string('address')->nullable();
             $table->string('postal_code')->nullable();
             $table->timestamps();

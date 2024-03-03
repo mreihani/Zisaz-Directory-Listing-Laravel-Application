@@ -17,7 +17,6 @@
     <script src="{{asset('assets/frontend/vendor/persain-date/persian-date.js')}}"></script>
 	<script src="{{asset('assets/frontend/vendor/persain-date/persian-datepicker.min.js')}}"></script>
 	<script src="{{asset('assets/frontend/vendor/persain-date/persian-date-initiate.js')}}"></script>
-	<script src="{{asset('assets/frontend/vendor/ir-province/ir-province.js')}}"></script>
 @endpush
 
 <div class="position-absolute top-0 start-0 w-100 bg-dark" style="height: 398px;"></div>

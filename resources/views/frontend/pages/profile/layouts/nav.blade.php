@@ -1,7 +1,7 @@
 <div class="d-flex align-items-start justify-content-between pb-4 mb-2">
     <div class="d-flex align-items-center">
         <div class="position-relative flex-shrink-0">
-            <img class="rounded-circle" src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}" width="100" alt="">
+            <img class="rounded-circle" src="{{auth()->user()->avatar()}}" width="100" alt="">
         </div>
         <div class="ps-3 ps-sm-4">
             <h3 class="h5">

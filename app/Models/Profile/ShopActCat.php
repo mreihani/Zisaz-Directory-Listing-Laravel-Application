@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ShopActCat extends Model
 {
     protected $guarded = [];
+    public $timestamps = false;
 
     public function shopActivityGroup()
     {
-        return $this->hasOne(ShopActGrp::class, 'shop_act_cat_id', 'id');
+        return $this->hasMany(ShopActGrp::class, 'shop_act_cat_id', 'id');
     }
 }

@@ -130,38 +130,105 @@
                 <h2 class="h5 font-vazir">اطلاعات فردی</h2>
             </div>
             <div class="col-md-9">
-                <div class="row border-bottom pb-3 mb-3">
-                    <div class="col-md-6">
-                        <!-- Gender-->
-                        <div class="">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="ps-2">
-                                    <label class="form-label fw-bold">جنسیت</label>
+                <div class="border rounded-3 p-3">
+                    <div class="row pb-3">
+                        <div class="col-md-6">
+                            <!-- Gender-->
+                            <div class="">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="ps-2">
+                                        <label class="form-label fw-bold">جنسیت</label>
+                                    </div>
                                 </div>
+                                <select class="form-select mt-3" wire:model="gender">
+                                    <option selected value="" disabled>انتخاب جنسیت</option>
+                                    <option value="male">مرد</option>
+                                    <option value="female">زن</option>
+                                </select>
+                                @if($errors->has('gender'))
+                                    <span class="text-danger">{{ $errors->first('gender') }}</span>
+                                @endif   
                             </div>
-                            <select class="form-select mt-3" wire:model="gender">
-                                <option selected value="" disabled>انتخاب جنسیت</option>
-                                <option value="male">مرد</option>
-                                <option value="female">زن</option>
-                            </select>
-                            @if($errors->has('gender'))
-                                <span class="text-danger">{{ $errors->first('gender') }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ps-2">
+                                <label class="form-label fw-bold">
+                                    تاریخ تولد
+                                </label>
+                            </div>
+                            <div class="input-group input-group-md mt-3">
+                                <input data-jdp="" data-jdp-min-date="today" name="datepicker" class="form-control rounded pe-5" placeholder="انتخاب تاریخ" wire:model="birth_date">
+                                <i class="fi-calendar text-muted position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                            </div>
+                            @if($errors->has('birth_date'))
+                                <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                             @endif   
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="ps-2">
-                            <label class="form-label fw-bold">
-                                تاریخ تولد
-                            </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop details -->
+        <div class="row pt-4 mt-2">
+            <div class="col-md-3">
+                <h2 class="h5 font-vazir">اطلاعات فروشگاه</h2>
+            </div>
+
+            <div class="col-md-9">
+                <div class="border rounded-3 p-3">
+                    <div class="row pb-3 mb-2">
+                        <div class="col-md-12">
+                            <div class="border-bottom pb-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="ps-2">
+                                        <label class="form-label fw-bold">
+                                            نام فروشگاه
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <input class="form-control mt-3" type="text" placeholder="نام فروشگاه خود را وارد نمایید" wire:model="shop_name">
+                                </div>
+                                @if($errors->has('shop_name'))
+                                    <span class="text-danger">{{ $errors->first('shop_name') }}</span>
+                                @endif   
+                            </div>
                         </div>
-                        <div class="input-group input-group-md mt-3">
-                            <input data-jdp="" data-jdp-min-date="today" name="datepicker" class="form-control rounded pe-5" placeholder="انتخاب تاریخ" wire:model="birth_date">
-                            <i class="fi-calendar text-muted position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                    </div>
+
+                    <div class="row pb-3">
+                        <div class="col-sm-6 mb-4">
+                            <label class="form-label" for="type_of_activity"> صنف فعالیت فروشگاه را تعیین نمایید<span class="text-danger">*</span></label>
+                            <select class="form-select form-select-md" wire:model="type_of_activity_id" wire:change="loadShopActivityGrpOnChange($event.target.value)">
+                                <option value="" disabled>انتخاب صنف فعالیت</option>
+                                @foreach ($typeOfActivityObj as $typeOfActivityItem)
+                                    <option value="{{$typeOfActivityItem->id}}">
+                                        {{$typeOfActivityItem->title}}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('type_of_activity_id'))
+                                <span class="text-danger">{{ $errors->first('type_of_activity_id') }}</span>
+                            @endif   
                         </div>
-                        @if($errors->has('birth_date'))
-                            <span class="text-danger">{{ $errors->first('birth_date') }}</span>
-                        @endif   
+                      
+                        <div class="col-sm-6 mb-4">
+                            <label class="form-label" for="user_account_category">گروه بندی صنف را تعیین نمایید <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-md" wire:model="shop_act_grps_id">
+                                <option value="" selected="true" disabled>انتخاب گروه بندی صنف</option>
+                                @foreach ($activityGroupObj as $activityGroupItem)
+                                    <option value="{{$activityGroupItem->id}}">
+                                        {{$activityGroupItem->title}}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('shop_act_grps_id'))
+                                <span class="text-danger">{{ $errors->first('shop_act_grps_id') }}</span>
+                            @endif   
+                        </div>
+
+
                     </div>
                 </div>
             </div>
