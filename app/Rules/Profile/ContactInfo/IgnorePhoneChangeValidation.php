@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Profile;
+namespace App\Rules\Profile\ContactInfo;
 
 use Closure;
 use App\Models\User;

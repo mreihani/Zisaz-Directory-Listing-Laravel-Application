@@ -51,7 +51,7 @@ class RegisterUser extends Component
         'terms_and_conditions.required' => 'لطفا برای ادامه شرایط و ضوابط سامانه جابان را تأیید نمایید.',
     ];
 
-    public function __construct() {
+    public function mount() {
         $this->typeOfActivityObj = ConAct::all();
         $this->userAccountCategoryObj = [];
         $this->type_of_activity_id = '';

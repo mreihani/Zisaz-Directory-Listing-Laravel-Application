@@ -62,5 +62,13 @@ Route::get('/test',
                 ]);
             }
         }
+
+        // آرایه مربوط به انواع قرارداد
+        $contractTypeArr = config('jaban.contract_type');
+        foreach ($contractTypeArr as $contractTypeItem) {
+            $contractTypeObj = App\Models\ContractType\ContractType::create([
+                'title' => $contractTypeItem['title']
+            ]);
+        }
     }
 );

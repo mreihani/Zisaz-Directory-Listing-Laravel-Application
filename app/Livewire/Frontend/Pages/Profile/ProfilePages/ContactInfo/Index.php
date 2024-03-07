@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\ContactInfo;
 
 use Livewire\Component;
+use Stevebauman\Purify\Facades\Purify;
 use App\Models\ProvinceAndCity\Province;
 
 class Index extends Component
@@ -37,7 +38,7 @@ class Index extends Component
         'postal_code.digits_between' => 'لطفا کد پستی صحیح وارد نمایید.',
     ];
 
-    public function __construct() {
+    public function mount() {
         $this->landline_telephone = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileContact
         && auth()->user()->userProfile->userProfileContact->landline_telephone)
@@ -90,10 +91,10 @@ class Index extends Component
         $userProfile->userProfileContact()->updateOrCreate([
             'user_profile_id' => $userProfile->id
         ],[
-            'landline_telephone' => $this->landline_telephone,
-            'city_id' => $this->selectedCityId,
-            'address' => $this->address,
-            'postal_code' => $this->postal_code,
+            'landline_telephone' => Purify::clean($this->landline_telephone),
+            'city_id' => Purify::clean($this->selectedCityId),
+            'address' => Purify::clean($this->address),
+            'postal_code' => Purify::clean($this->postal_code),
         ]);
 
         // Show Toaster

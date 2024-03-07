@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Profile\ShopActCat;
 use Intervention\Image\Facades\Image;
+use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
@@ -21,7 +22,7 @@ class Index extends Component
     public $activityGroupObj;
     public $shop_act_grps_id;
 
-    public function __construct() {
+    public function mount() {
         $this->profile_image = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
         && auth()->user()->userProfile->userProfileInformation->profile_image)
@@ -118,10 +119,10 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
-            'gender' => $this->gender,
-            'birth_date' => $this->birth_date,
-            'shop_name' => $this->shop_name ?: null,
-            'shop_act_grps_id' => $this->shop_act_grps_id ?: null,
+            'gender' => Purify::clean($this->gender),
+            'birth_date' => Purify::clean($this->birth_date),
+            'shop_name' => Purify::clean($this->shop_name) ?: null,
+            'shop_act_grps_id' => Purify::clean($this->shop_act_grps_id) ?: null,
         ]);
 
         // Show Toaster

@@ -1,156 +1,160 @@
 <div>
     <!-- Account Activity details -->
     <div class="bg-light rounded-3 p-4 p-md-5 mb-3">
-        <h2 class="h5 font-vazir mb-4"><i class="fi-briefcase text-primary fs-5 mt-n1 me-2 pe-1"></i>سوابق شغلی</h2>
+        <h2 class="h5 font-vazir mb-4">
+            <i class="fi-award text-primary fs-5 mt-n1 me-2"></i>
+            مجوز ها
+        </h2>
         
-        <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" id="no-experience">
-            <label class="form-check-label" for="no-experience">من هنوز هیچ تجربه کاری ندارم</label>
-        </div>
-        <label class="form-label" for="pr-title">عنوان شغل (سمت) <span class="text-danger">*</span></label>
-        <input class="form-control form-control-lg mb-4" type="text" id="pr-title" placeholder="عنوان شغل (سمت)" required="">
-        <div class="row">
-            <div class="col-sm-6 mb-4">
-            <label class="form-label" for="pr-company">نام شرکت <span class="text-danger">*</span></label>
-            <input class="form-control form-control-lg" type="text" id="pr-company" placeholder="نام شرکت" required="">
-            </div>
-            <div class="col-sm-6 mb-4">
-            <label class="form-label" for="pr-activity">زمینه فعالیت <span class="text-danger">*</span></label>
-            <select class="form-select form-select-lg" id="pr-activity" required="">
-                <option value="" disabled="" selected="">انتخاب زمینه فعالیت</option>
-                <option value="Accounting">مالی و حسابداری</option>
-                <option value="Marketing &amp; PR">فروش و بازاریابی</option>
-                <option value="Medicine">پزشکی، پرستاری</option>
-                <option value="Agriculture">مهندس معمار</option>
-                <option value="Internet technology">وب، برنامه نویسی و نرم افزار</option>
-                <option value="Security">امنیت شبکه</option>
-                <option value="Management">مدیریت مالی</option>
-                <option value="HoReCa">تحقیق و توسعه</option>
-                <option value="Insurance">کارشناس حقوقی</option>
-            </select>
-            </div>
-            <div class="col-sm-6 mb-4">
-            <label class="form-label" for="pr-country">کشور</label>
-            <select class="form-select form-select-lg" id="pr-country">
-                <option value="" disabled="" selected="">انتخاب کشور</option>
-                <option value="Australia">استرالیا</option>
-                <option value="Belgium">فرانسه</option>
-                <option value="Canada">کانادا</option>
-                <option value="China">ژاپن</option>
-                <option value="Denmark">دانمارک</option>
-                <option value="France">پاریس</option>
-                <option value="Germany">آلمان</option>
-                <option value="Japan">توکیو</option>
-                <option value="UK">انگلستان</option>
-                <option value="USA">آمریکا</option>
-            </select>
-            </div>
-            <div class="col-sm-6 mb-4">
-            <label class="form-label" for="pr-city">شهر</label>
-            <select class="form-select form-select-lg" id="pr-city">
-                <option value="" disabled="" selected="">انتخاب شهر</option>
-                <option value="Beijing">مالزی</option>
-                <option value="Berlin">برلین</option>
-                <option value="Brussels">بارسلونا</option>
-                <option value="Copenhagen">چین</option>
-                <option value="London">لندن</option>
-                <option value="Ottawa">آمستردام</option>
-                <option value="Paris">پاریس</option>
-                <option value="Sydney">سیدنی</option>
-                <option value="Tokyo">توکیو</option>
-                <option value="Washington">نیویورک</option>
-            </select>
-            </div>
-            <div class="col-lg-6 mb-4">
-            <label class="form-label" for="pr-period-from">تاریخ اشتغال از <span class="text-danger">*</span></label>
-            <div class="row gx-2 gx-sm-3">
-                <div class="col-7 col-sm-8">
-                <select class="form-select form-select-lg" id="pr-period-from" required="">
-                    <option value="" disabled="" selected="">ماه</option>
-                    <option value="January">فروردین</option>
-                    <option value="February">اردیبهشت</option>
-                    <option value="March">خرداد</option>
-                    <option value="April">تیر</option>
-                    <option value="May">مرداد</option>
-                    <option value="June">شهریور</option>
-                    <option value="July">مهر</option>
-                    <option value="August">آبان</option>
-                    <option value="September">آذر</option>
-                    <option value="October">دی</option>
-                    <option value="November">بهمن</option>
-                    <option value="December">اسفند</option>
-                </select>
-                </div>
-                <div class="col-5 col-sm-4">
-                <select class="form-select form-select-lg" required="">
-                    <option value="" disabled="" selected="">سال</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                    <option value="2014">2014</option>
-                    <option value="2013">2013</option>
-                    <option value="2012">2012</option>
-                    <option value="2011">2011</option>
-                    <option value="2010">2010</option>
-                </select>
-                </div>
-            </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-            <label class="form-label" for="pr-period-to">تا <span class="text-danger">*</span></label>
-            <div class="row gx-2 gx-sm-3">
-                <div class="col-7 col-sm-8">
-                <select class="form-select form-select-lg" id="pr-period-to" required="">
-                    <option value="" disabled="" selected="">ماه</option>
-                    <option value="January">فروردین</option>
-                    <option value="February">اردیبهشت</option>
-                    <option value="March">خرداد</option>
-                    <option value="April">تیر</option>
-                    <option value="May">مرداد</option>
-                    <option value="June">شهریور</option>
-                    <option value="July">مهر</option>
-                    <option value="August">آبان</option>
-                    <option value="September">آذر</option>
-                    <option value="October">دی</option>
-                    <option value="November">بهمن</option>
-                    <option value="December">اسفند</option>
-                </select>
-                </div>
-                <div class="col-5 col-sm-4">
-                <select class="form-select form-select-lg" required="">
-                    <option value="" disabled="" selected="">سال</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                    <option value="2014">2014</option>
-                    <option value="2013">2013</option>
-                    <option value="2012">2012</option>
-                    <option value="2011">2011</option>
-                    <option value="2010">2010</option>
-                </select>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" id="still-work">
-            <label class="form-check-label" for="still-work">هنوز مشغول به کار هستم</label>
-        </div>
+        <label class="form-label" for="pr-title">عنوان مجوز <span class="text-danger">*</span></label>
+        <input class="form-control form-control-lg mb-4" type="text" id="pr-title" placeholder="عنوان مجوز خود را وارد نمایید" required="">
+       
+        <!-- Multiple file upload: Grid of files + File type, size and quantity validation (Gallery) -->
         <div class="mb-4">
-            <label class="form-label" for="pr-description">توضیحات</label>
-            <textarea class="form-control" rows="5" id="pr-description" placeholder="موقعیت خود و هرگونه دستاورد مهم را شرح دهید"></textarea>
-            <div class="form-text pt-1">8000 کاراکتر استفاده شده است.</div>
+            <label class="form-label" for="pr-description">
+                بارگذاری تصویر مجوز
+                <span class="text-danger">*</span>
+            </label>
+            <input class="file-uploader file-uploader-grid" type="file" multiple data-max-files="4" data-max-file-size="2MB" accept="image/png, image/jpeg, video/mp4, video/mov" data-label-idle='<div class="btn btn-primary mb-3"><i class="fi-cloud-upload me-1"></i>Upload photos / video</div><div>or drag them in</div>'>
         </div>
+
         <button class="btn btn-link btn-lg text-primary py-2 px-0 mb-md-n2" type="button"><i class="fi-plus fs-sm me-2"></i>ایجاد سابقه شغلی</button>
     </div>
+
+
+
+    {{-- <div class="row">
+        <!-- Sidebar-->
+        <div class="col-md-3 mb-4 pb-3 pb-md-0">
+          <div style="max-width: 13rem;">
+            <ul class="list-unstyled fs-sm pb-1 pb-md-3 px-0">
+              <li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-file opacity-70 me-2"></i><span>منتشر شده</span><span class="text-muted ms-auto">(3)</span></a></li>
+              <li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-file-clean opacity-70 me-2"></i><span>پیش نویس</span><span class="text-muted ms-auto">(0)</span></a></li>
+              <li><a class="nav-link fw-normal d-flex align-items-center px-0 py-1" href="#"><i class="fi-archive opacity-70 me-2"></i><span>آرشیو</span><span class="text-muted ms-auto">(0)</span></a></li>
+            </ul><a class="btn btn-primary rounded-pill w-100" href="job-board-post-resume-1.html"><i class="fi-plus fs-sm me-2"></i>ثبت رزومه جدید</a>
+          </div>
+        </div>
+        <!-- List of resumes-->
+        <div class="col-md-9">
+          <!-- Item-->
+          <div class="card bg-secondary card-hover mb-2">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-start"><img class="d-none d-sm-block" src="{{asset('assets/frontend/img/avatars/38.png')}}" width="100" alt="Resume picture">
+                  <div class="ps-sm-3">
+                    <h3 class="h6 card-title pb-1 mb-2"><a class="stretched-link text-nav text-decoration-none" href="#">کارشناس پشتیبانی</a></h3>
+                    <div class="fs-sm">
+                      <div class="text-nowrap mb-2"><i class="fi-map-pin text-muted me-1"> </i>نیویورک</div>
+                      <div class="text-nowrap"><i class="fi-cash fs-base text-muted me-1"></i>450000 تومان</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-end justify-content-between">
+                  <div class="dropdown position-relative zindex-10 mb-3">
+                    <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
+                    <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-edit opacity-60 me-2"></i>ویرایش</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-flame opacity-60 me-2"></i>بروزرسانی</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-download-file opacity-60 me-2"></i>دریافت نسخه PDF</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-power opacity-60 me-2"></i>غیرفعال</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-trash opacity-60 me-2"></i>حذف</button>
+                      </li>
+                    </ul>
+                  </div><strong class="fs-sm">80 بازدید</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Item-->
+          <div class="card bg-secondary card-hover mb-2">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-start"><img class="d-none d-sm-block" src="{{asset('assets/frontend/img/avatars/37.png')}}" width="100" alt="Resume picture">
+                  <div class="ps-sm-3">
+                    <h3 class="h6 card-title pb-1 mb-2"><a class="stretched-link text-nav text-decoration-none" href="#"><span class="me-3">گرافیست</span><span class="badge bg-faded-accent fs-sm rounded-pill">ویژه</span></a></h3>
+                    <div class="fs-sm">
+                      <div class="text-nowrap mb-2"><i class="fi-map-pin text-muted me-1"> </i>نیویورک</div>
+                      <div class="text-nowrap"><i class="fi-cash fs-base text-muted me-1"></i>20000 تومان - 205000 تومان</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-end justify-content-between">
+                  <div class="dropdown position-relative zindex-5 mb-3">
+                    <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
+                    <ul class="dropdown-menu my-1" aria-labelledby="contextMenu2">
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-edit opacity-60 me-2"></i>ویرایش</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-flame opacity-60 me-2"></i>بروزرسانی</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-download-file opacity-60 me-2"></i>دریافت نسخه PDF</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-power opacity-60 me-2"></i>غیرفعال</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-trash opacity-60 me-2"></i>حذف</button>
+                      </li>
+                    </ul>
+                  </div><strong class="fs-sm">203 بازدید</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item-->
+          <div class="card bg-secondary card-hover">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-start"><img class="d-none d-sm-block" src="{{asset('assets/frontend/img/avatars/37.png')}}" width="100" alt="Resume picture">
+                  <div class="ps-sm-3">
+                    <h3 class="h6 card-title pb-1 mb-2"><a class="stretched-link text-nav text-decoration-none" href="#">کارشناس سرورهای ماکروسافت</a></h3>
+                    <div class="fs-sm">
+                      <div class="text-nowrap mb-2"><i class="fi-map-pin text-muted me-1"> </i>نیویورک</div>
+                      <div class="text-nowrap"><i class="fi-cash fs-base text-muted me-1"></i>2500000 تومان</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-end justify-content-between">
+                  <div class="dropdown position-relative zindex-1 mb-3">
+                    <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
+                     <ul class="dropdown-menu my-1" aria-labelledby="contextMenu2">
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-edit opacity-60 me-2"></i>ویرایش</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-flame opacity-60 me-2"></i>بروزرسانی</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-download-file opacity-60 me-2"></i>دریافت نسخه PDF</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-power opacity-60 me-2"></i>غیرفعال</button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button"><i class="fi-trash opacity-60 me-2"></i>حذف</button>
+                      </li>
+                    </ul>
+                  </div><strong class="fs-sm">92 بازدید</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div> --}}
+
+
 
     <!-- Action buttons-->
     <div class="row">
@@ -159,7 +163,6 @@
                 <button class="btn btn-primary rounded-pill px-3 px-sm-4" type="button">
                     ذخیره تغییرات
                 </button>
-                {{-- <button class="btn btn-link btn-sm px-0" type="button"><i class="fi-trash me-2"></i>حذف اکانت</button> --}}
             </div>
         </div>
     </div>

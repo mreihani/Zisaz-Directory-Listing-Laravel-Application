@@ -11,7 +11,7 @@ class Toast extends Component
     public $title;
     public $message;
 
-    public function __construct() {
+    public function mount() {
         $this->showToaster = false;
     }
 

@@ -8,14 +8,15 @@ use App\Models\ActiveCode;
 use Illuminate\Validation\Rule;
 use Stevebauman\Purify\Facades\Purify;
 use App\Notifications\Auth\SmsVerification;
-use App\Rules\Profile\IgnorePhoneChangeValidation;
+use App\Rules\Profile\ContactInfo\IgnorePhoneChangeValidation;
+
 
 class Index extends Component
 {
     public $confirmationCode;
     public $phone;
 
-    public function __construct() {
+    public function mount() {
         $this->confirmationCode = false;
         $this->phone = auth()->user()->phone;
     }

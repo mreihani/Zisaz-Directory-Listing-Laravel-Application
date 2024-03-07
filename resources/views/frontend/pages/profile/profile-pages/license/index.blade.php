@@ -25,7 +25,9 @@
             <ol class="breadcrumb breadcrumb-light">
             <li class="breadcrumb-item"><a href="{{URL::to('/')}}">خانه</a></li>
             <li class="breadcrumb-item"><a href="">حساب کاربری</a></li>
-            <li class="breadcrumb-item active" aria-current="page">تنظیمات حساب کاربری</li>
+            <li class="breadcrumb-item active" aria-current="page">
+                مجوز ها
+            </li>
             </ol>
         </nav>
         <!-- Page card like wrapper-->

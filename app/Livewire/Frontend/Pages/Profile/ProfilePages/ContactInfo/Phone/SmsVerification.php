@@ -7,7 +7,7 @@ use Livewire\Component;
 use App\Models\ActiveCode;
 use Illuminate\Http\Request;
 use Stevebauman\Purify\Facades\Purify;
-use App\Rules\Profile\VerificationLoginValidation;
+use App\Rules\Profile\ContactInfo\VerificationLoginValidation;
 
 
 class SmsVerification extends Component

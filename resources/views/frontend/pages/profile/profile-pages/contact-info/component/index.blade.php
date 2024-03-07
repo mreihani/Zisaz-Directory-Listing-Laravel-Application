@@ -36,6 +36,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">شماره تلفن ثابت</label>
+                                <span class="text-danger">*</span>
                             </div>
                         </div>
                         <div>
@@ -52,6 +53,7 @@
                             <div class="col-md-6">
                                 <div class="">
                                     <label class="form-label fw-bold">استان</label>
+                                    <span class="text-danger">*</span>
                                     <div class="select-box">
                                         <select class="form-select form-select-md" wire:model="selectedProvinceId" wire:change="loadCitiesByProvinceChange($event.target.value)">
                                             <option value="" selected disabled>انتخاب استان</option>
@@ -70,6 +72,7 @@
                             <div class="col-md-6">
                                 <div class="">
                                     <label class="form-label fw-bold">شهر</label>
+                                    <span class="text-danger">*</span>
                                     <select wire:model="selectedCityId" class="form-select form-select-md">
                                         <option value="" selected disabled>انتخاب شهر</option>
                                         @foreach ($cities as $cityItem)
@@ -91,6 +94,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">آدرس</label>
+                                <span class="text-danger">*</span>
                             </div>
                         </div>
                         <div>
@@ -106,6 +110,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">کد پستی</label>
+                                <span class="text-danger">*</span>
                             </div>
                         </div>
                         <div>

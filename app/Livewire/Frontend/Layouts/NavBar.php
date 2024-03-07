@@ -13,7 +13,7 @@ class NavBar extends Component
     /**
      * Constructor for initializing class properties based on user authentication status.
      */
-    public function __construct() {
+    public function mount() {
         // Check if the user is authenticated and set myAccountHeaderAuth and myAccountHeaderGuest accordingly
         $this->myAccountHeaderAuth = auth()->check();
     }

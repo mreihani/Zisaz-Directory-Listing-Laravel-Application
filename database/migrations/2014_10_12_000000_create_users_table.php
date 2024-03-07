@@ -55,6 +55,11 @@ return new class extends Migration
             $table->unique(['user_id','code']);
             $table->timestamp('expired_at');
         });
+
+        Schema::create('active_forms', function (Blueprint $table) {
+            $table->id();
+            $table->boolean('profile_resume_payment')->default(1);
+        });
     }
 
     /**
@@ -62,6 +67,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('active_forms');
         Schema::dropIfExists('active_codes');
         Schema::dropIfExists('user_grp_types');
         Schema::dropIfExists('con_grps');

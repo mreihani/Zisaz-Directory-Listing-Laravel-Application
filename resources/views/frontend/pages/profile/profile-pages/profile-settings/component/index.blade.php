@@ -138,6 +138,7 @@
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="ps-2">
                                         <label class="form-label fw-bold">جنسیت</label>
+                                        <span class="text-danger">*</span>
                                     </div>
                                 </div>
                                 <select class="form-select mt-3" wire:model="gender">
@@ -155,6 +156,7 @@
                                 <label class="form-label fw-bold">
                                     تاریخ تولد
                                 </label>
+                                <span class="text-danger">*</span>
                             </div>
                             <div class="input-group input-group-md mt-3">
                                 <input data-jdp="" data-jdp-min-date="today" name="datepicker" class="form-control rounded pe-5" placeholder="انتخاب تاریخ" wire:model="birth_date">
@@ -185,6 +187,7 @@
                                         <label class="form-label fw-bold">
                                             نام فروشگاه
                                         </label>
+                                        <span class="text-danger">*</span>
                                     </div>
                                 </div>
                                 <div class="mb-2">

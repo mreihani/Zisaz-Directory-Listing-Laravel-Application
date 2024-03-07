@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
+        });
+
+        Schema::create('contract_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
         });
 
         Schema::create('shop_act_cats', function (Blueprint $table) {
@@ -53,6 +57,12 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('profile_resumes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_profile_id');
+            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
+        });
+
         Schema::create('profile_company_specs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_profile_id');
@@ -68,8 +78,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_contact');
-        Schema::dropIfExists('profile_info');
+        Schema::dropIfExists('profile_company_specs');
+        Schema::dropIfExists('profile_resumes');
+        Schema::dropIfExists('profile_contacts');
+        Schema::dropIfExists('profile_infos');
+        Schema::dropIfExists('shop_act_grps');
+        Schema::dropIfExists('shop_act_cats');
+        Schema::dropIfExists('contract_types');
         Schema::dropIfExists('user_profiles');
     }
 };

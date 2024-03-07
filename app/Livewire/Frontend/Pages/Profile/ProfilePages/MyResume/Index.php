@@ -6,6 +6,20 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $resumeSectionNumber;
+
+    public function mount() {
+        $this->resumeSectionNumber = 1;
+    }
+
+    protected $listeners = [
+        'resumeSectionNumber' => 'resumeSectionNumber'
+    ];
+
+    public function resumeSectionNumber($resumeSectionNumber) {
+        $this->resumeSectionNumber = $resumeSectionNumber;
+    }
+
     public function render()
     {
         return view('frontend.pages.profile.profile-pages.my-resume.component.index');

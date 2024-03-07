@@ -8,13 +8,12 @@ use App\Models\ActiveCode;
 use Illuminate\Validation\Rule;
 use Stevebauman\Purify\Facades\Purify;
 use App\Notifications\Auth\SmsVerification;
-use App\Rules\profile\IgnorePhoneChangeValidation;
 
 class Index extends Component
 {
     public $phone;
 
-    public function __construct() {
+    public function mount() {
         $this->phone = auth()->user()->phone;
     }
 
