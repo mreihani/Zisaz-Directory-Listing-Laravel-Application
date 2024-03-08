@@ -15,7 +15,7 @@ class SmsVerification extends Notification
     public $code;
     public $phone;
     
-    public function mount($code, $phone)
+    public function __construct($code, $phone)
     {
         $this->code = $code;
         $this->phone = $phone;
