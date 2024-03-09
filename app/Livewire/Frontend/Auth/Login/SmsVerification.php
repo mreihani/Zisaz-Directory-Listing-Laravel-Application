@@ -47,8 +47,15 @@ class SmsVerification extends Component
                 // Delete code
                 $user->activeCode()->delete();
 
+                // Get remember me boolean
+                $remember = false;
+                if(session()->has('remember_me')) {
+                    $remember = session()->get('remember_me');
+                    session()->forget('remember_me');
+                } 
+                
                 // Login User
-                auth()->login($user);
+                auth()->login($user, $remember);
 
                 // Hide model after login
                 $this->dispatch('hideModelAfterLogin');

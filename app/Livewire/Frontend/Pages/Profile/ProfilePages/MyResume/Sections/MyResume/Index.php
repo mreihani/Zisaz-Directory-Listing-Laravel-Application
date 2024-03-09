@@ -10,6 +10,7 @@ class Index extends Component
     public $showResume;
     public $locations;
     public $jobBudget;
+    public $title;
 
     public function mount() {
         $this->resumeSectionNumber = 1;

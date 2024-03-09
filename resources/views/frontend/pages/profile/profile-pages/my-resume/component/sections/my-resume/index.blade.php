@@ -10,8 +10,10 @@
                             <div class="d-flex align-items-start">
                                 <img class="d-none d-sm-block" src="{{asset('assets/frontend/img/jaban/jaban_resume.png')}}" width="100" alt="Resume picture">
                                 <div class="ps-sm-3">
-                                    <h3 class="h6 card-title pb-1 mb-2">
-                                        <a class="stretched-link text-nav text-decoration-none" wire:click="editResume">کارشناس پشتیبانی</a>
+                                    <h3 class="h6 card-title pb-1 mb-2" style="cursor: pointer;">
+                                        <a class="stretched-link text-nav text-decoration-none" wire:click="editResume">
+                                            {{$title}}    
+                                        </a>
                                     </h3>
                                     <div class="fs-sm">
                                         <div class="text-nowrap mb-2"><i class="fi-map-pin text-muted me-1"> </i>

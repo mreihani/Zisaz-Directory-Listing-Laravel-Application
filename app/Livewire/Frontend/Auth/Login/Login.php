@@ -11,6 +11,7 @@ use App\Rules\Auth\Login\ValidPhoneLoginValidation;
 class Login extends Component
 {
     public $phone;
+    public $remember;
     public $smsVerificationSectionVisible = false;
 
     protected function rules()
@@ -27,7 +28,7 @@ class Login extends Component
     ];
 
     public function loginUser() {
-
+       
         // Validate user input
         $this->validate();
        
@@ -43,6 +44,9 @@ class Login extends Component
 
         // Save user_id in session
         session()->put('user_id_for_login_verification', $user->id);
+
+        // Put remememer me boolean
+        session()->put('remember_me', $this->remember ? true : false);
 
         // Generate code and send via SMS
         $code = ActiveCode::generateCode($user);

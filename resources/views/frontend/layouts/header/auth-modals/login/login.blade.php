@@ -19,6 +19,12 @@
                                             <span class="text-danger">{{ $errors->first('phone') }}</span>
                                         @endif   
                                     </div>
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="remember" wire:model="remember" type="checkbox"/>
+                                            <label class="form-check-label" for="remember"> مرا به خاطر بسپار</label>
+                                        </div>
+                                    </div>
                                     <div wire:loading.remove wire:target="loginUser">
                                         <button wire:key class="btn btn-primary btn-lg w-100" type="submit">ورود به حساب کاربری</button>
                                     </div>
