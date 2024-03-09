@@ -45,6 +45,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web','auth', 'role:admin'])
             ->prefix('admin')
             ->group(base_path('routes/web/admin-dashboard.php'));
+
+            Route::middleware(['web', 'auth'])
+                ->group(base_path('routes/web/assets.php'));
         });
     }
 }

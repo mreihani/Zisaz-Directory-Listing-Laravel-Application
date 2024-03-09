@@ -38,4 +38,9 @@ class UserProfile extends Model
     {
         return $this->hasOne(ProfileCompanySpec::class, 'user_profile_id', 'id');
     }
+    
+    public function userProfileLicense()
+    {
+        return $this->hasOne(ProfileLicense::class, 'user_profile_id', 'id');
+    }
 }

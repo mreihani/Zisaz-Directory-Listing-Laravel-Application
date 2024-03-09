@@ -2,20 +2,15 @@
 @section('main')
 
 @push('page-styles')
-    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css')}}"/>
-    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/filepond/dist/filepond.min.css')}}"/>
-    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/jalalidatepicker/jalalidatepicker.css')}}"/>
+    <style>
+        input[type='file'] {
+            display: block !important;
+        }
+    </style>
 @endpush
 
 @push('page-scripts')
-    <script src="{{asset('assets/frontend/vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/filepond/dist/filepond.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/jalalidatepicker/jalalidatepicker.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/jalalidatepicker/jalalidatepickerinitialize.js')}}"></script>
+   
 @endpush
 
 <div class="position-absolute top-0 start-0 w-100 bg-dark" style="height: 398px;"></div>
