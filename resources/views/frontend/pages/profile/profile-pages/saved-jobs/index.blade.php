@@ -6,11 +6,11 @@
     <!-- Breadcrumb-->
     <nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
         <ol class="breadcrumb breadcrumb-light">
-        <li class="breadcrumb-item"><a href="{{URL::to('/')}}">خانه</a></li>
-        <li class="breadcrumb-item"><a href="">حساب کاربری</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-          فرصت های شغلی نشان شده
-        </li>
+            <li class="breadcrumb-item"><a href="{{URL::to('/')}}">خانه</a></li>
+            <li class="breadcrumb-item"><a href="">حساب کاربری</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+            فرصت های شغلی نشان شده
+            </li>
         </ol>
     </nav>
     <!-- Page card like wrapper-->

@@ -24,11 +24,11 @@
         <!-- Breadcrumb-->
         <nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
             <ol class="breadcrumb breadcrumb-light">
-            <li class="breadcrumb-item"><a href="{{URL::to('/')}}">خانه</a></li>
-            <li class="breadcrumb-item"><a href="">حساب کاربری</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-                پروفایل من
-            </li>
+                <li class="breadcrumb-item"><a href="{{URL::to('/')}}">خانه</a></li>
+                <li class="breadcrumb-item"><a href="">حساب کاربری</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    پروفایل من
+                </li>
             </ol>
         </nav>
         <!-- Page card like wrapper-->
@@ -38,7 +38,7 @@
             <!-- Account menu-->
             @include('frontend.pages.profile.layouts.nav')    
             
-            @livewire('frontend.pages.profile.profile-pages.profile-settings.index')
+            @livewire('frontend.pages.profile.profile-pages.profile-settings.con-grp' . auth()->user()->userGroupType->groupable->id . '.index')
         </div>
     </div>
 </div>

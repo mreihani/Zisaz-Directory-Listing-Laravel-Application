@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileLicenseController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileMyResumeController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileSettingsController;
+use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileMyProjectController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileSavedJobsController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileContactInfoController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileNotificationsController;
-use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileLicenseController;
 
 
 Route::controller(UserProfileSettingsController::class)->group(function () {
@@ -25,4 +26,7 @@ Route::controller(UserProfileContactInfoController::class)->group(function () {
 });
 Route::controller(UserProfileLicenseController::class)->group(function () {
     Route::get('/dashboard/license', 'index')->name('user.dashboard.license.index');
+});
+Route::controller(UserProfileMyProjectController::class)->group(function () {
+    Route::get('/dashboard/my-project', 'index')->name('user.dashboard.my-project.index');
 });

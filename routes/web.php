@@ -19,8 +19,6 @@ require __DIR__.'/auth.php';
 
 Route::get('/test', 
     function () {
-        // echo App\Models\User::find(1)->employerProfile;
-
         // آرایه مربوط به زمینه فعالیت کاربر
         $typeOfActivityArray = config('jaban.profile.sector.construction.type_of_activity');
         foreach ($typeOfActivityArray as $typeOfActivityItem) {

@@ -42,11 +42,7 @@ class Edit extends Component
         $this->licenses = $this->getLicenses();
         $this->licenseTypeValue = $licenseItem->license_type;
         $this->otherDescriptionStatus = $this->getOtherDescriptionStatus();
-        $this->licenseImage = route('assets', [$this->getLicenseImageOwnerId(), $licenseItem->license_image]);
-    }
-
-    private function getLicenseImageOwnerId() {
-        return $this->licenseItem->profileLicense->userProfile->user->id;
+        $this->licenseImage = route('assets', [auth()->user()->id, $licenseItem->license_image]);
     }
 
     private function isLicense() {

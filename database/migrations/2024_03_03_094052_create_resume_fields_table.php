@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('profile_resume_id');
             $table->foreign('profile_resume_id')->references('id')->on('profile_resumes')->onDelete('cascade');
-            $table->string('payment_amount_from');
-            $table->string('payment_amount_to');
+            $table->string('payment_amount_from')->nullable();
+            $table->string('payment_amount_to')->nullable();
             $table->enum('payment_amount_type', ['monthly', 'hourly', 'weekly', 'annually'])->default('monthly');
             $table->timestamps();
         });

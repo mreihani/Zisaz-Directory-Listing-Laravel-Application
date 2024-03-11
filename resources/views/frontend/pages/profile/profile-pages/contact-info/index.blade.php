@@ -38,7 +38,7 @@
             <!-- Account menu-->
             @include('frontend.pages.profile.layouts.nav')    
             
-            @livewire('frontend.pages.profile.profile-pages.contact-info.index')
+            @livewire('frontend.pages.profile.profile-pages.contact-info.con-grp' . auth()->user()->userGroupType->groupable->id . '.index')
         </div>
     </div>
 </div>
