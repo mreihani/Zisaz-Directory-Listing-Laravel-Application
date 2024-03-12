@@ -154,37 +154,30 @@
                     </div>
 
                     <div class="row pb-3">
-                        <div class="col-sm-6 mb-4">
-                            <label class="form-label" for="type_of_activity"> صنف فعالیت فروشگاه را تعیین نمایید<span class="text-danger">*</span></label>
-                            <select class="form-select form-select-md" wire:model="type_of_activity_id" wire:change="loadShopActivityGrpOnChange($event.target.value)">
-                                <option value="" disabled>انتخاب صنف فعالیت</option>
-                                @foreach ($typeOfActivityObj as $typeOfActivityItem)
-                                    <option value="{{$typeOfActivityItem->id}}">
-                                        {{$typeOfActivityItem->title}}
-                                    </option>
+                        <div class="col-sm-12">
+                            <label class="form-label fw-bold pb-1 mb-2">صنف فعالیت فروشگاه را تعیین نمایید</label>
+                            <span class="text-danger">*</span>
+                            <div class="d-flex flex-column mb-3">
+                                @if($errors->has('shopActGrpsId'))
+                                    <span class="text-danger">{{ $errors->first('shopActGrpsId') }}</span>
+                                @endif 
+                            </div>  
+                            <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 skills">
+                                @foreach($shopActGrpsArray as $chunkArray)
+                                    <div class="col">
+                                        @foreach($chunkArray as $chunkItem)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="shop_act_grps_{{$chunkItem['id']}}"
+                                                    wire:model="shopActGrpsId.{{$chunkItem['id']}}">
+                                                <label class="form-check-label" for="shop_act_grps_{{$chunkItem['id']}}">
+                                                    {{$chunkItem['title']}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 @endforeach
-                            </select>
-                            @if($errors->has('type_of_activity_id'))
-                                <span class="text-danger">{{ $errors->first('type_of_activity_id') }}</span>
-                            @endif   
+                            </div>
                         </div>
-                      
-                        <div class="col-sm-6 mb-4">
-                            <label class="form-label" for="user_account_category">گروه بندی صنف را تعیین نمایید <span class="text-danger">*</span></label>
-                            <select class="form-select form-select-md" wire:model="shop_act_grps_id">
-                                <option value="" selected="true" disabled>انتخاب گروه بندی صنف</option>
-                                @foreach ($activityGroupObj as $activityGroupItem)
-                                    <option value="{{$activityGroupItem->id}}">
-                                        {{$activityGroupItem->title}}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('shop_act_grps_id'))
-                                <span class="text-danger">{{ $errors->first('shop_act_grps_id') }}</span>
-                            @endif   
-                        </div>
-
-
                     </div>
                 </div>
             </div>

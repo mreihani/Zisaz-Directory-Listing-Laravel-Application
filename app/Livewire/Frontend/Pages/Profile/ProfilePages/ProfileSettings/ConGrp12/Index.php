@@ -28,7 +28,7 @@ class Index extends Component
 	}
     
     protected $messages = [
-        'companyName.required' => 'لطفا نام دفتر را وارد نمایید.',
+        'companyName.required' => 'لطفا نام آزمایشگاه را وارد نمایید.',
         'companyRegNum.required' => 'لطفا شماره مجوز آزمایشگاه را وارد نماید.',
     ];
 

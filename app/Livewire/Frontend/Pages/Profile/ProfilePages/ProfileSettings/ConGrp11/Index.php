@@ -8,19 +8,15 @@ use App\Models\Profile\ShopActCat;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Rules\Profile\ProfileInfo\SelectedShopActGrpsIdValidationRule;
 
 class Index extends Component
 {
     use WithFileUploads;
 
     public $profile_image;
-    public $gender;
-    public $birth_date;
-    public $shop_name;
-    public $typeOfActivityObj;
-    public $type_of_activity_id;
-    public $activityGroupObj;
-    public $shop_act_grps_id;
+    public $shopActGrpsId;
+    public $shopActGrpsArray;
 
     public function mount() {
         $this->profile_image = (auth()->user()->userProfile
@@ -34,56 +30,55 @@ class Index extends Component
         && auth()->user()->userProfile->userProfileInformation->gender)
         ? auth()->user()->userProfile->userProfileInformation->gender : '';   
 
-        $this->birth_date = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->birth_date)
-        ? auth()->user()->userProfile->userProfileInformation->birth_date : '';   
-
-        $this->shop_name = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->shop_name)
-        ? auth()->user()->userProfile->userProfileInformation->shop_name : '';
-
-        $this->typeOfActivityObj = ShopActCat::all();
-
-        $this->type_of_activity_id = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->shopActivityGroup)
-        ? auth()->user()->userProfile->userProfileInformation->shopActivityGroup->shopActivityCategory->id : '';
-
-        $this->activityGroupObj = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->shopActivityGroup) 
-        ? auth()->user()->userProfile->userProfileInformation->shopActivityGroup->shopActivityCategory->shopActivityGroup
-        : [];
-
-        $this->shop_act_grps_id = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->shopActivityGroup)
-        ? auth()->user()->userProfile->userProfileInformation->shopActivityGroup->id : '';
-    }
-
-    public function loadShopActivityGrpOnChange() {
-        $typeOfActivityId = $this->type_of_activity_id;
-        $this->activityGroupObj = ShopActCat::find($typeOfActivityId)->shopActivityGroup;
-        $this->shop_act_grps_id = $this->activityGroupObj->first()->id;
+        $this->shopActGrpsId = $this->selectedshopActGrpsArray();
+        $this->shopActGrpsArray = ShopActCat::find(11)->shopActivityGroup->chunk(1)->toArray();
     }
 
     protected function rules()
     {
         return 
         [
-            'shop_name' => 'required',
-            'type_of_activity_id' => 'required',
-            'shop_act_grps_id' => 'required',
+            'shopActGrpsId' => new SelectedShopActGrpsIdValidationRule(),
         ];
 	}
     
-    protected $messages = [
-        'shop_name.required' => 'لطفا نام فروشگاه خود را تعیین نمایید.',
-        'type_of_activity_id.required' => 'لطفا فعالیت صنفی فروشگاه خود را تعیین نمایید.',
-        'shop_act_grps_id.required' => 'لطفا زیر دسته فعالیت صنفی فروشگاه خود را تعیین نمایید.',
-    ];
+    private function isProfileInfo() {
+        return !! (
+            auth()->user()->userProfile 
+            && auth()->user()->userProfile->userProfileInformation
+            && auth()->user()->userProfile->userProfileInformation->shopActGroups
+        );
+    }
+
+    private function selectedshopActGrpsArray() {
+        $selectedArray = $this->isProfileInfo() ? auth()->user()->userProfile->userProfileInformation->shopActGroups->pluck('id')->toArray() : null;
+        if($selectedArray) {
+            $selectedValuesArray = [];
+            foreach ($selectedArray as $value) {
+                $selectedValuesArray[$value] = true;
+            }
+            return $selectedValuesArray;
+        }
+        return []; 
+    }
+
+    private function calculateChunkNumber() {
+       
+        $totalCount = ShopActCat::find(1)->shopActivityGroup->count();
+
+        return (int) ceil($totalCount / 4);
+    }
+
+    private function storeSelectedShopActGrpsId($userProfileInformation) {
+        $selectedShopActGrpsIdArray = [];
+        foreach ($this->shopActGrpsId as $key => $value) {
+            if($value) {
+                $selectedShopActGrpsIdArray[] = Purify::clean($key);
+            }
+        }
+        
+        $userProfileInformation->shopActGroups()->sync($selectedShopActGrpsIdArray, true);
+    }
 
     public function saveProfile() {
         
@@ -107,13 +102,14 @@ class Index extends Component
             'user_id' => auth()->user()->id
         ]);
 
-        $userProfile->userProfileInformation()->updateOrCreate([
+        $userProfileInformation = $userProfile->userProfileInformation()->updateOrCreate([
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
-            'shop_name' => Purify::clean($this->shop_name) ?: null,
-            'shop_act_grps_id' => Purify::clean($this->shop_act_grps_id) ?: null,
         ]);
+
+        // Store store selected shop act grps id into db
+        $this->storeSelectedShopActGrpsId($userProfileInformation);
 
         // Show Toaster
         $this->dispatch('showToaster', 

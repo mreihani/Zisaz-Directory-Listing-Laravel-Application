@@ -15,8 +15,7 @@ class ProfileInfo extends Model
         return $this->belongsTo(UserProfile::class);
     }
 
-    public function shopActivityGroup()
-    {
-        return $this->belongsTo(ShopActGrp::class, 'shop_act_grps_id', 'id');
+    public function shopActGroups() {
+        return $this->belongsToMany(ShopActGrp::class, 'shop_act_grp_profile_info', 'profile_info_id', 'shop_act_grp_id');
     }
 }

@@ -139,12 +139,12 @@
                             <div class="border-bottom pb-3 mb-3">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="ps-2">
-                                        <label class="form-label fw-bold">نام دفتر</label>
+                                        <label class="form-label fw-bold">نام آزمایشگاه</label>
                                         <span class="text-danger">*</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <input class="form-control mt-3" type="text" wire:model="companyName" placeholder="نام دفتر را وارد نمایید">
+                                    <input class="form-control mt-3" type="text" wire:model="companyName" placeholder="نام آزمایشگاه را وارد نمایید">
                                 </div>
                                 @if($errors->has('companyName'))
                                     <span class="text-danger">{{ $errors->first('companyName') }}</span>

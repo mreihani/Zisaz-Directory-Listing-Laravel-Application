@@ -10,18 +10,6 @@ class Index extends Component
     public $resumeSectionNumber;
     public $workExperience;
 
-    protected function rules()
-    {
-        return 
-        [
-            'workExperience' => 'required',
-        ];
-	}
-    
-    protected $messages = [
-        'workExperience.required' => 'فیلد سابقه کار نمی تواند خالی باشد.',
-    ];
-
     public function mount() {
         $this->resumeSectionNumber = 4;
         $this->workExperience = $this->getWorkExperience();
@@ -47,8 +35,6 @@ class Index extends Component
     }
 
     public function save() {
-
-        $this->validate();
 
         $userProfile = auth()->user()->userProfile()->firstOrCreate(['user_id' => auth()->user()->id]);
         $userProfileResume = $userProfile->userProfileResume()->firstOrCreate(['user_profile_id' => $userProfile->id]);

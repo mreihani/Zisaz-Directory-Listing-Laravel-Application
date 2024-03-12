@@ -44,8 +44,15 @@ return new class extends Migration
             $table->string('shop_name')->nullable();
             $table->string('company_name')->nullable();
             $table->string('company_reg_num')->nullable();
-            $table->unsignedBigInteger('shop_act_grps_id')->nullable();
             $table->timestamps();
+        });
+
+        Schema::create('shop_act_grp_profile_info', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('shop_act_grp_id');
+            $table->foreign('shop_act_grp_id')->references('id')->on('shop_act_grps')->onDelete('cascade');
+            $table->unsignedBigInteger('profile_info_id');
+            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
         });
 
         Schema::create('profile_contacts', function (Blueprint $table) {

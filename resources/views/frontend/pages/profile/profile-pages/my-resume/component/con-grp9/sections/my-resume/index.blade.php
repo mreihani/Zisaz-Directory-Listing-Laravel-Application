@@ -7,7 +7,7 @@
                 
                 <!-- Step 3: Work experience-->
                 <div class="bg-light rounded-3 p-4 p-md-5 mb-3">
-                    <h2 class="h5 font-vazir mb-4"><i class="fi-briefcase text-primary fs-5 mt-n1 me-2 pe-1"></i>سوابق شغلی</h2>
+                    <h2 class="h5 font-vazir mb-4"><i class="fi-briefcase text-primary fs-5 mt-n1 me-2 pe-1"></i>سوابق دفتر مهندسی</h2>
                     <div class="mb-4">
                         <label class="form-label" for="pr-description">توضیحات</label>
                         <span class="text-danger">*</span>
