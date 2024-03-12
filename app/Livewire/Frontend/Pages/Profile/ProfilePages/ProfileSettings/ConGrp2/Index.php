@@ -15,6 +15,8 @@ class Index extends Component
 
     public $profile_image;
     public $activityGroupObj;
+    public $gender;
+    public $birth_date;
 
     public function mount() {
         $this->profile_image = (auth()->user()->userProfile
@@ -23,6 +25,16 @@ class Index extends Component
         ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
         null;
 
+        $this->gender = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->gender)
+        ? auth()->user()->userProfile->userProfileInformation->gender : '';   
+
+        $this->birth_date = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->birth_date)
+        ? auth()->user()->userProfile->userProfileInformation->birth_date : '';   
+
         $this->typeOfActivityObj = ShopActCat::all();
     }
 
@@ -30,14 +42,14 @@ class Index extends Component
     {
         return 
         [
-            'profile_image' => 'required|image|max:4096',
+            'gender' => 'required',
+            'birth_date' => 'required',
         ];
 	}
     
     protected $messages = [
-        'profile_image.required' => 'لطفا تصویر پروفایل خود را بارگذاری نمایید.',
-        'profile_image.image' => 'لطفا فایل صحیح برای پروفایل بارگذاری نمایید.',
-        'profile_image.max' => 'حداکثر حجم مجاز تصویر پروفایل 4 مگابایت است.',
+        'gender.required' => 'لطفا جنسیت را تعیین نماید.',
+        'birth_date.required' => 'لطفا تاریخ تولد خود را تعیین نمایید.',
     ];
 
     public function saveProfile() {
@@ -66,6 +78,8 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
+            'gender' => Purify::clean($this->gender),
+            'birth_date' => Purify::clean($this->birth_date),
         ]);
 
         // Show Toaster
@@ -79,6 +93,11 @@ class Index extends Component
     }
 
     private function handleFileUpload() {
+
+        if(is_null($this->profile_image)) {
+            return null;
+        }
+        
         $userId = auth()->user()->id;
         $dir = 'storage/upload/profile-images/' . $userId;
 

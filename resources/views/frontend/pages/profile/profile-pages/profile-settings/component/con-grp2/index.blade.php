@@ -123,6 +123,53 @@
                 </div>
             </div>
         </div>
+
+        <!-- Personal details -->
+        <div class="row pt-4 mt-2">
+            <div class="col-md-3">
+                <h2 class="h5 font-vazir">اطلاعات فردی</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="border rounded-3 p-3">
+                    <div class="row pb-3">
+                        <div class="col-md-6">
+                            <!-- Gender-->
+                            <div class="">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="ps-2">
+                                        <label class="form-label fw-bold">جنسیت</label>
+                                        <span class="text-danger">*</span>
+                                    </div>
+                                </div>
+                                <select class="form-select mt-3" wire:model="gender">
+                                    <option selected value="" disabled>انتخاب جنسیت</option>
+                                    <option value="male">مرد</option>
+                                    <option value="female">زن</option>
+                                </select>
+                                @if($errors->has('gender'))
+                                    <span class="text-danger">{{ $errors->first('gender') }}</span>
+                                @endif   
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ps-2">
+                                <label class="form-label fw-bold">
+                                    تاریخ تولد
+                                </label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="input-group input-group-md mt-3">
+                                <input data-jdp="" data-jdp-min-date="today" name="datepicker" class="form-control rounded pe-5" placeholder="انتخاب تاریخ" wire:model="birth_date">
+                                <i class="fi-calendar text-muted position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                            </div>
+                            @if($errors->has('birth_date'))
+                                <span class="text-danger">{{ $errors->first('birth_date') }}</span>
+                            @endif   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
         <!-- Action buttons-->
         <div class="row pt-4 mt-2">

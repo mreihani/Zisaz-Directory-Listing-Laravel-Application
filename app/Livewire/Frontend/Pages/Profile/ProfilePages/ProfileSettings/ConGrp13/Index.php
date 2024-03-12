@@ -26,25 +26,8 @@ class Index extends Component
         $this->typeOfActivityObj = ShopActCat::all();
     }
 
-    protected function rules()
-    {
-        return 
-        [
-            'profile_image' => 'required|image|max:4096',
-        ];
-	}
-    
-    protected $messages = [
-        'profile_image.required' => 'لطفا تصویر پروفایل خود را بارگذاری نمایید.',
-        'profile_image.image' => 'لطفا فایل صحیح برای پروفایل بارگذاری نمایید.',
-        'profile_image.max' => 'حداکثر حجم مجاز تصویر پروفایل 4 مگابایت است.',
-    ];
-
     public function saveProfile() {
-        
-        // Validate user input
-        $this->validate();
-        
+
         // Remove exsting profile image
         if(
             auth()->user()->userProfile
@@ -79,6 +62,11 @@ class Index extends Component
     }
 
     private function handleFileUpload() {
+
+        if(is_null($this->profile_image)) {
+            return null;
+        }
+
         $userId = auth()->user()->id;
         $dir = 'storage/upload/profile-images/' . $userId;
 

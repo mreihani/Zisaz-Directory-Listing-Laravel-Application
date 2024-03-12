@@ -73,21 +73,13 @@ class Index extends Component
     {
         return 
         [
-            'profile_image' => 'required|image|max:4096',
-            'gender' => 'required',
-            'birth_date' => 'required',
             'shop_name' => 'required',
             'type_of_activity_id' => 'required',
             'shop_act_grps_id' => 'required',
         ];
 	}
     
-    protected $messages = [
-        'profile_image.required' => 'لطفا تصویر پروفایل خود را بارگذاری نمایید.',
-        'profile_image.image' => 'لطفا فایل صحیح برای پروفایل بارگذاری نمایید.',
-        'profile_image.max' => 'حداکثر حجم مجاز تصویر پروفایل 4 مگابایت است.',
-        'gender.required' => 'لطفا جنسیت را تعیین نماید.',
-        'birth_date.required' => 'لطفا تاریخ تولد خود را تعیین نمایید.',
+    protected $messages = [       
         'shop_name.required' => 'لطفا نام فروشگاه خود را تعیین نمایید.',
         'type_of_activity_id.required' => 'لطفا فعالیت صنفی فروشگاه خود را تعیین نمایید.',
         'shop_act_grps_id.required' => 'لطفا زیر دسته فعالیت صنفی فروشگاه خود را تعیین نمایید.',
@@ -119,8 +111,6 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
-            'gender' => Purify::clean($this->gender),
-            'birth_date' => Purify::clean($this->birth_date),
             'shop_name' => Purify::clean($this->shop_name) ?: null,
             'shop_act_grps_id' => Purify::clean($this->shop_act_grps_id) ?: null,
         ]);
@@ -136,6 +126,11 @@ class Index extends Component
     }
 
     private function handleFileUpload() {
+
+        if(is_null($this->profile_image)) {
+            return null;
+        }
+
         $userId = auth()->user()->id;
         $dir = 'storage/upload/profile-images/' . $userId;
 
