@@ -17,11 +17,6 @@
                         رزومه و سابقه کار
                     </li>
                 @endif
-                @if(in_array(auth()->user()->userGroupType->groupable->id, [1]))
-                    <li class="breadcrumb-item active" aria-current="page">
-                        مشخصات کارفرما
-                    </li>
-                @endif
                 @if(in_array(auth()->user()->userGroupType->groupable->id, [8]))
                     <li class="breadcrumb-item active" aria-current="page">
                         درباره فروشگاه

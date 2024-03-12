@@ -20,14 +20,12 @@ class Index extends Component
         [
             'selectedProvinceId' => 'required',
             'selectedCityId' => 'required',
-            'address' => 'required',
         ];
 	}
 
     protected $messages = [
         'selectedProvinceId.required' => 'لطفا استان را انتخاب نمایید.',
         'selectedCityId.required' => 'لطفا شهر را انتخاب نمایید.',
-        'address.required' => 'لطفا آدرس را وارد نمایید.',
     ];
 
     public function mount() {

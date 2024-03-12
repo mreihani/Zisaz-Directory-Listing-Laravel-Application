@@ -156,7 +156,7 @@
                                 <label class="form-label fw-bold">
                                     تاریخ تولد
                                 </label>
-                                <span class="text-danger">*</span>
+                                <span>(اختیاری)</span>
                             </div>
                             <div class="input-group input-group-md mt-3">
                                 <input data-jdp="" data-jdp-min-date="today" name="datepicker" class="form-control rounded pe-5" placeholder="انتخاب تاریخ" wire:model="birth_date">

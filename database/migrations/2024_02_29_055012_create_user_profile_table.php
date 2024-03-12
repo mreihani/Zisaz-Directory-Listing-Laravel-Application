@@ -42,6 +42,8 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->string('birth_date')->nullable();
             $table->string('shop_name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('company_reg_num')->nullable();
             $table->unsignedBigInteger('shop_act_grps_id')->nullable();
             $table->timestamps();
         });
@@ -61,15 +63,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_profile_id');
             $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
-        });
-
-        Schema::create('profile_company_specs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_profile_id');
-            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
-            $table->string('company_name')->nullable();
-            $table->string('reg_number')->nullable();
-            $table->timestamps();
         });
     }
 

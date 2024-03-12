@@ -36,7 +36,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">شماره تلفن ثابت</label>
-                                <span class="text-danger">*</span>
+                                <span>(اختیاری)</span>
                             </div>
                         </div>
                         <div>
@@ -94,7 +94,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">آدرس</label>
-                                <span class="text-danger">*</span>
+                                <span>(اختیاری)</span>
                             </div>
                         </div>
                         <div>
@@ -110,7 +110,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">کد پستی</label>
-                                <span class="text-danger">*</span>
+                                <span>(اختیاری)</span>
                             </div>
                         </div>
                         <div>

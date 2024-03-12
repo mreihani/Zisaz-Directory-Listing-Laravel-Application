@@ -51,15 +51,6 @@
                 </a>
             </li>
         @endif
-        @if(in_array(auth()->user()->userGroupType->groupable->id, [1]))
-            <li class="nav-item mb-md-0 me-md-2 pe-md-1">
-                <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-resume.index' ? 'active' : ''}}" 
-                    href="{{route('user.dashboard.my-resume.index')}}">
-                    <i class="fi-file mt-n1 me-2 fs-base"></i>
-                    مشخصات کارفرما
-                </a>
-            </li>
-        @endif
         @if(in_array(auth()->user()->userGroupType->groupable->id, [8]))
             <li class="nav-item mb-md-0 me-md-2 pe-md-1">
                 <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-resume.index' ? 'active' : ''}}" 

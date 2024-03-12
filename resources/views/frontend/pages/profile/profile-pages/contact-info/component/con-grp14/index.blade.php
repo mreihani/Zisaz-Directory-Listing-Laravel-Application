@@ -79,14 +79,14 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">آدرس</label>
-                                <span class="text-danger">*</span>
+                                <span>(اختیاری)</span>
                             </div>
                         </div>
                         <div>
                             <input class="form-control mt-3" type="text" wire:model="address" placeholder="آدرس خود را وارد نمایید">
                         </div>
                         @if($errors->has('address'))
-                            <span class="text-danger">{{ $errors->first('address') }}</span>
+                            <span class="text-danger">{{ $errors->first('address') }}</span>                        
                         @endif 
                     </div>
 
@@ -95,7 +95,7 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="ps-2">
                                 <label class="form-label fw-bold">کد پستی</label>
-                                <span class="text-danger">*</span>
+                                <span>(اختیاری)</span>
                             </div>
                         </div>
                         <div>

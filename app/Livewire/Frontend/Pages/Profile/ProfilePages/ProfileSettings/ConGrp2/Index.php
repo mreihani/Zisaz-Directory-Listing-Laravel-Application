@@ -43,13 +43,11 @@ class Index extends Component
         return 
         [
             'gender' => 'required',
-            'birth_date' => 'required',
         ];
 	}
     
     protected $messages = [
         'gender.required' => 'لطفا جنسیت را تعیین نماید.',
-        'birth_date.required' => 'لطفا تاریخ تولد خود را تعیین نمایید.',
     ];
 
     public function saveProfile() {

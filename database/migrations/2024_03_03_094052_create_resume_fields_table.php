@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('profile_resume_id')->references('id')->on('profile_resumes')->onDelete('cascade');
             $table->string('payment_amount_from')->nullable();
             $table->string('payment_amount_to')->nullable();
+            $table->boolean('is_payment_by_agreement')->default(false);
             $table->enum('payment_amount_type', ['monthly', 'hourly', 'weekly', 'annually'])->default('monthly');
             $table->timestamps();
         });
@@ -58,9 +59,7 @@ return new class extends Migration
             $table->unsignedBigInteger('resume_aca_bg_id');
             $table->foreign('resume_aca_bg_id')->references('id')->on('resume_aca_bgs')->onDelete('cascade');
             $table->enum('academic_level', ['msd', 'hsd', 'ad', 'ba', 'ms', 'phd'])->default('msd');
-            $table->string('field_of_study');
-            $table->string('university_name');
-            $table->string('university_address');
+            $table->string('field_of_study')->nullable();
             $table->timestamps();
         });
 

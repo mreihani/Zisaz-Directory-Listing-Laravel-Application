@@ -21,17 +21,12 @@ class Index extends Component
         [
             'selectedProvinceId' => 'required',
             'selectedCityId' => 'required',
-            'address' => 'required',
-            'postal_code' => 'required|digits_between:10,10',
         ];
 	}
 
     protected $messages = [
         'selectedProvinceId.required' => 'لطفا استان را انتخاب نمایید.',
         'selectedCityId.required' => 'لطفا شهر را انتخاب نمایید.',
-        'address.required' => 'لطفا آدرس را وارد نمایید.',
-        'postal_code.required' => 'لطفا کد پستی را وارد نمایید.',
-        'postal_code.digits_between' => 'لطفا کد پستی صحیح وارد نمایید.',
     ];
 
     public function mount() {

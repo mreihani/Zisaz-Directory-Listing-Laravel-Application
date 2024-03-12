@@ -15,6 +15,22 @@ class Index extends Component
 
     public $profile_image;
     public $activityGroupObj;
+    public $companyName;
+    public $companyRegNum;
+
+    protected function rules()
+    {
+        return 
+        [
+            'companyName' => 'required',
+            'companyRegNum' => 'required',
+        ];
+	}
+    
+    protected $messages = [
+        'companyName.required' => 'لطفا نام دفتر را وارد نمایید.',
+        'companyRegNum.required' => 'لطفا شماره مجوز آزمایشگاه را وارد نماید.',
+    ];
 
     public function mount() {
         $this->profile_image = (auth()->user()->userProfile
@@ -24,10 +40,24 @@ class Index extends Component
         null;
 
         $this->typeOfActivityObj = ShopActCat::all();
+
+        $this->companyName = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->company_name)
+        ? auth()->user()->userProfile->userProfileInformation->company_name :
+        '';
+
+        $this->companyRegNum = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->company_reg_num)
+        ? auth()->user()->userProfile->userProfileInformation->company_reg_num :
+        '';
     }
 
     public function saveProfile() {
         
+        $this->validate();
+
         // Remove exsting profile image
         if(
             auth()->user()->userProfile
@@ -49,6 +79,8 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
+            'company_name' => Purify::clean($this->companyName),
+            'company_reg_num' => Purify::clean($this->companyRegNum),
         ]);
 
         // Show Toaster

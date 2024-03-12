@@ -12,34 +12,14 @@ class Index extends Component
     public $i;
     public $academicLevel;
     public $fieldOfStudy;
-    public $universityName;
-    public $universityAddress;
     public $relocateForInterview;
 
-    protected function rules()
-    {
-        return 
-        [
-            'fieldOfStudy.*' => 'required',
-            'universityName.*' => 'required',
-            'universityAddress.*' => 'required',
-        ];
-	}
-    
-    protected $messages = [
-        'fieldOfStudy.*.required' => 'رشته تحصیلی نمی تواند خالی باشد.',
-        'universityName.*.required' => 'نام دانشگاه یا موسسه آموزشی نمی تواند خالی باشد.',
-        'universityAddress.*.required' => 'آدرس دانشگاه یا موسسه آموزشی نمی تواند خالی باشد.',
-    ];
-    
     public function mount() {
         $this->resumeSectionNumber = 3;
         $this->inputs = $this->getInitialInput();
         $this->i = $this->getIterationNumber();
         $this->academicLevel = $this->getAcademicLevel();
         $this->fieldOfStudy = $this->getInitialFieldOfStudy();
-        $this->universityName = $this->getInitialUniversityName();
-        $this->universityAddress = $this->getInitialUniversityAddress();
         $this->relocateForInterview = $this->getInitialRelocateForInterview();
     }
 
@@ -92,40 +72,12 @@ class Index extends Component
         return [1 => ''];
     }
 
-    private function getInitialUniversityName() {
-        if($this->isResumeAcaBg()) {
-            $academicItems = auth()->user()->userProfile->userProfileResume->resumeAcaBg->academicItems;
-            
-            $universitynameArray = [];
-            foreach ($academicItems as $key => $value) {
-                $universitynameArray[$key + 1] = $value->university_name;
-            }
-            return $universitynameArray;
-        }
-
-        return [1 => ''];
-    }
-
     private function getInitialRelocateForInterview() {
         if($this->isResumeAcaBg()) {
             return $this->relocateForInterview = auth()->user()->userProfile->userProfileResume->resumeAcaBg->relocate_for_interview  ? true : false;
         }
 
         return false;
-    }
-
-    private function getInitialUniversityAddress() {
-        if($this->isResumeAcaBg()) {
-            $academicItems = auth()->user()->userProfile->userProfileResume->resumeAcaBg->academicItems;
-            
-            $universityAddressArray = [];
-            foreach ($academicItems as $key => $value) {
-                $universityAddressArray[$key + 1] = $value->university_address;
-            }
-            return $universityAddressArray;
-        }
-
-        return [1 => ''];
     }
 
     private function getAcademicLevel() {
@@ -147,8 +99,6 @@ class Index extends Component
         $this->i = $i + 1;
         $this->academicLevel[$i] = 'msd';
         $this->fieldOfStudy[$i] = '';
-        $this->universityName[$i] = '';
-        $this->universityAddress[$i] = '';
         array_push($this->inputs, $i);
     }
 
@@ -165,8 +115,6 @@ class Index extends Component
 
     public function save() {
 
-        $this->validate();
-
         $userProfile = auth()->user()->userProfile()->firstOrCreate(['user_id' => auth()->user()->id]);
         $userProfileResume = $userProfile->userProfileResume()->firstOrCreate(['user_profile_id' => $userProfile->id]);
         $resumeAcaBg = $userProfileResume->resumeAcaBg()->updateOrCreate([
@@ -182,8 +130,6 @@ class Index extends Component
                 'resume_aca_bg_id' => $resumeAcaBg->id,
                 'academic_level' => Purify::clean($this->academicLevel[$value]),
                 'field_of_study' => Purify::clean($this->fieldOfStudy[$value]),
-                'university_name' => Purify::clean($this->universityName[$value]),
-                'university_address' => Purify::clean($this->universityAddress[$value]),
             ]);
         }
 

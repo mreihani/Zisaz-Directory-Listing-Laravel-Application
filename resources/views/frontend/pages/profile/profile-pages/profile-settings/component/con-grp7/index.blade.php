@@ -123,6 +123,54 @@
                 </div>
             </div>
         </div>
+
+        <!-- Company Specs -->
+        <div class="row pt-4 mt-2">
+            <div class="col-lg-3">
+                <h2 class="h5 font-vazir">
+                    مشخصات شرکت
+                </h2>
+            </div>
+            <div class="col-lg-9">
+                <div class="border rounded-3 p-3" id="company-specs">
+                    <div class="row">
+                        <div class="col-md-12 d-flex flex-column justify-content-center">
+                           
+                            <div class="border-bottom pb-3 mb-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="ps-2">
+                                        <label class="form-label fw-bold">نام شرکت</label>
+                                        <span class="text-danger">*</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input class="form-control mt-3" type="text" wire:model="companyName" placeholder="نام شرکت را وارد نمایید">
+                                </div>
+                                @if($errors->has('companyName'))
+                                    <span class="text-danger">{{ $errors->first('companyName') }}</span>
+                                @endif 
+                            </div>
+
+                            <div class="pb-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="ps-2">
+                                        <label class="form-label fw-bold">شماره ثبت</label>
+                                        <span class="text-danger">*</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input class="form-control mt-3" type="text" wire:model="companyRegNum" placeholder="شماره ثبت شرکت را وارد نمایید">
+                                </div>
+                                @if($errors->has('companyRegNum'))
+                                    <span class="text-danger">{{ $errors->first('companyRegNum') }}</span>
+                                @endif
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
         <!-- Action buttons-->
         <div class="row pt-4 mt-2">

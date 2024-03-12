@@ -35,22 +35,9 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-6 mb-4">
-                                        <label class="form-label" for="pr-study-field">رشته تحصیلی <span class="text-danger">*</span></label>
+                                        <label class="form-label" for="pr-study-field">رشته تحصیلی <span>(اختیاری)</span></label>
                                         <input class="form-control form-control-lg" type="text" id="pr-study-field" placeholder="رشته تحصیلی" wire:model="fieldOfStudy.{{$value}}">
                                         @error('fieldOfStudy.'.$value) <span class="text-danger error">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div class="col-sm-6 mb-4">
-                                        <label class="form-label" for="pr-college">نام دانشگاه / موسسه آموزشی <span class="text-danger">*</span></label>
-                                        <input class="form-control form-control-lg" type="text" id="pr-college" placeholder="نام دانشگاه/ موسسه آموزشی" wire:model="universityName.{{$value}}">
-                                        @error('universityName.'.$value) <span class="text-danger error">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div class="col-sm-6 mb-4">
-                                        <label class="form-label" for="pr-country">
-                                                آدرس دانشگاه یا موسسه آموزشی
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <input class="form-control form-control-lg" type="text" id="pr-country" placeholder="کشور و شهر محل تحصیل" wire:model="universityAddress.{{$value}}">
-                                        @error('universityAddress.'.$value) <span class="text-danger error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -63,14 +50,15 @@
                         </div>
                     @endforeach
 
-                    <div class="form-check mb-4">
-                        <input class="form-check-input" type="checkbox" id="still-visiting" wire:model="relocateForInterview">
-                        <label class="form-check-label" for="still-visiting">به شهر مورد نظر برای مصاحبه می روم.</label>
-                    </div>
                     <button class="btn btn-link btn-lg text-primary py-2 px-0 mb-md-n2" type="button" wire:click="add({{$i}})">
                         <i class="fi-plus fs-sm me-2"></i>
                         ایجاد سابقه تحصیلی
                     </button>
+
+                    <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="still-visiting" wire:model="relocateForInterview">
+                        <label class="form-check-label" for="still-visiting">به شهر مورد نظر برای مصاحبه می روم.</label>
+                    </div>
                 </div>
             
                 <!-- Navigation-->

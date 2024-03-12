@@ -33,11 +33,6 @@ class UserProfile extends Model
     {
         return $this->hasOne(ProfileResume::class, 'user_profile_id', 'id');
     }
-
-    public function userProfileCompanySpecification()
-    {
-        return $this->hasOne(ProfileCompanySpec::class, 'user_profile_id', 'id');
-    }
     
     public function userProfileLicense()
     {

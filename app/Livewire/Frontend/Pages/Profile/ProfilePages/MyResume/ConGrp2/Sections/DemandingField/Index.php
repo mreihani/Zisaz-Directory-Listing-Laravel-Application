@@ -37,6 +37,7 @@ class Index extends Component
     public $selectedContractType;
 
     // payment amount section
+    public $isPaymentByAgreement;
     public $paymentAmountFrom;
     public $paymentAmountTo;
     public $paymentAmountType;
@@ -48,22 +49,23 @@ class Index extends Component
             'selectedProvinceId' => new SelectedProvinceIdValidationRule(),
             'selectedWorkExpIds' => new SelectedWorkExpIdsValidationRule(),
             'selectedContractType' => new SelectedContractTypeValidationRule(),
-            'paymentAmountFrom' => ['required', 'integer', 'min:1000'],
-            'paymentAmountTo' => ['required', 'integer', new PaymentValidationRule($this->paymentAmountFrom, $this->paymentAmountTo)],
-            'paymentAmountType' => 'required',
+            'paymentAmountFrom' => ['required_if:isPaymentByAgreement,==,false', 'integer', 'min:1000'],
+            'paymentAmountTo' => ['required_if:isPaymentByAgreement,==,false', 'integer', new PaymentValidationRule($this->paymentAmountFrom, $this->paymentAmountTo)],
+            'paymentAmountType' => 'required_if:isPaymentByAgreement,==,false',
         ];
 	}
     
     protected $messages = [
-        'paymentAmountFrom.required' => 'لطفا حداقل حقوق درخواستی خود را مشخص نمایید.',
+        'paymentAmountFrom.required_if' => 'لطفا حداقل حقوق درخواستی خود را مشخص نمایید.',
         'paymentAmountFrom.integer' => 'لطفا حداقل حقوق درخواستی صحیح را وارد نمایید.',
         'paymentAmountFrom.min' => 'لطفا حداقل حقوق درخواستی صحیح را وارد نمایید.',
-        'paymentAmountTo.required' => 'لطفا حداکثر حقوق درخواستی خود را مشخص نمایید.',
+        'paymentAmountTo.required_if' => 'لطفا حداکثر حقوق درخواستی خود را مشخص نمایید.',
         'paymentAmountTo.integer' => 'لطفا حداکثر حقوق درخواستی صحیح را وارد نمایید.',
-        'paymentAmountType.required' => 'لطفا نوع حقوق درخواستی خود را مشخص نمایید.',
+        'paymentAmountType.required_if' => 'لطفا نوع حقوق درخواستی خود را مشخص نمایید.',
     ];
 
     public function mount() {
+        $this->isPaymentByAgreement = ($this->isResumeFiled() && auth()->user()->userProfile->userProfileResume->resumeField->is_payment_by_agreement == 1) ? true : false;
         $this->paymentAmountFrom = $this->isResumeFiled() ? auth()->user()->userProfile->userProfileResume->resumeField->payment_amount_from : '';
         $this->paymentAmountTo = $this->isResumeFiled() ? auth()->user()->userProfile->userProfileResume->resumeField->payment_amount_to : '';
         $this->paymentAmountType = $this->isResumeFiled() ? auth()->user()->userProfile->userProfileResume->resumeField->payment_amount_type : 'monthly';
@@ -80,12 +82,7 @@ class Index extends Component
         $this->cities = $this->getInitialCity();
 
         // work experience section
-        // employer
         $this->workExpArray = ShopActGrp::whereBetween('id', [89, 141])->get()->chunk($this->calculateChunkNumber())->toArray();
-        // engineer
-        //$this->workExpArray = ShopActGrp::whereBetween('id', [89, 107])->get()->chunk($this->calculateChunkNumber())->toArray();
-        // worker
-        //$this->workExpArray = ShopActGrp::whereBetween('id', [109, 141])->get()->chunk($this->calculateChunkNumber())->toArray();
         $this->selectedWorkExpIds = $this->selectedWorkExpArray();
     }
 
@@ -111,6 +108,10 @@ class Index extends Component
 
     public function backward() {
         $this->dispatch('resumeSectionNumber', resumeSectionNumber: 1 );
+    }
+
+    public function setPaymentByAgreement($value) {
+        $this->isPaymentByAgreement = $value;
     }
 
     // province and cities repeater section
@@ -243,14 +244,7 @@ class Index extends Component
 
     private function calculateChunkNumber() {
 
-        // Employer
         $totalCount = ShopActGrp::whereBetween('id', [89, 141])->count();
-
-        // Engineer
-        //$totalCount = ShopActGrp::whereBetween('id', [89, 107])->count();
-
-        // Worker
-        //$totalCount = ShopActGrp::whereBetween('id', [109, 141])->count();
 
         return (int) ceil($totalCount / 4);
     }
@@ -275,6 +269,7 @@ class Index extends Component
         $resumeField = $userProfileResume->resumeField()->updateOrCreate([
             'profile_resume_id' => $userProfileResume->id,
         ],[
+            'is_payment_by_agreement' => $this->isPaymentByAgreement ? 1 : 0,
             'payment_amount_from' => Purify::clean($this->paymentAmountFrom),
             'payment_amount_to' => Purify::clean($this->paymentAmountTo),
             'payment_amount_type' => Purify::clean($this->paymentAmountType),

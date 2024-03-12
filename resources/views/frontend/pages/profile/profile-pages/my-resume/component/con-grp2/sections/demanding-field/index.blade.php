@@ -143,40 +143,52 @@
 
                         <label class="form-label fw-bold pb-1 mb-2">حداقل حقوق درخواستی</label>
                         <span class="text-danger">*</span>
-                        <div class="d-flex flex-column mb-3">
-                            @if($errors->has('paymentAmountFrom'))
-                                <span class="text-danger mb-2">{{ $errors->first('paymentAmountFrom') }}</span>
-                            @endif 
-                            @if($errors->has('paymentAmountTo'))
-                                <span class="text-danger mb-2">{{ $errors->first('paymentAmountTo') }}</span>
-                            @endif 
-                            @if($errors->has('paymentAmountType'))
-                                <span class="text-danger mb-2">{{ $errors->first('paymentAmountType') }}</span>
-                            @endif 
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="payment_by_agreement"
+                             wire:model="isPaymentByAgreement" wire:click="setPaymentByAgreement($event.target.checked)">
+                            <label class="form-check-label" for="payment_by_agreement">
+                                حقوق توافقی
+                            </label>
                         </div>
+                        
+                        @if(!$isPaymentByAgreement)
+                            <div wire:transition>
+                                <div class="d-flex flex-column mb-3">
+                                    @if($errors->has('paymentAmountFrom'))
+                                        <span class="text-danger mb-2">{{ $errors->first('paymentAmountFrom') }}</span>
+                                    @endif 
+                                    @if($errors->has('paymentAmountTo'))
+                                        <span class="text-danger mb-2">{{ $errors->first('paymentAmountTo') }}</span>
+                                    @endif 
+                                    @if($errors->has('paymentAmountType'))
+                                        <span class="text-danger mb-2">{{ $errors->first('paymentAmountType') }}</span>
+                                    @endif 
+                                </div>
 
-                        <div class="row gx-2 gx-lg-3 gx-xl-4">
-                            <div class="col-md-2 mb-3 mb-md-0">
-                                <select disabled class="form-select form-select-lg">
-                                    <option value="usd">تومان</option>
-                                </select>
-                            </div>
-                            <div class="col-md-7 mb-3 mb-md-0">
-                                <div class="d-flex align-items-center">
-                                    <input class="form-control form-control-lg" type="number" step="100" min="300" placeholder="از" wire:model="paymentAmountFrom">
-                                    <div class="mx-2">—</div>
-                                    <input class="form-control form-control-lg" type="number" step="100" min="500" placeholder="تا" wire:model="paymentAmountTo">
+                                <div class="row gx-2 gx-lg-3 gx-xl-4">
+                                    <div class="col-md-2 mb-3 mb-md-0">
+                                        <select disabled class="form-select form-select-lg">
+                                            <option value="usd">تومان</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-7 mb-3 mb-md-0">
+                                        <div class="d-flex align-items-center">
+                                            <input class="form-control form-control-lg" type="number" step="100" min="300" placeholder="از" wire:model="paymentAmountFrom">
+                                            <div class="mx-2">—</div>
+                                            <input class="form-control form-control-lg" type="number" step="100" min="500" placeholder="تا" wire:model="paymentAmountTo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select form-select-lg" wire:model="paymentAmountType">
+                                            <option value="monthly">ماهیانه</option>
+                                            <option value="hourly">ساعتی</option>
+                                            <option value="weekly">هفتگی</option>
+                                            <option value="annually">سالیانه</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <select class="form-select form-select-lg" wire:model="paymentAmountType">
-                                    <option value="monthly">ماهیانه</option>
-                                    <option value="hourly">ساعتی</option>
-                                    <option value="weekly">هفتگی</option>
-                                    <option value="annually">سالیانه</option>
-                                </select>
-                            </div>
-                        </div>
+                        @endif
                         
                     </div>
                 </div>

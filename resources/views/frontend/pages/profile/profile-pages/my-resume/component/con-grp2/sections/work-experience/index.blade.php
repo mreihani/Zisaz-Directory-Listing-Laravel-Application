@@ -14,7 +14,7 @@
                     <h2 class="h5 font-vazir mb-4"><i class="fi-briefcase text-primary fs-5 mt-n1 me-2 pe-1"></i>سوابق شغلی</h2>
                     <div class="mb-4">
                         <label class="form-label" for="pr-description">توضیحات</label>
-                        <span class="text-danger">*</span>
+                        <span>(اختیاری)</span>
                         @if($errors->has('workExperience'))
                             <span class="text-danger">{{ $errors->first('workExperience') }}</span>
                         @endif 
