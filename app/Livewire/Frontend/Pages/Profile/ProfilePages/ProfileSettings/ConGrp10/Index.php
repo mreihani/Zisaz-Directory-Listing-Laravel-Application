@@ -22,8 +22,6 @@ class Index extends Component
         && auth()->user()->userProfile->userProfileInformation->profile_image)
         ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
         null;
-
-        $this->typeOfActivityObj = ShopActCat::all();
     }
 
     public function saveProfile() {

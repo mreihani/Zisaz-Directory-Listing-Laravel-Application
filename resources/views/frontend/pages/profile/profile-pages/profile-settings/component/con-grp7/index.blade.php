@@ -172,6 +172,44 @@
             </div>
         </div>
     
+        <!-- Company details -->
+        <div class="row pt-4 mt-2">
+            <div class="col-md-3">
+                <h2 class="h5 font-vazir">زمینه فعالیت</h2>
+            </div>
+
+            <div class="col-md-9">
+                <div class="border rounded-3 p-3">
+                    <div class="row pb-3">
+                        <div class="col-sm-12">
+                            <label class="form-label fw-bold pb-1 mb-2">زمینه فعالیت شرکت را تعیین نمایید</label>
+                            <span class="text-danger">*</span>
+                            <div class="d-flex flex-column mb-3">
+                                @if($errors->has('shopActGrpsId'))
+                                    <span class="text-danger">{{ $errors->first('shopActGrpsId') }}</span>
+                                @endif 
+                            </div>  
+                            <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 skills">
+                                @foreach($shopActGrpsArray as $chunkArray)
+                                    <div class="col">
+                                        @foreach($chunkArray as $chunkItem)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="shop_act_grps_{{$chunkItem['id']}}"
+                                                    wire:model="shopActGrpsId.{{$chunkItem['id']}}">
+                                                <label class="form-check-label" for="shop_act_grps_{{$chunkItem['id']}}">
+                                                    {{$chunkItem['title']}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Action buttons-->
         <div class="row pt-4 mt-2">
             <div class="col-lg-9 offset-lg-3">

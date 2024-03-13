@@ -8,6 +8,7 @@ use App\Models\Profile\ShopActCat;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Rules\Profile\ProfileInfo\SelectedShopActGrpsIdValidationRule;
 
 class Index extends Component
 {
@@ -15,6 +16,17 @@ class Index extends Component
 
     public $profile_image;
     public $activityGroupObj;
+    public $shopActGrpsId;
+    public $shopActGrpsEngArray;
+    public $shopActGrpsManagerArray;
+
+    protected function rules()
+    {
+        return 
+        [
+            'shopActGrpsId' => new SelectedShopActGrpsIdValidationRule(),
+        ];
+	}
 
     public function mount() {
         $this->profile_image = (auth()->user()->userProfile
@@ -23,11 +35,54 @@ class Index extends Component
         ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
         null;
 
-        $this->typeOfActivityObj = ShopActCat::all();
+        $this->shopActGrpsId = $this->selectedshopActGrpsArray();
+        $this->shopActGrpsEngArray = ShopActCat::find(6)->shopActivityGroup->chunk($this->calculateChunkNumber(6))->toArray();
+        $this->shopActGrpsManagerArray = ShopActCat::find(7)->shopActivityGroup->chunk($this->calculateChunkNumber(7))->toArray();
+    }
+
+    private function isProfileInfo() {
+        return !! (
+            auth()->user()->userProfile 
+            && auth()->user()->userProfile->userProfileInformation
+            && auth()->user()->userProfile->userProfileInformation->shopActGroups
+        );
+    }
+
+    private function selectedshopActGrpsArray() {
+        $selectedArray = $this->isProfileInfo() ? auth()->user()->userProfile->userProfileInformation->shopActGroups->pluck('id')->toArray() : null;
+        if($selectedArray) {
+            $selectedValuesArray = [];
+            foreach ($selectedArray as $value) {
+                $selectedValuesArray[$value] = true;
+            }
+            return $selectedValuesArray;
+        }
+        return []; 
+    }
+
+    private function calculateChunkNumber($id) {
+       
+        $totalCount = ShopActCat::find($id)->shopActivityGroup->count();
+
+        return (int) ceil($totalCount / 4);
+    }
+
+    private function storeSelectedShopActGrpsId($userProfileInformation) {
+        $selectedShopActGrpsIdArray = [];
+        foreach ($this->shopActGrpsId as $key => $value) {
+            if($value) {
+                $selectedShopActGrpsIdArray[] = Purify::clean($key);
+            }
+        }
+        
+        $userProfileInformation->shopActGroups()->sync($selectedShopActGrpsIdArray, true);
     }
 
     public function saveProfile() {
         
+        // Validate user input
+        $this->validate();
+
         // Remove exsting profile image
         if(
             auth()->user()->userProfile
@@ -45,11 +100,14 @@ class Index extends Component
             'user_id' => auth()->user()->id
         ]);
 
-        $userProfile->userProfileInformation()->updateOrCreate([
+        $userProfileInformation = $userProfile->userProfileInformation()->updateOrCreate([
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
         ]);
+
+        // Store store selected shop act grps id into db
+        $this->storeSelectedShopActGrpsId($userProfileInformation);
 
         // Show Toaster
         $this->dispatch('showToaster', 

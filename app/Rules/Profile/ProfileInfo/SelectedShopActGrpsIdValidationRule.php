@@ -15,7 +15,7 @@ class SelectedShopActGrpsIdValidationRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if(!in_array(true, $value)) {
-            $fail('لطفا صنف فعالیت را مشخص نمایید.');
+            $fail('لطفا زمینه فعالیت را مشخص نمایید.');
         }
     }
 }
