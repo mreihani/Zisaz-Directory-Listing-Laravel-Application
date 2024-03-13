@@ -16,7 +16,7 @@
                         @if($errors->has('workExperience'))
                             <span class="text-danger">{{ $errors->first('workExperience') }}</span>
                         @endif 
-                        <textarea wire:model="workExperience" class="form-control" rows="5" id="pr-description" placeholder="در باره فروشگاه بنویسید مانند نوع کالا ها، شغل فروشگاه"></textarea>
+                        <textarea wire:model="workExperience" class="form-control" rows="5" id="pr-description" placeholder="درباره فروشگاه بنویسید مانند نوع کالا ها، شغل فروشگاه"></textarea>
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-lg rounded-pill ms-sm-auto">
