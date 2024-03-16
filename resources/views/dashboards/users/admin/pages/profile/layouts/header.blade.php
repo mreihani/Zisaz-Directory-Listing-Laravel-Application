@@ -5,10 +5,12 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="user-profile-header-banner"> 
-            <img src="{{asset('assets/dashboards/assets/img/pages/profile-banner.png')}}" alt="تصویر بنر" class="rounded-top"> 
+            <img src="{{asset('assets/dashboards/assets/img/pages/profile-banner.png')}}" class="rounded-top"> 
         </div>
         <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
-          <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto"> <img src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}" alt="تصویر کاربر" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img"> </div>
+          <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto"> 
+            <span class="d-block w-px-100 h-px-100 ms-0 ms-sm-4 rounded" style="background: url('{{(auth()->user()->avatar()) ?: asset('assets/dashboards/assets/img/jaban/user.png')}}'); background-size: cover;"></span>
+          </div>
           <div class="flex-grow-1 mt-3 mt-sm-5">
             <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
               <div class="user-profile-info">

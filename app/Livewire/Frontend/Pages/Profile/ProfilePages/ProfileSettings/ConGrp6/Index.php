@@ -80,15 +80,6 @@ class Index extends Component
 
         $this->validate();
         
-        // Remove exsting profile image
-        if(
-            auth()->user()->userProfile
-            && auth()->user()->userProfile->userProfileInformation
-            && auth()->user()->userProfile->userProfileInformation->profile_image
-            ) {
-            unlink(auth()->user()->userProfile->userProfileInformation->profile_image);
-        }
-        
         // Get uploaded image address
         $profileImageAddress = $this->handleFileUpload();
 
@@ -122,13 +113,25 @@ class Index extends Component
             return null;
         }
 
+        // Remove exsting profile image
+        if(
+            auth()->user()->userProfile
+            && auth()->user()->userProfile->userProfileInformation
+            && auth()->user()->userProfile->userProfileInformation->profile_image
+            ) {
+            unlink(auth()->user()->userProfile->userProfileInformation->profile_image);
+        }
+
         $userId = auth()->user()->id;
         $dir = 'storage/upload/profile-images/' . $userId;
 
         $unique_image_name = hexdec(uniqid());
         $filename = $unique_image_name . '.' . 'jpg';
 
-        $img = Image::make($this->profile_image)->encode('jpg');
+        $img = Image::make($this->profile_image)->resize(200, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('jpg');
+        
         Storage::disk('public')->put('upload/profile-images/' . $userId . '/' . $filename, $img);
 
         return $dir . '/' . $filename;

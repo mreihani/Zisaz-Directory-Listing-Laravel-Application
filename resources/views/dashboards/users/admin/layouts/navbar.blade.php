@@ -11,7 +11,7 @@
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
           <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown" href="javascript:void(0);">
             <div class="avatar avatar-online">
-              <img alt class="h-auto rounded-circle" src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}"/>
+              <img class="rounded-circle" style="background: url('{{(auth()->user()->avatar()) ?: asset('assets/dashboards/assets/img/jaban/user.png')}}'); background-size: cover;" />
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -20,7 +20,7 @@
                 <div class="d-flex">
                   <div class="flex-shrink-0 me-3">
                     <div class="avatar avatar-online">
-                      <img alt class="h-auto rounded-circle" src="{{asset('assets/dashboards/assets/img/jaban/user.png')}}"/>
+                      <img class="rounded-circle" style="background: url('{{(auth()->user()->avatar()) ?: asset('assets/dashboards/assets/img/jaban/user.png')}}'); background-size: cover;" />
                     </div>
                   </div>
                   <div class="flex-grow-1">

@@ -22,11 +22,11 @@
                 <div class="card-body"> 
                     <ul class="list-unstyled mb-4">
                         <li class="d-flex align-items-center mb-3"> <i class="ti ti-user text-heading"></i><span class="fw-medium mx-2 text-heading">نام کامل:</span> <span>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</span>                                                </li>
-                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-crown text-heading"></i><span class="fw-medium mx-2 text-heading">نقش:</span> <span>مدیر</span>                                                </li>
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-crown text-heading"></i><span class="fw-medium mx-2 text-heading">نقش:</span> <span>مدیر</span></li>
                     </ul> <small class="card-text text-uppercase">اطلاعات تماس</small>
                     <ul class="list-unstyled mt-3">
-                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-phone-call"></i><span class="fw-medium mx-2 text-heading">تلفن:</span> <span><bdi>{{auth()->user()->phone}}</bdi></span>                                                </li>
-                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-mail"></i><span class="fw-medium mx-2 text-heading">پست الکترونیکی:</span> <span>{{auth()->user()->email}}</span>                                                </li>
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-phone-call"></i><span class="fw-medium mx-2 text-heading">تلفن:</span> <span><bdi>{{auth()->user()->phone}}</bdi></span></li>
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-mail"></i><span class="fw-medium mx-2 text-heading">پست الکترونیکی:</span> <span>{{auth()->user()->email}}</span></li>
                     </ul>
                 </div>
             </div>
