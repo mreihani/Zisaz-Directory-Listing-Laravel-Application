@@ -54,9 +54,9 @@ class Index extends Component
         ? auth()->user()->userProfile->userProfileInformation->birth_date : '';   
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
-        $this->shopActGrpsEngArray = ShopActCat::find(6)->shopActivityGroup->chunk($this->calculateChunkNumber(6))->toArray();
-        $this->shopActGrpsManagerArray = ShopActCat::find(7)->shopActivityGroup->chunk($this->calculateChunkNumber(7))->toArray();
-        $this->shopActGrpsTechnicalArray = ShopActCat::find(8)->shopActivityGroup->chunk($this->calculateChunkNumber(8))->toArray();
+        $this->shopActGrpsEngArray = ShopActCat::find(15)->shopActivityGroup->chunk($this->calculateChunkNumber(15))->toArray();
+        $this->shopActGrpsManagerArray = ShopActCat::find(16)->shopActivityGroup->chunk($this->calculateChunkNumber(16))->toArray();
+        $this->shopActGrpsTechnicalArray = ShopActCat::find(14)->shopActivityGroup->chunk($this->calculateChunkNumber(14))->toArray();
     }
 
     private function isProfileInfo() {
@@ -83,7 +83,7 @@ class Index extends Component
        
         $totalCount = ShopActCat::find($id)->shopActivityGroup->count();
 
-        return (int) ceil($totalCount / 4);
+        return (int) ceil($totalCount / 3);
     }
 
     private function storeSelectedShopActGrpsId($userProfileInformation) {

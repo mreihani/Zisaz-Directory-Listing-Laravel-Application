@@ -29,7 +29,7 @@
                                             <option value="msd">سیکل</option>
                                             <option value="hsd">دیپلم</option>
                                             <option value="ad">کاردانی</option>
-                                            <option value="ba">کارشناسی ارشد</option>
+                                            <option value="ba">کارشناسی</option>
                                             <option value="ms">کارشناسی ارشد</option>
                                             <option value="phd">دکترا و بالاتر</option>
                                         </select>

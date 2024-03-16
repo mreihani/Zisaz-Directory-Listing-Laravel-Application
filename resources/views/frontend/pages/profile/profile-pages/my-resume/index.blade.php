@@ -22,17 +22,17 @@
                         درباره فروشگاه
                     </li>
                 @endif
-                @if(in_array(auth()->user()->userGroupType->groupable->id, [11]))
+                @if(in_array(auth()->user()->userGroupType->groupable->id, [10]))
                     <li class="breadcrumb-item active" aria-current="page">
                         درباره ماشین آلات
                     </li>
                 @endif
-                @if(in_array(auth()->user()->userGroupType->groupable->id, [12]))
+                @if(in_array(auth()->user()->userGroupType->groupable->id, [11]))
                     <li class="breadcrumb-item active" aria-current="page">
                         درباره آزمایشگاه
                     </li>
                 @endif
-                @if(in_array(auth()->user()->userGroupType->groupable->id, [14, 15]))
+                @if(in_array(auth()->user()->userGroupType->groupable->id, [13, 14]))
                     <li class="breadcrumb-item active" aria-current="page">
                         اطلاعات سرمایه گذاری
                     </li>

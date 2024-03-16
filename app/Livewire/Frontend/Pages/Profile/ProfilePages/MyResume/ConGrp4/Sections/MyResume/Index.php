@@ -43,10 +43,10 @@ class Index extends Component
     }
 
     private function getResumeTitle() {
-        if($this->getResumeStatus()) {
-            return auth()->user()->userProfile->userProfileResume->resumeField->shopActGroups->first()->title;
-        }   
-        return '';
+        // if($this->getResumeStatus()) {
+        //     return auth()->user()->userProfile->userProfileResume->resumeField->shopActGroups->first()->title;
+        // }   
+        return 'رزومه من';
     }
 
     public function addNewResume() {

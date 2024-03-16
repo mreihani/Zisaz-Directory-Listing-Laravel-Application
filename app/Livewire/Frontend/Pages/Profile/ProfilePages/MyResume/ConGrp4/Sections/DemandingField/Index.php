@@ -11,7 +11,6 @@ use App\Models\ContractType\ContractType;
 use App\Rules\Profile\Resume\PaymentValidationRule;
 use App\Rules\Profile\Resume\SelectedCityIdValidationRule;
 use App\Rules\Profile\Resume\SelectedProvinceIdValidationRule;
-use App\Rules\Profile\Resume\SelectedWorkExpIdsValidationRule;
 use App\Rules\Profile\Resume\SelectedContractTypeValidationRule;
 
 class Index extends Component
@@ -27,17 +26,11 @@ class Index extends Component
     public $inputs;
     public $saveResumeDemadingFieldProvince;
 
-    // work experience section
-    public $workExpArray;
-    public $selectedWorkExpIds;
-    public $saveResumeDemadingFieldWorkExp;
-
     protected function rules()
     {
         return 
         [
             'selectedProvinceId' => new SelectedProvinceIdValidationRule(),
-            'selectedWorkExpIds' => new SelectedWorkExpIdsValidationRule(),
         ];
 	}
 
@@ -52,11 +45,6 @@ class Index extends Component
         $this->selectedCityId = $this->getInitialSelectedCityId();
         $this->inputs = $this->getInitialInput();
         $this->cities = $this->getInitialCity();
-
-        // work experience section
-        $this->workExpArray = ShopActGrp::whereBetween('id', [89, 107])->get()->chunk($this->calculateChunkNumber())->toArray();
-
-        $this->selectedWorkExpIds = $this->selectedWorkExpArray();
     }
 
     private function isResumeFiled() {
@@ -181,43 +169,10 @@ class Index extends Component
     }
     // End of - province and cities repeater section
 
-    // Work experience section
-    private function selectedWorkExpArray() {
-        $selectedArray = $this->isResumeFiled() ? auth()->user()->userProfile->userProfileResume->resumeField->shopActGroups->pluck('id')->toArray() : null;
-        if($selectedArray) {
-            $selectedValuesArray = [];
-            foreach ($selectedArray as $value) {
-                $selectedValuesArray[$value] = true;
-            }
-            return $selectedValuesArray;
-        }
-        return []; 
-    }
-
     private function saveResumeProvinceAndCity() {
         $selectedCityIdArray = Purify::clean(array_values($this->selectedCityId));
         auth()->user()->userProfile->userProfileResume->resumeField->cities()->sync($selectedCityIdArray, true); 
     }
-
-    private function saveResumeDemadingFieldWorkExp() {
-
-        $selectedWorkExpIdsArray = [];
-        foreach ($this->selectedWorkExpIds as $key => $value) {
-            if($value) {
-                $selectedWorkExpIdsArray[] = Purify::clean($key);
-            }
-        }
-       
-        auth()->user()->userProfile->userProfileResume->resumeField->shopActGroups()->sync($selectedWorkExpIdsArray, true);
-    }
-
-    private function calculateChunkNumber() {
-       
-        $totalCount = ShopActGrp::whereBetween('id', [89, 107])->count();
-
-        return (int) ceil($totalCount / 4);
-    }
-    // End of - Work experience section
 
     private function storeSelecteContractType() {
         $selectedContractTypeArray = [];
@@ -239,9 +194,6 @@ class Index extends Component
 
         // Store selected Province And City array into DB
         $this->saveResumeProvinceAndCity();
-
-        // Store selected work exp array into DB
-        $this->saveResumeDemadingFieldWorkExp();
 
         $this->dispatch('resumeSectionNumber', resumeSectionNumber: 4 );
     }

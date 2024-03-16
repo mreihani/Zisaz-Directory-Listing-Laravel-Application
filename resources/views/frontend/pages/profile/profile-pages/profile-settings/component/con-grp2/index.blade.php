@@ -62,18 +62,19 @@
                                             Pond.removeFiles();
                                         });
                                     ">
-                                    <div class="flex-shrink-0 order-sm-2" style="width: 10rem; height: 10rem;">
-                                        <input 
-                                        class="file-uploader bg-secondary"
-                                        type="file" 
-                                        accept="image/png, image/jpeg"
-                                        data-label-idle="&lt;i class=&quot;d-inline-block fi-camera-plus fs-2 text-muted mb-2&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;span class=&quot;fw-bold&quot;&gt;تغییر تصویر پروفایل&lt;/span&gt;"
-                                        data-style-panel-layout="compact" 
-                                        data-image-preview-height="160" 
-                                        data-image-crop-aspect-ratio="1:1" 
-                                        data-image-resize-target-width="200"
-                                        data-image-resize-target-height="200"
-                                        wire:model="profile_image">
+                                        <div class="flex-shrink-0 order-sm-2" style="width: 10rem; height: 10rem;">
+                                            <input 
+                                            class="file-uploader bg-secondary"
+                                            type="file" 
+                                            accept="image/png, image/jpeg"
+                                            data-label-idle="&lt;i class=&quot;d-inline-block fi-camera-plus fs-2 text-muted mb-2&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;span class=&quot;fw-bold&quot;&gt;تغییر تصویر پروفایل&lt;/span&gt;"
+                                            data-style-panel-layout="compact" 
+                                            data-image-preview-height="160" 
+                                            data-image-crop-aspect-ratio="1:1" 
+                                            data-image-resize-target-width="200"
+                                            data-image-resize-target-height="200"
+                                            wire:model="profile_image">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +194,7 @@
                                 <label class="form-label fw-bold pb-1 mb-2">مهندسین</label>
                             </div>
                      
-                            <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 skills">
+                            <div class="row row-cols-sm-2 row-cols-md-3 gx-3 gx-lg-3 skills">
                                 @foreach($shopActGrpsEngArray as $chunkArray)
                                     <div class="col">
                                         @foreach($chunkArray as $chunkItem)
@@ -214,10 +215,10 @@
                     <div class="row pb-3">
                         <div class="col-sm-12">
                             <label class="form-label fw-bold pb-1 mb-2">
-                                مدیران و اداری
+                                مدیران و پرسنل اداری
                             </label>
                             
-                            <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 skills">
+                            <div class="row row-cols-sm-2 row-cols-md-3 gx-3 gx-lg-3 skills">
                                 @foreach($shopActGrpsManagerArray as $chunkArray)
                                     <div class="col">
                                         @foreach($chunkArray as $chunkItem)
@@ -241,7 +242,7 @@
                                 نیروهای فنی
                             </label>
                             
-                            <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 skills">
+                            <div class="row row-cols-sm-2 row-cols-md-3 gx-3 gx-lg-3 skills">
                                 @foreach($shopActGrpsTechnicalArray as $chunkArray)
                                     <div class="col">
                                         @foreach($chunkArray as $chunkItem)

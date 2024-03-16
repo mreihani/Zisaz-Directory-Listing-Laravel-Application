@@ -16,12 +16,11 @@
                   {{$user->firstname}} {{$user->lastname}}
                 </h4>
                 <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
-                  <li class="list-inline-item d-flex gap-1"> <i class="ti ti-color-swatch"></i> طراح UX </li>
-                  <li class="list-inline-item d-flex gap-1"><i class="ti ti-map-pin"></i> تهران</li>
-                  <li class="list-inline-item d-flex gap-1"> <i class="ti ti-calendar"></i> عضویت در بهمن 1400 </li>
+                  <li class="list-inline-item d-flex gap-1"> <i class="ti ti-color-swatch"></i> مدیر </li>
+                  <li class="list-inline-item d-flex gap-1"> <i class="ti ti-calendar"></i> عضویت در {{jdate($user->created_at)->format('%d %B %Y')}} </li>
                 </ul>
               </div>
-              <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light"> <i class="ti ti-check me-1"></i>متصل </a>
+              {{-- <a href="javascript:void(0)" class="btn btn-primary waves-effect waves-light"> <i class="ti ti-check me-1"></i>متصل </a> --}}
             </div>
           </div>
         </div>

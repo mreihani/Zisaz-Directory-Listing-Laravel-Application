@@ -62,18 +62,19 @@
                                             Pond.removeFiles();
                                         });
                                     ">
-                                    <div class="flex-shrink-0 order-sm-2" style="width: 10rem; height: 10rem;">
-                                        <input 
-                                        class="file-uploader bg-secondary"
-                                        type="file" 
-                                        accept="image/png, image/jpeg"
-                                        data-label-idle="&lt;i class=&quot;d-inline-block fi-camera-plus fs-2 text-muted mb-2&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;span class=&quot;fw-bold&quot;&gt;تغییر تصویر پروفایل&lt;/span&gt;"
-                                        data-style-panel-layout="compact" 
-                                        data-image-preview-height="160" 
-                                        data-image-crop-aspect-ratio="1:1" 
-                                        data-image-resize-target-width="200"
-                                        data-image-resize-target-height="200"
-                                        wire:model="profile_image">
+                                        <div class="flex-shrink-0 order-sm-2" style="width: 10rem; height: 10rem;">
+                                            <input 
+                                            class="file-uploader bg-secondary"
+                                            type="file" 
+                                            accept="image/png, image/jpeg"
+                                            data-label-idle="&lt;i class=&quot;d-inline-block fi-camera-plus fs-2 text-muted mb-2&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;span class=&quot;fw-bold&quot;&gt;تغییر تصویر پروفایل&lt;/span&gt;"
+                                            data-style-panel-layout="compact" 
+                                            data-image-preview-height="160" 
+                                            data-image-crop-aspect-ratio="1:1" 
+                                            data-image-resize-target-width="200"
+                                            data-image-resize-target-height="200"
+                                            wire:model="profile_image">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -134,9 +135,7 @@
                 <div class="border rounded-3 p-3">
                     <div class="row pb-3">
                         <div class="col-sm-12">
-                            <label class="form-label fw-bold pb-1 mb-2">
-                                لطفا زمینه فعالیت خود را با توجه به دسته بندی های زیر تعیین نمایید
-                            </label>
+                            <label class="form-label fw-bold pb-1 mb-2">مهارت و تخصص های خود را تعیین نمایید</label>
                             <span class="text-danger">*</span>
                             @if($errors->has('shopActGrpsId'))
                                 <span class="text-danger">{{ $errors->first('shopActGrpsId') }}</span>

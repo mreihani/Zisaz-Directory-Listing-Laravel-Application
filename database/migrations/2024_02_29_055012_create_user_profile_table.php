@@ -42,6 +42,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->string('birth_date')->nullable();
             $table->string('shop_name')->nullable();
+            $table->enum('company_type', ['corporate', 'independent'])->default('corporate');
             $table->string('company_name')->nullable();
             $table->string('company_reg_num')->nullable();
             $table->timestamps();

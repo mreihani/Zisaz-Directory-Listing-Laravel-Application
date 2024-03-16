@@ -31,7 +31,7 @@ class Index extends Component
         ? auth()->user()->userProfile->userProfileInformation->gender : '';   
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
-        $this->shopActGrpsArray = ShopActCat::find(11)->shopActivityGroup->chunk(1)->toArray();
+        $this->shopActGrpsArray = ShopActCat::find(18)->shopActivityGroup->chunk(1)->toArray();
     }
 
     protected function rules()
@@ -64,7 +64,7 @@ class Index extends Component
 
     private function calculateChunkNumber() {
        
-        $totalCount = ShopActCat::find(1)->shopActivityGroup->count();
+        $totalCount = ShopActCat::find(18)->shopActivityGroup->count();
 
         return (int) ceil($totalCount / 4);
     }

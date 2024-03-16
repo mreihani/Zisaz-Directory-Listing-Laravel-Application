@@ -26,15 +26,6 @@
                             <label class="form-label" for="pr-phone">شماره تماس</label>
                             <input disabled class="form-control form-control-lg" type="text" id="pr-phone" value="{{auth()->user()->phone}}" placeholder="تلفن خود را وارد کنید">
                         </div>
-                        {{-- <div class="col-sm-6 mb-4">
-                            <label class="form-label" for="pr-birth-date">تاریخ تولد </label>
-                            <div class="input-group input-group-lg">
-                            <input disabled class="form-control rounded pe-5" placeholder="انتخاب تاریخ" 
-                            value="{{auth()->user()->userProfile && auth()->user()->userProfile->userProfileInformation && auth()->user()->userProfile->userProfileInformation->birth_date
-                                ? auth()->user()->userProfile->userProfileInformation->birth_date : ''}}">
-                                <i class="fi-calendar text-muted position-absolute top-50 end-0 translate-middle-y me-3"></i>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="border-top pt-4">
@@ -91,93 +82,6 @@
                                 افزودن استان و شهر
                             </button>
                         </div>
-                    </div>
-
-                    <div class="border-top pt-4">
-
-                        <label class="form-label fw-bold pb-1 mb-2">سوابق شغلی و تجربه کاری</label>
-                        <span class="text-danger">*</span>
-                        <div class="d-flex flex-column mb-3">
-                            @if($errors->has('selectedWorkExpIds'))
-                                <span class="text-danger">{{ $errors->first('selectedWorkExpIds') }}</span>
-                            @endif 
-                        </div>  
-                        <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 mb-4 skills">
-                            @foreach($workExpArray as $chunkArray)
-                                <div class="col">
-                                    @foreach($chunkArray as $chunkItem)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="workexp_{{$chunkItem['id']}}"
-                                                wire:model="selectedWorkExpIds.{{$chunkItem['id']}}">
-                                            <label class="form-check-label" for="workexp_{{$chunkItem['id']}}">
-                                                {{$chunkItem['title']}}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
-                        
-                        {{-- <label class="form-label fw-bold pb-1 mb-2">نوع قرارداد</label>
-                        <span class="text-danger">*</span>
-                        <div class="d-flex flex-column mb-3">
-                            @if($errors->has('selectedContractType'))
-                                <span class="text-danger">{{ $errors->first('selectedContractType') }}</span>
-                            @endif 
-                        </div>
-                        <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 mb-4">
-                            @foreach ($contractTypeArray as $contractTypeChunk)
-                            <div class="col">
-                                @foreach ($contractTypeChunk as $contractTypeItem)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="contract_type_{{$contractTypeItem['id']}}"
-                                         wire:model="selectedContractType.{{$contractTypeItem['id']}}">
-                                        <label class="form-check-label" for="contract_type_{{$contractTypeItem['id']}}">
-                                            {{$contractTypeItem['title']}}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @endforeach
-                        </div> --}}
-
-                        {{-- <label class="form-label fw-bold pb-1 mb-2">حداقل حقوق درخواستی</label>
-                        <span class="text-danger">*</span>
-                        <div class="d-flex flex-column mb-3">
-                            @if($errors->has('paymentAmountFrom'))
-                                <span class="text-danger mb-2">{{ $errors->first('paymentAmountFrom') }}</span>
-                            @endif 
-                            @if($errors->has('paymentAmountTo'))
-                                <span class="text-danger mb-2">{{ $errors->first('paymentAmountTo') }}</span>
-                            @endif 
-                            @if($errors->has('paymentAmountType'))
-                                <span class="text-danger mb-2">{{ $errors->first('paymentAmountType') }}</span>
-                            @endif 
-                        </div> --}}
-
-                        {{-- <div class="row gx-2 gx-lg-3 gx-xl-4">
-                            <div class="col-md-2 mb-3 mb-md-0">
-                                <select disabled class="form-select form-select-lg">
-                                    <option value="usd">تومان</option>
-                                </select>
-                            </div>
-                            <div class="col-md-7 mb-3 mb-md-0">
-                                <div class="d-flex align-items-center">
-                                    <input class="form-control form-control-lg" type="number" step="100" min="300" placeholder="از" wire:model="paymentAmountFrom">
-                                    <div class="mx-2">—</div>
-                                    <input class="form-control form-control-lg" type="number" step="100" min="500" placeholder="تا" wire:model="paymentAmountTo">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-select form-select-lg" wire:model="paymentAmountType">
-                                    <option value="monthly">ماهیانه</option>
-                                    <option value="hourly">ساعتی</option>
-                                    <option value="weekly">هفتگی</option>
-                                    <option value="annually">سالیانه</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
                     </div>
                 </div>
             

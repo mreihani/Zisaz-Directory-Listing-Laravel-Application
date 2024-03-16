@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::get('/test', 
+Route::get('/seed', 
     function () {
         // آرایه مربوط به زمینه فعالیت کاربر
         $typeOfActivityArray = config('jaban.profile.sector.construction.type_of_activity');

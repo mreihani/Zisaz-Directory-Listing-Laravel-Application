@@ -19,21 +19,35 @@ class Index extends Component
     public $companyName;
     public $companyRegNum;
     public $shopActGrpsId;
-    public $shopActGrpsArray;
+    public $shopActGrpsMassConstArray;
+    public $shopActGrpsWholeContractorArray;
+    public $shopActGrpsExcavationArray;
+    public $shopActGrpsFoundationArray;
+    public $shopActGrpsExteriorArray;
+    public $shopActGrpsMechanicalArray;
+    public $shopActGrpsInsulationArray;
+    public $shopActGrpsOtherArray;
+    public $shopActGrpsDoorArray;
+    public $shopActGrpsInteriorArray;
+    public $shopActGrpsGardenArray;
+    public $companyType;
+    public $showCompanySpecs;
 
     protected function rules()
     {
         return 
         [
-            'companyName' => 'required',
-            'companyRegNum' => 'required',
+            'companyType' => 'required',
+            'companyName' => 'required_if:companyType,corporate',
+            'companyRegNum' => 'required_if:companyType,corporate',
             'shopActGrpsId' => new SelectedShopActGrpsIdValidationRule(),
         ];
 	}
     
     protected $messages = [
-        'companyName.required' => 'لطفا نام شرکت را وارد نمایید.',
-        'companyRegNum.required' => 'لطفا شماره ثبت شرکت را وارد نماید.',
+        'companyType.required' => 'لطفا نوع پیمانکار را مشخص نمایید.',
+        'companyName.required_if' => 'لطفا نام شرکت را وارد نمایید.',
+        'companyRegNum.required_if' => 'لطفا شماره ثبت شرکت را وارد نماید.',
     ];
 
     public function mount() {
@@ -42,6 +56,12 @@ class Index extends Component
         && auth()->user()->userProfile->userProfileInformation->profile_image)
         ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
         null;
+
+        $this->companyType = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->company_type)
+        ? auth()->user()->userProfile->userProfileInformation->company_type :
+        '';
 
         $this->companyName = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
@@ -55,8 +75,24 @@ class Index extends Component
         ? auth()->user()->userProfile->userProfileInformation->company_reg_num :
         '';
 
+        $this->showCompanySpecs = (auth()->user()->userProfile
+        && auth()->user()->userProfile->userProfileInformation
+        && auth()->user()->userProfile->userProfileInformation->company_type == 'independent')
+        ? false :
+        true;
+
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
-        $this->shopActGrpsArray = ShopActCat::find(2)->shopActivityGroup->chunk($this->calculateChunkNumber())->toArray();
+        $this->shopActGrpsMassConstArray = ShopActCat::find(2)->shopActivityGroup->chunk($this->calculateChunkNumber(2))->toArray();
+        $this->shopActGrpsWholeContractorArray = ShopActCat::find(4)->shopActivityGroup->chunk($this->calculateChunkNumber(4))->toArray();
+        $this->shopActGrpsExcavationArray = ShopActCat::find(5)->shopActivityGroup->chunk($this->calculateChunkNumber(5))->toArray();
+        $this->shopActGrpsFoundationArray = ShopActCat::find(6)->shopActivityGroup->chunk($this->calculateChunkNumber(6))->toArray();
+        $this->shopActGrpsExteriorArray = ShopActCat::find(7)->shopActivityGroup->chunk($this->calculateChunkNumber(7))->toArray();
+        $this->shopActGrpsMechanicalArray = ShopActCat::find(8)->shopActivityGroup->chunk($this->calculateChunkNumber(7))->toArray();
+        $this->shopActGrpsInsulationArray = ShopActCat::find(9)->shopActivityGroup->chunk($this->calculateChunkNumber(9))->toArray();
+        $this->shopActGrpsOtherArray = ShopActCat::find(10)->shopActivityGroup->chunk($this->calculateChunkNumber(10))->toArray();
+        $this->shopActGrpsDoorArray = ShopActCat::find(11)->shopActivityGroup->chunk($this->calculateChunkNumber(11))->toArray();
+        $this->shopActGrpsInteriorArray = ShopActCat::find(12)->shopActivityGroup->chunk($this->calculateChunkNumber(12))->toArray();
+        $this->shopActGrpsGardenArray = ShopActCat::find(13)->shopActivityGroup->chunk($this->calculateChunkNumber(13))->toArray();
     }
 
     private function isProfileInfo() {
@@ -79,9 +115,9 @@ class Index extends Component
         return []; 
     }
 
-    private function calculateChunkNumber() {
+    private function calculateChunkNumber($id) {
        
-        $totalCount = ShopActCat::find(2)->shopActivityGroup->count();
+        $totalCount = ShopActCat::find($id)->shopActivityGroup->count();
 
         return (int) ceil($totalCount / 4);
     }
@@ -95,6 +131,16 @@ class Index extends Component
         }
         
         $userProfileInformation->shopActGroups()->sync($selectedShopActGrpsIdArray, true);
+    }
+
+    public function changeCompanyType($value) {
+        $this->companyType = $value;
+ 
+        if($value == "corporate") {
+            $this->showCompanySpecs = true;
+        } elseif($value == "independent") {
+            $this->showCompanySpecs = false;
+        }
     }
 
     public function saveProfile() {
@@ -122,6 +168,7 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
+            'company_type' => Purify::clean($this->companyType),
             'company_name' => Purify::clean($this->companyName),
             'company_reg_num' => Purify::clean($this->companyRegNum),
         ]);

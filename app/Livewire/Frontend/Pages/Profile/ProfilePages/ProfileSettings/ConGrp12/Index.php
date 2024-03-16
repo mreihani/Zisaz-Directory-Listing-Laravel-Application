@@ -16,8 +16,6 @@ class Index extends Component
 
     public $profile_image;
     public $activityGroupObj;
-    public $companyName;
-    public $companyRegNum;
     public $shopActGrpsId;
     public $shopActGrpsArray;
 
@@ -25,16 +23,9 @@ class Index extends Component
     {
         return 
         [
-            'companyName' => 'required',
-            'companyRegNum' => 'required',
             'shopActGrpsId' => new SelectedShopActGrpsIdValidationRule(),
         ];
 	}
-    
-    protected $messages = [
-        'companyName.required' => 'لطفا نام آزمایشگاه را وارد نمایید.',
-        'companyRegNum.required' => 'لطفا شماره مجوز آزمایشگاه را وارد نماید.',
-    ];
 
     public function mount() {
         $this->profile_image = (auth()->user()->userProfile
@@ -43,20 +34,8 @@ class Index extends Component
         ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
         null;
 
-        $this->companyName = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->company_name)
-        ? auth()->user()->userProfile->userProfileInformation->company_name :
-        '';
-
-        $this->companyRegNum = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->company_reg_num)
-        ? auth()->user()->userProfile->userProfileInformation->company_reg_num :
-        '';
-
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
-        $this->shopActGrpsArray = ShopActCat::find(10)->shopActivityGroup->chunk($this->calculateChunkNumber())->toArray();
+        $this->shopActGrpsArray = ShopActCat::find(3)->shopActivityGroup->chunk($this->calculateChunkNumber())->toArray();
     }
 
     private function isProfileInfo() {
@@ -81,7 +60,7 @@ class Index extends Component
 
     private function calculateChunkNumber() {
        
-        $totalCount = ShopActCat::find(10)->shopActivityGroup->count();
+        $totalCount = ShopActCat::find(3)->shopActivityGroup->count();
 
         return (int) ceil($totalCount / 4);
     }
@@ -98,7 +77,7 @@ class Index extends Component
     }
 
     public function saveProfile() {
-        
+
         $this->validate();
 
         // Remove exsting profile image
@@ -122,8 +101,6 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
-            'company_name' => Purify::clean($this->companyName),
-            'company_reg_num' => Purify::clean($this->companyRegNum),
         ]);
 
         // Store store selected shop act grps id into db

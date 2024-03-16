@@ -19,26 +19,14 @@
         <div class="col-xl-4 col-lg-5 col-md-5">
             <!-- About User -->
             <div class="card mb-4">
-                <div class="card-body"> <small class="card-text text-uppercase">درباره</small>
-                    <ul class="list-unstyled mb-4 mt-3">
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-user text-heading"></i><span class="fw-medium mx-2 text-heading">نام کامل:</span> <span>پیمان معادی</span>                                                </li>
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-check text-heading"></i><span class="fw-medium mx-2 text-heading">وضعیت:</span> <span>فعال</span> </li>
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-crown text-heading"></i><span class="fw-medium mx-2 text-heading">نقش:</span> <span>توسعه دهنده</span>                                                </li>
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-flag text-heading"></i><span class="fw-medium mx-2 text-heading">کشور:</span> <span>ایران</span> </li>
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-file-description text-heading"></i><span class="fw-medium mx-2 text-heading">زبان ها:</span> <span>فارسی</span>                                                </li>
-                    </ul> <small class="card-text text-uppercase">مخاطبین</small>
-                    <ul class="list-unstyled mb-4 mt-3">
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-phone-call"></i><span class="fw-medium mx-2 text-heading">تماس با ما:</span> <span><bdi>0913 000 0000</bdi></span>                                                </li>
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-brand-skype"></i><span class="fw-medium mx-2 text-heading">اسکایپ: نـوید</span> <span>@TEST</span> </li>
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-mail"></i><span class="fw-medium mx-2 text-heading">پست الکترونیکی:</span> <span>john.doe@example.com</span>                                                </li>
-                    </ul> <small class="card-text text-uppercase">تیم ها</small>
-                    <ul class="list-unstyled mb-0 mt-3">
-                    <li class="d-flex align-items-center mb-3"> <i class="ti ti-brand-angular text-danger me-2"></i>
-                        <div class="d-flex flex-wrap"> <span class="fw-medium me-2 text-heading">توسعه دهنده آنگولار</span> <span>(126 اعضا)</span> </div>
-                    </li>
-                    <li class="d-flex align-items-center"> <i class="ti ti-brand-react-native text-info me-2"></i>
-                        <div class="d-flex flex-wrap"> <span class="fw-medium me-2 text-heading">توسعه دهنده ری‌اکت</span> <span>(98 اعضا)</span> </div>
-                    </li>
+                <div class="card-body"> 
+                    <ul class="list-unstyled mb-4">
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-user text-heading"></i><span class="fw-medium mx-2 text-heading">نام کامل:</span> <span>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</span>                                                </li>
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-crown text-heading"></i><span class="fw-medium mx-2 text-heading">نقش:</span> <span>مدیر</span>                                                </li>
+                    </ul> <small class="card-text text-uppercase">اطلاعات تماس</small>
+                    <ul class="list-unstyled mt-3">
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-phone-call"></i><span class="fw-medium mx-2 text-heading">تلفن:</span> <span><bdi>{{auth()->user()->phone}}</bdi></span>                                                </li>
+                        <li class="d-flex align-items-center mb-3"> <i class="ti ti-mail"></i><span class="fw-medium mx-2 text-heading">پست الکترونیکی:</span> <span>{{auth()->user()->email}}</span>                                                </li>
                     </ul>
                 </div>
             </div>

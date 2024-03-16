@@ -94,29 +94,6 @@
                     </div>
 
                     <div class="border-top pt-4">
-
-                        <label class="form-label fw-bold pb-1 mb-2">سوابق شغلی و تجربه کاری</label>
-                        <span class="text-danger">*</span>
-                        <div class="d-flex flex-column mb-3">
-                            @if($errors->has('selectedWorkExpIds'))
-                                <span class="text-danger">{{ $errors->first('selectedWorkExpIds') }}</span>
-                            @endif 
-                        </div>  
-                        <div class="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 mb-4 skills">
-                            @foreach($workExpArray as $chunkArray)
-                                <div class="col">
-                                    @foreach($chunkArray as $chunkItem)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="workexp_{{$chunkItem['id']}}"
-                                                wire:model="selectedWorkExpIds.{{$chunkItem['id']}}">
-                                            <label class="form-check-label" for="workexp_{{$chunkItem['id']}}">
-                                                {{$chunkItem['title']}}
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
                         
                         <label class="form-label fw-bold pb-1 mb-2">نوع قرارداد</label>
                         <span class="text-danger">*</span>

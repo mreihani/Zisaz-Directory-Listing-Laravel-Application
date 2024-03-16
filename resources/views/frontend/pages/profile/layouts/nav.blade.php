@@ -42,7 +42,7 @@
                 اطلاعات تماس
             </a>
         </li>
-        @if(in_array(auth()->user()->userGroupType->groupable->id, [2, 3, 4, 5, 6, 7, 9, 10]))
+        @if(in_array(auth()->user()->userGroupType->groupable->id, [2, 3, 4, 5, 6, 7, 9]))
             <li class="nav-item mb-md-0 me-md-2 pe-md-1">
                 <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-resume.index' ? 'active' : ''}}" 
                     href="{{route('user.dashboard.my-resume.index')}}">
@@ -60,7 +60,7 @@
                 </a>
             </li>
         @endif
-        @if(in_array(auth()->user()->userGroupType->groupable->id, [11]))
+        @if(in_array(auth()->user()->userGroupType->groupable->id, [10]))
             <li class="nav-item mb-md-0 me-md-2 pe-md-1">
                 <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-resume.index' ? 'active' : ''}}" 
                     href="{{route('user.dashboard.my-resume.index')}}">
@@ -69,7 +69,7 @@
                 </a>
             </li>
         @endif
-        @if(in_array(auth()->user()->userGroupType->groupable->id, [12]))
+        @if(in_array(auth()->user()->userGroupType->groupable->id, [11]))
             <li class="nav-item mb-md-0 me-md-2 pe-md-1">
                 <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-resume.index' ? 'active' : ''}}" 
                     href="{{route('user.dashboard.my-resume.index')}}">
@@ -78,7 +78,7 @@
                 </a>
             </li>
         @endif
-        @if(in_array(auth()->user()->userGroupType->groupable->id, [13]))
+        @if(in_array(auth()->user()->userGroupType->groupable->id, [12]))
             <li class="nav-item mb-md-0 me-md-2 pe-md-1">
                 <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.my-project.index' ? 'active' : ''}}" 
                     href="{{route('user.dashboard.my-project.index')}}">
@@ -87,7 +87,7 @@
                 </a>
             </li>
         @endif
-        @if(in_array(auth()->user()->userGroupType->groupable->id, [2, 3, 4, 5, 7, 8, 9, 12]))
+        @if(in_array(auth()->user()->userGroupType->groupable->id, [2, 3, 4, 5, 7, 8, 9, 11]))
             <li class="nav-item mb-md-0 me-md-2 pe-md-1">
                 <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.license.index' ? 'active' : ''}}" 
                     href="{{route('user.dashboard.license.index')}}">
@@ -96,20 +96,22 @@
                 </a>
             </li>
         @endif
-        <li class="nav-item mb-md-0 me-md-2 pe-md-1">
-            <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.saved-jobs.index' ? 'active' : ''}}" 
-                href="{{route('user.dashboard.saved-jobs.index')}}">
-                <i class="fi-bookmark mt-n1 me-2 fs-base"></i>
-                فرصت های شغلی نشان شده
-            </a>
-        </li>
-        <li class="nav-item mb-md-0">
-            <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.account-notifications.index' ? 'active' : ''}}" 
-                href="{{route('user.dashboard.account-notifications.index')}}">
-                <i class="fi-bell mt-n1 me-2 fs-base"></i>
-                تنظیمات اطلاع رسانی
-            </a>
-        </li>
+        @if(in_array(auth()->user()->userGroupType->groupable->id, [1, 2]))
+            <li class="nav-item mb-md-0 me-md-2 pe-md-1">
+                <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.saved-jobs.index' ? 'active' : ''}}" 
+                    href="{{route('user.dashboard.saved-jobs.index')}}">
+                    <i class="fi-bookmark mt-n1 me-2 fs-base"></i>
+                    فرصت های شغلی نشان شده
+                </a>
+            </li>
+            <li class="nav-item mb-md-0">
+                <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.account-notifications.index' ? 'active' : ''}}" 
+                    href="{{route('user.dashboard.account-notifications.index')}}">
+                    <i class="fi-bell mt-n1 me-2 fs-base"></i>
+                    تنظیمات اطلاع رسانی
+                </a>
+            </li>
+        @endif
         <li class="nav-item d-md-none">
             <a class="nav-link" href="{{route('logout')}}">
             <i class="fi-logout mt-n1 me-2 fs-base"></i>

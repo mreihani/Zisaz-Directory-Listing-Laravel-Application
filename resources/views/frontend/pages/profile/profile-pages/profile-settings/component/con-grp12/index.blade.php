@@ -62,18 +62,19 @@
                                             Pond.removeFiles();
                                         });
                                     ">
-                                    <div class="flex-shrink-0 order-sm-2" style="width: 10rem; height: 10rem;">
-                                        <input 
-                                        class="file-uploader bg-secondary"
-                                        type="file" 
-                                        accept="image/png, image/jpeg"
-                                        data-label-idle="&lt;i class=&quot;d-inline-block fi-camera-plus fs-2 text-muted mb-2&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;span class=&quot;fw-bold&quot;&gt;تغییر تصویر پروفایل&lt;/span&gt;"
-                                        data-style-panel-layout="compact" 
-                                        data-image-preview-height="160" 
-                                        data-image-crop-aspect-ratio="1:1" 
-                                        data-image-resize-target-width="200"
-                                        data-image-resize-target-height="200"
-                                        wire:model="profile_image">
+                                        <div class="flex-shrink-0 order-sm-2" style="width: 10rem; height: 10rem;">
+                                            <input 
+                                            class="file-uploader bg-secondary"
+                                            type="file" 
+                                            accept="image/png, image/jpeg"
+                                            data-label-idle="&lt;i class=&quot;d-inline-block fi-camera-plus fs-2 text-muted mb-2&quot;&gt;&lt;/i&gt;&lt;br&gt;&lt;span class=&quot;fw-bold&quot;&gt;تغییر تصویر پروفایل&lt;/span&gt;"
+                                            data-style-panel-layout="compact" 
+                                            data-image-preview-height="160" 
+                                            data-image-crop-aspect-ratio="1:1" 
+                                            data-image-resize-target-width="200"
+                                            data-image-resize-target-height="200"
+                                            wire:model="profile_image">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -123,54 +124,6 @@
                 </div>
             </div>
         </div>
-    
-        <!-- Company Specs -->
-        <div class="row pt-4 mt-2">
-            <div class="col-lg-3">
-                <h2 class="h5 font-vazir">
-                    مشخصات آزمایشگاه
-                </h2>
-            </div>
-            <div class="col-lg-9">
-                <div class="border rounded-3 p-3" id="company-specs">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center">
-                           
-                            <div class="border-bottom pb-3 mb-3">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="ps-2">
-                                        <label class="form-label fw-bold">نام آزمایشگاه</label>
-                                        <span class="text-danger">*</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <input class="form-control mt-3" type="text" wire:model="companyName" placeholder="نام آزمایشگاه را وارد نمایید">
-                                </div>
-                                @if($errors->has('companyName'))
-                                    <span class="text-danger">{{ $errors->first('companyName') }}</span>
-                                @endif 
-                            </div>
-
-                            <div class="pb-3">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="ps-2">
-                                        <label class="form-label fw-bold">شماره مجوز آزمایشگاه</label>
-                                        <span class="text-danger">*</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <input class="form-control mt-3" type="text" wire:model="companyRegNum" placeholder="شماره مجوز آزمایشگاه را وارد نمایید">
-                                </div>
-                                @if($errors->has('companyRegNum'))
-                                    <span class="text-danger">{{ $errors->first('companyRegNum') }}</span>
-                                @endif
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Company details -->
         <div class="row pt-4 mt-2">
@@ -182,7 +135,7 @@
                 <div class="border rounded-3 p-3">
                     <div class="row pb-3">
                         <div class="col-sm-12">
-                            <label class="form-label fw-bold pb-1 mb-2">زمینه فعالیت آزمایشکاه را تعیین نمایید</label>
+                            <label class="form-label fw-bold pb-1 mb-2">زمینه فعالیت پروژه را تعیین نمایید</label>
                             <span class="text-danger">*</span>
                             <div class="d-flex flex-column mb-3">
                                 @if($errors->has('shopActGrpsId'))
@@ -209,7 +162,7 @@
                 </div>
             </div>
         </div>
-
+    
         <!-- Action buttons-->
         <div class="row pt-4 mt-2">
             <div class="col-lg-9 offset-lg-3">

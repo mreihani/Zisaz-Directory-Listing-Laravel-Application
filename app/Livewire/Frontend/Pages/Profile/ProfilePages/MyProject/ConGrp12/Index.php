@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\MyProject\ConGrp13;
+namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\MyProject\ConGrp12;
 
 use Livewire\Component;
 use Stevebauman\Purify\Facades\Purify;
@@ -18,7 +18,7 @@ class Index extends Component
 	}
     
     protected $messages = [
-        'workExperience.required' => 'فیلد سابقه کار نمی تواند خالی باشد.',
+        'workExperience.required' => 'فیلد توضیحات نمی تواند خالی باشد.',
     ];
 
     public function mount() {

@@ -54,7 +54,7 @@ class Index extends Component
         '';
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
-        $this->shopActGrpsArray = ShopActCat::find(9)->shopActivityGroup->chunk($this->calculateChunkNumber())->toArray();
+        $this->shopActGrpsArray = ShopActCat::find(15)->shopActivityGroup->chunk($this->calculateChunkNumber())->toArray();
     }
 
     private function isProfileInfo() {
@@ -79,7 +79,7 @@ class Index extends Component
 
     private function calculateChunkNumber() {
        
-        $totalCount = ShopActCat::find(9)->shopActivityGroup->count();
+        $totalCount = ShopActCat::find(15)->shopActivityGroup->count();
 
         return (int) ceil($totalCount / 4);
     }

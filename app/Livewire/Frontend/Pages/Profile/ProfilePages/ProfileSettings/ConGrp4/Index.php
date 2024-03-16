@@ -36,8 +36,8 @@ class Index extends Component
         null;
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
-        $this->shopActGrpsEngArray = ShopActCat::find(6)->shopActivityGroup->chunk($this->calculateChunkNumber(6))->toArray();
-        $this->shopActGrpsManagerArray = ShopActCat::find(7)->shopActivityGroup->chunk($this->calculateChunkNumber(7))->toArray();
+        $this->shopActGrpsEngArray = ShopActCat::find(15)->shopActivityGroup->chunk($this->calculateChunkNumber(15))->toArray();
+        $this->shopActGrpsManagerArray = ShopActCat::find(16)->shopActivityGroup->chunk($this->calculateChunkNumber(16))->toArray();
     }
 
     private function isProfileInfo() {

@@ -78,9 +78,13 @@
             </div>
         @else
             <div class="d-flex justify-content-center align-items-center flex-column mt-5">
-                <h4>
-                    شما هیچ مجوزی بارگذاری نکرده اید، برای بارگذاری مجوز خود بر روی دکمه زیر کلیک کنید.
-                </h4>
+                <p class="text-primary">
+                    <i class="fi-alert-circle fs-sm"></i>
+                    در صورتی که مجوزهای قانونی ندارید، از این مرحله می توانید عبور کنید.
+                </p>
+                <h5>
+                    برای بارگذاری مجوز خود بر روی دکمه زیر کلیک کنید.
+                </h5>
                 <div class="col-md-2">
                     <button class="btn btn-primary rounded-pill w-100" wire:click="addNewLicense">
                         <i class="fi-plus fs-sm me-2"></i>
