@@ -45,13 +45,15 @@ class Index extends Component
 
         $this->gender = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->gender)
-        ? auth()->user()->userProfile->userProfileInformation->gender : '';   
+        && auth()->user()->userProfile->userProfileInformation->profileInfoPersonal
+        && auth()->user()->userProfile->userProfileInformation->profileInfoPersonal->gender)
+        ? auth()->user()->userProfile->userProfileInformation->profileInfoPersonal->gender : '';   
 
         $this->birth_date = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->birth_date)
-        ? auth()->user()->userProfile->userProfileInformation->birth_date : '';   
+        && auth()->user()->userProfile->userProfileInformation->profileInfoPersonal
+        && auth()->user()->userProfile->userProfileInformation->profileInfoPersonal->birth_date)
+        ? auth()->user()->userProfile->userProfileInformation->profileInfoPersonal->birth_date : '';   
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
         $this->shopActGrpsEngArray = ShopActCat::find(15)->shopActivityGroup->chunk($this->calculateChunkNumber(15))->toArray();
@@ -114,6 +116,11 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
+        ]);
+
+        $userProfileInformation->profileInfoPersonal()->updateOrCreate([
+            'profile_info_id' => $userProfileInformation->id
+        ],[
             'gender' => Purify::clean($this->gender),
             'birth_date' => Purify::clean($this->birth_date),
         ]);

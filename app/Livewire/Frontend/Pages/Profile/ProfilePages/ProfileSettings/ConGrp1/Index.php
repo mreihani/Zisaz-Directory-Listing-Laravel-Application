@@ -30,7 +30,7 @@ class Index extends Component
         $profileImageAddress = $this->handleFileUpload();
 
         // Save user profile
-        $userProfile = auth()->user()->userProfile()->firstOrCreate([
+       $userProfile = auth()->user()->userProfile()->firstOrCreate([
             'user_id' => auth()->user()->id
         ]);
 

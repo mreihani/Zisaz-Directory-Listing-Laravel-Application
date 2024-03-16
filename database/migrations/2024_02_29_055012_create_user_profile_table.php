@@ -39,12 +39,33 @@ return new class extends Migration
             $table->unsignedBigInteger('user_profile_id');
             $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
             $table->string('profile_image')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('profile_info_personals', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('profile_info_id');
+            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->string('birth_date')->nullable();
-            $table->string('shop_name')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('profile_info_companies', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('profile_info_id');
+            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
             $table->enum('company_type', ['corporate', 'independent'])->default('corporate');
             $table->string('company_name')->nullable();
             $table->string('company_reg_num')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('profile_info_shops', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('profile_info_id');
+            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
+            $table->string('shop_name')->nullable();
             $table->timestamps();
         });
 
@@ -79,9 +100,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_company_specs');
         Schema::dropIfExists('profile_resumes');
         Schema::dropIfExists('profile_contacts');
+        Schema::dropIfExists('shop_act_grp_profile_info');
+        Schema::dropIfExists('profile_info_shops');
+        Schema::dropIfExists('profile_info_companies');
+        Schema::dropIfExists('profile_info_personals');
         Schema::dropIfExists('profile_infos');
         Schema::dropIfExists('shop_act_grps');
         Schema::dropIfExists('shop_act_cats');

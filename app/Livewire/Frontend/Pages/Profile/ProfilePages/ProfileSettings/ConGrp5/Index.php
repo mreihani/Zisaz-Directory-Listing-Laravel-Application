@@ -45,14 +45,16 @@ class Index extends Component
 
         $this->companyName = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->company_name)
-        ? auth()->user()->userProfile->userProfileInformation->company_name :
+        && auth()->user()->userProfile->userProfileInformation->profileInfoCompany
+        && auth()->user()->userProfile->userProfileInformation->profileInfoCompany->company_name)
+        ? auth()->user()->userProfile->userProfileInformation->profileInfoCompany->company_name :
         '';
 
         $this->companyRegNum = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->company_reg_num)
-        ? auth()->user()->userProfile->userProfileInformation->company_reg_num :
+        && auth()->user()->userProfile->userProfileInformation->profileInfoCompany
+        && auth()->user()->userProfile->userProfileInformation->profileInfoCompany->company_reg_num)
+        ? auth()->user()->userProfile->userProfileInformation->profileInfoCompany->company_reg_num :
         '';
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
@@ -113,6 +115,11 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
+        ]);
+
+        $userProfileInformation->profileInfoCompany()->updateOrCreate([
+            'profile_info_id' => $userProfileInformation->id
+        ],[
             'company_name' => Purify::clean($this->companyName),
             'company_reg_num' => Purify::clean($this->companyRegNum),
         ]);

@@ -6,7 +6,7 @@
         <ul class="dropdown-menu dropdown-menu-dark">
 
             <div class="d-flex align-items-start border-bottom border-light px-3 py-1 mb-2" style="width: 16rem;">
-                <img class="rounded-circle" src="{{auth()->user()->avatar()}}" width="48" alt="">
+                <img class="rounded-circle" src="{{auth()->user()->avatar()}}" style="height: 48px; width:48px;">
                 <div class="ps-2 text-end">
                     <h6 class="fs-base text-light mb-0"> 
                         {{auth()->user()->firstname}} {{auth()->user()->lastname}} 

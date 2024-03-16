@@ -28,8 +28,9 @@ class Index extends Component
         
         $this->shop_name = (auth()->user()->userProfile
         && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->shop_name)
-        ? auth()->user()->userProfile->userProfileInformation->shop_name : '';
+        && auth()->user()->userProfile->userProfileInformation->profileInfoShop
+        && auth()->user()->userProfile->userProfileInformation->profileInfoShop->shop_name)
+        ? auth()->user()->userProfile->userProfileInformation->profileInfoShop->shop_name : '';
 
         $this->shopActGrpsId = $this->selectedshopActGrpsArray();
         $this->shopActGrpsArray = ShopActCat::find(1)->shopActivityGroup->chunk($this->calculateChunkNumber())->toArray();
@@ -103,6 +104,11 @@ class Index extends Component
             'user_profile_id' => $userProfile->id
         ],[
             'profile_image' => $profileImageAddress,
+        ]);
+
+        $userProfileInformation->profileInfoShop()->updateOrCreate([
+            'profile_info_id' => $userProfileInformation->id
+        ],[
             'shop_name' => Purify::clean($this->shop_name) ?: null,
         ]);
 
