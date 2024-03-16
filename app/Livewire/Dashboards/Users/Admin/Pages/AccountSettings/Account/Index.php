@@ -31,6 +31,7 @@ class Index extends Component
     //     $this->dispatch('resumeSectionNumber', resumeSectionNumber: 4 );
     // }
 
+    
     public function render()
     {
         return view('dashboards.users.admin.pages.account-settings.account.component.index');
