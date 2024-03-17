@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
             return redirect(route('admin.dashboard.index'));
         }
      
-        return redirect(route('user.dashboard.index'));
+        return redirect(route('user.dashboard.profile-settings.index'));
     }
 
     /**

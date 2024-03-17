@@ -18,5 +18,9 @@ class IgnorePhoneRegistrationValidation implements ValidationRule
         if(User::where($attribute, $value)->where('phone_verified', 1)->exists()) {
             $fail('شماره تلفن مورد نظر قبلا در سامانه ثبت شده است. لطفا شماره دیگری وارد نمایید.');
         }
+
+        if(User::where($attribute, $value)->where('role', 'admin')->exists()) {
+            $fail('شماره تلفن مورد نظر قبلا در سامانه ثبت شده است. لطفا شماره دیگری وارد نمایید.');
+        }
     }
 }

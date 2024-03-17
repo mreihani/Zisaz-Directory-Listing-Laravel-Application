@@ -26,7 +26,7 @@ class RemoveNotValidatedUsers extends Command
      */
     public function handle()
     {
-        User::where('phone_verified', 0)->whereHas('activeCode', function ($query) {
+        User::where('phone_verified', 0)->where('role','construction')->whereHas('activeCode', function ($query) {
             return $query->where('expired_at', '<', now());
         })->delete();
     }
