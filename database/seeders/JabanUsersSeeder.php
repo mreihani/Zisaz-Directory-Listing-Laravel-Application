@@ -71,10 +71,10 @@ class JabanUsersSeeder extends Seeder
             ]);
         }
 
-        // اضافه کردن کاربر ادمین تست
-        User::insert([
-            'firstname' => 'admin',
-            'lastname' => 'reihani',
+        // اضافه کردن مدیر ها
+        User::create([
+            'firstname' => 'محمد امین',
+            'lastname' => 'ریحانی',
             'email' => 'mreihani@gmail.com',
             'phone' => '09922966614',
             'password' => Hash::make(12345678),
@@ -82,10 +82,21 @@ class JabanUsersSeeder extends Seeder
             'phone_verified' => 0,
         ]);
 
-        // اضافه کردن کاربر معمولی خودم
+        User::create(
+        [
+            'firstname' => 'سید خلیل',
+            'lastname' => 'حسینی',
+            'email' => 'seyedkhalilhosseini@gmail.com',
+            'phone' => '09173119853',
+            'password' => Hash::make(12345678),
+            'role' => 'admin',
+            'phone_verified' => 0,
+        ]);
+
+        // اضافه کردن کاربر معمولی
         $user = User::create([
-            'firstname' => 'amin',
-            'lastname' => 'reihani',
+            'firstname' => 'امین',
+            'lastname' => 'ریحانی',
             'email' => 'reihani.eng@gmail.com',
             'phone' => '09152024192',
             'password' => null,

@@ -4,6 +4,11 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/dashboards/master/jaban-custom-styles.css": {
+    "file": "assets/jaban-custom-styles-CaQSrNQ0.css",
+    "src": "resources/css/dashboards/master/jaban-custom-styles.css",
+    "isEntry": true
+  },
   "resources/css/frontend/master/jaban-custom-styles.css": {
     "file": "assets/jaban-custom-styles-BH0EKnSH.css",
     "src": "resources/css/frontend/master/jaban-custom-styles.css",
@@ -27,6 +32,11 @@
   "resources/js/frontend/master/page-loading-scripts.js": {
     "file": "assets/page-loading-scripts-DbXaYtrp.js",
     "src": "resources/js/frontend/master/page-loading-scripts.js",
+    "isEntry": true
+  },
+  "resources/js/frontend/master/toast-timer-hide.js": {
+    "file": "assets/toast-timer-hide-Di-mY1Rc.js",
+    "src": "resources/js/frontend/master/toast-timer-hide.js",
     "isEntry": true
   }
 }

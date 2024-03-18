@@ -64,7 +64,7 @@
                     </div>
                     <!-- /Logo -->
 
-                    <form action="{{route('login')}}" class="mb-3" id="formAuthentication" method="POST">
+                    {{-- <form action="{{route('login')}}" class="mb-3" id="formAuthentication" method="POST">
                         @csrf
 
                         @if($errors->has('email'))
@@ -98,7 +98,10 @@
                         <div class="mb-3">
                             <button class="btn btn-primary d-grid w-100" type="submit">ورود به سامانه</button>
                         </div>
-                    </form>
+                    </form> --}}
+
+                    @livewire('dashboards.auth.login')
+
                 </div>
             </div>
             <!-- /Register -->
@@ -114,7 +117,6 @@
 <script src="{{asset('assets/dashboards/assets/endor/libs/node-waves/node-waves.js')}}v"></script>
 <script src="{{asset('assets/dashboards/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
 <script src="{{asset('assets/dashboards/assets/vendor/libs/hammer/hammer.js')}}"></script>
-<script src="{{asset('assets/dashboards/assets/vendor/libs/i18n/i18n.js')}}"></script>
 <script src="{{asset('assets/dashboards/assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
 <script src="{{asset('assets/dashboards/assets/vendor/js/menu.js')}}"></script>
 <!-- endbuild -->

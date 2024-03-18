@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Profile\ContactInfo;
+namespace App\Rules\Dashboards;
 
 use Closure;
 use App\Models\User;
@@ -17,6 +17,6 @@ class IgnorePhoneChangeValidation implements ValidationRule
     {
         if(User::where($attribute, $value)->exists()) {
             $fail('شماره تلفن مورد نظر قبلا در سامانه ثبت شده است. لطفا شماره دیگری وارد نمایید.');
-        }
+        } 
     }
 }

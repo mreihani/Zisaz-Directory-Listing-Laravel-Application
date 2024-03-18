@@ -1,7 +1,7 @@
 <div>
     @if($showToaster)
-        <div x-data="{show: true}" x-show="show" x-init="setTimeout(() => show = false, 5000)" style="display: none;">
-            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div>
+            <div id="toastBody" class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header {{$type}} text-white">
                 <i class="fi-check-circle me-2"></i>
                 <span class="fw-bold me-auto">

@@ -1,0 +1,19 @@
+/* Toast custom styles */
+.toast {
+    right: 30px;
+    top: 30px;
+    position: fixed;
+    z-index: 10000;
+}
+
+/* Hide input number arrows Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide input number arrows Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

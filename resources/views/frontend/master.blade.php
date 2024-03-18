@@ -84,6 +84,7 @@
     <script src="{{asset('assets/frontend/js/theme.min.js')}}"></script>
     
     @vite('resources/js/frontend/master/auth-modals-scripts.js')
+    @vite('resources/js/frontend/master/toast-timer-hide.js')
     
   </body>
 

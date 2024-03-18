@@ -12,11 +12,17 @@ export default defineConfig({
                 'resources/css/frontend/master/page-loading-styles.css',
                 'resources/css/frontend/master/jaban-custom-styles.css',
 
+                // Dashboards, master page, preloading css file
+                'resources/css/dashboards/master/jaban-custom-styles.css',
+
                 // Frontend, master page, preloading js file
                 'resources/js/frontend/master/page-loading-scripts.js',
 
                 // Frontend, master page, login and registraion modals scripts
                 'resources/js/frontend/master/auth-modals-scripts.js',
+
+                // Hide toast message after specific time
+                'resources/js/frontend/master/toast-timer-hide.js',
             ],
             refresh: true,
         }),

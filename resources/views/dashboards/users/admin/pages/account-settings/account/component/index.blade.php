@@ -26,9 +26,15 @@
                         @endif 
                     </div>
                 </div>
+
+                <div class="mt-4">
+                    <button class="btn btn-primary me-2 waves-effect waves-light" type="submit">ذخیره</button>
+                    <a class="btn btn-label-secondary waves-effect" href="{{route('admin.dashboard.index')}}">لغو</a>
+                </div>
             </div>
 
             <hr class="my-0">
+
             <div class="card-body">
                 <div class="row">
                     <div class="mb-3 col-md-6 fv-plugins-icon-container">
@@ -48,16 +54,12 @@
                     <div class="mb-3 col-md-6">
                         <label class="form-label" for="phoneNumber">شماره تلفن</label>
                         <div class="input-group input-group-merge">
-                            <input class="form-control ltr" id="phoneNumber" type="text" value="{{auth()->user()->phone}}" wire:model="phone">
+                            <input disabled class="form-control ltr" id="phoneNumber" type="text" value="{{auth()->user()->phone}}" wire:model="phone">
                         </div>
                     </div>
-                </div>
-                <div class="mt-2">
-                    <button class="btn btn-primary me-2 waves-effect waves-light" type="submit">ذخیره تغییرات</button>
-                    <a class="btn btn-label-secondary waves-effect" href="{{route('admin.dashboard.index')}}">لغو</a>
                 </div>
             </div>
             <!-- /Account -->
         </div>
-    </form>    
+    </form>   
 </div>

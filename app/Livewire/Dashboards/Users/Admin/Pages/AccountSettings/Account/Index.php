@@ -68,7 +68,6 @@ class Index extends Component
             ', 
             type: 'bg-success'
         );
-       
     }
 
     private function handleFileUpload() {

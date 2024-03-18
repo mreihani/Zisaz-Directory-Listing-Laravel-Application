@@ -1,14 +1,14 @@
 <div wire:transition>
-    <form wire:submit.prevent="userVerificationCode" class="needs-validation" novalidate>
+    <form wire:submit.prevent="userVerificationCode" class="needs-validation mb-4" novalidate>
         <div class="row">
-            <div class="col-md-10">
-                <div class="mt-3">
+            <div class="col-md-6">
+                <div class="">
                     <input autofocus class="form-control" type="text" placeholder="کد تأیید پیامک شده را وارد نمایید" wire:model="verification_code_login">
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="d-flex align-items-center justify-content-center">
-                    <button type="submit" class="btn btn-sm btn-translucent-accent mt-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center justify-content-start">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">
                         تأیید شماره
                     </button>
                 </div>

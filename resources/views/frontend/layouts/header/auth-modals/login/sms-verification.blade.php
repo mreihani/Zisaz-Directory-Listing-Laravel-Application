@@ -8,7 +8,7 @@
                         <div class="row gx-2 gx-md-4">
                             <div class="col-sm-12 mb-4">
                                 <label class="form-label" for="js-fn">کد تأیید را وارد نمایید *</label>
-                                <input class="form-control" name="verification_code_login" type="text" id="js-fn" placeholder="کد پیامک شده" required wire:model="verification_code_login">
+                                <input autofocus class="form-control" name="verification_code_login" type="text" id="js-fn" placeholder="کد پیامک شده" required wire:model="verification_code_login">
                                 @if($errors->has('verification_code_login'))
                                     <span class="text-danger mb-4">{{ $errors->first('verification_code_login') }}</span>
                                 @endif 

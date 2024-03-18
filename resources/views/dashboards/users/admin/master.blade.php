@@ -45,25 +45,31 @@
 
   <!-- Better experience of RTL -->
   <link href="{{asset('assets/dashboards/assets/vendor/css/rtl/rtl.css')}}" rel="stylesheet"/>
+
+  <!-- Jaban.ir Custom Styles -->
+  @vite('resources/css/dashboards/master/jaban-custom-styles.css')
+
 </head>
 
 <body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
-
+    
     <!-- Menu -->
     @include('dashboards.users.admin.layouts.sidebar')
     <!-- / Menu -->
-
+    
     <!-- Layout container -->
     <div class="layout-page">
 
       <!-- Navbar -->
       @include('dashboards.users.admin.layouts.navbar')
       <!-- / Navbar -->
-
+      @livewire('frontend.layouts.toast')
       <!-- Content wrapper -->
+     
+      {!! displayFlashMessage() !!}
       
       <div class="content-wrapper">
 
@@ -109,6 +115,8 @@
 
 <!-- Page JS -->
 @stack('page-scripts')
+
+@vite('resources/js/frontend/master/toast-timer-hide.js')
 
 </body>
 
