@@ -156,7 +156,7 @@ class Index extends Component
             'selectedCityIdValidation' => new SelectedCityValidationRule($this->resumeGoal, $this->selectedCityId, $this->adsType, $this->employmentAdsType),
             'selectedInvestmentProvinceIdValidation' => new SelectedInvestmentProvinceValidationRule($this->selectedInvestmentProvinceId, $this->adsType, $this->investmentAdsType),
             'selectedInvestmentCityIdValidation' => new SelectedInvestmentCityValidationRule($this->selectedInvestmentCityId, $this->adsType, $this->investmentAdsType),
-            'jobTitle' => new JobTitleValidationRule($this->adsType, $this->resumeGoal, $this->jobTitle),
+            'jobTitle' => new JobTitleValidationRule($this->section, $this->resumeGoal, $this->jobTitle),
             'shopName' => new shopNameValidationRule($this->resumeGoal, $this->shopName),
             'address' => new shopAddressValidationRule($this->resumeGoal, $this->address),
             'actGrpsId' => new SelectedShopActGrpsIdValidationRule($this->resumeGoal, $this->adsType),
@@ -187,6 +187,9 @@ class Index extends Component
     ];
 
     public function mount() {
+        // این رو بعدا پاک کن برای فراخوانی فایل های شخصی است
+        // $this->licenseImage = route('assets', [auth()->user()->id, $licenseItem->license_image]);
+
         $this->section = null;
         $this->activityType = "";
 
@@ -858,5 +861,5 @@ class Index extends Component
     public function render()
     {
         return view('frontend.pages.activity.component.index');
-    }
+    } 
 }
