@@ -4,9 +4,8 @@ namespace App\Livewire\Frontend\Auth\Register\User;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\ActiveCode;
+use App\Models\Frontend\UserModels\ActiveCode;
 use Illuminate\Http\Request;
-use App\Models\Construction\ConAct;
 use Stevebauman\Purify\Facades\Purify;
 use App\Notifications\Auth\SmsVerification;
 use App\Rules\Auth\Registration\IgnoreEmailRegistrationValidation;
@@ -18,10 +17,6 @@ class RegisterUser extends Component
     public $lastname;
     public $phone;
     public $email;
-    public $typeOfActivityObj;
-    public $type_of_activity_id;
-    public $user_account_category_id;
-    public $userAccountCategoryObj;
     public $terms_and_conditions;
 
     protected function rules()
@@ -32,8 +27,6 @@ class RegisterUser extends Component
             'lastname' => 'required',
             'phone' => ['required', new IgnorePhoneRegistrationValidation(), config('phone-regex.ir.regex')],
             'email' => [new IgnoreEmailRegistrationValidation(), $this->email ? 'email' : ''],
-            'type_of_activity_id' => 'required',
-            'user_account_category_id' => 'required',
             'terms_and_conditions' => 'required',
         ];
 	}
@@ -46,23 +39,8 @@ class RegisterUser extends Component
         'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید.',
         'phone.unique' => 'شماره تلفن مورد نظر قبلا در سامانه ثبت شده است. شماره دیگری وارد نمایید.',
         'email.email' => 'لطفا آدرس ایمیل صحیح وارد نمایید.',
-        'type_of_activity_id.required' => 'لطفا نوع فعالیت حساب کاربری خود را انتخاب نمایید.',
-        'user_account_category_id.required' => 'لطفا گروه بندی حساب کاربری خود را انتخاب نمایید.',
         'terms_and_conditions.required' => 'لطفا برای ادامه شرایط و ضوابط سامانه جابان را تأیید نمایید.',
     ];
-
-    public function mount() {
-        $this->typeOfActivityObj = ConAct::all();
-        $this->userAccountCategoryObj = [];
-        $this->type_of_activity_id = '';
-        $this->user_account_category_id = '';
-    }
-
-    public function loadUserAccountOnChange() {
-        $typeOfActivityId = $this->type_of_activity_id;
-        $this->userAccountCategoryObj = ConAct::find($typeOfActivityId)->conGrp;
-        $this->user_account_category_id = $this->userAccountCategoryObj->first()->id;
-    }
 
     public function registerUser() {
 
@@ -79,13 +57,6 @@ class RegisterUser extends Component
             'phone' => Purify::clean($this->phone),
             'email' => Purify::clean($this->email) ?: NULL,
             'role' => 'construction',
-        ]);
-
-        // Set user group information
-        $user->userGroupType()->create([
-            'user_id' => $user->id,
-            'groupable_id' => $this->user_account_category_id,
-            'groupable_type' => 'App\Models\Construction\ConGrp',
         ]);
 
         // Generate code and send via SMS

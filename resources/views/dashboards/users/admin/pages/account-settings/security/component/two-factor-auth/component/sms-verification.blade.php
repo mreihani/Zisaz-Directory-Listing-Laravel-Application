@@ -1,4 +1,4 @@
-<div wire:transition>
+<div>
     <form wire:submit.prevent="userVerificationCode" class="needs-validation mb-4" novalidate>
         <div class="row">
             <div class="col-md-6">

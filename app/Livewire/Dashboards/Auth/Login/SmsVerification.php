@@ -4,7 +4,6 @@ namespace App\Livewire\Dashboards\Auth\Login;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\ActiveCode;
 use Illuminate\Http\Request;
 use Stevebauman\Purify\Facades\Purify;
 use App\Rules\Auth\Login\VerificationCodeLoginValidation;

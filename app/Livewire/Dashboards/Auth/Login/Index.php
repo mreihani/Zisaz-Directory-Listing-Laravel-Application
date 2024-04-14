@@ -4,7 +4,7 @@ namespace App\Livewire\Dashboards\Auth\Login;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\ActiveCode;
+use App\Models\Frontend\UserModels\ActiveCode;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
 use App\Notifications\Auth\SmsVerification;

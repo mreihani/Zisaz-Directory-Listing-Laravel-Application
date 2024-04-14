@@ -4,7 +4,6 @@ namespace App\Livewire\Frontend\Auth\Register;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\ActiveCode;
 use Illuminate\Http\Request;
 use App\Rules\Auth\Registration\VerificationCodeRegistrationValidation;
 

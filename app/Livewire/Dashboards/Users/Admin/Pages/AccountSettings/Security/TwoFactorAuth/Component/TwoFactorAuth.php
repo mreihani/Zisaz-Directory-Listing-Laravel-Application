@@ -4,11 +4,9 @@ namespace App\Livewire\Dashboards\Users\Admin\Pages\AccountSettings\Security\Two
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\ActiveCode;
 use Illuminate\Http\Request;
 use Stevebauman\Purify\Facades\Purify;
 use App\Rules\Profile\ContactInfo\VerificationLoginValidation;
-
 
 class TwoFactorAuth extends Component
 {

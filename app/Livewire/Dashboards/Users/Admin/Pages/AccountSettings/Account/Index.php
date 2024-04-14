@@ -34,9 +34,8 @@ class Index extends Component
 
     public function mount() {
         $this->profileImage = (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->profile_image)
-        ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
+        && auth()->user()->userProfile->profile_image)
+        ? asset(auth()->user()->userProfile->profile_image) :
         null;
     }
 
@@ -49,13 +48,11 @@ class Index extends Component
 
         if(!is_null($profileImageAddress)) {
             // Save user profile
-            $userProfile = auth()->user()->userProfile()->firstOrCreate([
-                'user_id' => auth()->user()->id
-            ]);
-
-            $userProfile->userProfileInformation()->updateOrCreate([
-                'user_profile_id' => $userProfile->id
+            $userProfile = auth()->user()->userProfile()->updateOrCreate(
+            [
+                'user_id' => auth()->user()->id,
             ],[
+                'user_id' => auth()->user()->id,
                 'profile_image' => $profileImageAddress,
             ]);
         }
@@ -79,10 +76,9 @@ class Index extends Component
         // Remove exsting profile image
         if(
             auth()->user()->userProfile
-            && auth()->user()->userProfile->userProfileInformation
-            && auth()->user()->userProfile->userProfileInformation->profile_image
+            && auth()->user()->userProfile->profile_image
             ) {
-            unlink(auth()->user()->userProfile->userProfileInformation->profile_image);
+            unlink(auth()->user()->userProfile->profile_image);
         }
 
         $userId = auth()->user()->id;
@@ -91,9 +87,7 @@ class Index extends Component
         $unique_image_name = hexdec(uniqid());
         $filename = $unique_image_name . '.' . 'jpg';
         
-        $img = Image::make($this->profileImage)->resize(200, null, function ($constraint) {
-            $constraint->aspectRatio();
-        })->encode('jpg');
+        $img = Image::make($this->profileImage)->fit(200)->encode('jpg');
 
         Storage::disk('public')->put('upload/profile-images/' . $userId . '/' . $filename, $img);
 

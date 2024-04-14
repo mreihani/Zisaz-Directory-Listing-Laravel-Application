@@ -1,5 +1,6 @@
 @extends('frontend.master')
 @section('main')
+
 <!-- Page content-->
 <section class="bg-dark py-5">
     <div class="container pt-5 pb-lg-5">

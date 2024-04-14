@@ -29,34 +29,6 @@
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif  
             </div>
-            <div class="col-sm-6 mb-4">
-                <label class="form-label" for="type_of_activity"> نوع فعالیت حساب کاربری را تعیین نمایید<span class="text-danger">*</span></label>
-                <select class="form-select form-select-md" wire:model="type_of_activity_id" wire:change="loadUserAccountOnChange($event.target.value)">
-                    <option value="" disabled>انتخاب نوع فعالیت</option>
-                    @foreach ($typeOfActivityObj as $typeOfActivityItem)
-                        <option value="{{$typeOfActivityItem->id}}">
-                            {{$typeOfActivityItem->title}}
-                        </option>
-                    @endforeach
-                </select>
-                @if($errors->has('type_of_activity_id'))
-                    <span class="text-danger">{{ $errors->first('type_of_activity_id') }}</span>
-                @endif   
-            </div>
-            <div class="col-sm-6 mb-4">
-                <label class="form-label" for="user_account_category">گروه بندی حساب کاربری را تعیین نمایید <span class="text-danger">*</span></label>
-                <select class="form-select form-select-md" wire:model="user_account_category_id">
-                    <option value="" selected="true" disabled>انتخاب گروه بندی حساب کاربری</option>
-                    @foreach ($userAccountCategoryObj as $userAccountCategoryItem)
-                        <option value="{{$userAccountCategoryItem->id}}">
-                            {{$userAccountCategoryItem->title}}
-                        </option>
-                    @endforeach
-                </select>
-                @if($errors->has('user_account_category_id'))
-                    <span class="text-danger">{{ $errors->first('user_account_category_id') }}</span>
-                @endif   
-            </div>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="user-registration-agree-to-terms" required name="terms_and_conditions" wire:model="terms_and_conditions">

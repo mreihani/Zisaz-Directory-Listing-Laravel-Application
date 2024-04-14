@@ -47,6 +47,9 @@
     <!-- jQuery 3.7 -->
     <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
 
+    <!-- Page JS in the top -->
+    @stack('page-scripts-top')
+
   </head>
 
   <!-- Body-->

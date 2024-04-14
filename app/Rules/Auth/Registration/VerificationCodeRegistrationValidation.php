@@ -4,7 +4,7 @@ namespace App\Rules\Auth\Registration;
 
 use Closure;
 use App\Models\User;
-use App\Models\ActiveCode;
+use App\Models\Frontend\UserModels\ActiveCode;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class VerificationCodeRegistrationValidation implements ValidationRule

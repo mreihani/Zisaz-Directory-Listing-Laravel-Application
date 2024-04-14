@@ -12,5 +12,4 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/blog/{id}', 'blogSingle')->name('blog-single');
     Route::get('/contact-us', 'contactUs')->name('contact-us');
     Route::get('/faq', 'faq')->name('faq');
-    Route::get('/resume-builder', 'resumeBuilder')->name('resume-builder');
 });

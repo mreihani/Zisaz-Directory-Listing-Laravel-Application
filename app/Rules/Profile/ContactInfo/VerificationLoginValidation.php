@@ -4,7 +4,7 @@ namespace App\Rules\Profile\ContactInfo;
 
 use Closure;
 use App\Models\User;
-use App\Models\ActiveCode;
+use App\Models\Frontend\UserModels\ActiveCode;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class VerificationLoginValidation implements ValidationRule
@@ -24,6 +24,5 @@ class VerificationLoginValidation implements ValidationRule
         if(!$isCodeVerified) {
             $fail('لطفا کد اعتبار سنجی صحیح وارد نمایید.');
         }
-        
     }
 }

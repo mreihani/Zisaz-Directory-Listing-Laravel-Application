@@ -4,7 +4,7 @@ namespace App\Livewire\Frontend\Auth\Login;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\ActiveCode;
+use App\Models\Frontend\UserModels\ActiveCode;
 use App\Notifications\Auth\SmsVerification;
 use App\Rules\Auth\Login\ValidPhoneLoginValidation;
 

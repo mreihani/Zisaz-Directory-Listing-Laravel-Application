@@ -15,6 +15,29 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('profile_image')->nullable();
+        });
+
+        Schema::create('act_cats', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+        });
+
+        Schema::create('act_grps', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('act_cat_id');
+            $table->foreign('act_cat_id')->references('id')->on('act_cats')->onDelete('cascade');
+            $table->string('title');
+        });
+
+        Schema::create('paymnt_mtds', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+        });
+
+        Schema::create('ads_stats', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
         });
 
         Schema::create('contract_types', function (Blueprint $table) {
@@ -22,76 +45,14 @@ return new class extends Migration
             $table->string('title');
         });
 
-        Schema::create('shop_act_cats', function (Blueprint $table) {
+        Schema::create('academics', function (Blueprint $table) {
             $table->id();
             $table->string('title');
         });
 
-        Schema::create('shop_act_grps', function (Blueprint $table) {
+        Schema::create('genders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shop_act_cat_id');
-            $table->foreign('shop_act_cat_id')->references('id')->on('shop_act_cats')->onDelete('cascade');
             $table->string('title');
-        });
-
-        Schema::create('profile_infos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_profile_id');
-            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
-            $table->string('profile_image')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('profile_info_personals', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('profile_info_id');
-            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
-            $table->enum('gender', ['male', 'female'])->default('male');
-            $table->string('birth_date')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('profile_info_companies', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('profile_info_id');
-            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
-            $table->enum('company_type', ['corporate', 'independent'])->default('corporate');
-            $table->string('company_name')->nullable();
-            $table->string('company_reg_num')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('profile_info_shops', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('profile_info_id');
-            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
-            $table->string('shop_name')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('shop_act_grp_profile_info', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('shop_act_grp_id');
-            $table->foreign('shop_act_grp_id')->references('id')->on('shop_act_grps')->onDelete('cascade');
-            $table->unsignedBigInteger('profile_info_id');
-            $table->foreign('profile_info_id')->references('id')->on('profile_infos')->onDelete('cascade');
-        });
-
-        Schema::create('profile_contacts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_profile_id');
-            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
-            $table->string('landline_telephone')->nullable();
-            $table->string('city_id')->nullable();
-            $table->string('address')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('profile_resumes', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_profile_id');
-            $table->foreign('user_profile_id')->references('id')->on('user_profiles')->onDelete('cascade');
         });
     }
 
@@ -100,16 +61,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_resumes');
-        Schema::dropIfExists('profile_contacts');
-        Schema::dropIfExists('shop_act_grp_profile_info');
-        Schema::dropIfExists('profile_info_shops');
-        Schema::dropIfExists('profile_info_companies');
-        Schema::dropIfExists('profile_info_personals');
-        Schema::dropIfExists('profile_infos');
-        Schema::dropIfExists('shop_act_grps');
-        Schema::dropIfExists('shop_act_cats');
+        Schema::dropIfExists('genders');
+        Schema::dropIfExists('academics');
         Schema::dropIfExists('contract_types');
+        Schema::dropIfExists('ads_stats');
+        Schema::dropIfExists('paymnt_mtds');
+        Schema::dropIfExists('act_grps');
+        Schema::dropIfExists('act_cats');
         Schema::dropIfExists('user_profiles');
     }
 };

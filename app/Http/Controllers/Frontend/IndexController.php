@@ -63,9 +63,4 @@ class IndexController extends Controller
     public function faq() {
         return view('frontend.pages.faq.index');
     }
-
-    public function resumeBuilder() {
-        return view('frontend.pages.resume-builder.index');
-    }
-
 }

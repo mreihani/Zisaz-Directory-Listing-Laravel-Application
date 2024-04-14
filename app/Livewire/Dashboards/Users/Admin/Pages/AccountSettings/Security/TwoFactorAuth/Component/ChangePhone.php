@@ -3,7 +3,7 @@
 namespace App\Livewire\Dashboards\Users\Admin\Pages\AccountSettings\Security\TwoFactorAuth\Component;
 
 use Livewire\Component;
-use App\Models\ActiveCode;
+use App\Models\Frontend\UserModels\ActiveCode;
 use Illuminate\Validation\Validator;
 use App\Notifications\Auth\SmsVerification;
 use App\Rules\Dashboards\IgnorePhoneChangeValidation;

@@ -4,15 +4,17 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\Profile\ShopActCat;
-use App\Models\Profile\ShopActGrp;
-use App\Models\Construction\ConAct;
-use App\Models\Construction\ConGrp;
-use App\Models\ProvinceAndCity\City;
 use Illuminate\Support\Facades\Hash;
-use App\Models\ProvinceAndCity\Province;
-use App\Models\ContractType\ContractType;
+use App\Models\Frontend\ReferenceData\Gender\Gender;
+use App\Models\Frontend\ReferenceData\Academic\Academic;
+use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
+use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
+use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
+use App\Models\Frontend\ReferenceData\Construction\Skill\ActCat;
+use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
+use App\Models\Frontend\ReferenceData\ContractType\ContractType;
 
 class JabanUsersSeeder extends Seeder
 {
@@ -21,29 +23,15 @@ class JabanUsersSeeder extends Seeder
      */
     public function run(): void
     {
-        // آرایه مربوط به زمینه فعالیت کاربر
-        $typeOfActivityArray = config('jaban.profile.sector.construction.type_of_activity');
-        foreach ($typeOfActivityArray as $typeOfActivityItem) {
-            $conActObj = ConAct::create([
+        // آرایه مربوط به صنف فروشگاه ها
+        $typeOfActivity = config('jaban.profile.sector.construction.type_of_activity');
+        foreach ($typeOfActivity as $typeOfActivityItem) {
+            $conActObj = ActCat::create([
                 'title' => $typeOfActivityItem['title']
             ]);
             foreach ($typeOfActivityItem['value'] as $gpr) {
-                ConGrp::insert([
-                    'con_act_id' => $conActObj->id,
-                    'title' => $gpr['title'],
-                ]);
-            }
-        }
-
-        // آرایه مربوط به صنف فروشگاه ها
-        $shopTypeOfActivity = config('jaban.profile.sector.construction.shop_type_of_activity');
-        foreach ($shopTypeOfActivity as $shopTypeOfActivityItem) {
-            $shopConActObj = ShopActCat::create([
-                'title' => $shopTypeOfActivityItem['title']
-            ]);
-            foreach ($shopTypeOfActivityItem['value'] as $gpr) {
-                ShopActGrp::insert([
-                    'shop_act_cat_id' => $shopConActObj->id,
+                ActGrp::insert([
+                    'act_cat_id' => $conActObj->id,
                     'title' => $gpr['title'],
                 ]);
             }
@@ -63,11 +51,43 @@ class JabanUsersSeeder extends Seeder
             }
         }
 
-        // آرایه مربوط به انواع قرارداد
+        // روش پرداخت
+        $paymentMethodArr = config('jaban.payment_method');
+        foreach ($paymentMethodArr as $paymentMethodItem) {
+            $paymentMethodObj = PaymntMtd::create([
+                'title' => $paymentMethodItem['title']
+            ]);
+        }
+
+        // وضعیت آگهی
+        $adsStatusArr = config('jaban.ads_status');
+        foreach ($adsStatusArr as $adsStatusItem) {
+            $adsStatusObj = AdsStat::create([
+                'title' => $adsStatusItem['title']
+            ]);
+        }
+
+        // نوع قرارداد
         $contractTypeArr = config('jaban.contract_type');
         foreach ($contractTypeArr as $contractTypeItem) {
             $contractTypeObj = ContractType::create([
                 'title' => $contractTypeItem['title']
+            ]);
+        }
+
+        // تحصیلات
+        $academicArr = config('jaban.academic');
+        foreach ($academicArr as $academicItem) {
+            $academicObj = Academic::create([
+                'title' => $academicItem['title']
+            ]);
+        }
+
+        // جنسیت
+        $genderArr = config('jaban.gender');
+        foreach ($genderArr as $genderItem) {
+            $genderObj = Gender::create([
+                'title' => $genderItem['title']
             ]);
         }
 
@@ -102,12 +122,6 @@ class JabanUsersSeeder extends Seeder
             'password' => null,
             'role' => 'construction',
             'phone_verified' => 1,
-        ]);
-
-        $user->userGroupType()->create([
-            'user_id' => $user->id,
-            'groupable_id' => 1,
-            'groupable_type' => 'App\Models\Construction\ConGrp',
         ]);
     }
 }

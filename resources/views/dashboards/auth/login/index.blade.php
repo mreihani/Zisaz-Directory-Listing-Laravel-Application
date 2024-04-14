@@ -39,7 +39,7 @@
             <div wire:loading wire:target="loginUser">
                 <span class="btn btn-secondary w-100">
                     <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
-                    در حال ارسال پیامک
+                    در حال ورود
                 </span>
             </div>
         </div>

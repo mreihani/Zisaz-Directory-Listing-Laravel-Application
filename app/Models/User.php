@@ -3,13 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Models\ActiveCode;
-use App\Models\UserGrpType;
-use App\Models\Profile\UserProfile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Frontend\UserModels\ActiveCode;
+use App\Models\Frontend\UserModels\Activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Frontend\UserModels\Profile\UserProfile;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -68,20 +67,17 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
 
-    public function userGroupType()
-    {
-        return $this->hasOne(UserGrpType::class, 'user_id', 'id');
-    }
-
     public function avatar() {
         $avatar = 
         (auth()->user()->userProfile
-        && auth()->user()->userProfile->userProfileInformation
-        && auth()->user()->userProfile->userProfileInformation->profile_image)
-        ? asset(auth()->user()->userProfile->userProfileInformation->profile_image) :
+        && auth()->user()->userProfile->profile_image)
+        ? asset(auth()->user()->userProfile->profile_image) :
             asset('assets/dashboards/assets/img/jaban/user.png');
 
         return $avatar;    
     }
    
+    public function activity() {
+        return $this->hasOne(Activity::class);
+    }
 }

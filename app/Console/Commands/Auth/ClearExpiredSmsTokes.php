@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Auth;
 
-use App\Models\ActiveCode;
 use Illuminate\Console\Command;
+use App\Models\Frontend\UserModels\ActiveCode;
 
 class ClearExpiredSmsTokes extends Command
 {

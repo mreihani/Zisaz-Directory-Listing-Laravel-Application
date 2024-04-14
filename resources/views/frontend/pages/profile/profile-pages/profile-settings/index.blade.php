@@ -1,7 +1,6 @@
 @extends('frontend.master')
 @section('main')
 
-
 @push('page-styles')
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css')}}"/>
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/filepond/dist/filepond.min.css')}}"/>
@@ -38,7 +37,7 @@
             <!-- Account menu-->
             @include('frontend.pages.profile.layouts.nav')    
             
-            @livewire('frontend.pages.profile.profile-pages.profile-settings.con-grp' . auth()->user()->userGroupType->groupable->id . '.index')
+            @livewire('frontend.pages.profile.profile-pages.profile-settings.index')
         </div>
     </div>
 </div>
