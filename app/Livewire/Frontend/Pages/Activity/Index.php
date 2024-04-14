@@ -22,6 +22,7 @@ use App\Rules\Activity\SelectedCityValidationRule;
 use App\Rules\Activity\AcademicLevelValidationRule;
 use App\Rules\Activity\CompanyRegNumValidationRule;
 use App\Models\Frontend\ReferenceData\Gender\Gender;
+use App\Rules\Activity\AdsDescriptionValidationRule;
 use App\Rules\Activity\EmployerGenderValidationRule;
 use App\Rules\Activity\ProvinceToWorkValidationRule;
 use App\Rules\Activity\SelectedProvinceValidationRule;
@@ -176,6 +177,7 @@ class Index extends Component
             'licenseTypeValue.*' => 'required_if:resumeGoal,==,5',
             'licenseImage.*' => 'required_if:resumeGoal,==,5',
             'provinceToWork' => new ProvinceToWorkValidationRule($this->adsType, $this->employmentAdsType),
+            'adsDescription' => new AdsDescriptionValidationRule($this->adsType, $this->investmentAdsType),
         ];
     }
 

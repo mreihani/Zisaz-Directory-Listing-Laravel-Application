@@ -33,6 +33,10 @@
     </label>
     <span class="text-danger">*</span>
     <textarea class="form-control" rows="5" id="pr-description" placeholder="" wire:model="adsDescription"></textarea>
+
+    @if($errors->has('adsDescription'))
+        <span class="text-danger">{{ $errors->first('adsDescription') }}</span>
+    @endif 
 </div>
 
 <!-- Investment value -->
