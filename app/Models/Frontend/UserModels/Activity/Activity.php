@@ -78,4 +78,8 @@ class Activity extends Model
     public function gender() {
         return $this->belongsToMany(Gender::class, 'gender_activity');
     }
+
+    public function subactivity() {
+        return $this->morphTo();
+    }
 }

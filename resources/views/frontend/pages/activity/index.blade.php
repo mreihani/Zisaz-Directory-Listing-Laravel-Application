@@ -18,10 +18,6 @@
     <script src="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.js')}}"></script>
 @endpush
 
-{{-- @push('page-scripts')
-    <script src="{{asset('assets/frontend/vendor/jaban-create-activity-map/show-map.js')}}"></script>
-@endpush --}}
-
 <div class="container mt-5 mb-md-4 py-5">
     <!-- Breadcrumb-->
     <nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">

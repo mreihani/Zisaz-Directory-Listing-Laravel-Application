@@ -29,6 +29,7 @@ use App\Rules\Activity\SelectedProvinceValidationRule;
 use App\Rules\Activity\SellingActGrpsIdValidationRule;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
+use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 use App\Rules\Activity\SelectedPaymentMethodValidationRule;
 use App\Rules\Activity\SelectedShopActGrpsIdValidationRule;
 use App\Rules\Activity\SelectedInvestmentCityValidationRule;
@@ -545,6 +546,11 @@ class Index extends Component
             // save activity group handler
             $this->saveActivityGroupHandler($activity);
         }
+
+        $activity->update([
+            'subactivity_id' => $resume->id,
+            'subactivity_type' => get_class($resume),
+        ]);
     }
     // save custom page into Db
     private function saveCustomPageHandler() {
@@ -706,7 +712,7 @@ class Index extends Component
         // آگهی استخدام
         // آکهی فروش کالا
         if($this->adsType == "selling") {
-            $selling = $activity->selling()->create([
+            $ads = $activity->selling()->create([
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
                 'manufacturer' => Purify::clean($this->sellingAdsManufacturereType),
@@ -736,7 +742,7 @@ class Index extends Component
         // آگهی استخدام
         // کارجو
         if($this->adsType == "employment" && $this->employmentAdsType == "employee") {
-            $employment = $activity->employment()->create([
+            $ads = $activity->employment()->create([
                 'employment_ads_type' => Purify::clean($this->employmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
@@ -767,7 +773,7 @@ class Index extends Component
         // آگهی استخدام
         // کارفرما
         if($this->adsType == "employment" && $this->employmentAdsType == "employer") {
-            $employment = $activity->employment()->create([
+            $ads = $activity->employment()->create([
                 'employment_ads_type' => Purify::clean($this->employmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
@@ -797,7 +803,7 @@ class Index extends Component
         // آگهی شراکت و سرمایه کذاری
         // سرمایه گذار
         if($this->adsType == "investment" && $this->investmentAdsType == "investor") {
-            $investment = $activity->investment()->create([
+            $ads = $activity->investment()->create([
                 'investment_ads_type' => Purify::clean($this->investmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
@@ -812,7 +818,7 @@ class Index extends Component
         // آگهی شراکت و سرمایه کذاری
         // سرمایه پذیر
         if($this->adsType == "investment" && $this->investmentAdsType == "invested") {
-            $investment = $activity->investment()->create([
+            $ads = $activity->investment()->create([
                 'investment_ads_type' => Purify::clean($this->investmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
@@ -826,6 +832,11 @@ class Index extends Component
                 'invested_city_id' => Purify::clean($this->selectedInvestmentCityId),
             ]);
         }
+
+        $activity->update([
+            'subactivity_id' => $ads->id,
+            'subactivity_type' => get_class($ads),
+        ]);
     }
 
     public function save() {    
