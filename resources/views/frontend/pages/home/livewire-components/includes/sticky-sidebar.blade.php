@@ -151,12 +151,12 @@
                                         </label>
                                         <ul>
                                             <li class="list-unstyled mt-2">
-                                                <label>
+                                                <label wire:click="loadSpecificCategory(@js('App\Models\Frontend\UserModels\Activity\AdsRegistration\Investment'), 'invested')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
                                                     سرمایه پذیر هستم
                                                 </label>
                                             </li>
                                             <li class="list-unstyled mt-2">
-                                                <label>
+                                                <label wire:click="loadSpecificCategory(@js('App\Models\Frontend\UserModels\Activity\AdsRegistration\Investment'), 'investor')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
                                                     سرمایه گذار هستم
                                                 </label>
                                             </li>

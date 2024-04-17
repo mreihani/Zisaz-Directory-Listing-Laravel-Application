@@ -35,7 +35,7 @@ class MainContent extends Component
     public function mount() {
 
         // set initial value of category filter to null
-        $this->categoryFilter = null;
+        $this->filteredCollection = null;
 
         // set initial value of sidebar category filter to null for ads
         $this->sidebarCategoryFilterCollection = null;
@@ -76,6 +76,7 @@ class MainContent extends Component
 
     // فیلتر صفحه اصلی برای لود نشدن 3 مورد
     public function loadSpecificCategory($categoryFilter, $type) {
+        $this->sidebarCategoryFilterCollectionAds = null;
         $this->categoryFilter = $categoryFilter;
         $this->type = $type;
         $this->filteredCollection = $categoryFilter::where('ads_type', $type)->get();
@@ -83,6 +84,7 @@ class MainContent extends Component
 
     // فیلتر سایدبار برای آگهی ها
     public function loadSpecificCategorySidebarFilterAds($actGrpsId, $type) {
+        $this->filteredCollection = null;
         $this->type = $type;
         $this->sidebarCategoryFilterCollectionAds = ActGrp::find($actGrpsId)->activity;
     }
