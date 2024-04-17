@@ -16,3 +16,33 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* add grey overlay to home page more card items */
+.home-page-more-card-overlay-div {
+  height:100%;
+  width:100%;
+  position:absolute;
+  background-color:#000;
+  opacity:0.7;
+  z-index:1;
+}
+.home-page-more-item-card p {
+  color: white;
+  position: absolute;
+  top: 42%;
+  right: 31%;
+  z-index: 2;
+}
+
+/* header search bar width */
+.search-from-header {
+  min-width:600px;
+}    
+    
+/* tree category filter home page */
+.tree label {
+  cursor: pointer;
+}
+.tree .category-filter-last-loop-ul {
+  padding-left: 0;
+}

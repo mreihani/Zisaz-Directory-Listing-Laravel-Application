@@ -62,6 +62,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            $table->enum('ads_type', ['selling'])->default('selling');
             $table->string('item_title')->nullable();
             $table->text('item_description')->nullable();
             $table->enum('manufacturer', ['iran_overseas', 'iran', 'overseas'])->default('iran_overseas');
@@ -103,7 +104,7 @@ return new class extends Migration
         Schema::create('employments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('activity_id');
-            $table->enum('employment_ads_type', ['employee', 'employer'])->default('employee');
+            $table->enum('ads_type', ['employee', 'employer'])->default('employee');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->string('item_title')->nullable();
             $table->text('item_description')->nullable();
@@ -151,7 +152,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-            $table->enum('investment_ads_type', ['investor', 'invested'])->default('investor');
+            $table->enum('ads_type', ['investor', 'invested'])->default('investor');
             $table->string('item_title')->nullable();
             $table->text('item_description')->nullable();
             $table->string('investment_value')->nullable();
