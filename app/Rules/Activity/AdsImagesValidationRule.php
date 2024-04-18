@@ -5,19 +5,19 @@ namespace App\Rules\Activity;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class AdsImageValidationRule implements ValidationRule
+class adsImagesValidationRule implements ValidationRule
 {
-    public $adsImage;
+    public $adsImages;
     public $adsType;
     
-    public function __construct($adsImage, $adsType) {
-        $this->adsImage = $adsImage;
+    public function __construct($adsImages, $adsType) {
+        $this->adsImages = $adsImages;
         $this->adsType = $adsType;
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if((empty($this->adsImage)) && ($this->adsType == "selling")) {
+        if((empty($this->adsImages)) && ($this->adsType == "selling")) {
             $fail('لطفا تصویر آگهی را وارد نمایید!');
         }
     }

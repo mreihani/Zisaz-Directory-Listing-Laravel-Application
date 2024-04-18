@@ -123,18 +123,18 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="mb-3">
-                        <input class="form-control" type="file" wire:model="adsImage" multiple>
-                        @error('adsImage') <span class="text-danger error">{{ $message }}</span> @enderror
+                        <input class="form-control" type="file" wire:model="adsImages" multiple>
+                        @error('adsImages') <span class="text-danger error">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    @if(count($adsImage)) 
+                    @if(count($adsImages)) 
                         <div class="row">
-                            @foreach ($adsImage as $adsImageItem)
+                            @foreach ($adsImages as $adsImagesItem)
                                     <div class="col-sm-3 d-flex justify-content-center mb-2">
                                         <div class="border rounded-3 p-1" style="width: 150px;">
                                             <div class="d-flex justify-content-center p-1">
-                                                <img src="{{$adsImageItem->temporaryUrl()}}">    
+                                                <img src="{{$adsImagesItem->temporaryUrl()}}">    
                                             </div>
                                         </div>  
                                     </div>

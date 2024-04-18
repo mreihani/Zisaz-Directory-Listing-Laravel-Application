@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Rules\Activity\GenderValidationRule;
 use App\Rules\Activity\WorkExpValidationRule;
 use App\Rules\Activity\AcademicValidationRule;
-use App\Rules\Activity\AdsImageValidationRule;
+use App\Rules\Activity\adsImagesValidationRule;
 use App\Rules\Activity\AdsTitleValidationRule;
 use App\Rules\Activity\JobTitleValidationRule;
 use App\Rules\Activity\shopNameValidationRule;
@@ -111,7 +111,7 @@ class Index extends Component
     public $productBrand;
     public $adsStatus;
     public $adsStatusArray;
-    public $adsImage;
+    public $adsImages;
     public $price;
     public $priceByAgreement;
     public $paymentMethod;
@@ -165,7 +165,7 @@ class Index extends Component
             'companyRegNum' => new CompanyRegNumValidationRule($this->resumeGoal, $this->companyRegNum),
             'sellingActGrpsIdValidation' => new SellingActGrpsIdValidationRule($this->sellingActGrpsId, $this->adsType),
             'adsTitle' => new AdsTitleValidationRule($this->adsTitle, $this->adsType),
-            'adsImage' => new AdsImageValidationRule($this->adsImage, $this->adsType),
+            'adsImages' => new adsImagesValidationRule($this->adsImages, $this->adsType),
             'sellingAdsManufacturerTypeValidation' => new SellingAdsManufacturerTypeValidationRule($this->sellingAdsManufacturereType, $this->adsType),
             'paymentMethod' => new SelectedPaymentMethodValidationRule($this->paymentMethod, $this->adsType),
             'agreeToTerms' => new AgreeToTermsValidationRule($this->agreeToTerms, $this->adsType),
@@ -237,7 +237,7 @@ class Index extends Component
         $this->sellingAdsManufacturereType = "";
         $this->adsStatus = [];
         $this->adsStatusArray = AdsStat::all();
-        $this->adsImage = [];
+        $this->adsImages = [];
         $this->priceByAgreement = false;
         $this->paymentMethod = [];
         $this->paymentMethodArray = PaymntMtd::all();
@@ -587,14 +587,14 @@ class Index extends Component
     // public ads image upload handler
     private function handlePublicAdsFileUpload($activity) {
         
-        if(count($this->adsImage) == 0) {
+        if(count($this->adsImages) == 0) {
             return;
         }
 
         $folderId = $activity->id;
         $dir = 'storage/upload/ads-images/' . $folderId;
 
-        foreach ($this->adsImage as $key => $value) {
+        foreach ($this->adsImages as $key => $value) {
 
             if($key > 4) {
                 break;
