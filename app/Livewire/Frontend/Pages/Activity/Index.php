@@ -609,7 +609,7 @@ class Index extends Component
 
             $image_path = $dir . '/' . $filename;
 
-            $activity->adsImage()->create([
+            $activity->adsImages()->create([
                 'image' => $image_path
             ]);
         }
