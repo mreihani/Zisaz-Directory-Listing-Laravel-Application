@@ -69,7 +69,7 @@
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
                                 <span style="
-                                    background-image: url('assets/frontend/img/jaban/more_ads.jpg');
+                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
                                     width: 196px;
                                     height: 100px;
                                     background-size: cover;
@@ -127,7 +127,7 @@
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
                                 <span style="
-                                    background-image: url('');
+                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
                                     width: 196px;
                                     height: 100px;
                                     background-size: cover;
@@ -185,7 +185,7 @@
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
                                 <span style="
-                                    background-image: url('assets/frontend/img/jaban/more_ads.jpg');
+                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
                                     width: 196px;
                                     height: 100px;
                                     background-size: cover;
@@ -243,7 +243,7 @@
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
                                 <span style="
-                                    background-image: url('assets/frontend/img/jaban/more_ads.jpg');
+                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
                                     width: 196px;
                                     height: 100px;
                                     background-size: cover;
