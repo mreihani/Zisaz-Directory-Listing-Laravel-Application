@@ -5,7 +5,7 @@ namespace App\Rules\Activity;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class adsImagesValidationRule implements ValidationRule
+class AdsImagesValidationRule implements ValidationRule
 {
     public $adsImages;
     public $adsType;

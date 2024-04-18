@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Rules\Activity\GenderValidationRule;
 use App\Rules\Activity\WorkExpValidationRule;
 use App\Rules\Activity\AcademicValidationRule;
-use App\Rules\Activity\adsImagesValidationRule;
+use App\Rules\Activity\AdsImagesValidationRule;
 use App\Rules\Activity\AdsTitleValidationRule;
 use App\Rules\Activity\JobTitleValidationRule;
 use App\Rules\Activity\shopNameValidationRule;
@@ -165,7 +165,7 @@ class Index extends Component
             'companyRegNum' => new CompanyRegNumValidationRule($this->resumeGoal, $this->companyRegNum),
             'sellingActGrpsIdValidation' => new SellingActGrpsIdValidationRule($this->sellingActGrpsId, $this->adsType),
             'adsTitle' => new AdsTitleValidationRule($this->adsTitle, $this->adsType),
-            'adsImages' => new adsImagesValidationRule($this->adsImages, $this->adsType),
+            'adsImages' => new AdsImagesValidationRule($this->adsImages, $this->adsType),
             'sellingAdsManufacturerTypeValidation' => new SellingAdsManufacturerTypeValidationRule($this->sellingAdsManufacturereType, $this->adsType),
             'paymentMethod' => new SelectedPaymentMethodValidationRule($this->paymentMethod, $this->adsType),
             'agreeToTerms' => new AgreeToTermsValidationRule($this->agreeToTerms, $this->adsType),
