@@ -59,7 +59,7 @@ class Activity extends Model
         return $this->belongsToMany(AdsStat::class, 'ads_stat_activity');
     }
 
-    public function adsImage() {
+    public function adsImages() {
         return $this->hasMany(AdsImage::class);
     }
 

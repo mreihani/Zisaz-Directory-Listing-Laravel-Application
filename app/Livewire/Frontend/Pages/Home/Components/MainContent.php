@@ -32,6 +32,9 @@ class MainContent extends Component
     public $actGrpsTechnicalAdsArray;
     public $actGrpsShopArray;
 
+    // سرچ بار
+    public $searchResults;
+
     public function mount() {
 
         // set initial value of category filter to null
@@ -39,6 +42,9 @@ class MainContent extends Component
 
         // set initial value of sidebar category filter to null for ads
         $this->sidebarCategoryFilterCollection = null;
+
+        // set initial value of search bar results to null
+        $this->searchResults = null;
 
         // load selling ads with eager loading
         $this->sellingAds = Activity::where('activity_type','ads_registration')->has('selling')->with('selling')->get()->take(3);
@@ -87,6 +93,14 @@ class MainContent extends Component
         $this->filteredCollection = null;
         $this->type = $type;
         $this->sidebarCategoryFilterCollectionAds = ActGrp::find($actGrpsId)->activity;
+    }
+
+    // سرچ بار
+    protected $listeners = [
+        'searchResults' => 'searchResults',
+    ];
+    public function searchResults($searchResults) {
+        $this->searchResults = $searchResults;
     }
 
     public function render()

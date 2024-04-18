@@ -9,12 +9,14 @@
                 <div class="col-lg-8 col-md-8 position-relative mb-4 mb-md-0" style="z-index: 1025;">
                     <!-- Main-->
                     <div class="col-lg-12 mt-5 pt-5">
-                        @if(is_null($filteredCollection) && is_null($sidebarCategoryFilterCollectionAds))
+                        @if(is_null($filteredCollection) && is_null($sidebarCategoryFilterCollectionAds) && is_null($searchResults))
                             @include('frontend.pages.home.livewire-components.includes.main-content')
                         @elseif(!is_null($filteredCollection))
                             @include('frontend.pages.home.livewire-components.includes.filtered-collection')
                         @elseif(!is_null($sidebarCategoryFilterCollectionAds))
                             @include('frontend.pages.home.livewire-components.includes.sidebar-category-filter-collection')
+                        @elseif(!is_null($searchResults))
+                            @include('frontend.pages.home.livewire-components.includes.search-results-collection')
                         @endif
                     </div>
                 </div>

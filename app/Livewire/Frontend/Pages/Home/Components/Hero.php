@@ -3,9 +3,28 @@
 namespace App\Livewire\Frontend\Pages\Home\Components;
 
 use Livewire\Component;
+use App\Models\Frontend\UserModels\Activity\Activity;
 
 class Hero extends Component
 {
+    public $searchQuery;
+    public $searchCategory;
+
+    public function search() {
+
+        $searchResults = null;
+
+        if($this->searchCategory == 'آگهی ها') {
+            $searchResults = Activity::where('activity_type','ads_registration')->withWhereHas('subactivity', function($q){
+                $q->where('item_title', 'like', '%'.$this->searchQuery.'%');
+            })->get()->pluck('subactivity');
+        }
+        
+        $this->dispatch('searchResults', 
+            searchResults: $searchResults, 
+        );
+    }
+
     public function render()
     {
         return view('frontend.pages.home.livewire-components.hero');
