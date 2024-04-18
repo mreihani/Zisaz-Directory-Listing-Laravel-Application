@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class adsImage extends Model
+class AdsImage extends Model
 {
     protected $guarded = [];
 

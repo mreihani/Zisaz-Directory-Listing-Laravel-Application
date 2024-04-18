@@ -15,7 +15,7 @@ use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 use App\Models\Frontend\ReferenceData\ContractType\ContractType;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
-use App\Models\Frontend\UserModels\Activity\AdsRegistration\adsImage;
+use App\Models\Frontend\UserModels\Activity\AdsRegistration\AdsImage;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Employment;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Investment;
 
@@ -60,7 +60,7 @@ class Activity extends Model
     }
 
     public function adsImages() {
-        return $this->hasMany(adsImage::class);
+        return $this->hasMany(AdsImage::class);
     }
 
     public function contractType() {
