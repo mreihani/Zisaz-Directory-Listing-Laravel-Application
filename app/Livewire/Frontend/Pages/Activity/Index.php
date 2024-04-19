@@ -604,7 +604,7 @@ class Index extends Component
             $filename = $unique_image_name . '.' . 'jpg';
 
             $img = Image::make($value)->fit(400)->encode('jpg');
-
+            dd($value);
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
 
             $image_path = $dir . '/' . $filename;
@@ -613,7 +613,7 @@ class Index extends Component
                 'image' => $image_path
             ]);
 
-            dd($value);
+            
         }
     }
     // save payment method into DB
