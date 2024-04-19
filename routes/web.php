@@ -3,8 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use Intervention\Image\Facades\Image;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +20,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/test2', function(){
     $img = Image::make(('assets/frontend/img/jaban/png.png'))->fit(400)->encode('jpg');
+    dd($img);
 });
 
 
