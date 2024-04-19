@@ -595,7 +595,7 @@ class Index extends Component
         $dir = 'storage/upload/ads-images/' . $folderId;
 
         foreach ($this->adsImages as $key => $value) {
-            dd($value);
+            
             if($key > 4) {
                 break;
             }
@@ -612,6 +612,8 @@ class Index extends Component
             $activity->adsImages()->create([
                 'image' => $image_path
             ]);
+
+            dd($value);
         }
     }
     // save payment method into DB
