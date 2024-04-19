@@ -736,6 +736,8 @@ class Index extends Component
 
             // save payment method into DB
             $this->savePaymentMethodHandler($activity);
+
+            dd($ads);
         }
 
         // ثبت آگهی
@@ -832,7 +834,7 @@ class Index extends Component
                 'invested_city_id' => Purify::clean($this->selectedInvestmentCityId),
             ]);
         }
-        dd($ads);
+        
         $activity->update([
             'subactivity_id' => $ads->id,
             'subactivity_type' => get_class($ads),
