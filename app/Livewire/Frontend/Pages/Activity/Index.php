@@ -586,11 +586,11 @@ class Index extends Component
     }
     // public ads image upload handler
     private function handlePublicAdsFileUpload($activity) {
-        dd(count($this->adsImages));
+        
         if(count($this->adsImages) == 0) {
             return;
         }
-
+        dd(count($this->adsImages));
         $folderId = $activity->id;
         $dir = 'storage/upload/ads-images/' . $folderId;
 
