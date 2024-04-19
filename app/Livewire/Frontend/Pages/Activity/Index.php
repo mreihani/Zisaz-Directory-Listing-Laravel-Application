@@ -586,7 +586,7 @@ class Index extends Component
     }
     // public ads image upload handler
     private function handlePublicAdsFileUpload($activity) {
-        
+        dd($this->adsImages);
         if(count($this->adsImages) == 0) {
             return;
         }
