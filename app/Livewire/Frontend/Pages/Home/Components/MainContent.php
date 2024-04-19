@@ -39,7 +39,7 @@ class MainContent extends Component
 
     public function mount() {
         $img = Image::make(('assets/frontend/img/jaban/png.png'))->fit(400)->encode('jpg');
-        dd($img);
+        
         // set initial value of category filter to null
         $this->filteredCollection = null;
 
