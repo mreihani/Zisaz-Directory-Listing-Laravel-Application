@@ -732,7 +732,7 @@ class Index extends Component
             $this->saveSellingAdsStatusHandler($activity);
 
             // upload ads image
-            $this->handlePublicAdsFileUpload($activity);
+            //$this->handlePublicAdsFileUpload($activity);
 
             // save payment method into DB
             $this->savePaymentMethodHandler($activity);
