@@ -611,8 +611,6 @@ class Index extends Component
             $activity->adsImages()->create([
                 'image' => $image_path
             ]);
-
-            
         }
     }
     // save payment method into DB
