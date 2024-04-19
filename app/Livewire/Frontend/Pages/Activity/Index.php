@@ -595,7 +595,7 @@ class Index extends Component
         $dir = 'storage/upload/ads-images/' . $folderId;
 
         foreach ($this->adsImages as $key => $value) {
-
+            dd($value);
             if($key > 4) {
                 break;
             }
@@ -732,12 +732,10 @@ class Index extends Component
             $this->saveSellingAdsStatusHandler($activity);
 
             // upload ads image
-            //$this->handlePublicAdsFileUpload($activity);
+            $this->handlePublicAdsFileUpload($activity);
 
             // save payment method into DB
             $this->savePaymentMethodHandler($activity);
-
-            dd($ads);
         }
 
         // ثبت آگهی
