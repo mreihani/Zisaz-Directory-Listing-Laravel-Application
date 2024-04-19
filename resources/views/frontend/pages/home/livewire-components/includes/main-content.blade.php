@@ -11,7 +11,7 @@
                         <a class="card-img-top overflow-hidden position-relative" href="">
                             <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
                             <span style="
-                                background-image: url('{{asset($sellingAdsItem->adsImages->first()->image)}}');
+                                background-image: url('{{isset($sellingAdsItem->adsImages) ? asset($sellingAdsItem->adsImages->first()->image) : asset('assets/frontend/img/jaban/png.png')}}');
                                 width: 196px;
                                 height: 100px;
                                 background-size: cover;
