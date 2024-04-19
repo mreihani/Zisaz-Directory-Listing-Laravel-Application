@@ -590,7 +590,7 @@ class Index extends Component
         if(count($this->adsImages) == 0) {
             return;
         }
-       dd($activity);
+       
         $folderId = $activity->id;
         $dir = 'storage/upload/ads-images/' . $folderId;
 
@@ -832,7 +832,7 @@ class Index extends Component
                 'invested_city_id' => Purify::clean($this->selectedInvestmentCityId),
             ]);
         }
-
+        dd($ads);
         $activity->update([
             'subactivity_id' => $ads->id,
             'subactivity_type' => get_class($ads),
