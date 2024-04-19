@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
 
-Route::get('/test2', function(){
-    $img = Image::make(('assets/frontend/img/jaban/png.png'))->fit(400)->encode('jpg');
+Route::post('/upload-img', function(Request $request) {
+    $img = Image::make($request->fileToUpload)->fit(400)->encode('jpg');
     dd($img);
 });
 
