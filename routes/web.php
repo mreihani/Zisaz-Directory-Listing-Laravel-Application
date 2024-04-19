@@ -19,11 +19,5 @@ use App\Http\Controllers\ProfileController;
 require __DIR__.'/auth.php';
 
 
-Route::post('/upload-img', function(Request $request) {
-    $img = Image::make($request->fileToUpload)->fit(400)->encode('jpg');
-    dd($img);
-});
-
-
 
 
