@@ -590,7 +590,7 @@ class Index extends Component
         if(count($this->adsImages) == 0) {
             return;
         }
-        dd(count($this->adsImages));
+       dd($activity);
         $folderId = $activity->id;
         $dir = 'storage/upload/ads-images/' . $folderId;
 
