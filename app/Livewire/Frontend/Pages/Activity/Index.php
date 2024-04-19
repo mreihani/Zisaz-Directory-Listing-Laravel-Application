@@ -586,7 +586,7 @@ class Index extends Component
     }
     // public ads image upload handler
     private function handlePublicAdsFileUpload($activity) {
-        dd($this->adsImages);
+        
         if(count($this->adsImages) == 0) {
             return;
         }
@@ -613,6 +613,8 @@ class Index extends Component
                 'image' => $image_path
             ]);
         }
+
+        dd($this->adsImages);
     }
     // save payment method into DB
     private function savePaymentMethodHandler($activity) {
