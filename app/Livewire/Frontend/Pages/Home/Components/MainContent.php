@@ -8,8 +8,6 @@ use App\Models\Frontend\ReferenceData\Construction\Skill\ActCat;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
 
-use Intervention\Image\Facades\Image;
-
 class MainContent extends Component
 {
     // آیتم های فیلتر دسته بندی داخل تایل در صفحه اصلی
@@ -38,8 +36,7 @@ class MainContent extends Component
     public $searchResults;
 
     public function mount() {
-        $img = Image::make(('assets/frontend/img/jaban/png.png'))->fit(400)->encode('jpg');
-        
+       
         // set initial value of category filter to null
         $this->filteredCollection = null;
 
