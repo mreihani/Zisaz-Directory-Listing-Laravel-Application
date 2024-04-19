@@ -603,8 +603,8 @@ class Index extends Component
             $unique_image_name = hexdec(uniqid());
             $filename = $unique_image_name . '.' . 'jpg';
 
-            $img = Image::make($value)->fit(400)->encode('jpg');
             dd($value);
+            $img = Image::make($value)->fit(400)->encode('jpg');
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
 
             $image_path = $dir . '/' . $filename;
