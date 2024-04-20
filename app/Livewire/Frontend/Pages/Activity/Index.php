@@ -603,7 +603,7 @@ class Index extends Component
             $unique_image_name = hexdec(uniqid());
             $filename = $unique_image_name . '.' . 'jpg';
 
-            $img = Image::make($value)->fit(400)->encode('jpg');
+            $img = Image::make($value)->fit(832,424)->encode('jpg');
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
 
             $image_path = $dir . '/' . $filename;
@@ -752,8 +752,8 @@ class Index extends Component
                 'address' => Purify::clean($this->address),
             ]);
 
-             // save academic into DB
-             $this->saveEmployeeAcademicHandler($activity);
+            // save academic into DB
+            $this->saveEmployeeAcademicHandler($activity);
 
             // save activity group handler
             $this->saveActivityGroupHandler($activity);
@@ -766,6 +766,9 @@ class Index extends Component
 
             // save gender into DB
             $this->saveEmployeeGenderHandler($activity);
+
+            // upload ads image
+            $this->handlePublicAdsFileUpload($activity);
         }
 
         // ثبت آگهی
@@ -796,6 +799,9 @@ class Index extends Component
 
             // save province into DB
             $this->saveProvinceHandler($activity);
+
+            // upload ads image
+            $this->handlePublicAdsFileUpload($activity);
         }
 
         // ثبت آگهی
@@ -811,6 +817,9 @@ class Index extends Component
                 'investment_bail' => Purify::clean($this->investmentBail),
                 'city_id' => Purify::clean($this->selectedCityId),
             ]);
+
+            // upload ads image
+            $this->handlePublicAdsFileUpload($activity);
         }
 
         // ثبت آگهی
@@ -830,6 +839,9 @@ class Index extends Component
                 'city_id' => Purify::clean($this->selectedCityId),
                 'invested_city_id' => Purify::clean($this->selectedInvestmentCityId),
             ]);
+
+            // upload ads image
+            $this->handlePublicAdsFileUpload($activity);
         }
         
         $activity->update([

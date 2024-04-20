@@ -82,4 +82,8 @@ class Activity extends Model
     public function subactivity() {
         return $this->morphTo();
     }
+
+    public function adsImagesUrl() {
+        return ($this->adsImages->first() !== null) ? asset($this->adsImages->first()->image) : asset('assets/frontend/img/jaban/png.png');
+    }
 }

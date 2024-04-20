@@ -124,6 +124,41 @@
     <textarea class="form-control" rows="5" id="pr-description" placeholder="" wire:model="adsDescription"></textarea>
 </div>
 
+<!-- Ads Image-->
+<div class="row">
+    <div class="col-sm-12 mb-4">
+        <label class="form-label fw-bold">
+             تصویر آگهی را بارگذاری نمایید
+            <span class="fw-bold">(اختیاری)</span>
+        </label>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="mb-3">
+                    <input class="form-control" type="file" wire:model="adsImages">
+                    @error('adsImages') <span class="text-danger error">{{ $message }}</span> @enderror
+                </div>
+            </div>
+            <div class="col-sm-12">
+                @if(count($adsImages)) 
+                    <div class="row">
+                        @foreach ($adsImages as $adsImagesItem)
+                                <div class="col-sm-3 d-flex justify-content-center mb-2">
+                                    <div class="border rounded-3 p-1" style="width: 150px;">
+                                        <div class="d-flex justify-content-center p-1">
+                                            <img src="{{$adsImagesItem->temporaryUrl()}}">    
+                                        </div>
+                                    </div>  
+                                </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+
+    </div>
+</div>   
+
 <!-- Contract Type-->
 <div class="row">
     <div class="col">

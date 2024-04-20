@@ -10,13 +10,7 @@
                     <div class="card card-hover border-0 shadow-sm h-100">
                         <a class="card-img-top overflow-hidden position-relative" href="">
                             <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                            <span style="
-                                background-image: url('{{($sellingAdsItem->adsImages->first() !== null) ? asset($sellingAdsItem->adsImages->first()->image) : asset('assets/frontend/img/jaban/png.png')}}');
-                                width: 196px;
-                                height: 100px;
-                                background-size: cover;
-                                display:block;
-                            "></span>
+                            <img class="d-block" src="{{$sellingAdsItem->adsImagesUrl()}}" alt="Image">
                         </a>
                         <div class="card-body">
                             <a class="fs-sm text-uppercase text-decoration-none" href="">
@@ -68,13 +62,7 @@
                         <div class="card card-hover border-0 shadow-sm h-100">
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <span style="
-                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
-                                    width: 196px;
-                                    height: 100px;
-                                    background-size: cover;
-                                    display:block;
-                                "></span>
+                                <img class="d-block" src="{{$employeeAdsItem->adsImagesUrl()}}" alt="Image">
                             </a>
                             <div class="card-body">
                                 <a class="fs-sm text-uppercase text-decoration-none" href="">
@@ -126,13 +114,7 @@
                         <div class="card card-hover border-0 shadow-sm h-100">
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <span style="
-                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
-                                    width: 196px;
-                                    height: 100px;
-                                    background-size: cover;
-                                    display:block;
-                                "></span>
+                                <img class="d-block" src="{{$employerAdsItem->adsImagesUrl()}}" alt="Image">
                             </a>
                             <div class="card-body">
                                 <a class="fs-sm text-uppercase text-decoration-none" href="">
@@ -184,13 +166,7 @@
                         <div class="card card-hover border-0 shadow-sm h-100">
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <span style="
-                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
-                                    width: 196px;
-                                    height: 100px;
-                                    background-size: cover;
-                                    display:block;
-                                "></span>
+                                <img class="d-block" src="{{$investorAdsItem->adsImagesUrl()}}" alt="Image">
                             </a>
                             <div class="card-body">
                                 <a class="fs-sm text-uppercase text-decoration-none" href="">
@@ -242,13 +218,7 @@
                         <div class="card card-hover border-0 shadow-sm h-100">
                             <a class="card-img-top overflow-hidden position-relative" href="">
                                 <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <span style="
-                                    background-image: url('assets/frontend/img/job-board/blog/01.jpg');
-                                    width: 196px;
-                                    height: 100px;
-                                    background-size: cover;
-                                    display:block;
-                                "></span>
+                                <img class="d-block" src="{{$investedAdsItem->adsImagesUrl()}}" alt="Image">
                             </a>
                             <div class="card-body">
                                 <a class="fs-sm text-uppercase text-decoration-none" href="">
@@ -311,7 +281,7 @@
                     <div class="card card-hover border-0 shadow-sm h-100">
                         <a class="card-img-top overflow-hidden position-relative" href="">
                             <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                            <img class="d-block" src="{{asset('assets/frontend/img/job-board/blog/01.jpg')}}" alt="Image">
+                            <img class="d-block" src="{{$adsRegistrationItem->adsImagesUrl()}}" alt="Image">
                         </a>
                         <div class="card-body">
                             <a class="fs-sm text-uppercase text-decoration-none" href="">

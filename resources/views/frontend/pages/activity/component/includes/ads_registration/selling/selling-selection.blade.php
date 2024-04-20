@@ -112,7 +112,7 @@
         </div>
     </div>
     
-    <!-- Ads Status-->
+    <!-- Ads Image-->
     <div class="row">
         <div class="col-sm-12 mb-4">
             <label class="form-label fw-bold">
