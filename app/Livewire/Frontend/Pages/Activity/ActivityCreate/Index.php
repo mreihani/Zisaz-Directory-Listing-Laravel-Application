@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\Activity;
+namespace App\Livewire\Frontend\Pages\Activity\ActivityCreate;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -420,7 +420,8 @@ class Index extends Component
 
         // create activity item
         $activity = auth()->user()->activity()->create([
-            'activity_type' => Purify::clean($this->section)
+            'activity_type' => Purify::clean($this->section),
+            'slug' => Str::random() .''. Activity::getLatestId(),
         ]);
 
         // معرفی رزومه
@@ -561,7 +562,8 @@ class Index extends Component
         if($this->customWebPage != "") {
             // create activity item
             $activity = auth()->user()->activity()->create([
-                'activity_type' => Purify::clean($this->section)
+                'activity_type' => Purify::clean($this->section),
+                'slug' => Str::random() .''. Activity::getLatestId(),
             ]);
 
             // To Do
@@ -926,6 +928,6 @@ class Index extends Component
    
     public function render()
     {
-        return view('frontend.pages.activity.component.index');
+        return view('frontend.pages.activity.activity-create.component.index');
     } 
 }

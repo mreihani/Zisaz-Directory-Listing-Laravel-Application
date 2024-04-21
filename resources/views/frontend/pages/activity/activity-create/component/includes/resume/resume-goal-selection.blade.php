@@ -18,16 +18,16 @@
     </div>
 
     @if($resumeGoal == 1)
-        @include('frontend.pages.activity.component.includes.resume.resume-goal-form-1')
+        @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-form-1')
     @elseif($resumeGoal == 2)
-        @include('frontend.pages.activity.component.includes.resume.resume-goal-form-2')
+        @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-form-2')
     @elseif($resumeGoal == 3)
-        @include('frontend.pages.activity.component.includes.resume.resume-goal-form-3')
+        @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-form-3')
     @elseif($resumeGoal == 4)
-        @include('frontend.pages.activity.component.includes.resume.resume-goal-form-4')
+        @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-form-4')
     @elseif($resumeGoal == 5)
-        @include('frontend.pages.activity.component.includes.resume.resume-goal-form-5')
+        @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-form-5')
     @elseif($resumeGoal == 6)
-        @include('frontend.pages.activity.component.includes.resume.resume-goal-form-6')
+        @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-form-6')
     @endif
 </div>

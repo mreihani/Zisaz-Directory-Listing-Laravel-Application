@@ -14,8 +14,8 @@
         </div>
     </div>
     
-    @include('frontend.pages.activity.component.includes.ads_registration.selling.selling-selection')
-    @include('frontend.pages.activity.component.includes.ads_registration.employment.employment-selection')
-    @include('frontend.pages.activity.component.includes.ads_registration.investment.investment-selection')
+    @include('frontend.pages.activity.activity-create.component.includes.ads_registration.selling.selling-selection')
+    @include('frontend.pages.activity.activity-create.component.includes.ads_registration.employment.employment-selection')
+    @include('frontend.pages.activity.activity-create.component.includes.ads_registration.investment.investment-selection')
 
 </div>

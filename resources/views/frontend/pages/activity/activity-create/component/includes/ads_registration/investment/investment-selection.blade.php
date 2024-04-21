@@ -14,9 +14,9 @@
     </div>
 
     @if($investmentAdsType == "investor")
-        @include('frontend.pages.activity.component.includes.ads_registration.investment.investor')
+        @include('frontend.pages.activity.activity-create.component.includes.ads_registration.investment.investor')
     @elseif($investmentAdsType == "invested")
-        @include('frontend.pages.activity.component.includes.ads_registration.investment.invested')
+        @include('frontend.pages.activity.activity-create.component.includes.ads_registration.investment.invested')
     @endif
 </div>
 

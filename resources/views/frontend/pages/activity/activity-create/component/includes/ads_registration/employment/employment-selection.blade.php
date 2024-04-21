@@ -14,9 +14,9 @@
     </div>
 
     @if($employmentAdsType == "employee")
-        @include('frontend.pages.activity.component.includes.ads_registration.employment.employee')
+        @include('frontend.pages.activity.activity-create.component.includes.ads_registration.employment.employee')
     @elseif($employmentAdsType == "employer")
-        @include('frontend.pages.activity.component.includes.ads_registration.employment.employer')
+        @include('frontend.pages.activity.activity-create.component.includes.ads_registration.employment.employer')
     @endif
 
 </div>

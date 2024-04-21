@@ -12,7 +12,7 @@ class UserActivityController extends Controller
      */
     public function index()
     {
-        return view('frontend.pages.activity.index');
+        return view('frontend.pages.activity.activity-create.index');
     }
 
     /**
