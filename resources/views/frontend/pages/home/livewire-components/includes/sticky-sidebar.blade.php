@@ -1,4 +1,4 @@
-<aside class="col-lg-4 col-md-4">
+<aside class="col-lg-4 col-md-4 home-page-sidebar">
     <div class="sticky-top" style="padding-top: 7rem;">
         <div class="offcanvas-lg offcanvas-end" id="blog-sidebar">
             <div class="offcanvas-header shadow-sm mb-2">

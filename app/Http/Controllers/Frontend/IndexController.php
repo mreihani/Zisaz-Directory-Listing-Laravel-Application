@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Frontend\UserModels\Activity\Activity;
 
 class IndexController extends Controller
 {
@@ -62,5 +63,11 @@ class IndexController extends Controller
 
     public function faq() {
         return view('frontend.pages.faq.index');
+    }
+
+    public function activity($slug) {
+        dd(
+            $slug
+        );
     }
 }

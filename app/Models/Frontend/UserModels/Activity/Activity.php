@@ -84,6 +84,11 @@ class Activity extends Model
     }
 
     public function adsImagesUrl() {
-        return ($this->adsImages->first() !== null) ? asset($this->adsImages->first()->image) : asset('assets/frontend/img/jaban/png.png');
+        return ($this->adsImages->first() !== null) ? asset($this->adsImages->first()->image_sm) : asset('assets/frontend/img/jaban/png_sm.png');
+    }
+
+    // This is for slug, it gets the last ID to create a unique random string
+    public static function getLatestId() {
+        return self::latest()->first() ? self::latest()->first()->id : 0;
     }
 }

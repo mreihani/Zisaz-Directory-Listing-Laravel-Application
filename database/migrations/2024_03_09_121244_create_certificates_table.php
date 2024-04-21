@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('activity_type', ['resume', 'custom_page', 'ads_registration', 'jaban_ads'])->default('resume');
             $table->unsignedBigInteger('subactivity_id')->nullable();
             $table->string('subactivity_type')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
 
@@ -98,6 +99,7 @@ return new class extends Migration
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->string('image')->nullable();
+            $table->string('image_sm')->nullable();
             $table->timestamps();
         });
 

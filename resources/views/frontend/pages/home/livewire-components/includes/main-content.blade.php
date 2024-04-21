@@ -5,38 +5,41 @@
     @if(count($sellingAds))
         <div class="row">
             @foreach ($sellingAds as $key => $sellingAdsItem)
+
                 <!-- Item-->
-                <div class="col-sm-3 mb-4">
-                    <div class="card card-hover border-0 shadow-sm h-100">
-                        <a class="card-img-top overflow-hidden position-relative" href="">
-                            <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                            <img class="d-block" src="{{$sellingAdsItem->adsImagesUrl()}}" alt="Image">
-                        </a>
-                        <div class="card-body">
-                            <a class="fs-sm text-uppercase text-decoration-none" href="">
-                                {{$sellingAdsItem->selling->item_title}}
-                            </a>
-                            <h3 class="fs-base pt-1 mb-2">
-                                <a class="nav-link" href="">
-                                    {{$sellingAdsItem->selling->item_description}}
+                <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
+                    <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+                        <a class="card-img-top" href="{{route('activity', $sellingAdsItem->slug)}}" style="background-image: url('{{$sellingAdsItem->adsImagesUrl()}}');"></a>
+                        <div class="d-flex flex-column justify-content-between p-3">
+                            <h4 class="fs-6 pt-1 mb-2">
+                                <a class="nav-link" href="{{route('activity', $sellingAdsItem->slug)}}">
+                                    {{$sellingAdsItem->selling->item_title}}
                                 </a>
-                            </h3>
+                            </h4>
+                            <a class="text-decoration-none" href="{{route('activity', $sellingAdsItem->slug)}}">
+                                <div class="text-body fs-xs">
+                                    <span class="me-2 pe-1">
+                                        {{jdate($sellingAdsItem->updated_at)->ago()}}
+                                    </span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
-            @endforeach
 
+            @endforeach
+            
             <!-- More Items Card-->
-            <div class="col-sm-3 mb-4">
-                <div class="position-relative home-page-more-item-card">
-                    <a class="card-img-top overflow-hidden position-relative card card-hover border-0 shadow-sm h-100" href="" wire:click.prevent="loadSpecificCategory( @js(get_class($sellingAdsItem->selling)), '{{$sellingAdsItem->selling->ads_type}}')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <div class="home-page-more-card-overlay-div card card-hover border-0 shadow-sm h-100"></div> 
-                        <img class="d-block" src="{{asset('assets/frontend/img/jaban/more_ads.jpg')}}" alt="Image">
-                        <p class="fw-bolder">
-                            مشاهده بیشتر
-                        </p>
-                    </a>
-                </div>
+            <div class="d-flex justify-content-center">
+                <button 
+                    type="button"
+                    class="fw-bolder text-decoration-none mb-3 btn btn-sm btn-translucent-accent rounded-pill" 
+                    href=""
+                    wire:click.prevent="loadSpecificCategory( @js(get_class($sellingAdsItem->selling)), '{{$sellingAdsItem->selling->ads_type}}')" 
+                    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})"
+                >
+                    مشاهده بیشتر
+                </button>
             </div>
 
         </div>
@@ -57,40 +60,44 @@
         <div class="row">
             @foreach ($employeeAds as $employeeAdsItem)
                 @if($employeeAdsItem->employment->where('employment_ads_type','employee'))
+
                     <!-- Item-->
-                    <div class="col-sm-3 mb-4">
-                        <div class="card card-hover border-0 shadow-sm h-100">
-                            <a class="card-img-top overflow-hidden position-relative" href="">
-                                <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <img class="d-block" src="{{$employeeAdsItem->adsImagesUrl()}}" alt="Image">
-                            </a>
-                            <div class="card-body">
-                                <a class="fs-sm text-uppercase text-decoration-none" href="">
-                                    {{$employeeAdsItem->employment->item_title}}
-                                </a>
-                                <h3 class="fs-base pt-1 mb-2">
-                                    <a class="nav-link" href="">
-                                        {{$employeeAdsItem->employment->item_description}}
+                    <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
+                        <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+                            <a class="card-img-top" href="{{route('activity', $employeeAdsItem->slug)}}" style="background-image: url('{{$employeeAdsItem->adsImagesUrl()}}');"></a>
+                            <div class="d-flex flex-column justify-content-between p-3">
+                                <h4 class="fs-6 pt-1 mb-2">
+                                    <a class="nav-link" href="{{route('activity', $employeeAdsItem->slug)}}">
+                                        {{$employeeAdsItem->employment->item_title}}
                                     </a>
-                                </h3>
+                                </h4>
+                                <a class="text-decoration-none" href="{{route('activity', $employeeAdsItem->slug)}}">
+                                    <div class="text-body fs-xs">
+                                        <span class="me-2 pe-1">
+                                            {{jdate($employeeAdsItem->updated_at)->ago()}}
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
+
                 @endif
             @endforeach
             
             <!-- More Items Card-->
-            <div class="col-sm-3 mb-4">
-                <div class="position-relative home-page-more-item-card">
-                    <a class="card-img-top overflow-hidden position-relative card card-hover border-0 shadow-sm h-100" href="" wire:click.prevent="loadSpecificCategory( @js(get_class($employeeAdsItem->employment)), '{{$employeeAdsItem->employment->ads_type}}')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <div class="home-page-more-card-overlay-div card card-hover border-0 shadow-sm h-100"></div> 
-                        <img class="d-block" src="{{asset('assets/frontend/img/jaban/more_ads.jpg')}}" alt="Image">
-                        <p class="fw-bolder">
-                            مشاهده بیشتر
-                        </p>
-                    </a>
-                </div>
+            <div class="d-flex justify-content-center">
+                <button 
+                    type="button"
+                    class="fw-bolder text-decoration-none mb-3 btn btn-sm btn-translucent-accent rounded-pill" 
+                    href=""
+                    wire:click.prevent="loadSpecificCategory( @js(get_class($employeeAdsItem->employment)), '{{$employeeAdsItem->employment->ads_type}}')" 
+                    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})"
+                >
+                    مشاهده بیشتر
+                </button>
             </div>
+
         </div>
     @else
         <div class="mx-2">
@@ -108,41 +115,45 @@
     @if(count($employerAds))
         <div class="row">
             @foreach ($employerAds as $employerAdsItem)
-                @if($employerAdsItem->employment->where('employment_ads_type','employee'))
+                @if($employerAdsItem->employment->where('employment_ads_type','employer'))
+
                     <!-- Item-->
-                    <div class="col-sm-3 mb-4">
-                        <div class="card card-hover border-0 shadow-sm h-100">
-                            <a class="card-img-top overflow-hidden position-relative" href="">
-                                <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <img class="d-block" src="{{$employerAdsItem->adsImagesUrl()}}" alt="Image">
-                            </a>
-                            <div class="card-body">
-                                <a class="fs-sm text-uppercase text-decoration-none" href="">
-                                    {{$employerAdsItem->employment->item_title}}
-                                </a>
-                                <h3 class="fs-base pt-1 mb-2">
-                                    <a class="nav-link" href="">
-                                        {{$employerAdsItem->employment->item_description}}
+                    <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
+                        <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+                            <a class="card-img-top" href="{{route('activity', $employerAdsItem->slug)}}" style="background-image: url('{{$employerAdsItem->adsImagesUrl()}}');"></a>
+                            <div class="d-flex flex-column justify-content-between p-3">
+                                <h4 class="fs-6 pt-1 mb-2">
+                                    <a class="nav-link" href="{{route('activity', $employerAdsItem->slug)}}">
+                                        {{$employerAdsItem->employment->item_title}}
                                     </a>
-                                </h3>
+                                </h4>
+                                <a class="text-decoration-none" href="{{route('activity', $employerAdsItem->slug)}}">
+                                    <div class="text-body fs-xs">
+                                        <span class="me-2 pe-1">
+                                            {{jdate($employerAdsItem->updated_at)->ago()}}
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
+
                 @endif
             @endforeach
 
             <!-- More Items Card-->
-            <div class="col-sm-3 mb-4">
-                <div class="position-relative home-page-more-item-card">
-                    <a class="card-img-top overflow-hidden position-relative card card-hover border-0 shadow-sm h-100" href="" wire:click.prevent="loadSpecificCategory( @js(get_class($employerAdsItem->employment)), '{{$employerAdsItem->employment->ads_type}}')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <div class="home-page-more-card-overlay-div card card-hover border-0 shadow-sm h-100"></div> 
-                        <img class="d-block" src="{{asset('assets/frontend/img/jaban/more_ads.jpg')}}" alt="Image">
-                        <p class="fw-bolder">
-                            مشاهده بیشتر
-                        </p>
-                    </a>
-                </div>
+            <div class="d-flex justify-content-center">
+                <button 
+                    type="button"
+                    class="fw-bolder text-decoration-none mb-3 btn btn-sm btn-translucent-accent rounded-pill" 
+                    href=""
+                    wire:click.prevent="loadSpecificCategory( @js(get_class($employerAdsItem->employment)), '{{$employerAdsItem->employment->ads_type}}')" 
+                    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})"
+                >
+                    مشاهده بیشتر
+                </button>
             </div>
+
         </div>
     @else
         <div class="mx-2">
@@ -161,40 +172,44 @@
         <div class="row">
             @foreach ($investorAds as $investorAdsItem)
                 @if($investorAdsItem->investment->where('investment_ads_type','investor'))
+
                     <!-- Item-->
-                    <div class="col-sm-3 mb-4">
-                        <div class="card card-hover border-0 shadow-sm h-100">
-                            <a class="card-img-top overflow-hidden position-relative" href="">
-                                <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <img class="d-block" src="{{$investorAdsItem->adsImagesUrl()}}" alt="Image">
-                            </a>
-                            <div class="card-body">
-                                <a class="fs-sm text-uppercase text-decoration-none" href="">
-                                    {{$investorAdsItem->investment->item_title}}
-                                </a>
-                                <h3 class="fs-base pt-1 mb-2">
-                                    <a class="nav-link" href="">
-                                        {{$investorAdsItem->investment->item_description}}
+                    <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
+                        <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+                            <a class="card-img-top" href="{{route('activity', $investorAdsItem->slug)}}" style="background-image: url('{{$investorAdsItem->adsImagesUrl()}}');"></a>
+                            <div class="d-flex flex-column justify-content-between p-3">
+                                <h4 class="fs-6 pt-1 mb-2">
+                                    <a class="nav-link" href="{{route('activity', $investorAdsItem->slug)}}">
+                                        {{$investorAdsItem->investment->item_title}}
                                     </a>
-                                </h3>
+                                </h4>
+                                <a class="text-decoration-none" href="{{route('activity', $investorAdsItem->slug)}}">
+                                    <div class="text-body fs-xs">
+                                        <span class="me-2 pe-1">
+                                            {{jdate($investorAdsItem->updated_at)->ago()}}
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
+
                 @endif
             @endforeach
 
             <!-- More Items Card-->
-            <div class="col-sm-3 mb-4">
-                <div class="position-relative home-page-more-item-card">
-                    <a class="card-img-top overflow-hidden position-relative card card-hover border-0 shadow-sm h-100" href="" wire:click.prevent="loadSpecificCategory( @js(get_class($investorAdsItem->investment)), '{{$investorAdsItem->investment->ads_type}}')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <div class="home-page-more-card-overlay-div card card-hover border-0 shadow-sm h-100"></div> 
-                        <img class="d-block" src="{{asset('assets/frontend/img/jaban/more_ads.jpg')}}" alt="Image">
-                        <p class="fw-bolder">
-                            مشاهده بیشتر
-                        </p>
-                    </a>
-                </div>
+            <div class="d-flex justify-content-center">
+                <button 
+                    type="button"
+                    class="fw-bolder text-decoration-none mb-3 btn btn-sm btn-translucent-accent rounded-pill" 
+                    href=""
+                    wire:click.prevent="loadSpecificCategory( @js(get_class($investorAdsItem->investment)), '{{$investorAdsItem->investment->ads_type}}')" 
+                    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})"
+                >
+                    مشاهده بیشتر
+                </button>
             </div>
+
         </div>
     @else
         <div class="mx-2">
@@ -214,21 +229,22 @@
             @foreach ($investedAds as $investedAdsItem)
                 @if($investedAdsItem->investment->where('investment_ads_type','invested'))
                     <!-- Item-->
-                    <div class="col-sm-3 mb-4">
-                        <div class="card card-hover border-0 shadow-sm h-100">
-                            <a class="card-img-top overflow-hidden position-relative" href="">
-                                <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                                <img class="d-block" src="{{$investedAdsItem->adsImagesUrl()}}" alt="Image">
-                            </a>
-                            <div class="card-body">
-                                <a class="fs-sm text-uppercase text-decoration-none" href="">
-                                    {{$investedAdsItem->investment->item_title}}
-                                </a>
-                                <h3 class="fs-base pt-1 mb-2">
-                                    <a class="nav-link" href="">
-                                        {{$investedAdsItem->investment->item_description}}
+                    <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
+                        <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+                            <a class="card-img-top" href="{{route('activity', $investedAdsItem->slug)}}" style="background-image: url('{{$investedAdsItem->adsImagesUrl()}}');"></a>
+                            <div class="d-flex flex-column justify-content-between p-3">
+                                <h4 class="fs-6 pt-1 mb-2">
+                                    <a class="nav-link" href="{{route('activity', $investedAdsItem->slug)}}">
+                                        {{$investedAdsItem->investment->item_title}}
                                     </a>
-                                </h3>
+                                </h4>
+                                <a class="text-decoration-none" href="{{route('activity', $investedAdsItem->slug)}}">
+                                    <div class="text-body fs-xs">
+                                        <span class="me-2 pe-1">
+                                            {{jdate($investedAdsItem->updated_at)->ago()}}
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -236,17 +252,18 @@
             @endforeach
 
             <!-- More Items Card-->
-            <div class="col-sm-3 mb-4">
-                <div class="position-relative home-page-more-item-card">
-                    <a class="card-img-top overflow-hidden position-relative card card-hover border-0 shadow-sm h-100" href="" wire:click.prevent="loadSpecificCategory( @js(get_class($investedAdsItem->investment)), '{{$investedAdsItem->investment->ads_type}}')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <div class="home-page-more-card-overlay-div card card-hover border-0 shadow-sm h-100"></div> 
-                        <img class="d-block" src="{{asset('assets/frontend/img/jaban/more_ads.jpg')}}" alt="Image">
-                        <p class="fw-bolder">
-                            مشاهده بیشتر
-                        </p>
-                    </a>
-                </div>
+            <div class="d-flex justify-content-center">
+                <button 
+                    type="button"
+                    class="fw-bolder text-decoration-none mb-3 btn btn-sm btn-translucent-accent rounded-pill" 
+                    href=""
+                    wire:click.prevent="loadSpecificCategory( @js(get_class($investedAdsItem->investment)), '{{$investedAdsItem->investment->ads_type}}')" 
+                    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})"
+                >
+                    مشاهده بیشتر
+                </button>
             </div>
+
         </div>
     @else
         <div class="mx-2">
@@ -276,25 +293,28 @@
     @if(count($adsRegistrations))
         <div class="row">
             @foreach ($adsRegistrations as $adsRegistrationItem)
+
                 <!-- Item-->
-                <div class="col-sm-3 mb-4">
-                    <div class="card card-hover border-0 shadow-sm h-100">
-                        <a class="card-img-top overflow-hidden position-relative" href="">
-                            <span class="badge bg-faded-info position-absolute top-0 end-0 fs-sm rounded-pill m-3">جدید</span>
-                            <img class="d-block" src="{{$adsRegistrationItem->adsImagesUrl()}}" alt="Image">
-                        </a>
-                        <div class="card-body">
-                            <a class="fs-sm text-uppercase text-decoration-none" href="">
-                                {{$adsRegistrationItem->subactivity->item_title}}
-                            </a>
-                            <h3 class="fs-base pt-1 mb-2">
-                                <a class="nav-link" href="">
-                                    {{$adsRegistrationItem->subactivity->item_description}}
+                <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
+                    <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
+                        <a class="card-img-top" href="{{route('activity', $adsRegistrationItem->slug)}}" style="background-image: url('{{$adsRegistrationItem->adsImagesUrl()}}');"></a>
+                        <div class="d-flex flex-column justify-content-between p-3">
+                            <h4 class="fs-6 pt-1 mb-2">
+                                <a class="nav-link" href="{{route('activity', $adsRegistrationItem->slug)}}">
+                                    {{$adsRegistrationItem->subactivity->item_title}}
                                 </a>
-                            </h3>
+                            </h4>
+                            <a class="text-decoration-none" href="{{route('activity', $adsRegistrationItem->slug)}}">
+                                <div class="text-body fs-xs">
+                                    <span class="me-2 pe-1">
+                                        {{jdate($adsRegistrationItem->updated_at)->ago()}}
+                                    </span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
+
             @endforeach
         </div>
     @else

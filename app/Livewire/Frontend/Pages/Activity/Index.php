@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Pages\Activity;
 
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
@@ -10,10 +11,10 @@ use Illuminate\Support\Facades\Storage;
 use App\Rules\Activity\GenderValidationRule;
 use App\Rules\Activity\WorkExpValidationRule;
 use App\Rules\Activity\AcademicValidationRule;
-use App\Rules\Activity\AdsImagesValidationRule;
 use App\Rules\Activity\AdsTitleValidationRule;
 use App\Rules\Activity\JobTitleValidationRule;
 use App\Rules\Activity\shopNameValidationRule;
+use App\Rules\Activity\AdsImagesValidationRule;
 use App\Rules\Activity\ReturnTimeValidationRule;
 use App\Rules\Activity\shopAddressValidationRule;
 use App\Rules\Activity\AgreeToTermsValidationRule;
@@ -25,6 +26,7 @@ use App\Models\Frontend\ReferenceData\Gender\Gender;
 use App\Rules\Activity\AdsDescriptionValidationRule;
 use App\Rules\Activity\EmployerGenderValidationRule;
 use App\Rules\Activity\ProvinceToWorkValidationRule;
+use App\Models\Frontend\UserModels\Activity\Activity;
 use App\Rules\Activity\SelectedProvinceValidationRule;
 use App\Rules\Activity\SellingActGrpsIdValidationRule;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
@@ -111,6 +113,7 @@ class Index extends Component
     public $productBrand;
     public $adsStatus;
     public $adsStatusArray;
+    public $adsImage;
     public $adsImages;
     public $price;
     public $priceByAgreement;
@@ -237,6 +240,7 @@ class Index extends Component
         $this->sellingAdsManufacturereType = "";
         $this->adsStatus = [];
         $this->adsStatusArray = AdsStat::all();
+        $this->adsImage = "";
         $this->adsImages = [];
         $this->priceByAgreement = false;
         $this->paymentMethod = [];
@@ -584,6 +588,35 @@ class Index extends Component
         
         $activity->adsStats()->attach($grpArray);
     }
+    // public ads single image upload handler
+    private function handlePublicAdsSingleFileUpload($activity) {
+        
+        if($this->adsImage == "") {
+            return;
+        }
+       
+        $folderId = $activity->id;
+        $dir = 'storage/upload/ads-images/' . $folderId;
+
+        // for large images
+        $unique_image_name = hexdec(uniqid());
+        $filename = $unique_image_name . '.' . 'jpg';
+        $img = Image::make($this->adsImage)->fit(400,400)->encode('jpg');
+        Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
+        $image_path = $dir . '/' . $filename;
+
+        // for thumbnails
+        $unique_image_name_sm = hexdec(uniqid());
+        $filename_sm = $unique_image_name_sm . '.' . 'jpg';
+        $img_sm = Image::make($this->adsImage)->fit(110,110)->encode('jpg');
+        Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename_sm, $img_sm);
+        $image_path_sm = $dir . '/' . $filename_sm;
+
+        $activity->adsImages()->create([
+            'image' => $image_path,
+            'image_sm' => $image_path_sm,
+        ]);
+    }
     // public ads image upload handler
     private function handlePublicAdsFileUpload($activity) {
         
@@ -600,16 +633,26 @@ class Index extends Component
                 break;
             }
 
+            $folderId = $activity->id;
+            $dir = 'storage/upload/ads-images/' . $folderId;
+
+            // for large images
             $unique_image_name = hexdec(uniqid());
             $filename = $unique_image_name . '.' . 'jpg';
-
-            $img = Image::make($value)->fit(832,424)->encode('jpg');
+            $img = Image::make($value)->fit(400,400)->encode('jpg');
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
-
             $image_path = $dir . '/' . $filename;
 
+            // for thumbnails
+            $unique_image_name_sm = hexdec(uniqid());
+            $filename_sm = $unique_image_name_sm . '.' . 'jpg';
+            $img_sm = Image::make($value)->fit(110,110)->encode('jpg');
+            Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename_sm, $img_sm);
+            $image_path_sm = $dir . '/' . $filename_sm;
+
             $activity->adsImages()->create([
-                'image' => $image_path
+                'image' => $image_path,
+                'image_sm' => $image_path_sm,
             ]);
         }
     }
@@ -704,9 +747,10 @@ class Index extends Component
         
         // create activity item
         $activity = auth()->user()->activity()->create([
-            'activity_type' => Purify::clean($this->section)
+            'activity_type' => Purify::clean($this->section),
+            'slug' => str_replace(' ', '-', Purify::clean($this->adsTitle)) .'-'. Str::random() .''. Activity::getLatestId(),
         ]);
-
+        
         // ثبت آگهی
         // آگهی استخدام
         // آکهی فروش کالا
@@ -768,7 +812,7 @@ class Index extends Component
             $this->saveEmployeeGenderHandler($activity);
 
             // upload ads image
-            $this->handlePublicAdsFileUpload($activity);
+            $this->handlePublicAdsSingleFileUpload($activity);
         }
 
         // ثبت آگهی
@@ -801,7 +845,7 @@ class Index extends Component
             $this->saveProvinceHandler($activity);
 
             // upload ads image
-            $this->handlePublicAdsFileUpload($activity);
+            $this->handlePublicAdsSingleFileUpload($activity);
         }
 
         // ثبت آگهی
@@ -819,7 +863,7 @@ class Index extends Component
             ]);
 
             // upload ads image
-            $this->handlePublicAdsFileUpload($activity);
+            $this->handlePublicAdsSingleFileUpload($activity);
         }
 
         // ثبت آگهی
@@ -841,7 +885,7 @@ class Index extends Component
             ]);
 
             // upload ads image
-            $this->handlePublicAdsFileUpload($activity);
+            $this->handlePublicAdsSingleFileUpload($activity);
         }
         
         $activity->update([

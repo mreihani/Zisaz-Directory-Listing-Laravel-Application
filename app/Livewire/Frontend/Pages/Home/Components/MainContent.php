@@ -47,30 +47,30 @@ class MainContent extends Component
         $this->searchResults = null;
 
         // load selling ads with eager loading
-        $this->sellingAds = Activity::where('activity_type','ads_registration')->has('selling')->with('selling')->get()->take(3);
+        $this->sellingAds = Activity::where('activity_type','ads_registration')->has('selling')->with('selling')->latest()->get()->take(3);
                 
         // load employee ads with eager loading
         $this->employeeAds = Activity::where('activity_type','ads_registration')->withWhereHas('employment', function($q){
             $q->where('ads_type', '=', 'employee');
-        })->get()->take(3);
+        })->latest()->get()->take(3);
 
         // load emoployer ads with eager loading
         $this->employerAds = Activity::where('activity_type','ads_registration')->withWhereHas('employment', function($q){
             $q->where('ads_type', '=', 'employer');
-        })->get()->take(3);
+        })->latest()->get()->take(3);
 
         // load investor ads with eager loading
         $this->investorAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
             $q->where('ads_type', '=', 'investor');
-        })->get()->take(3);
+        })->latest()->get()->take(3);
 
         // load invested ads with eager loading
         $this->investedAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
             $q->where('ads_type', '=', 'invested');
-        })->get();
+        })->latest()->get();
 
         // load all ads with eager loading
-        $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->get();
+        $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->latest()->get();
 
         // load filter category items
         // مربوط به آگهی ها می شود
@@ -100,7 +100,7 @@ class MainContent extends Component
         'searchResults' => 'searchResults',
     ];
     public function searchResults($searchResults) {
-        $this->searchResults = $searchResults;
+        $this->searchResults = Activity::find($searchResults);
     }
 
     public function render()

@@ -26,7 +26,7 @@
 
                     @if(Route::currentRouteName() == 'home-page')
                         <!-- Search bar-->
-                        <li class="nav-item">
+                        <li class="nav-item dropdown d-none d-lg-block d-sm-none">
                             @livewire('frontend.pages.home.components.hero')
                         </li>
                     @else    
@@ -56,13 +56,8 @@
                                 سوالات متداول
                             </a>
                         </li>
-                        <li class="nav-item d-lg-none">
-                            <a class="nav-link" href="#signin-modal" data-bs-toggle="modal">
-                                <i class="fi-user me-2"></i>
-                                ورود
-                            </a>
-                        </li>
                     @endif 
+
 
                 </ul>
             </div>
@@ -72,5 +67,6 @@
         @livewire('frontend.layouts.toast')
 
     </header>
+
 </div>
 

@@ -50,29 +50,26 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="mb-3">
-                    <input class="form-control" type="file" wire:model="adsImages">
-                    @error('adsImages') <span class="text-danger error">{{ $message }}</span> @enderror
+                    <input class="form-control" type="file" wire:model="adsImage">
                 </div>
             </div>
             <div class="col-sm-12">
-                @if(count($adsImages)) 
+                @if($adsImage !== "") 
                     <div class="row">
-                        @foreach ($adsImages as $adsImagesItem)
-                                <div class="col-sm-3 d-flex justify-content-center mb-2">
-                                    <div class="border rounded-3 p-1" style="width: 150px;">
-                                        <div class="d-flex justify-content-center p-1">
-                                            <img src="{{$adsImagesItem->temporaryUrl()}}">    
-                                        </div>
-                                    </div>  
+                        <div class="col-sm-3 d-flex justify-content-center mb-2">
+                            <div class="border rounded-3 p-1" style="width: 150px;">
+                                <div class="d-flex justify-content-center p-1">
+                                    <img src="{{$adsImage->temporaryUrl()}}">    
                                 </div>
-                        @endforeach
+                            </div>  
+                        </div>
                     </div>
                 @endif
             </div>
         </div>
 
     </div>
-</div>
+</div>   
 
 <!-- Investment value -->
 <div class="row">

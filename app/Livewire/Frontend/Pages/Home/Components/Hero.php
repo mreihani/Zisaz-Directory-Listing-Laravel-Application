@@ -17,7 +17,7 @@ class Hero extends Component
         if($this->searchCategory == 'آگهی ها') {
             $searchResults = Activity::where('activity_type','ads_registration')->withWhereHas('subactivity', function($q){
                 $q->where('item_title', 'like', '%'.$this->searchQuery.'%');
-            })->get()->pluck('subactivity');
+            })->get()->pluck('id');
         }
         
         $this->dispatch('searchResults', 
