@@ -78,7 +78,7 @@ class IndexController extends Controller
 
     public function getProductsAds() {
         $sellingAds = Selling::all();
-        dd($sellingAds);
+        
         return view('frontend.pages.activity.activity-all.ads_registration.selling.selling', compact('sellingAds'));
     }
 }
