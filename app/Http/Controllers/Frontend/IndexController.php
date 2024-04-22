@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\UserModels\Activity\Activity;
+use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
 
 class IndexController extends Controller
 {
@@ -73,5 +74,11 @@ class IndexController extends Controller
         $similarItems = $activity->subactivity->latest()->where('id', '!=', $activity->subactivity->id)->get()->take(10);
 
         return view('frontend.pages.activity.activity-single.index', compact('activity', 'similarItems', 'similarItemsCount'));
+    }
+
+    public function getProductsAds() {
+        $sellingAds = Selling::all();
+        
+        return view('frontend.pages.activity.activity-all.ads_registration.selling.selling', compact('sellingAds'));
     }
 }

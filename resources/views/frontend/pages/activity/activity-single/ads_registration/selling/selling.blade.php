@@ -217,7 +217,7 @@
     <section class="container pt-md-2 pb-5 mb-md-4">
         <div class="d-sm-flex align-items-center justify-content-between pb-4 mb-sm-2">
             <h2 class="h4 mb-sm-0 font-vazir">آگهی های مشابه</h2>
-            <a class="btn btn-link fw-normal p-0" href="job-board-catalog.html">
+            <a class="btn btn-link fw-normal p-0" href="{{route('ads-products')}}">
                 مشاهده همه
                 <i class="fi-arrow-long-left ms-2"></i>
             </a>
@@ -229,11 +229,11 @@
                     <div class="pb-4">
                         <div class="card bg-secondary card-hover h-100">
                             <div class="card-body pb-3">
-                                <div class="d-flex align-items-center mb-2">
+                                {{-- <div class="d-flex align-items-center mb-2">
                                     <img class="me-2" src="{{asset('assets/frontend/img/job-board/company/it-pro.png')}}" width="24" alt="IT Pro Logo">
                                     <span class="fs-sm text-dark opacity-80 px-1">پرشین سیر</span>
                                     <span class="badge bg-faded-danger rounded-pill fs-sm ms-auto">فوری</span>
-                                </div>
+                                </div> --}}
                                 <h3 class="h6 card-title pt-1 mb-2">
                                     <a class="text-nav stretched-link text-decoration-none" href="{{route('activity', $similarItem->activity->slug)}}">
                                         {{$similarItem->item_title}}

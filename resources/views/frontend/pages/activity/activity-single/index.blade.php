@@ -7,7 +7,7 @@
 @endpush
 
 @if($activity->subactivity->ads_type == 'selling')
-    @include('frontend.pages.activity.activity-single.ads_registration.selling')
+    @include('frontend.pages.activity.activity-single.ads_registration.selling.selling')
 @elseif($activity->subactivity->ads_type == 'employee')
     @include('frontend.pages.activity.activity-single.ads_registration.employment.employee')
 @elseif($activity->subactivity->ads_type == 'employer')
