@@ -47,30 +47,30 @@ class MainContent extends Component
         $this->searchResults = null;
 
         // load selling ads with eager loading
-        $this->sellingAds = Activity::where('activity_type','ads_registration')->has('selling')->with('selling')->latest()->get()->take(3);
+        $this->sellingAds = Activity::where('activity_type','ads_registration')->has('selling')->with('selling')->orderBy('updated_at', 'DESC')->get()->take(3);
                 
         // load employee ads with eager loading
         $this->employeeAds = Activity::where('activity_type','ads_registration')->withWhereHas('employment', function($q){
             $q->where('ads_type', '=', 'employee');
-        })->latest()->get()->take(3);
+        })->orderBy('updated_at', 'DESC')->get()->take(3);
 
         // load emoployer ads with eager loading
         $this->employerAds = Activity::where('activity_type','ads_registration')->withWhereHas('employment', function($q){
             $q->where('ads_type', '=', 'employer');
-        })->latest()->get()->take(3);
+        })->orderBy('updated_at', 'DESC')->get()->take(3);
 
         // load investor ads with eager loading
         $this->investorAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
             $q->where('ads_type', '=', 'investor');
-        })->latest()->get()->take(3);
+        })->orderBy('updated_at', 'DESC')->get()->take(3);
 
         // load invested ads with eager loading
         $this->investedAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
             $q->where('ads_type', '=', 'invested');
-        })->latest()->get();
+        })->orderBy('updated_at', 'DESC')->get();
 
         // load all ads with eager loading
-        $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->latest()->get();
+        $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->orderBy('updated_at', 'DESC')->get();
 
         // load filter category items
         // مربوط به آگهی ها می شود
@@ -80,12 +80,12 @@ class MainContent extends Component
         $this->actGrpsShopArray = ActCat::find(19)->activityGroup;
     }
 
-    // فیلتر صفحه اصلی برای لود نشدن 3 مورد
+    // فیلتر صفحه اصلی که دکمه مشاهده بیشتر دارد
     public function loadSpecificCategory($categoryFilter, $type) {
         $this->sidebarCategoryFilterCollectionAds = null;
         $this->categoryFilter = $categoryFilter;
         $this->type = $type;
-        $this->filteredCollection = $categoryFilter::where('ads_type', $type)->get();
+        $this->filteredCollection = $categoryFilter::where('ads_type', $type)->orderBy('updated_at', 'DESC')->get();
     }
 
     // فیلتر سایدبار برای آگهی ها

@@ -10,6 +10,7 @@ use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
 use App\Models\Frontend\UserModels\Activity\LicenseItem;
 use App\Models\Frontend\UserModels\Activity\Resume\Resume;
+use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;

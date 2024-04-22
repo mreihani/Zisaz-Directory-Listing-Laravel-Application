@@ -415,6 +415,7 @@ class Index extends Component
         
         $activity->activityGroups()->attach($grpArray);
     }
+
     // save resume into DB
     private function saveResumeHandler() {
 
@@ -557,6 +558,7 @@ class Index extends Component
             'subactivity_type' => get_class($resume),
         ]);
     }
+
     // save custom page into Db
     private function saveCustomPageHandler() {
         if($this->customWebPage != "") {
@@ -570,6 +572,7 @@ class Index extends Component
             // اطلاعات مربوط به صفحه اختصاصی باید در مدل و مایگریشن مخصوص اینجا ریخه شود
         }
     }
+
     // save selling activity group into DB
     private function saveSellingActivityGroupHandler($activity) {
         // get items which are true
@@ -590,6 +593,7 @@ class Index extends Component
         
         $activity->adsStats()->attach($grpArray);
     }
+
     // public ads single image upload handler
     private function handlePublicAdsSingleFileUpload($activity) {
         
@@ -603,7 +607,7 @@ class Index extends Component
         // for large images
         $unique_image_name = hexdec(uniqid());
         $filename = $unique_image_name . '.' . 'jpg';
-        $img = Image::make($this->adsImage)->fit(400,400)->encode('jpg');
+        $img = Image::make($this->adsImage)->fit(748,520)->encode('jpg');
         Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
         $image_path = $dir . '/' . $filename;
 
@@ -641,7 +645,7 @@ class Index extends Component
             // for large images
             $unique_image_name = hexdec(uniqid());
             $filename = $unique_image_name . '.' . 'jpg';
-            $img = Image::make($value)->fit(400,400)->encode('jpg');
+            $img = Image::make($value)->fit(748,520)->encode('jpg');
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
             $image_path = $dir . '/' . $filename;
 
@@ -658,6 +662,7 @@ class Index extends Component
             ]);
         }
     }
+
     // save payment method into DB
     private function savePaymentMethodHandler($activity) {
         // get items which are true
@@ -744,6 +749,7 @@ class Index extends Component
 
         $activity->gender()->attach($grpArray);
     }
+
     // save ads registration into DB
     private function saveAdsRegistrationHandler() {
         

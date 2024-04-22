@@ -2,8 +2,8 @@
 @section('main')
 
 @push('page-styles')
-    <link rel="stylesheet" href="assets/frontend/vendor/jaban-create-activity-map/leaflet.css"/>    
-
+    <link rel="stylesheet" href="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.css')}}"/>    
+    
     <style>
         .page-wrapper {
             background-color: #f5f4f8;
@@ -22,7 +22,9 @@
     <!-- Breadcrumb-->
     <nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">خانه</a></li>
+            <li class="breadcrumb-item">
+                <a href="{{route('home-page')}}">خانه</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
                 ایجاد فعالیت
             </li>

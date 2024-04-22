@@ -66,8 +66,12 @@ class IndexController extends Controller
     }
 
     public function activity($slug) {
-        dd(
-            $slug
-        );
+        $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
+       
+        // get similar items for carousel element
+        $similarItemsCount = $activity->subactivity->count();
+        $similarItems = $activity->subactivity->latest()->where('id', '!=', $activity->subactivity->id)->get()->take(10);
+
+        return view('frontend.pages.activity.activity-single.index', compact('activity', 'similarItems', 'similarItemsCount'));
     }
 }

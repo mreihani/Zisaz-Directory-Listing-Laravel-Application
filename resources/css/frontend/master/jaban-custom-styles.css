@@ -60,3 +60,8 @@ input[type=number] {
 .tree .category-filter-last-loop-ul {
   padding-left: 0;
 }
+
+/* ads images carousel cursor */
+.ads-images-carousel-wrapper img {
+  cursor: pointer;
+}

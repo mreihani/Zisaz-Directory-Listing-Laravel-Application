@@ -210,26 +210,27 @@
             <label class="form-label fw-bold" for="pr-address-lt">مختصات مکانی آدرس را از روی نقشه انتخاب نمایید</label>
             <span class="fw-bold">(اختیاری)</span>
             <div id="map" style="height: 400px;" x-init="
-            let marker; const map = new L.Map('map', {
-                key: 'web.e4b772dc75484285a83a98d6466a4c10',
-                maptype: 'neshan',
-                poi: false,
-                traffic: false,
-                center: [35.699756, 51.338076],
-                zoom: 14,
-            }); 
-            map.on('click', function (e) {
-                if (marker) { 
-                    map.removeLayer(marker);
-                }
-                marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+                let marker; const map = new L.Map('map', {
+                    key: 'web.e4b772dc75484285a83a98d6466a4c10',
+                    maptype: 'neshan',
+                    poi: false,
+                    traffic: false,
+                    center: [35.699756, 51.338076],
+                    zoom: 14,
+                }); 
+                map.on('click', function (e) {
+                    if (marker) { 
+                        map.removeLayer(marker);
+                    }
+                    marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 
-                @this.latitude = e.latlng.lat;
-                @this.longitude = e.latlng.lng;
-            }); 
-            setInterval(function() {
-                map.invalidateSize();
-            }, 500);"></div>
+                    @this.latitude = e.latlng.lat;
+                    @this.longitude = e.latlng.lng;
+                }); 
+                setInterval(function() {
+                    map.invalidateSize();
+                }, 500);">
+            </div>
         </div>
     </div>
 
