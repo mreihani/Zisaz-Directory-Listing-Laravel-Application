@@ -1,8 +1,8 @@
 <div>
     @if($showPhone)
-        <a class="text-decoration-none" href="tel:{{auth()->user()->phone}}">
+        <a class="text-decoration-none" href="tel:{{$phone}}">
             <span>
-                {{auth()->user()->phone}}
+                {{$phone}}
             </span>
         </a>
     @else

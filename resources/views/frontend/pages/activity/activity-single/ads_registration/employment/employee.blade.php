@@ -49,7 +49,7 @@
                     <li class="d-flex align-items-center mb-2">
                         <i class="fi-phone fs-base text-muted me-2"></i>
                         
-                        @livewire('frontend.auth.login.open-login-modal')
+                        @livewire('frontend.auth.login.open-login-modal', ['phone' => $activity->user->phone])
                     </li>
                 </ul>
                 

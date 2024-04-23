@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 class OpenLoginModal extends Component
 {
     public $showPhone;
+    public $phone;
 
     public function mount() {
         $this->showPhone = auth()->check();
