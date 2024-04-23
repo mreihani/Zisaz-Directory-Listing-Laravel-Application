@@ -32,11 +32,6 @@
                     @else    
                         <!-- Menu items-->
                         <li class="nav-item dropdown">
-                            <a class="nav-link {{Route::currentRouteName() == 'jobs' ? 'active' : ''}}" href="{{route('jobs')}}">
-                                آگهی ها استخدام
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
                             <a class="nav-link {{Route::currentRouteName() == 'blog-all' ? 'active' : ''}}" href="{{route('blog-all')}}">
                                 مقالات
                             </a>

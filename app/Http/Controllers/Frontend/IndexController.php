@@ -38,14 +38,6 @@ class IndexController extends Controller
         return view('frontend.pages.home.index');
     }
 
-    public function jobs() {
-        return view('frontend.pages.jobs.jobs-all.index');
-    }
-
-    public function jobSingle($id) {
-        return view('frontend.pages.jobs.job-single.index');
-    }
-
     public function aboutUs() {
         return view('frontend.pages.about-us.index');
     }

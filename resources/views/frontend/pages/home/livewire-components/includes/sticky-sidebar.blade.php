@@ -217,6 +217,7 @@
 
                         <!-- فیلتر مزایده و مناقصه-->
                         <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="#">مزایده و مناقصه</a>
+                        <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="">متخصصین و نیروی انسانی</a>
 
                     </div>
                 </div>
@@ -225,13 +226,11 @@
                 <div class="card card-flush pb-2 pb-lg-0 mb-4">
                     <div class="card-body">
                         <h3 class="h5">لینک های ویژه</h3>
-                        <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="{{route('jobs')}}">آگهی ها استخدام</a>
                         <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="{{route('blog-all')}}">مقالات</a>
                         <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="{{route('about-us')}}">درباره ما</a>
                         <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="{{route('contact-us')}}">تماس با ما</a>
                         <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="{{route('faq')}}">سوالات متداول</a>
                         <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="">فرصت همکاری</a>
-                        <a class="nav-link fw-normal d-flex justify-content-between py-1 px-0" href="">متخصصین و نیروی انسانی</a>
                     </div>
                 </div>
             </div>
