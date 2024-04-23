@@ -44,6 +44,11 @@
                             {{$activity->subactivity->city->title}}
                         </span>
                     </li>
+                    <li class="d-flex align-items-center mb-2">
+                        <i class="fi-phone fs-base text-muted me-2"></i>
+                        
+                        @livewire('frontend.auth.login.open-login-modal')
+                    </li>
                 </ul>
 
                 <hr class="mb-4">

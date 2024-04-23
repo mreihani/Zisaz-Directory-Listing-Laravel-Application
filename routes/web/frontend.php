@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\IndexController;
 
 Route::controller(IndexController::class)->group(function () {
     Route::get('/', 'homePage')->name('home-page');
+    Route::get('/login', 'userLogin')->name('login');
     Route::get('/logout', 'logout')->name('logout');
     Route::get('/about-us', 'aboutUs')->name('about-us');
     Route::get('/blog', 'blogAll')->name('blog-all');

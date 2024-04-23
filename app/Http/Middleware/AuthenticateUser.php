@@ -12,6 +12,6 @@ class AuthenticateUser extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('home-page');
+        return $request->expectsJson() ? null : route('login');
     }
 }

@@ -8,3 +8,11 @@ document.addEventListener('hideModelAfterLogin', () => {
     $("#signin-modal").modal('hide');
 });
 
+// show login modal on login route
+document.addEventListener('showLoginModal', (e) => {
+    if(e.detail.showModal) {
+        const modal = new bootstrap.Modal('#signin-modal')
+        modal.show()
+    }
+});
+

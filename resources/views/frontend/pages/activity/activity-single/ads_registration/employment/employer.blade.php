@@ -19,6 +19,7 @@
         <div class="row">
             <!-- Signle job content-->
             <div class="col-lg-7 position-relative pe-lg-5 mb-5 mb-lg-0" style="z-index: 1025;">
+
                 <div class="d-flex justify-content-between mb-2">
                     <h2 class="h4 mb-0 font-vazir">
                         {{$activity->subactivity->item_title}}
@@ -30,7 +31,17 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <ul class="list-unstyled fs-sm mb-4">
+                    <li class="d-flex align-items-center mb-2">
+                        <i class="fi-phone fs-base text-muted me-2"></i>
+                        
+                        @livewire('frontend.auth.login.open-login-modal')
+                    </li>
+                </ul>
+
+                <hr class="mb-4">
+
                 @if($activity->activityGroups->count())
                     <h3 class="h6 pt-2">زمینه فعالیت: </h3>
                     <ul class="list-unstyled">

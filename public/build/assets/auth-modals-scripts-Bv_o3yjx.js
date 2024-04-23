@@ -1,0 +1,1 @@
+document.addEventListener("hideModelAfterRegistration",()=>{$("#signup-modal").modal("hide")});document.addEventListener("hideModelAfterLogin",()=>{$("#signin-modal").modal("hide")});document.addEventListener("showLoginModal",d=>{d.detail.showModal&&new bootstrap.Modal("#signin-modal").show()});

@@ -38,6 +38,10 @@ class IndexController extends Controller
         return view('frontend.pages.home.index');
     }
 
+    public function userLogin(Request $request) {
+        return view('frontend.pages.home.index');
+    }
+
     public function aboutUs() {
         return view('frontend.pages.about-us.index');
     }
@@ -58,6 +62,7 @@ class IndexController extends Controller
         return view('frontend.pages.faq.index');
     }
 
+    // activity single page
     public function activity($slug) {
         $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
         
@@ -73,6 +78,7 @@ class IndexController extends Controller
         return view('frontend.pages.activity.activity-single.index', compact('activity', 'similarItems', 'similarItemsCount'));
     }
 
+    // get all ads with type
     public function getAds(Request $request) {
         $adsType = $request->ads_type;
        

@@ -4,15 +4,17 @@ namespace App\Livewire\Frontend\Auth\Login;
 
 use App\Models\User;
 use Livewire\Component;
-use App\Models\Frontend\UserModels\ActiveCode;
+use Illuminate\Support\Facades\Route;
 use App\Notifications\Auth\SmsVerification;
+use App\Models\Frontend\UserModels\ActiveCode;
 use App\Rules\Auth\Login\ValidPhoneLoginValidation;
 
 class Login extends Component
 {
     public $phone;
     public $remember;
-    public $smsVerificationSectionVisible = false;
+    public $smsVerificationSectionVisible;
+    public $showLoginModel;
 
     protected function rules()
     {
@@ -26,6 +28,21 @@ class Login extends Component
         'phone.required' => 'لطفا شماره تلفن همراه خود را وارد نمایید.',
         'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید.',
     ];
+
+    public function mount() {
+        $this->smsVerificationSectionVisible = false;
+      
+        // show login modal on login route
+        $this->showLoginModel = Route::getCurrentRoute()->uri == "login" ? true : false;
+        $this->openLoginModal();
+    }
+
+    // show login modal on login route
+    private function openLoginModal() {
+        $this->dispatch('showLoginModal', 
+            showModal: $this->showLoginModel, 
+        ); 
+    }
 
     public function loginUser() {
        

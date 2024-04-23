@@ -67,7 +67,7 @@ class MainContent extends Component
         // load invested ads with eager loading
         $this->investedAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
             $q->where('ads_type', '=', 'invested');
-        })->orderBy('updated_at', 'DESC')->get();
+        })->orderBy('updated_at', 'DESC')->get()->take(3);
 
         // load all ads with eager loading
         $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->orderBy('updated_at', 'DESC')->get();

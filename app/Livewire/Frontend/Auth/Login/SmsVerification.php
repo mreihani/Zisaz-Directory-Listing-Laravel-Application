@@ -61,6 +61,11 @@ class SmsVerification extends Component
 
                 // Show my account header for authenticated users
                 $this->dispatch('showMyAccountHeaderAuth');    
+
+                // show phone number in ads single page
+                $this->dispatch('showPhone', 
+                    showPhone: true, 
+                );
                 
                 // Show Toaster
                 $toasterWelcomeMessage = "
