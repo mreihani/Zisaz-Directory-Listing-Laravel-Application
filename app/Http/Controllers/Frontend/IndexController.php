@@ -68,17 +68,26 @@ class IndexController extends Controller
 
     public function activity($slug) {
         $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
-       
+        
         // get similar items for carousel element
-        $similarItemsCount = $activity->subactivity->count();
-        $similarItems = $activity->subactivity->latest()->where('id', '!=', $activity->subactivity->id)->get()->take(10);
+        $similarItemsCount = $activity->subactivity->where('ads_type', $activity->subactivity->ads_type)->count();
+        $similarItems = $activity->subactivity
+        ->latest()
+        ->where('id', '!=', $activity->subactivity->id)
+        ->where('ads_type', $activity->subactivity->ads_type)
+        ->get()
+        ->take(10);
 
         return view('frontend.pages.activity.activity-single.index', compact('activity', 'similarItems', 'similarItemsCount'));
     }
 
-    public function getProductsAds() {
-        $sellingAds = Selling::all();
-        
-        return view('frontend.pages.activity.activity-all.ads_registration.selling.selling', compact('sellingAds'));
+    public function getAds(Request $request) {
+        $adsType = $request->ads_type;
+       
+        $activities = Activity::withWhereHas('subactivity', function($q) use($adsType) {
+            $q->where('ads_type', '=', $adsType);
+        })->orderBy('updated_at', 'DESC')->get();
+
+        return view('frontend.pages.activity.activity-all.ads_registration.index', compact('activities'));
     }
 }
