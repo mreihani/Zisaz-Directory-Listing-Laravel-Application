@@ -82,7 +82,7 @@ class IndexController extends Controller
     public function getAds(Request $request) {
         //$adsType = $request->ads_type;
        
-        $activities = Activity::withWhereHas('subactivity', function($q) use($adsType) {
+        $activities = Activity::withWhereHas('subactivity', function($q) {
             //$q->where('ads_type', '=', $adsType);
             $q->where('ads_type', '=', 'selling');
         })->orderBy('updated_at', 'DESC')->get();
