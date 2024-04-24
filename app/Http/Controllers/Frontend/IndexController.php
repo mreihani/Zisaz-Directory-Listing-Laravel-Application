@@ -81,8 +81,17 @@ class IndexController extends Controller
     // get all ads with type
     public function getAds(Request $request) {
         $adsType = $request->ads_type;
+        $relationName = $request->r_name;
        
-        $activities = Activity::withWhereHas('subactivity', function($q) use($adsType) {
+        // stop users to enter irrelevant model name
+        if(!in_array($relationName, ['selling', 'employment', 'investment'])) {
+            abort(404);
+        }
+        if(!in_array($adsType, ['selling', 'employee', 'employer', 'investor', 'invested'])) {
+            abort(404);
+        }
+
+        $activities = Activity::withWhereHas($relationName, function($q) use($adsType) {
             $q->where('ads_type', $adsType);
         })->orderBy('updated_at', 'DESC')->get();
 

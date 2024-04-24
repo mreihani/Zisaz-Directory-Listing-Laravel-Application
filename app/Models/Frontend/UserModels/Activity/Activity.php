@@ -81,7 +81,7 @@ class Activity extends Model
     }
 
     public function subactivity() {
-        return $this->morphTo('subactivity');
+        return $this->morphTo();
     }
 
     public function adsImagesUrl() {
