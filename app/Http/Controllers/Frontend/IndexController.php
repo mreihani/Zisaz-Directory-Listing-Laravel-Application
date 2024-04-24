@@ -80,12 +80,11 @@ class IndexController extends Controller
 
     // get all ads with type
     public function getAds(Request $request) {
-        //$adsType = $request->ads_type;
+        $adsType = $request->ads_type;
        
-        $activities = Activity::withWhereHas('subactivity', function($q) {
-            //$q->where('ads_type', '=', $adsType);
-            $q->where('ads_type', '=', 'selling');
-        })->orderBy('updated_at', 'DESC')->get();
+        $activities = Activity::withWhereHas('subactivity', function($q) use($adsType) {
+            $q->where('ads_type', '=', $adsType);
+        })->get();
 
         return view('frontend.pages.activity.activity-all.ads_registration.index', compact('activities'));
     }
