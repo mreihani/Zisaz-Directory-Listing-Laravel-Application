@@ -37,7 +37,7 @@
                         <div class="col-md-12 d-flex justify-content-md-end mt-3">
                             <div class="dt-action-buttons text-end pt-3 pt-md-0">
                                 <div class="dt-buttons btn-group flex-wrap">
-                                    <a class="btn btn-secondary create-new btn-secondary waves-effect waves-light me-2" href="{{route('admin.dashboard.index')}}">
+                                    <a class="btn btn-secondary create-new btn-secondary waves-effect waves-light me-2" href="{{route('admin.dashboard.category.index')}}">
                                         <span>
                                             <i class="ti ti-circle-x me-sm-1"></i> 
                                             <span class="d-none d-sm-inline-block">
