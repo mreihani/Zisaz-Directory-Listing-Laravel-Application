@@ -62,8 +62,8 @@
                         </form>
                     </div>
                     <div class="col-md-7 d-flex justify-content-md-end">
-                        <div class="dt-action-buttons text-end pt-3 pt-md-0">
-                            <div class="dt-buttons btn-group flex-wrap">
+                        <div class="text-end pt-3 pt-md-0">
+                            <div class="btn-group flex-wrap">
                                 <span class="btn btn-primary">
                                     <i class="ti ti-plus me-sm-1"></i> 
                                     <a href="{{route('admin.dashboard.category.create')}}" class="text-white">

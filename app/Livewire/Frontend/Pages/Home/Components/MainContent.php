@@ -74,9 +74,9 @@ class MainContent extends Component
 
         // load filter category items
         // مربوط به آگهی ها می شود
-        $this->actGrpsEngAdsArray = ActGrp::find([190,191,192,193,194,195,196,197,198]);
-        $this->actGrpsManagerAdsArray = ActGrp::find([221,222,223,224,225,226,227,228,229,230,231]);
-        $this->actGrpsTechnicalAdsArray = ActGrp::find([169,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,154,155,156,157,158,159,160,161,162,163,164,165,166,167]);
+        $this->actGrpsTechnicalAdsArray = ActCat::find(14)->activityGroup;
+        $this->actGrpsEngAdsArray = ActCat::find(15)->activityGroup;
+        $this->actGrpsManagerAdsArray = ActCat::find(16)->activityGroup;
         $this->actGrpsShopArray = ActCat::find(19)->activityGroup;
     }
 

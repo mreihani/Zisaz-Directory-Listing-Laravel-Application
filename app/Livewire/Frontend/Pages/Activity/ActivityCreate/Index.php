@@ -259,9 +259,9 @@ class Index extends Component
         $this->investmentCities = [];
         $this->selectedInvestmentProvinceId = '';
         $this->selectedInvestmentCityId = '';
-        $this->actGrpsEngAdsArray = ActGrp::find([190,191,192,193,194,195,196,197,198])->chunk(2)->toArray();
-        $this->actGrpsManagerAdsArray = ActGrp::find([221,222,223,224,225,226,227,228,229,230,231])->chunk(2)->toArray();
-        $this->actGrpsTechnicalAdsArray = ActGrp::find([169,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,154,155,156,157,158,159,160,161,162,163,164,165,166,167])->chunk(2)->toArray();
+        $this->actGrpsEngAdsArray = $this->actGrpsEngArray;
+        $this->actGrpsManagerAdsArray = $this->actGrpsManagerArray;
+        $this->actGrpsTechnicalAdsArray = $this->actGrpsTechnicalArray;
         
         // custom web page
         $this->customWebPage = "";
