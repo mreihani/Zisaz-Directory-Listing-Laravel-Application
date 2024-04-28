@@ -39,6 +39,9 @@ class IndexController extends Controller
     }
 
     public function userLogin(Request $request) {
+        if(auth()->check()) {
+            return redirect(route('user.dashboard.profile-settings.index'));
+        }
         return view('frontend.pages.home.index');
     }
 
@@ -83,10 +86,11 @@ class IndexController extends Controller
         $adsType = $request->ads_type;
         $relationName = $request->r_name;
        
-        // stop users to enter irrelevant model name
+        // stop users enter irrelevant relationship
         if(!in_array($relationName, ['selling', 'employment', 'investment'])) {
             abort(404);
         }
+        // stop users enter irrelevant ads type
         if(!in_array($adsType, ['selling', 'employee', 'employer', 'investor', 'invested'])) {
             abort(404);
         }

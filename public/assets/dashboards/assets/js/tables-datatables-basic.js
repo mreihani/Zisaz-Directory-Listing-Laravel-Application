@@ -134,7 +134,10 @@ $(function () {
         searching: false,
         lengthChange: false,
         ordering: false,
-        pageLength: 5,
+        pageLength: 10,
+        info: false,
+        ordering: false,
+        paging: false,
       });
 
     $('.datatables-direct-basic tbody').on( 'click', '.dropdown-item.delete-record', function () {

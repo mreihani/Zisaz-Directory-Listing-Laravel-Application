@@ -42,6 +42,13 @@
                 اطلاعات تماس
             </a>
         </li> --}}
+        <li class="nav-item mb-md-0 me-md-2 pe-md-1">
+            <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.saved-activities.index' ? 'active' : ''}}" 
+                href="{{route('user.dashboard.saved-activities.index')}}">
+                <i class="fi-layers mt-n1 me-2 fs-base"></i>
+                فعالیت های من
+            </a>
+        </li>
         <li class="nav-item mb-md-0">
             <a class="nav-link {{Route::currentRouteName() == 'user.dashboard.account-notifications.index' ? 'active' : ''}}" 
                 href="{{route('user.dashboard.account-notifications.index')}}">

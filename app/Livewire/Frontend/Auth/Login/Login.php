@@ -39,9 +39,11 @@ class Login extends Component
 
     // show login modal on login route
     private function openLoginModal() {
-        $this->dispatch('showLoginModal', 
-            showModal: $this->showLoginModel, 
-        ); 
+        if(!auth()->check()) {
+                $this->dispatch('showLoginModal', 
+                showModal: $this->showLoginModel, 
+            ); 
+        }
     }
 
     public function loginUser() {
