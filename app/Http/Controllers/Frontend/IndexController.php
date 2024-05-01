@@ -101,4 +101,8 @@ class IndexController extends Controller
 
         return view('frontend.pages.activity.activity-all.ads_registration.index', compact('activities'));
     }
+
+    public function category(Request $request) {
+        return view('frontend.pages.category.index');
+    }
 }

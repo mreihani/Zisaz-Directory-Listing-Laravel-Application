@@ -47,6 +47,8 @@ class Index extends Component
 {
     use WithFileUploads;
 
+    public $activityTypeUrl;
+
     public $section;
     public $activityType;
     public $selectedProvinceIdValidation;
@@ -194,8 +196,8 @@ class Index extends Component
         // این رو بعدا پاک کن برای فراخوانی فایل های شخصی است
         // $this->licenseImage = route('assets', [auth()->user()->id, $licenseItem->license_image]);
 
-        $this->section = null;
-        $this->activityType = "";
+        // Get activity type directly by url and show the relevant form
+        $this->getActivityTypeUrl();
 
         // resume section
         $this->resumeGoal = "";
@@ -234,7 +236,6 @@ class Index extends Component
         $this->shopLicense = "no";
 
         // ads section
-        $this->adsType = "";
         $this->employmentAdsType = "";
         $this->investmentAdsType = "";
         $this->sellingAdsManufacturereType = "";
@@ -265,6 +266,37 @@ class Index extends Component
         
         // custom web page
         $this->customWebPage = "";
+    }
+
+    // Get activity type directly by url and show the relevant form
+    private function getActivityTypeUrl() {
+
+        if(is_null($this->activityTypeUrl)) {
+            $this->activityType = "";
+            $this->section = null;
+            $this->adsType = "";
+        }
+
+        // ثبت آگهی
+        if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'selling') {
+            $this->activityType = 'ads_registration';
+            $this->section = 'ads_registration';
+            $this->adsType = "";
+        }
+
+       // ثبت تخصص و تجربه
+       if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'resume') {
+            $this->activityType = 'resume';
+            $this->section = 'resume';
+            $this->adsType = "";
+        }
+
+        // ثبت فروشگاه / شرکت
+       if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'custom_page') {
+            $this->activityType = 'custom_page';
+            $this->section = 'custom_page';
+            $this->adsType = "";
+        }
     }
 
     public function changeActivityType($value) {

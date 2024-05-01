@@ -18,7 +18,7 @@
                             عنوان دسته بندی
                         </label>
                         <span class="text-danger">*</span>
-                        <input aria-describedby="defaultFormControlHelp" class="form-control" id="category-title" placeholder="عنوان" type="text" name="title">
+                        <input aria-describedby="defaultFormControlHelp" class="form-control" id="category-title" placeholder="عنوان" type="text" name="title" value="{{old('title')}}">
                         @error("title")
                             <span class="text-danger">
                                 {{ $message }}

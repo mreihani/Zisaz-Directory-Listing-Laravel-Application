@@ -10,9 +10,11 @@ class UserActivityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('frontend.pages.activity.activity-create.index');
+        $activityTypeUrl = $request->type;
+        
+        return view('frontend.pages.activity.activity-create.index', compact('activityTypeUrl'));
     }
 
     /**

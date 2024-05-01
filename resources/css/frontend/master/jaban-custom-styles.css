@@ -61,7 +61,86 @@ input[type=number] {
   padding-left: 0;
 }
 
-/* ads images carousel cursor */
+/* ads images single page carousel cursor */
 .ads-images-carousel-wrapper img {
   cursor: pointer;
 }
+
+/* top notification banner custom styles */
+/* for desktop banner */
+.top-notification-banner-wrapper .top-notification-banner-desktop {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  height:60px;
+  width:100%; 
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center;
+  display: none;
+}
+@media screen and (min-width: 992px) {
+  .top-notification-banner-wrapper .top-notification-banner-desktop {
+    display: block;
+  }
+}
+.top-notification-banner-wrapper header {
+  top: 60px;
+}
+/* for mobile banner */
+.top-notification-banner-wrapper .top-notification-banner-mobile {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  height:35px;
+  width:100%; 
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center;
+  display: none;
+}
+@media screen and (max-width: 991px) {
+  .top-notification-banner-wrapper .top-notification-banner-mobile {
+    display: block;
+  }
+}
+@media screen and (max-width: 991px) {
+  .top-notification-banner-wrapper header {
+    top: 35px;
+  }
+}
+/* END OF - top notification banner custom styles */
+
+/* set top distance for all main elements, this is caused by the new two rows header design */
+@media screen and (max-width: 991px) {
+  .jaban-main-element {
+    margin-top: 250px !important;
+  }
+}
+
+/* category circles in home page */
+.home-page-category-circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.home-page-category-circles a {
+  /* width: 20%; */
+  margin-top: 20px;
+}
+.home-page-category-circles a {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.home-page-category-circles a img {
+  border: 2px #000000 solid;
+  width: 120px;
+  height: 120px;
+}
+@media (max-width: 800px) {
+  .home-page-category-circles {
+    margin-top: 80px;
+  }
+}
+

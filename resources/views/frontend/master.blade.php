@@ -57,15 +57,19 @@
     <!-- Page loading spinner-->
     <div class="page-loading active">
         <div class="page-loading-inner">
-        <div class="page-spinner"></div><span>لطفا منتظر باشید</span>
+            <div class="page-spinner"></div>
+            <span>لطفا منتظر باشید</span>
         </div>
     </div>
 
     <main class="page-wrapper">
+
         @include('frontend.layouts.header')
 
         <!-- Page content-->
-        @yield('main')
+        <div class="jaban-main-element">
+            @yield('main')
+        </div>
 
     </main>
 

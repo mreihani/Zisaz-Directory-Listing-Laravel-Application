@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\Home\Components;
+namespace App\Livewire\Frontend\Pages\Category\Components;
 
 use Livewire\Component;
 use App\Models\Frontend\UserModels\Activity\Activity;
@@ -105,6 +105,6 @@ class MainContent extends Component
 
     public function render()
     {
-        return view('frontend.pages.home.livewire-components.main-content');
+        return view('frontend.pages.category.livewire-components.main-content');
     }
 }

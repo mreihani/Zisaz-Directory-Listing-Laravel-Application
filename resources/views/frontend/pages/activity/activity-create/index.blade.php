@@ -45,7 +45,7 @@
             </div>
         
             <!-- Livewire component-->
-            @livewire('frontend.pages.activity.activity-create.index')
+            @livewire('frontend.pages.activity.activity-create.index', ['activityTypeUrl' => $activityTypeUrl])
 
         </div>
     </div>
