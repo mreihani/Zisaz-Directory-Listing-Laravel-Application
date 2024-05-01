@@ -191,7 +191,7 @@
         <div class="d-sm-flex align-items-center justify-content-between pb-4 mb-sm-2">
             <h2 class="h4 mb-sm-0 font-vazir">آگهی های مشابه</h2>
             <a class="btn btn-link fw-normal p-0" 
-                href="{{route('get-ads', ['r_name' => strtolower(class_basename($similarItems->first())), 'ads_type' => $similarItems->first()->ads_type])}}">
+                href="{{route('get-activities', ['r_name' => strtolower(class_basename($similarItems->first())), 'ads_type' => $similarItems->first()->ads_type])}}">
                 مشاهده همه
                 <i class="fi-arrow-long-left ms-2"></i>
             </a>

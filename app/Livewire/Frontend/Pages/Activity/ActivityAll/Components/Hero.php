@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\Category\Components;
+namespace App\Livewire\Frontend\Pages\Activity\ActivityAll\Components;
 
 use Livewire\Component;
 use App\Models\Frontend\UserModels\Activity\Activity;
@@ -27,6 +27,6 @@ class Hero extends Component
 
     public function render()
     {
-        return view('frontend.pages.category.livewire-components.hero');
+        return view('frontend.pages.activity.activity-all.livewire-components.hero');
     }
 }

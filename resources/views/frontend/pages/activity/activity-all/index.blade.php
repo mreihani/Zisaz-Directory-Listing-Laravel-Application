@@ -6,7 +6,7 @@
 @endpush
 
 <div>
-    @livewire('frontend.pages.category.components.main-content')
+    @livewire('frontend.pages.activity.activity-all.components.main-content', ['activities' => $activities])
 </div>
 
 @endsection

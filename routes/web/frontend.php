@@ -12,6 +12,5 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/contact-us', 'contactUs')->name('contact-us');
     Route::get('/faq', 'faq')->name('faq');
     Route::get('/activity/{slug}', 'activity')->name('activity');
-    Route::get('/advertisement', 'getAds')->name('get-ads');
-    Route::get('/category', 'category')->name('category');
+    Route::get('/activities', 'getActivties')->name('get-activities');
 });

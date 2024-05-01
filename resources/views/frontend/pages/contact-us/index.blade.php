@@ -2,8 +2,8 @@
 @section('main')
 
   <!-- Page content-->
-  <section class="py-5">
-    <div class="container pt-5 pb-lg-5">
+  <section class="py-4">
+    <div class="container pt-lg-0 pt-5 pb-lg-5 mt-4">
       <!-- Breadcrumbs-->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-md-3 py-1">

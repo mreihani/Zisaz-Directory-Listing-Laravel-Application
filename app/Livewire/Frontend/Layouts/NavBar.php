@@ -20,7 +20,7 @@ class NavBar extends Component
         $this->myAccountHeaderAuth = auth()->check();
 
         // This is for top banner
-        $this->isBannerShown = true;
+        $this->isBannerShown = true ;
         // Set URL of desktop banner
         $this->desktopBannerUrl = 'https://dkstatics-public.digikala.com/digikala-adservice-banners/af603731f7f4d7299a077400810c23e45968004b_1712849670.gif?x-oss-process=image';
         // Set URL of mobile banner

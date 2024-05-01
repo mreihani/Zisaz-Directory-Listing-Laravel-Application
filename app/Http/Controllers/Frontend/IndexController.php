@@ -82,11 +82,19 @@ class IndexController extends Controller
     }
 
     // get all ads with type
-    public function getAds(Request $request) {
+    public function getActivties(Request $request) {
+
+        //https://jabanlocal.ir/activities?activity_type=ads_registration&ads_type=selling&r_name=selling
+
+        $activityType = $request->activity_type;
         $adsType = $request->ads_type;
         $relationName = $request->r_name;
        
-        // stop users enter irrelevant relationship
+        // stop users enter irrelevant activity type
+        if(!in_array($activityType, ['resume', 'ads_registration', 'custom_page'])) {
+            abort(404);
+        }
+        // stop users enter irrelevant ads type
         if(!in_array($relationName, ['selling', 'employment', 'investment'])) {
             abort(404);
         }
@@ -95,14 +103,16 @@ class IndexController extends Controller
             abort(404);
         }
 
-        $activities = Activity::withWhereHas($relationName, function($q) use($adsType) {
+        // $activities = Activity::where('activity_type', $activityType)->withWhereHas($relationName, function($q) use($adsType) {
+        //     $q->where('ads_type', $adsType);
+        // })->orderBy('updated_at', 'DESC')->get();
+
+        $activities = Activity::where('activity_type', $activityType)->withWhereHas('subactivity', function($q) use($adsType) {
             $q->where('ads_type', $adsType);
         })->orderBy('updated_at', 'DESC')->get();
 
-        return view('frontend.pages.activity.activity-all.ads_registration.index', compact('activities'));
-    }
+        // dd($activities);
 
-    public function category(Request $request) {
-        return view('frontend.pages.category.index');
+        return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
 }

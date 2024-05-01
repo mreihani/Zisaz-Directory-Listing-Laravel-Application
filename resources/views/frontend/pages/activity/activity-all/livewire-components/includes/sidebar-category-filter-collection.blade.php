@@ -17,7 +17,7 @@
         آگهی
     </h5>
    
-    @if(count($sidebarCategoryFilterCollectionAds) && count($sidebarCategoryFilterCollectionAds->pluck('subactivity')->where('ads_type',$type)))
+    @if(count($sidebarCategoryFilterCollectionAds) && count($sidebarCategoryFilterCollectionAds->pluck('subactivity')->where('ads_type', $type)))
         <div class="row">
             @foreach ($sidebarCategoryFilterCollectionAds as $filteredSidebarAdsItem)
 

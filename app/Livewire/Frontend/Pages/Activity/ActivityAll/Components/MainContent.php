@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\Category\Components;
+namespace App\Livewire\Frontend\Pages\Activity\ActivityAll\Components;
 
 use Livewire\Component;
 use App\Models\Frontend\UserModels\Activity\Activity;
@@ -10,6 +10,9 @@ use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
 
 class MainContent extends Component
 {
+    // این رو از کنترولر اصلی دریافت می کنه برای وقتی که پارامتر کوئری داشته باشی
+    public $activities;
+
     // آیتم های فیلتر دسته بندی داخل تایل در صفحه اصلی
     public $categoryFilter;
     public $type;
@@ -17,13 +20,6 @@ class MainContent extends Component
 
     // فیلتر  دسته بندی سایدبار برای آگهی ها
     public $sidebarCategoryFilterCollectionAds;
-
-    public $sellingAds;
-    public $employeeAds;
-    public $employerAds;
-    public $investorAds;
-    public $investedAds;
-    public $adsRegistrations;
 
     // filter categoy items
     // مربوط به آگهی ها می شود
@@ -46,31 +42,8 @@ class MainContent extends Component
         // set initial value of search bar results to null
         $this->searchResults = null;
 
-        // load selling ads with eager loading
-        $this->sellingAds = Activity::where('activity_type','ads_registration')->has('selling')->with('selling')->orderBy('updated_at', 'DESC')->get()->take(3);
-                
-        // load employee ads with eager loading
-        $this->employeeAds = Activity::where('activity_type','ads_registration')->withWhereHas('employment', function($q){
-            $q->where('ads_type', '=', 'employee');
-        })->orderBy('updated_at', 'DESC')->get()->take(3);
-
-        // load emoployer ads with eager loading
-        $this->employerAds = Activity::where('activity_type','ads_registration')->withWhereHas('employment', function($q){
-            $q->where('ads_type', '=', 'employer');
-        })->orderBy('updated_at', 'DESC')->get()->take(3);
-
-        // load investor ads with eager loading
-        $this->investorAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
-            $q->where('ads_type', '=', 'investor');
-        })->orderBy('updated_at', 'DESC')->get()->take(3);
-
-        // load invested ads with eager loading
-        $this->investedAds = Activity::where('activity_type','ads_registration')->withWhereHas('investment', function($q){
-            $q->where('ads_type', '=', 'invested');
-        })->orderBy('updated_at', 'DESC')->get()->take(3);
-
         // load all ads with eager loading
-        $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->orderBy('updated_at', 'DESC')->get();
+        // $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->orderBy('updated_at', 'DESC')->get();
 
         // load filter category items
         // مربوط به آگهی ها می شود
@@ -105,6 +78,6 @@ class MainContent extends Component
 
     public function render()
     {
-        return view('frontend.pages.category.livewire-components.main-content');
+        return view('frontend.pages.activity.activity-all.livewire-components.main-content');
     }
 }
