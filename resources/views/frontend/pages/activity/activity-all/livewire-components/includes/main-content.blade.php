@@ -9,17 +9,17 @@
                 <!-- Item-->
                 <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
                     <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
-                        <a class="card-img-top" href="{{route('activity', $activityItem->slug)}}" style="background-image: url('{{$activityItem->adsImagesUrl()}}');"></a>
+                        <a class="card-img-top" href="{{route('activity', $activityItem->activity->slug)}}" style="background-image: url('{{$activityItem->activity->adsImagesUrl()}}');"></a>
                         <div class="d-flex flex-column justify-content-between p-3">
                             <h4 class="fs-6 pt-1 mb-2">
-                                <a class="nav-link" href="{{route('activity', $activityItem->slug)}}">
-                                    {{$activityItem->subactivity->item_title}}
+                                <a class="nav-link" href="{{route('activity', $activityItem->activity->slug)}}">
+                                    {{$activityItem->item_title}}
                                 </a>
                             </h4>
-                            <a class="text-decoration-none" href="{{route('activity', $activityItem->slug)}}">
+                            <a class="text-decoration-none" href="{{route('activity', $activityItem->activity->slug)}}">
                                 <div class="text-body fs-xs">
                                     <span class="me-2 pe-1">
-                                        {{jdate($activityItem->updated_at)->ago()}}
+                                        {{jdate($activityItem->activity->updated_at)->ago()}}
                                     </span>
                                 </div>
                             </a>
