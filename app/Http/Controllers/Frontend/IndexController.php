@@ -108,9 +108,13 @@ class IndexController extends Controller
         //     $q->where('ads_type', $adsType);
         // })->orderBy('updated_at', 'DESC')->get();
 
-        $activities = Activity::where('activity_type', $activityType)->withWhereHas('subactivity', function($q) use($adsType) {
+        // $activities = Activity::where('activity_type', $activityType)->withWhereHas('subactivity', function($q) use($adsType) {
+        //     $q->where('ads_type', $adsType);
+        // })->orderBy('updated_at', 'DESC')->get();
+
+        $activities = Activity::where('activity_type', $activityType)->whereHas('subactivity', function($q) use($adsType) {
             $q->where('ads_type', $adsType);
-        })->orderBy('updated_at', 'DESC')->get();
+        })->get();
 
         return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
