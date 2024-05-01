@@ -84,7 +84,8 @@ class IndexController extends Controller
     // get all ads with type
     public function getActivties(Request $request) {
 
-        //https://jabanlocal.ir/activities?activity_type=ads_registration&ads_type=selling&r_name=selling
+        //https://jabanlocal.ir/activities?activity_type=ads_registration&ads_type=investor&r_name=investment
+        //https://jaban.ir/activities?activity_type=ads_registration&r_name=selling&ads_type=selling
 
         $activityType = $request->activity_type;
         $adsType = $request->ads_type;
@@ -110,8 +111,6 @@ class IndexController extends Controller
         $activities = Activity::where('activity_type', $activityType)->withWhereHas('subactivity', function($q) use($adsType) {
             $q->where('ads_type', $adsType);
         })->orderBy('updated_at', 'DESC')->get();
-
-        // dd($activities);
 
         return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
