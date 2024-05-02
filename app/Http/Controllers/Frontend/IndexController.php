@@ -70,11 +70,11 @@ class IndexController extends Controller
         $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
         
         // get similar items for carousel element
-        $similarItemsCount = $activity->subactivity->where('ads_type', $activity->subactivity->ads_type)->count();
+        $similarItemsCount = $activity->subactivity->where('type', $activity->subactivity->type)->count();
         $similarItems = $activity->subactivity
         ->latest()
         ->where('id', '!=', $activity->subactivity->id)
-        ->where('ads_type', $activity->subactivity->ads_type)
+        ->where('type', $activity->subactivity->type)
         ->get()
         ->take(10);
 
@@ -85,7 +85,7 @@ class IndexController extends Controller
     public function getActivties(Request $request) {
 
         $activityType = $request->activity_type;
-        $adsType = $request->ads_type;
+        $type = $request->type;
         $relationName = $request->r_name;
        
         // load all activities e.g. /activities
@@ -95,19 +95,19 @@ class IndexController extends Controller
         }
 
         // load all activities with only activity_type parameter e.g. /activities?activity_type=ads_registration
-        if(is_null($adsType) && is_null($relationName)) {
+        if(is_null($type) && is_null($relationName)) {
             $activities = Activity::where('activity_type', $activityType)->get()->pluck('subactivity');
             return view('frontend.pages.activity.activity-all.index', compact('activities'));
         }
 
         // load all activities with activity_type & relation name parameter e.g. /activities?activity_type=ads_registration&r_name=selling
-        if(is_null($adsType) && !is_null($relationName)) {
+        if(is_null($type) && !is_null($relationName)) {
             $activities = Activity::where('activity_type', $activityType)->with($relationName)->get()->pluck($relationName)->filter();
             return view('frontend.pages.activity.activity-all.index', compact('activities'));
         }
 
-        // load all activities with activity_type & ads_type parameter e.g. /activities?activity_type=ads_registration&ads_type=investor
-        $activities = Activity::where('activity_type', $activityType)->with('subactivity')->get()->pluck('subactivity')->where('ads_type', $adsType);
+        // load all activities with activity_type & type parameter e.g. /activities?activity_type=ads_registration&type=investor
+        $activities = Activity::where('activity_type', $activityType)->with('subactivity')->get()->pluck('subactivity')->where('type', $type);
         return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
 }

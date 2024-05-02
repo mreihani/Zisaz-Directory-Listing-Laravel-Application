@@ -826,7 +826,7 @@ class Index extends Component
         // کارجو
         if($this->adsType == "employment" && $this->employmentAdsType == "employee") {
             $ads = $activity->employment()->create([
-                'ads_type' => Purify::clean($this->employmentAdsType),
+                'type' => Purify::clean($this->employmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
                 'age' => Purify::clean($this->age),
@@ -860,7 +860,7 @@ class Index extends Component
         // کارفرما
         if($this->adsType == "employment" && $this->employmentAdsType == "employer") {
             $ads = $activity->employment()->create([
-                'ads_type' => Purify::clean($this->employmentAdsType),
+                'type' => Purify::clean($this->employmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
                 'age' => Purify::clean($this->age),
@@ -893,7 +893,7 @@ class Index extends Component
         // سرمایه گذار
         if($this->adsType == "investment" && $this->investmentAdsType == "investor") {
             $ads = $activity->investment()->create([
-                'ads_type' => Purify::clean($this->investmentAdsType),
+                'type' => Purify::clean($this->investmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
                 'investment_value' => Purify::clean($this->investmentValue),
@@ -911,7 +911,7 @@ class Index extends Component
         // سرمایه پذیر
         if($this->adsType == "investment" && $this->investmentAdsType == "invested") {
             $ads = $activity->investment()->create([
-                'ads_type' => Purify::clean($this->investmentAdsType),
+                'type' => Purify::clean($this->investmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
                 'investment_value' => Purify::clean($this->investmentValue),

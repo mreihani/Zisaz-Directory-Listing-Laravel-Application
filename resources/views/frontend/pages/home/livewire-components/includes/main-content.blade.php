@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="home-page-category-circles">
 
-                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'ads_type' => 'selling'])}}">
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/selling.jpg')}}" alt="selling">    
                         <span>
                             آگهی های فروش

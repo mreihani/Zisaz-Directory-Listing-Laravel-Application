@@ -71,7 +71,7 @@
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark">
                                             <li>
-                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'ads_type' => 'selling'])}}">
+                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
                                                     فروش کالا
                                                 </a>
                                             </li>
@@ -81,12 +81,12 @@
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-dark">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'ads_type' => 'employee'])}}">
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'type' => 'employee'])}}">
                                                             کارجو
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'ads_type' => 'employer'])}}">
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'type' => 'employer'])}}">
                                                             کارفرما
                                                         </a>
                                                     </li>
@@ -98,12 +98,12 @@
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-dark">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'ads_type' => 'invested'])}}">
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'type' => 'invested'])}}">
                                                             سرمایه پذیر
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'ads_type' => 'investor'])}}">
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'type' => 'investor'])}}">
                                                             سرمایه گذار
                                                         </a>
                                                     </li>
@@ -185,7 +185,7 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li>
-                                            <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'selling', 'ads_type' => 'selling'])}}">
+                                            <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'selling', 'type' => 'selling'])}}">
                                                 فروش کالا
                                             </a>
                                         </li>
@@ -195,12 +195,12 @@
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-dark">
                                                 <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'employment', 'ads_type' => 'employer'])}}">
+                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'employment', 'type' => 'employer'])}}">
                                                         کارجو
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'employment', 'ads_type' => 'employee'])}}">
+                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'employment', 'type' => 'employee'])}}">
                                                         کارفرما
                                                     </a>
                                                 </li>
@@ -212,12 +212,12 @@
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-dark">
                                                 <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'investment', 'ads_type' => 'invested'])}}">
+                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'investment', 'type' => 'invested'])}}">
                                                         سرمایه پذیر
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'investment', 'ads_type' => 'investor'])}}">
+                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'investment', 'type' => 'investor'])}}">
                                                         سرمایه گذار
                                                     </a>
                                                 </li>

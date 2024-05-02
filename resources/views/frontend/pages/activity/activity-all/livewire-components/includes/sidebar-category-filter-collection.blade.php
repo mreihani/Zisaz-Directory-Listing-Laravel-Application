@@ -17,11 +17,11 @@
         آگهی
     </h5>
    
-    @if(count($sidebarCategoryFilterCollectionAds) && count($sidebarCategoryFilterCollectionAds->pluck('subactivity')->where('ads_type', $type)))
+    @if(count($sidebarCategoryFilterCollectionAds) && count($sidebarCategoryFilterCollectionAds->pluck('subactivity')->where('type', $type)))
         <div class="row">
             @foreach ($sidebarCategoryFilterCollectionAds as $filteredSidebarAdsItem)
 
-                @if($filteredSidebarAdsItem->subactivity->ads_type == $type)
+                @if($filteredSidebarAdsItem->subactivity->type == $type)
 
                     <!-- Item-->
                     <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">

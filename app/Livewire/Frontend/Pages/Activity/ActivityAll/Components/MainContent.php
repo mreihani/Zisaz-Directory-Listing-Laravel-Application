@@ -58,7 +58,7 @@ class MainContent extends Component
         $this->sidebarCategoryFilterCollectionAds = null;
         $this->categoryFilter = $categoryFilter;
         $this->type = $type;
-        $this->filteredCollection = $categoryFilter::where('ads_type', $type)->orderBy('updated_at', 'DESC')->get();
+        $this->filteredCollection = $categoryFilter::where('type', $type)->orderBy('updated_at', 'DESC')->get();
     }
 
     // فیلتر سایدبار برای آگهی ها

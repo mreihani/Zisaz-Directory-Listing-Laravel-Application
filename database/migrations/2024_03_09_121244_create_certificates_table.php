@@ -26,6 +26,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            $table->enum('type', ['resume'])->default('resume');
             $table->enum('resume_goal', ['1', '2', '3', '4', '5', '6'])->default('1');
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
@@ -63,7 +64,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-            $table->enum('ads_type', ['selling'])->default('selling');
+            $table->enum('type', ['selling'])->default('selling');
             $table->string('item_title')->nullable();
             $table->text('item_description')->nullable();
             $table->enum('manufacturer', ['iran_overseas', 'iran', 'overseas'])->default('iran_overseas');
@@ -106,7 +107,7 @@ return new class extends Migration
         Schema::create('employments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('activity_id');
-            $table->enum('ads_type', ['employee', 'employer'])->default('employee');
+            $table->enum('type', ['employee', 'employer'])->default('employee');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->string('item_title')->nullable();
             $table->text('item_description')->nullable();
@@ -154,7 +155,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-            $table->enum('ads_type', ['investor', 'invested'])->default('investor');
+            $table->enum('type', ['investor', 'invested'])->default('investor');
             $table->string('item_title')->nullable();
             $table->text('item_description')->nullable();
             $table->string('investment_value')->nullable();
