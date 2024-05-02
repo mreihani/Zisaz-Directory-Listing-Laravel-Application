@@ -7,15 +7,15 @@
                 </script>
                 تمامی حقوق برای
                 <a class="fw-medium" href="{{route('home-page')}}" target="_blank">
-                    سامانه جابان
+                    سامانه زی ساز
                 </a>
                 محفوظ است.
             </div>
             <div class="d-none d-lg-inline-block">
-                <a class="footer-link me-4" href="{{route('home-page')}}" target="_blank">
+                <a class="footer-link me-4" href="{{route('contact-us')}}" target="_blank">
                     درباره ما
                 </a>
-                <a class="footer-link me-4" href="{{route('home-page')}}" target="_blank">
+                <a class="footer-link me-4" href="{{route('about-us')}}" target="_blank">
                     تماس با ما
                 </a>
                 <a class="footer-link me-4" href="{{route('home-page')}}" target="_blank">

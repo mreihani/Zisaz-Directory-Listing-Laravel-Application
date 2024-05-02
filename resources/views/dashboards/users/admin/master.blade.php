@@ -6,12 +6,12 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" name="viewport"/>
   <title>
-      سامانه جابان
+      سامانه زی ساز
   </title>
   <meta content="" name="description"/>
 
   <!-- Favicon -->
-  <link href="{{asset('assets/frontend/favicon-32x32.png')}}" rel="icon" type="image/x-icon"/>
+  <link href="{{asset('assets/frontend/img/logo/zsaz_sm.png')}}" rel="icon" type="image/x-icon"/>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>

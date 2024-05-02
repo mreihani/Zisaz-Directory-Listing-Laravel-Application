@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-      سامانه جابان
+      سامانه زی ساز
     </title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="">
@@ -16,11 +16,11 @@
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/frontend/apple-touch-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/frontend/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/frontend/favicon-16x16.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/frontend/img/logo/zsaz_sm.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/frontend/img/logo/zsaz_sm.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/frontend/img/logo/zsaz_sm.png')}}">
     <link rel="manifest" href="{{asset('assets/frontend/site.webmanifest')}}">
-    <link rel="mask-icon" color="#5bbad5" href="{{asset('assets/frontend/safari-pinned-tab.svg')}}">
+    <link rel="mask-icon" color="#5bbad5" href="{{asset('assets/frontend/img/logo/zsaz_sm.png')}}">
     <meta name="msapplication-TileColor" content="#766df4">
     <meta name="theme-color" content="#ffffff">
     

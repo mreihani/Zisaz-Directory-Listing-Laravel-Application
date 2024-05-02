@@ -8,7 +8,7 @@
 
         <div class="container-fluid d-flex justify-content-center">
             <a class="navbar-brand ms-0 ms-xl-4" href="{{route('home-page')}}">
-                <img class="d-block" src="{{asset('assets/frontend/img/logo/logo-light.svg')}}" width="90" alt="جابان">
+                <img class="d-block" src="{{asset('assets/frontend/img/logo/zsaz.png')}}" width="90" alt="جابان">
             </a>
     
             <div class="container-fluid d-flex flex-column align-items-center">
@@ -72,7 +72,12 @@
                                         <ul class="dropdown-menu dropdown-menu-dark">
                                             <li>
                                                 <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
-                                                    فروش کالا
+                                                    مصالح و تجهیزات ساختمانی
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="">
+                                                    خدمات مهندسی و پیمانکاری
                                                 </a>
                                             </li>
                                             <li class="dropdown">

@@ -18,23 +18,26 @@
     <script src="{{asset('assets/dashboards/assets/js/tables-datatables-basic.js')}}"></script>
 @endpush
 
-@if(session()->has('success'))
-    <div class="alert alert-icon alert-success alert-bg alert-inline show-code-action ms-4 me-4 mt-3 mb-1">
-        <i style="color:#50cd89" class="fas fa-check"></i> {{session('success')}}
-    </div>
-@endif
 
-@if(session()->has('error'))
-    <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action ms-4 me-4 mt-3 mb-1">
-        <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
-    </div>
-@endif
+<div class="container-xxl">
+    @if(session()->has('success'))
+        <div class="alert alert-icon alert-success alert-bg alert-inline show-code-action mt-3 mb-0">
+            <i style="color:#50cd89" class="fas fa-check"></i> {{session('success')}}
+        </div>
+    @endif
 
-@foreach($errors->all() as $error)
-    <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action ms-4 me-4 mt-3 mb-1">
-        <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
-    </div>
-@endforeach
+    @if(session()->has('error'))
+        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action mt-3 mb-0">
+            <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
+        </div>
+    @endif
+
+    @foreach($errors->all() as $error)
+        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action mt-3 mb-0">
+            <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
+        </div>
+    @endforeach
+</div>
 
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">

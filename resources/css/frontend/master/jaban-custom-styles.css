@@ -152,6 +152,10 @@ input[type=number] {
   .home-page-category-circles {
     margin-top: 50px;
   }
+  .home-page-category-circles a img {
+    width: 80px;
+    /* height: 80px; */
+  }
 }
 
 /* set modal z index */

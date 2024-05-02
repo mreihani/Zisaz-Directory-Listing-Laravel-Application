@@ -8,7 +8,7 @@
                     <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/selling.jpg')}}" alt="selling">    
                         <span>
-                            آگهی های فروش
+                            مصالح و تجهیزات
                         </span>
                     </a>
 
@@ -29,21 +29,21 @@
                     <a class="text-decoration-none text-dark text-center" href="">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/auction.jpg')}}" alt="auction">    
                         <span>
-                            مزایده ها
+                            مزایده و مناقصه
                         </span>
                     </a>
 
                     <a class="text-decoration-none text-dark text-center" href="">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/tender.jpg')}}" alt="tender">    
                         <span>
-                            مناقصه ها
+                            استعلام قیمت
                         </span>
                     </a>
 
                     <a class="text-decoration-none text-dark text-center" href="">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/eng_manager.jpg')}}" alt="eng_manager">    
                         <span>
-                            مدیر و مهندس
+                            پیمانکاران
                         </span>
                     </a>
 

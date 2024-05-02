@@ -39,7 +39,7 @@ class RegisterUser extends Component
         'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید.',
         'phone.unique' => 'شماره تلفن مورد نظر قبلا در سامانه ثبت شده است. شماره دیگری وارد نمایید.',
         'email.email' => 'لطفا آدرس ایمیل صحیح وارد نمایید.',
-        'terms_and_conditions.required' => 'لطفا برای ادامه شرایط و ضوابط سامانه جابان را تأیید نمایید.',
+        'terms_and_conditions.required' => 'لطفا برای ادامه شرایط و ضوابط سامانه زی ساز را تأیید نمایید.',
     ];
 
     public function registerUser() {

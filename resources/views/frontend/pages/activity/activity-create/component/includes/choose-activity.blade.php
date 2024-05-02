@@ -14,7 +14,7 @@
             <option value="resume">معرفی رزومه</option>
             <option value="custom_page">ساخت صفحه اختصاصی</option>
             <option value="ads_registration">ثبت آگهی</option>
-            <option value="jaban_ads">تبلیغات در جابان</option>
+            <option value="jaban_ads">تبلیغات در زی ساز</option>
         </select>
     </div>
 </div>
