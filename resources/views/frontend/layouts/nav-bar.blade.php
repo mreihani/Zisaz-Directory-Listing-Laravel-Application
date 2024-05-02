@@ -66,7 +66,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li class="dropdown">
-                                        <a class="dropdown-item dropdown-toggle" href="">
+                                        <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration'])}}">
                                             آگهی ها
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark">
@@ -76,24 +76,24 @@
                                                 </a>
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-item dropdown-toggle" href="">
+                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment'])}}">
                                                     کار و استخدام
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-dark">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'ads_type' => 'employer'])}}">
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'ads_type' => 'employee'])}}">
                                                             کارجو
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'ads_type' => 'employee'])}}">
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'ads_type' => 'employer'])}}">
                                                             کارفرما
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-item dropdown-toggle" href="">
+                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment'])}}">
                                                     شراکت و سرمایه گذاری
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-dark">

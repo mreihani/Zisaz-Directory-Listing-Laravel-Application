@@ -84,38 +84,30 @@ class IndexController extends Controller
     // get all ads with type
     public function getActivties(Request $request) {
 
-        //https://jabanlocal.ir/activities?activity_type=ads_registration&ads_type=investor&r_name=investment
-        //https://jaban.ir/activities?activity_type=ads_registration&r_name=selling&ads_type=selling
-
         $activityType = $request->activity_type;
         $adsType = $request->ads_type;
         $relationName = $request->r_name;
        
-        // stop users enter irrelevant activity type
-        if(!in_array($activityType, ['resume', 'ads_registration', 'custom_page'])) {
-            abort(404);
-        }
-        // stop users enter irrelevant ads type
-        if(!in_array($relationName, ['selling', 'employment', 'investment'])) {
-            abort(404);
-        }
-        // stop users enter irrelevant ads type
-        if(!in_array($adsType, ['selling', 'employee', 'employer', 'investor', 'invested'])) {
-            abort(404);
+        // load all activities e.g. /activities
+        if(empty($request->all())) {
+            $activities = Activity::with('subactivity')->get()->pluck('subactivity');
+            return view('frontend.pages.activity.activity-all.index', compact('activities'));
         }
 
-        // $activities = Activity::where('activity_type', $activityType)->withWhereHas($relationName, function($q) use($adsType) {
-        //     $q->where('ads_type', $adsType);
-        // })->orderBy('updated_at', 'DESC')->get();
+        // load all activities with only activity_type parameter e.g. /activities?activity_type=ads_registration
+        if(is_null($adsType) && is_null($relationName)) {
+            $activities = Activity::where('activity_type', $activityType)->get()->pluck('subactivity');
+            return view('frontend.pages.activity.activity-all.index', compact('activities'));
+        }
 
-        // $activities = Activity::where('activity_type', $activityType)->withWhereHas('subactivity', function($q) use($adsType) {
-        //     $q->where('ads_type', $adsType);
-        // })->orderBy('updated_at', 'DESC')->get();
+        // load all activities with activity_type & relation name parameter e.g. /activities?activity_type=ads_registration&r_name=selling
+        if(is_null($adsType) && !is_null($relationName)) {
+            $activities = Activity::where('activity_type', $activityType)->with($relationName)->get()->pluck($relationName)->filter();
+            return view('frontend.pages.activity.activity-all.index', compact('activities'));
+        }
 
+        // load all activities with activity_type & ads_type parameter e.g. /activities?activity_type=ads_registration&ads_type=investor
         $activities = Activity::where('activity_type', $activityType)->with('subactivity')->get()->pluck('subactivity')->where('ads_type', $adsType);
-
-       
-
         return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
 }

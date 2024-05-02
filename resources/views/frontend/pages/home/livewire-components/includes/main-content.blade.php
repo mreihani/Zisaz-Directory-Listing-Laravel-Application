@@ -5,21 +5,21 @@
             <div class="row">
                 <div class="home-page-category-circles">
 
-                    <a class="text-decoration-none text-dark text-center" href="">
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'ads_type' => 'selling'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/selling.jpg')}}" alt="selling">    
                         <span>
                             آگهی های فروش
                         </span>
                     </a>
 
-                    <a class="text-decoration-none text-dark text-center" href="">
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/employment.jpg')}}" alt="employment">    
                         <span>
                             کار و استخدام
                         </span>
                     </a>
 
-                    <a class="text-decoration-none text-dark text-center" href="">
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/investment.jpg')}}" alt="investment">    
                         <span>
                             سرمایه گذاری و شراکت
