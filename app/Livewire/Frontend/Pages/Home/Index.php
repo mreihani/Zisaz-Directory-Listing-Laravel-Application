@@ -19,7 +19,7 @@ class Index extends Component
 
     private function getAdsRegistrations() {
         // load all ads with eager loading
-        $this->adsRegistrations = Activity::where('activity_type','ads_registration')->with('subactivity')->orderBy('updated_at', 'DESC')->get();
+        $this->adsRegistrations = Activity::with('subactivity')->orderBy('updated_at', 'DESC')->get();
     }
 
     // سرچ بار
