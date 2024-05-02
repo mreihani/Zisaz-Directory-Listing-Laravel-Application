@@ -4,6 +4,9 @@
     top: 30px;
     position: fixed;
 }
+#toastBody {
+  z-index: 99999;
+}
 
 /* Hide input number arrows Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -71,7 +74,7 @@ input[type=number] {
 .top-notification-banner-wrapper .top-notification-banner-desktop {
   position: fixed;
   top: 0;
-  z-index: 10000;
+  z-index: 1000;
   height:60px;
   width:100%; 
   background-size: cover;
@@ -91,7 +94,7 @@ input[type=number] {
 .top-notification-banner-wrapper .top-notification-banner-mobile {
   position: fixed;
   top: 0;
-  z-index: 10000;
+  z-index: 1000;
   height:35px;
   width:100%; 
   background-size: cover;
@@ -153,5 +156,5 @@ input[type=number] {
 
 /* set modal z index */
 .modal {
-  z-index: 9999999;
+  z-index: 99999;
 }
