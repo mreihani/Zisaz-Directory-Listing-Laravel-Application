@@ -3,30 +3,41 @@
 namespace App\Livewire\Frontend\Layouts;
 
 use Livewire\Component;
+use App\Models\Frontend\Banners\BannerHomePage;
 
 class NavBar extends Component
 {
     public $myAccountHeaderAuth;
-    public $isBannerShown;
-    public $desktopBannerUrl;
-    public $mobileBannerUrl;
-    public $bannerLinkUrl;
+    public $isDesktopBannerShown;
+    public $isMobileBannerShown;
+    public $desktopBannerImageAddress;
+    public $mobileBannerImageAddress;
+    public $bannerLinkUrlDesktop;
+    public $bannerLinkUrlMobile;
 
     /**
      * Constructor for initializing class properties based on user authentication status.
      */
     public function mount() {
+        
+        $homeTopBannerDesktop = BannerHomePage::where('position', 'home_top_banner_desktop')->first();
+        $homeTopBannerMobile = BannerHomePage::where('position', 'home_top_banner_mobile')->first();
+        
         // Check if the user is authenticated and set myAccountHeaderAuth and myAccountHeaderGuest accordingly
         $this->myAccountHeaderAuth = auth()->check();
 
-        // This is for top banner
-        $this->isBannerShown = true ;
+        // This is for desktop banner at top
+        $this->isDesktopBannerShown = ($homeTopBannerDesktop && $homeTopBannerDesktop->display_banner == 1) ? true : false;
+        // This is for mobile banner at top
+        $this->isMobileBannerShown = ($homeTopBannerMobile && $homeTopBannerMobile->display_banner == 1) ? true : false;
         // Set URL of desktop banner
-        $this->desktopBannerUrl = 'https://dkstatics-public.digikala.com/digikala-adservice-banners/af603731f7f4d7299a077400810c23e45968004b_1712849670.gif?x-oss-process=image';
+        $this->desktopBannerImageAddress = $homeTopBannerDesktop ? asset($homeTopBannerDesktop->image) : '';
         // Set URL of mobile banner
-        $this->mobileBannerUrl = 'https://dkstatics-public.digikala.com/digikala-adservice-banners/27e467e008ae57738e8d44a85fb4e89849c377e5_1712849670.jpg?x-oss-process=image/quality,q_95';
-        // Set banner Link url
-        $this->bannerLinkUrl = 'https://www.google.com/';
+        $this->mobileBannerImageAddress = $homeTopBannerMobile ? asset($homeTopBannerMobile->image) : '';
+        // Set banner Link url desktop
+        $this->bannerLinkUrlDesktop = $homeTopBannerDesktop ? $homeTopBannerDesktop->url : '';
+        // Set banner Link url mobile
+        $this->bannerLinkUrlMobile = $homeTopBannerMobile ? $homeTopBannerMobile->url : '';
     }
 
     protected $listeners = [

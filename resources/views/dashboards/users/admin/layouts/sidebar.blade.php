@@ -150,7 +150,7 @@
         <!-- Beginnig of Dynamic banners section -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
-                مدیریت بنرهای صفحه اصلی
+                مدیریت بنر
             </span>
         </li>
         <li class="menu-item
@@ -173,7 +173,7 @@
                 " style="">
                     <a class="menu-link" href="{{route('admin.dashboard.dynamic-banners.home-top-banner.index')}}">
                         <div>
-                            بنر بالای صفحه
+                            بنر بالای صفحه اصلی
                         </div>
                     </a>
                 </li>

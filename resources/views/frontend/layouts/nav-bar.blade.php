@@ -1,7 +1,11 @@
-<div class="{{$isBannerShown ? 'top-notification-banner-wrapper' : ''}}" style="{{$isBannerShown ? 'margin-bottom: 150px;' : ''}}">
+<div class="{{($isDesktopBannerShown || $isMobileBannerShown) ? 'top-notification-banner-wrapper' : ''}}" style="{{$isDesktopBannerShown ? 'margin-bottom: 150px;' : ''}}">
 
-    @if($isBannerShown)
-        @include('frontend.layouts.top-notification-banner')
+    @if($isDesktopBannerShown)
+        @include('frontend.layouts.banners.top-notification-banner-desktop')
+    @endif
+
+    @if($isMobileBannerShown)
+        @include('frontend.layouts.banners.top-notification-banner-mobile')
     @endif
 
     <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-scroll-header>

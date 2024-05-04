@@ -5,7 +5,7 @@ use App\Http\Controllers\Dashboards\Admin\AdminDashboardProfileController;
 use App\Http\Controllers\Dashboards\Admin\Categories\AdminDashboardCategoryController;
 use App\Http\Controllers\Dashboards\Admin\AccountSettings\AdminDashboardAccountSecurityController;
 use App\Http\Controllers\Dashboards\Admin\AccountSettings\AdminDashboardAccountSettingsController;
-use App\Http\Controllers\Dashboards\Admin\DynamicBanners\AdminDashboardHomeTopBannerController;
+use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeTopBannerController;
 
 Route::controller(AdminDashboardController::class)->group(function () {
     Route::get('/dashboard', 'index')->name('admin.dashboard.index');
