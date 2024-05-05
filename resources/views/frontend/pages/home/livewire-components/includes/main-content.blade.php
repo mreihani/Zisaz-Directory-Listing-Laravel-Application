@@ -76,62 +76,78 @@
     </section>
 
     <!-- two banners -->
-    <section class="position-relative bg-white rounded-xxl-4 zindex-5">
-        <div class="container pt-1 pb-5">
-            <div class="row">
-                <div class="col-md-6 mt-2">
-                    <a href="">
-                        <img class="d-block rounded-3" src="{{asset('assets/frontend/img/real-estate/blog/03.jpg')}}" alt="">
-                    </a>
-                </div>
-                <div class="col-md-6 mt-2">
-                    <a href="">
-                        <img class="d-block rounded-3" src="{{asset('assets/frontend/img/real-estate/blog/04.jpg')}}" alt="">
-                    </a>
+    @if($isMiddleOneBannerShown)
+        <section class="position-relative bg-white rounded-xxl-4 zindex-5">
+            <div class="container pt-1 pb-5">
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <a href="{{$middleOneRightLinkUrl}}">
+                            <img class="d-block rounded-3" src="{{$middleOneRightBannerImageAddress}}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <a href="{{$middleOneLeftLinkUrl}}">
+                            <img class="d-block rounded-3" src="{{$middleOneLeftBannerImageAddress}}" alt="">
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <!-- Carousel with slides count-->
-    <section class="position-relative bg-white rounded-xxl-4 zindex-5">
-        <div class="container pt-4 pb-2">
-            <div class="row">
-                <div class="order-lg-1 order-2">
-                    <div class="tns-carousel-wrapper">
-                        {{-- <div class="tns-slides-count text-light">
-                            <i class="fi-image fs-lg me-2"></i>
-                            <div class="pe-1">
-                                <span class="tns-current-slide fs-5 fw-bold"></span>
-                                <span class="fs-5 fw-bold">/</span>
-                                <span class="tns-total-slides fs-5 fw-bold"></span>
-                            </div>
-                        </div> --}}
-                        <div class="tns-carousel-inner" data-carousel-options="{&quot;autoplay&quot;: true, &quot;navAsThumbnails&quot;: true, &quot;navContainer&quot;: &quot;#thumbnails&quot;, &quot;gutter&quot;: 12, &quot;responsive&quot;: {&quot;0&quot;:{&quot;controls&quot;: false},&quot;500&quot;:{&quot;controls&quot;: true}}}">
-                            <div class="d-flex justify-content-center">
-                                <img class="rounded-3" src="{{asset('assets/frontend/img/real-estate/single/09.jpg')}}" alt="Image">
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <img class="rounded-3" src="{{asset('assets/frontend/img/real-estate/single/10.jpg')}}" alt="Image">
+    @if($isSlideOneShown)
+        <section class="position-relative bg-white rounded-xxl-4 zindex-5">
+            <div class="container pt-4 pb-2">
+                <div class="row">
+                    <div class="order-lg-1 order-2">
+                        <div class="tns-carousel-wrapper">
+                            <div class="tns-carousel-inner" data-carousel-options="{&quot;autoplay&quot;: true, &quot;navAsThumbnails&quot;: false,  &quot;gutter&quot;: 12, &quot;responsive&quot;: {&quot;0&quot;:{&quot;controls&quot;: false},&quot;500&quot;:{&quot;controls&quot;: true}}}">
+                                @if($firstSlideImageAddress != '')
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{$firstSlideLinkUrl}}">
+                                            <img class="rounded-3" src="{{$firstSlideImageAddress}}" alt="Image">
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($secondSlideImageAddress != '')
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{$secondSlideLinkUrl}}">
+                                            <img class="rounded-3" src="{{$secondSlideImageAddress}}" alt="Image">
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($thirdSlideImageAddress != '')
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{$thirdSlideLinkUrl}}">
+                                            <img class="rounded-3" src="{{$thirdSlideImageAddress}}" alt="Image">
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($fourthSlideImageAddress != '')
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{$fourthSlideLinkUrl}}">
+                                            <img class="rounded-3" src="{{$fourthSlideImageAddress}}" alt="Image">
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($fifthSlideImageAddress != '')
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{$fifthSlideLinkUrl}}">
+                                            <img class="rounded-3" src="{{$fifthSlideImageAddress}}" alt="Image">
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <!-- Thumbnails nav-->
-                    <ul class="tns-thumbnails mb-4" id="thumbnails">
-                        <li class="tns-thumbnail">
-                            {{-- <img src="" alt="Thumbnail"> --}}
-                        </li>
-                        <li class="tns-thumbnail">
-                            {{-- <img src="" alt="Thumbnail"> --}}
-                        </li>
-                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <!-- List of all jobs -->
-    <section class="position-relative bg-white rounded-xxl-4 zindex-5">
+    <section class="position-relative bg-white rounded-xxl-4 zindex-5 mt-3">
         <div class="container pb-5">
             <div class="pb-2">
                 <h5 class="pb-3">کلیه آگهی ها</h5>

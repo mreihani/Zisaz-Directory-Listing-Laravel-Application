@@ -8,6 +8,8 @@ use App\Models\Frontend\Banners\BannerHomePage;
 class NavBar extends Component
 {
     public $myAccountHeaderAuth;
+
+    // top banner section
     public $isDesktopBannerShown;
     public $isMobileBannerShown;
     public $desktopBannerImageAddress;
@@ -19,12 +21,13 @@ class NavBar extends Component
      * Constructor for initializing class properties based on user authentication status.
      */
     public function mount() {
-        
-        $homeTopBannerDesktop = BannerHomePage::where('position', 'home_top_banner_desktop')->first();
-        $homeTopBannerMobile = BannerHomePage::where('position', 'home_top_banner_mobile')->first();
-        
+
         // Check if the user is authenticated and set myAccountHeaderAuth and myAccountHeaderGuest accordingly
         $this->myAccountHeaderAuth = auth()->check();
+        
+        // top banner section
+        $homeTopBannerDesktop = BannerHomePage::where('position', 'home_top_banner_desktop')->first();
+        $homeTopBannerMobile = BannerHomePage::where('position', 'home_top_banner_mobile')->first();
 
         // This is for desktop banner at top
         $this->isDesktopBannerShown = ($homeTopBannerDesktop && $homeTopBannerDesktop->display_banner == 1) ? true : false;

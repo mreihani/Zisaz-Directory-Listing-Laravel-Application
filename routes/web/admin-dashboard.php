@@ -3,9 +3,11 @@
 use App\Http\Controllers\Dashboards\Admin\AdminDashboardController;
 use App\Http\Controllers\Dashboards\Admin\AdminDashboardProfileController;
 use App\Http\Controllers\Dashboards\Admin\Categories\AdminDashboardCategoryController;
+use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeSliderOneController;
+use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeTopBannerController;
+use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeMiddleBannerOneController;
 use App\Http\Controllers\Dashboards\Admin\AccountSettings\AdminDashboardAccountSecurityController;
 use App\Http\Controllers\Dashboards\Admin\AccountSettings\AdminDashboardAccountSettingsController;
-use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeTopBannerController;
 
 Route::controller(AdminDashboardController::class)->group(function () {
     Route::get('/dashboard', 'index')->name('admin.dashboard.index');
@@ -40,6 +42,16 @@ Route::controller(AdminDashboardCategoryController::class)->group(function () {
 Route::controller(AdminDashboardHomeTopBannerController::class)->group(function () {
     Route::get('/dashboard/dynamic-banners/home-top-banner', 'index')->name('admin.dashboard.dynamic-banners.home-top-banner.index');
     Route::post('/dashboard/dynamic-banners/home-top-banner', 'store')->name('admin.dashboard.dynamic-banners.home-top-banner.store');
+});
+
+Route::controller(AdminDashboardHomeMiddleBannerOneController::class)->group(function () {
+    Route::get('/dashboard/dynamic-banners/home-middle-one-banner', 'index')->name('admin.dashboard.dynamic-banners.home-middle-one-banner.index');
+    Route::post('/dashboard/dynamic-banners/home-middle-one-banner', 'store')->name('admin.dashboard.dynamic-banners.home-middle-one-banner.store');
+});
+
+Route::controller(AdminDashboardHomeSliderOneController::class)->group(function () {
+    Route::get('/dashboard/dynamic-banners/home-slider-one-banner', 'index')->name('admin.dashboard.dynamic-banners.home-slider-one-banner.index');
+    Route::post('/dashboard/dynamic-banners/home-slider-one-banner', 'store')->name('admin.dashboard.dynamic-banners.home-slider-one-banner.store');
 });
 
 
