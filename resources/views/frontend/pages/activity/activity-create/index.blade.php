@@ -5,9 +5,6 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.css')}}"/>    
     
     <style>
-        .page-wrapper {
-            background-color: #f5f4f8;
-        }
         input[type='file'] {
             display: block !important;
         }

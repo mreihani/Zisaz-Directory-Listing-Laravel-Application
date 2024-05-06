@@ -1,6 +1,6 @@
 <div>
     <!-- Search form-->
-    <form class="form-group form-group-light d-block rounded-lg-pill p-0" wire:submit.prevent="search">
+    <form class="form-group d-block rounded-lg-pill p-0" wire:submit.prevent="search">
         <div class="row align-items-center search-from-header">
             <div class="col-lg-6">
                 <div class="input-group input-group-lg border-end-xl border-light">
@@ -19,7 +19,7 @@
                     <button class="btn btn-link dropdown-toggle search-category" type="button" aria-expanded="false" aria-haspopup="true" >
                         <span class="dropdown-toggle-label">دسته بندی</span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark my-3" style="top:25px;">
+                    <ul class="dropdown-menu dropdown-menu-light my-3" style="top:25px;">
                         <li>
                             <a class="dropdown-item" href="#">
                                 <span class="dropdown-item-label">آگهی ها</span>

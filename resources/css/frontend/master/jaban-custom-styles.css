@@ -116,7 +116,7 @@ input[type=number] {
 
 /* set top distance for all main elements, this is caused by the new two rows header design */
 .jaban-main-element {
-  margin-top: 160px !important;
+  margin-top: 30px !important;
 }
 @media screen and (max-width: 991px) {
   .jaban-main-element {
@@ -161,4 +161,14 @@ input[type=number] {
 /* set modal z index */
 .modal {
   z-index: 99999;
+}
+
+/* hide about-us and contact-us buttons in header on mobile */
+@media (max-width: 1342px) {
+  .header-about-us-element {
+    display: none;
+  }
+  .header-contact-element {
+    display: none;
+  }
 }

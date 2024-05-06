@@ -3,7 +3,7 @@
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             حساب کاربری
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark">
+        <ul class="dropdown-menu dropdown-menu-light">
 
             <div class="d-flex align-items-start border-bottom border-light px-3 py-1 mb-2" style="width: 16rem;">
                 <img class="rounded-circle" src="{{auth()->user()->avatar()}}" style="height: 48px; width:48px;">
@@ -20,7 +20,7 @@
 
             @if(auth()->user()->role == "construction")
                 {{-- <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">ناحیه کاربری</a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
+                    <ul class="dropdown-menu dropdown-menu-light">
                         <li>
                             <a class="dropdown-item" href="{{route('user.dashboard.profile-settings.index')}}">پروفایل من</a>
                         </li>
