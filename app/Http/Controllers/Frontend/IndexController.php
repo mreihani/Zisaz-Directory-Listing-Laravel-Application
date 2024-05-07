@@ -110,4 +110,8 @@ class IndexController extends Controller
         $activities = Activity::where('activity_type', $activityType)->with('subactivity')->get()->pluck('subactivity')->where('type', $type);
         return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
+
+    public function support() {
+        return view('frontend.pages.support.index');
+    }
 }

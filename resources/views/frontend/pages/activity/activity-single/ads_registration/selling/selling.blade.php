@@ -2,285 +2,274 @@
 @section('main')
 
 <!-- Page content-->
-<section class="position-relative bg-white rounded-xxl-4 zindex-5" style="margin-top: 90px;">
-    <div class="container pt-4 pb-5 mb-md-4">
-        <!-- Breadcrumb-->
-        <nav class="pb-4 my-2" aria-label="Breadcrumb">
-            <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item">
-                    <a href="{{route('home-page')}}">خانه</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="">آگهی فروش</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">آگهی فروش کالا</li>
-            </ol>
-        </nav>
-        <div class="row">
-            <!-- Signle job content-->
-            <div class="col-lg-7 position-relative pe-lg-5 mb-5 mb-lg-0" style="z-index: 1025;">
-                <div class="d-flex justify-content-between mb-2">
-                    <h2 class="h4 mb-0 font-vazir">
+<section class="container mt-5 mb-lg-5 mb-4 pt-5 pb-lg-5">
+    <!-- Breadcrumb-->
+    <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{route('home-page')}}">خانه</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="">آگهی فروش</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">آگهی فروش کالا</li>
+        </ol>
+    </nav>
+    <div class="row gy-5 pt-lg-2">
+        <div class="col-lg-7">
+            <div class="d-flex flex-column">
+
+                <!-- Ads Images (carousel)-->
+                @if($activity->adsImages->count())
+                    <!-- Carousel with slides count-->
+                    <div class="order-lg-1 order-2">
+                        <div class="tns-carousel-wrapper">
+                            <div class="tns-slides-count text-light">
+                                <i class="fi-image fs-lg me-2"></i>
+                                <div class="pe-1">
+                                    <span class="tns-current-slide fs-5 fw-bold"></span>
+                                    <span class="fs-5 fw-bold">/</span>
+                                    <span class="tns-total-slides fs-5 fw-bold"></span>
+                                </div>
+                            </div>
+                            <div class="tns-carousel-inner" data-carousel-options="{&quot;navAsThumbnails&quot;: true, &quot;navContainer&quot;: &quot;#thumbnails&quot;, &quot;gutter&quot;: 12, &quot;responsive&quot;: {&quot;0&quot;:{&quot;controls&quot;: false},&quot;500&quot;:{&quot;controls&quot;: true}}}">
+                                @foreach($activity->adsImages as $adsImageItem)
+                                    <div>
+                                        <img class="rounded-3" src="{{asset($adsImageItem->image)}}" alt="Image">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- Thumbnails nav-->
+                        <ul class="tns-thumbnails mb-4" id="thumbnails">
+                            @foreach($activity->adsImages as $adsImageItem)
+                                <li class="tns-thumbnail">
+                                    <img src="{{asset($adsImageItem->image)}}" alt="Thumbnail">
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <!-- Page title + Features-->
+                <div class="order-lg-2 order-1">
+                    <h1 class="h2 mb-2">
                         {{$activity->subactivity->item_title}}
-                    </h2>
-                    <div class="text-end">
-                        <span class="badge bg-faded-accent rounded-pill fs-sm mb-2">ویژه</span>
-                        <div class="fs-sm text-muted">
-                            {{jdate($activity->subactivity->updated_at)->ago()}}
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-unstyled fs-sm mb-4">
-                    <li class="d-flex align-items-center mb-2">
-                        <i class="fi-list text-muted me-2"></i>
-                        <span>
-                            {{$activity->activityGroups->first()->title}}
-                        </span>
-                    </li>
-                    <li class="d-flex align-items-center mb-2">
-                        <i class="fi-globe text-muted me-2"></i>
-                        @if($activity->subactivity->manufacturer == "iran_overseas")
-                            <span>
-                                ایرانی و خارجی
-                            </span>
-                        @elseif($activity->subactivity->manufacturer == "iran")
-                            <span>
-                                ایرانی
-                            </span>
-                        @else
-                            <span>
-                                خارجی
-                            </span>
-                        @endif
-                    </li>
-                    <li class="d-flex align-items-center mb-2">
-                        <i class="fi-map-pin text-muted me-2"></i>
-                       
-                        <span>
-                            {{$activity->subactivity->city->province->title}}
-                        </span>
-
-                        ،&nbsp;
-
-                        <span>
-                            {{$activity->subactivity->city->title}}
-                        </span>
-                    </li>
-                    <li class="d-flex align-items-center mb-2">
-                        <i class="fi-cash fs-base text-muted me-2"></i>
-                        @if($activity->subactivity->price && !$activity->subactivity->price_by_agreement)
-                            <span>
-                                {{$activity->subactivity->price}}
-                                تومان
-                            </span>
-                        @else    
-                            <span>
-                                توافقی
-                            </span>
-                        @endif
-                    </li>
-                    
-                    <li class="d-flex align-items-center mb-2">
-                        <i class="fi-phone fs-base text-muted me-2"></i>
-
-                        @livewire('frontend.auth.login.open-login-modal', ['phone' => $activity->user->phone])
-                    </li>
-                </ul>
-                <hr class="mb-4">
-
-                @if($activity->subactivity->product_brand)
-                    <h3 class="h6">برند کالا: </h3>
-                    <p class="line-h18">
-                        {{$activity->subactivity->product_brand}}
-                    </p>
-                @endif
-
-                @if($activity->subactivity->item_description)
-                    <h3 class="h6">توضیحات: </h3>
-                    <p class="line-h18">
-                        {{$activity->subactivity->item_description}}
-                    </p>
-                @endif
-                   
-                @if($activity->adsStats->count())
-                    <h3 class="h6 pt-2">وضعیت آگهی: </h3>
-                    <ul class="list-unstyled">
-                        @foreach ($activity->adsStats as $adsStatusItem)
-                            <li class="d-flex">
-                                <span class="text-primary fs-lg me-2">•</span>
-                                {{$adsStatusItem->title}}
-                            </li> 
-                        @endforeach
-                    </ul>
-                @endif
-
-                @if($activity->paymentMethod->count())
-                    <h3 class="h6 pt-2">روش پرداخت: </h3>
-                    <ul class="list-unstyled">
-                        @foreach ($activity->paymentMethod as $paymentMethodItem)
-                            <li class="d-flex">
-                                <span class="text-primary fs-lg me-2">•</span>
-                                {{$paymentMethodItem->title}}
-                            </li> 
-                        @endforeach
-                    </ul>
-                @endif
-
-                @if($activity->subactivity->address)
-                    <h3 class="h6 pt-2">آدرس: </h3>
-                    <p class="line-h18">
-                        {{$activity->subactivity->address}}
-                    </p>
-                @endif
-
-                @if($activity->subactivity->lt && $activity->subactivity->ln)
-                    <!-- Map-->
-                    <div class="row" id="jaban-map-container" wire:ignore>
-                        <div class="col-12 mb-4 mt-3">
-                            <div id="map" style="height: 400px;" x-init="
-                                let marker; 
-                                const map = new L.Map('map', {
-                                    key: 'web.e4b772dc75484285a83a98d6466a4c10',
-                                    maptype: 'neshan',
-                                    poi: false,
-                                    traffic: false,
-                                    center: [@js($activity->subactivity->lt), @js($activity->subactivity->ln)],
-                                    zoom: 14,
-                                }); 
-                                L.marker([@js($activity->subactivity->lt), @js($activity->subactivity->ln)]).addTo(map);
-                                ">
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
-                <hr class="my-4">
-            </div>
-
-            <!-- Sticky sidebar-->
-            <aside class="col-lg-5" style="margin-top: -6rem;">
-                <div class="sticky-top" style="padding-top: 6rem;">
-
-                    <!-- Ads Images (carousel)-->
-                    @if($activity->adsImages->count())
-                        <div class="card card-flush pb-3 pb-lg-0 mb-4">
-                            <div class="card-body">
-                            <h4 class="h5">
-                                تصاویر محصول
-                            </h4>
-                            <div class="tns-carousel-wrapper mx-n3 ads-images-carousel-wrapper">
-                                <div class="tns-carousel-inner d-block" data-carousel-options="{&quot;nav&quot;: false, &quot;autoHeight&quot;: true, &quot;controlsContainer&quot;: &quot;#externalControls&quot;}">
-                                    @foreach($activity->adsImages as $adsImageItem)
-                                        <article class="px-3 pb-4">
-                                            <div class="card border-0 shadow-sm">
-                                                <img class="d-block cursor-pointer" src="{{asset($adsImageItem->image)}}" alt="Image">
-                                            </div>
-                                        </article>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="tns-carousel-controls justify-content-center mt-n2" id="externalControls">
-                                <button class="me-3" type="button"><i class="fi-chevron-left fs-xs"></i></button>
-                                <button type="button"><i class="fi-chevron-right fs-xs"></i></button>
-                            </div>
-                            </div>
-                        </div>
+                    </h1>
+                    @if($activity->subactivity->address)
+                        <p class="mb-2 pb-1 fs-base">
+                            {{$activity->subactivity->address}}
+                        </p>
                     @endif
-                    
-                    <!-- Subscription-->
-                    <div class="card shadow-sm p-lg-3 mb-3 mb-lg-0">
-                        <div class="card-body p-lg-4">
-                            <h2 class="h4 font-vazir">عضویت در خبرنامه</h2>
-                            <p>هیچ گونه به روزرسانی شغلی و اطلاعات مربوط به موقعیت های خالی را از دست ندهید!</p>
-                            <form class="form-group rounded-pill mb-3">
-                                <div class="input-group"><span class="input-group-text text-muted"><i class="fi-mail text-muted"></i></span>
-                                    <input class="form-control" type="text" placeholder="پست الکترونیکی">
-                                </div>
-                                <button class="btn btn-primary rounded-pill" type="button">ثبت</button>
-                            </form>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="agree">
-                                <label class="form-check-label" for="agree">من با دریافت خبرهای جدید از سایت موافقم.</label>
-                            </div>
-                            <hr class="my-4">
-                            <div class="d-flex align-items-end">
-                                <div class="fs-md me-3">آیا به دنبال یه شغل مناسب هستید؟<br>دریافت آخرین فرصت های شغلی در کانال تلگرام</div>
-                                <a class="btn btn-icon btn-translucent-primary btn-xs rounded-circle" href="#">
-                                    <i class="fi-telegram"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </aside>
+            </div>
+            <!-- Overview-->
+            @if($activity->subactivity->item_description)
+                <h2 class="h5">
+                    توضیحات
+                </h2>
+                <p class="mb-4 pb-2">
+                    {{$activity->subactivity->item_description}}
+                </p>
+            @endif
+        
         </div>
-    </div>
-</section>
-
-@if($similarItemsCount > 3)
-    <!-- Related Ads-->
-    <section class="container pt-md-2 pb-5 mb-md-4">
-        <div class="d-sm-flex align-items-center justify-content-between pb-4 mb-sm-2">
-            <h2 class="h4 mb-sm-0 font-vazir">آگهی های مشابه</h2>
-            <a class="btn btn-link fw-normal p-0" 
-                href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
-                مشاهده همه
-                <i class="fi-arrow-long-left ms-2"></i>
-            </a>
-        </div>
-        <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush">
-            <div class="tns-carousel-inner" data-carousel-options="{&quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1, &quot;gutter&quot;: 16},&quot;600&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 16},&quot;768&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 24},&quot;992&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 24}}}">
-                @foreach($similarItems as $similarItem)
-                    <!-- Item-->
-                    <div class="pb-4">
-                        <div class="card bg-secondary card-hover h-100">
-                            <div class="card-body pb-3">
-                                
-                                <div class="d-flex align-items-center mb-2">
-                                    <img class="me-2" src="{{asset('assets/frontend/img/job-board/company/it-pro.png')}}" width="24" alt="IT Pro Logo">
-                                    <span class="fs-sm text-dark opacity-80 px-1">پرشین سیر</span>
-                                    <span class="badge bg-faded-danger rounded-pill fs-sm ms-auto">فوری</span>
-                                </div>
-
-                                <h3 class="h6 card-title pt-1 mb-2">
-                                    <a class="text-nav stretched-link text-decoration-none" href="{{route('activity', $similarItem->activity->slug)}}">
-                                        {{$similarItem->item_title}}
-                                    </a>
-                                </h3>
-                                <p class="fs-sm mb-0">
-                                    {{$similarItem->item_description}}
-                                </p>
-                            </div>
-                            <div class="card-footer d-flex align-items-center justify-content-between border-0 pt-0">
-                                <div class="fs-sm">
-                                    <span class="text-nowrap me-3">
-                                        <i class="fi-map-pin text-muted me-1"> </i>
-                                        <span>
-                                            {{$similarItem->city->title}}
-                                        </span>
-                                    </span>
-                                    <span class="text-nowrap me-3">
-                                        <i class="fi-cash fs-base text-muted me-1"></i>
-                                        @if($similarItem->price && !$similarItem->price_by_agreement)
-                                            <span>
-                                                {{$similarItem->price}}
-                                                تومان
-                                            </span>
-                                        @else    
-                                            <span>
-                                                توافقی
-                                            </span>
-                                        @endif
-                                    </span>
-                                </div>
-                                <button class="btn btn-icon btn-light btn-xs text-primary shadow-sm rounded-circle content-overlay" type="button" data-bs-toggle="tooltip" title="نشان کردن">
-                                    <i class="fi-bookmark"></i>
+        <!-- Sidebar with details-->
+        <aside class="col-lg-5">
+            <div class="ps-lg-5">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div>
+                        <span class="badge bg-success me-2 mb-2">
+                            تایید شده
+                        </span>
+                        <span class="badge bg-info me-2 mb-2">
+                            جدید
+                        </span>
+                    </div>
+                    <div class="text-nowrap">
+                        <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="tooltip" title="نشان کردن">
+                            <i class="fi-bookmark"></i>
+                        </button>
+                        <div class="dropdown d-inline-block" data-bs-toggle="tooltip" title="اشتراک گذاری">
+                            <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="dropdown">
+                                <i class="fi-share"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end my-1">
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-facebook fs-base opacity-75 me-2"></i>
+                                    فیسبوک
+                                </button>
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-twitter fs-base opacity-75 me-2"></i>
+                                    توییتر
+                                </button>
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-instagram fs-base opacity-75 me-2"></i>
+                                    اینستاگرام
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <!-- Property details-->
+                <div class="card border-0 bg-secondary mb-4">
+                    <div class="card-body">
+                        <h5 class="mb-0 pb-3">مشخصات</h5>
+                        <ul class="list-unstyled mt-n2 mb-0">
+                            <li class="mt-2 mb-0">
+                                <b>دسته بندی آگهی: </b>
+                                {{$activity->activityGroups->first()->title}}
+                            </li>
+                            <li class="mt-2 mb-0">
+                                <b>تولید کننده: </b>
+                                @if($activity->subactivity->manufacturer == "iran_overseas")
+                                    <span>
+                                        ایرانی و خارجی
+                                    </span>
+                                @elseif($activity->subactivity->manufacturer == "iran")
+                                    <span>
+                                        ایرانی
+                                    </span>
+                                @else
+                                    <span>
+                                        خارجی
+                                    </span>
+                                @endif
+                            </li>
+                            <li class="mt-2 mb-0">
+                                <b>موقعیت مکانی: </b>
+                                {{$activity->subactivity->city->province->title}}،
+                                {{$activity->subactivity->city->title}}
+                            </li>
+                            <li class="mt-2 mb-0">
+                                <b>قیمت: </b>
+                                @if($activity->subactivity->price && !$activity->subactivity->price_by_agreement)
+                                    <span>
+                                        {{$activity->subactivity->price}}
+                                        تومان
+                                    </span>
+                                @else    
+                                    <span>
+                                        توافقی
+                                    </span>
+                                @endif
+                            </li>
+                            <li class="mt-2 mb-0 d-flex">
+                                <b>تلفن:&nbsp;</b>
+                                @livewire('frontend.auth.login.open-login-modal', ['phone' => $activity->user->phone])
+                            </li>
+                            @if($activity->subactivity->product_brand)
+                                <li class="mt-2 mb-0">
+                                    <b>برند کالا: </b>
+                                    {{$activity->subactivity->product_brand}}
+                                </li>
+                            @endif
+                            @if($activity->adsStats->count())
+                                <li class="mt-2 mb-0">
+                                    <b>وضعیت آگهی: </b>
+                                    {{$activity->adsStats->pluck('title')->implode('، ')}}
+                                </li>
+                            @endif
+                            @if($activity->paymentMethod->count())
+                                <li class="mt-2 mb-0">
+                                    <b>روش پرداخت: </b>
+                                    {{$activity->paymentMethod->pluck('title')->implode('، ')}}
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Map-->
+                @if($activity->subactivity->lt && $activity->subactivity->ln)
+                    <div class="card border-0 mb-4">
+                        <div class="row" id="jaban-map-container" wire:ignore>
+                            <div class="col-12 mb-4 mt-3">
+                                <div id="map" style="height: 400px;" x-init="
+                                    let marker; 
+                                    const map = new L.Map('map', {
+                                        key: 'web.e4b772dc75484285a83a98d6466a4c10',
+                                        maptype: 'neshan',
+                                        poi: false,
+                                        traffic: false,
+                                        center: [@js($activity->subactivity->lt), @js($activity->subactivity->ln)],
+                                        zoom: 14,
+                                    }); 
+                                    L.marker([@js($activity->subactivity->lt), @js($activity->subactivity->ln)]).addTo(map);
+                                    ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                
+                <!-- Post meta-->
+                <ul class="d-flex mb-4 list-unstyled fs-sm">
+                    <li class="me-3 pe-3 border-end">زمان انتشار: 
+                        <b> 
+                            {{jdate($activity->subactivity->updated_at)->ago()}}    
+                        </b>
+                    </li>
+                    <li class="me-3 pe-3 border-end">شماره آگهی: 
+                        <b>
+                            {{$activity->subactivity->id}}
+                        </b>
+                    </li>
+                    <li class="me-3 pe-3">بازدید: <b>100 نفر</b></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</section>
+
+
+<!-- Recently viewed-->
+@if($similarItemsCount > 3)
+    <section class="container mb-5 pb-2 pb-lg-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h2 class="h3 mb-0">
+                آگهی های مشابه
+            </h2>
+            <a class="btn btn-link fw-normal p-0" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
+                مشاهده همه
+                <i class="fi-arrow-long-left ms-2"></i>
+            </a>
+        </div>
+        <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush mx-n2">
+            <div class="tns-carousel-inner row gx-4 mx-0 pt-3 pb-4" data-carousel-options="{&quot;items&quot;: 4, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;992&quot;:{&quot;items&quot;:4}}}">
+
+                @foreach($similarItems as $similarItem)
+                    <!-- Item-->
+                    <div class="col">
+                        <div class="card shadow-sm card-hover border-0 h-100">
+                            <div class="card-img-top card-img-hover">
+                                <a class="img-overlay" href="{{route('activity', $similarItem->activity->slug)}}"></a>
+                                <div class="content-overlay end-0 top-0 pt-3 pe-3">
+                                    <button class="btn btn-icon btn-light btn-xs text-primary rounded-circle" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="نشان کردن">
+                                        <i class="fi-bookmark"></i>
+                                    </button>
+                                </div>
+                                <img src="{{$similarItem->activity->adsImagesUrl()}}" alt="Image">
+                            </div>
+                                <div class="card-body position-relative pb-3">
+                                <h3 class="h6 mb-2 fs-base">
+                                    <a class="nav-link stretched-link" href="{{route('activity', $similarItem->activity->slug)}}">{{$similarItem->item_title}}</a>
+                                </h3>
+                                <p class="mb-2 fs-sm text-muted">
+                                    {{$similarItem->address}}
+                                </p>
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-center mx-3 pt-3 text-nowrap">
+                                <span class="d-inline-block mx-1 px-2 fs-sm">
+                                    {{jdate($similarItem->activity->updated_at)->ago()}}
+                                    <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
+            
             </div>
         </div>
     </section>

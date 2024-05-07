@@ -639,14 +639,14 @@ class Index extends Component
         // for large images
         $unique_image_name = hexdec(uniqid());
         $filename = $unique_image_name . '.' . 'jpg';
-        $img = Image::make($this->adsImage)->fit(748,520)->encode('jpg');
+        $img = Image::make($this->adsImage)->fit(746,421)->encode('jpg');
         Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
         $image_path = $dir . '/' . $filename;
 
         // for thumbnails
         $unique_image_name_sm = hexdec(uniqid());
         $filename_sm = $unique_image_name_sm . '.' . 'jpg';
-        $img_sm = Image::make($this->adsImage)->fit(110,110)->encode('jpg');
+        $img_sm = Image::make($this->adsImage)->fit(428,195)->encode('jpg');
         Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename_sm, $img_sm);
         $image_path_sm = $dir . '/' . $filename_sm;
 
@@ -677,14 +677,14 @@ class Index extends Component
             // for large images
             $unique_image_name = hexdec(uniqid());
             $filename = $unique_image_name . '.' . 'jpg';
-            $img = Image::make($value)->fit(748,520)->encode('jpg');
+            $img = Image::make($value)->fit(746,421)->encode('jpg');
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename, $img);
             $image_path = $dir . '/' . $filename;
 
             // for thumbnails
             $unique_image_name_sm = hexdec(uniqid());
             $filename_sm = $unique_image_name_sm . '.' . 'jpg';
-            $img_sm = Image::make($value)->fit(110,110)->encode('jpg');
+            $img_sm = Image::make($value)->fit(428,195)->encode('jpg');
             Storage::disk('public')->put('upload/ads-images/' . $folderId . '/' . $filename_sm, $img_sm);
             $image_path_sm = $dir . '/' . $filename_sm;
 

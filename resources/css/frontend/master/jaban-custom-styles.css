@@ -50,11 +50,6 @@ input[type=number] {
     display: none;
   }
 }
-
-/* header search bar width */
-.search-from-header {
-  min-width:600px;
-}    
     
 /* tree category filter home page */
 .tree label {
@@ -171,4 +166,9 @@ input[type=number] {
   .header-contact-element {
     display: none;
   }
+}
+
+/* mobile footer styles */
+.footer-mobile span {
+  font-size: 10px;
 }

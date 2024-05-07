@@ -74,7 +74,8 @@
     </main>
 
     <!-- Footer-->
-    @include('frontend.layouts.footer')
+    @include('frontend.layouts.footer-desktop')
+    @include('frontend.layouts.footer-mobile')
 
     <!-- Back to top button-->
     <a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm ms-2">بالا</span><i class="btn-scroll-top-icon fi-chevron-up">   </i></a>

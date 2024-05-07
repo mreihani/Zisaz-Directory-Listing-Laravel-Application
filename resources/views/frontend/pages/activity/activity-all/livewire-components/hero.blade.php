@@ -1,17 +1,14 @@
-<div>
+<div class="mb-2 mb-lg-0">
     <!-- Search form-->
-    <form class="form-group d-block rounded-lg-pill p-0" wire:submit.prevent="search">
-        <div class="row align-items-center search-from-header">
-            <div class="col-lg-6">
+    <form class="form-group d-block rounded-lg-pill py-0" wire:submit.prevent="search">
+        <div class="d-flex align-items-center search-from-header">
+            <div>
                 <div class="input-group input-group-lg border-end-xl border-light">
-                    <span class="input-group-text text-light rounded-pill opacity-50 pe-3">
-                        <i class="fi-search"></i>
-                    </span>
                     <input class="form-control" type="text" placeholder="عنوان شغلی، مهارت یا..." wire:model="searchQuery">
                 </div>
             </div>
-            <hr class="hr-light d-lg-none my-2">
-            <div class="col-lg-3">
+            
+            <div class="d-none d-lg-block">
                 <div class="dropdown border-light btn-group" data-bs-toggle="select" wire:ignore x-on:click="
                     let category = $('.search-category span').html();
                     @this.searchCategory = category;
@@ -43,10 +40,10 @@
                     </ul>
                 </div>
             </div>
-            <hr class="hr-light d-lg-none my-2">
-            <div class="col-lg-3 d-flex align-items-center justify-content-center">
-                <button class="btn btn-sm btn-primary w-50 w-lg-auto rounded-pill" type="submit">
-                    جستجو
+           
+            <div class=" d-flex align-items-center justify-content-center">
+                <button class="btn btn-sm btn-primary w-lg-auto rounded-pill" type="submit">
+                    <i class="fi-search"></i>
                 </button>
             </div>
         </div>

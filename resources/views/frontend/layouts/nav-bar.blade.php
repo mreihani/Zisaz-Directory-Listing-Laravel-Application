@@ -9,11 +9,11 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
         @include('frontend.layouts.banners.top-notification-banner-mobile')
     @endif
 
-    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
+    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top border-bottom" data-scroll-header>
       
         <div class="container-fluid d-flex justify-content-center">
             <a class="navbar-brand ms-0 ms-xl-4" href="{{route('home-page')}}">
-                <img class="d-block" src="{{asset('assets/frontend/img/logo/zsaz2.png')}}" width="250" alt="زی ساز">
+                <img class="d-block" src="{{asset('assets/frontend/img/logo/zsaz2.png')}}" width="150" alt="زی ساز">
             </a>
     
             <div class="container d-flex flex-column align-items-center">
@@ -135,7 +135,7 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
             <div class="d-flex flex-md-row flex-column">
 
                 <div class="d-flex justify-content-center">
-                    <ul class="navbar-nav navbar-nav-scroll me-2" style="max-width: 250px;">
+                    <ul class="navbar-nav navbar-nav-scroll me-2 d-none d-lg-block" style="max-width: 250px;">
                         @if($myAccountHeaderAuth)
                             @livewire('frontend.auth.header.my-account-header-auth')
                         @else 
@@ -143,91 +143,28 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                         @endif
                     </ul>
     
+                    <!-- add search box for mobile !-->
                     <ul class="navbar-nav navbar-nav-scroll d-lg-none">
-                        <li class="nav-item dropdown" class="mt-1">
-                            <a class="nav-link dropdown-toggle align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fi-align-justify me-1"></i>
-                                دسته بندی
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-light">
-                                <li class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle" href="">
-                                        آگهی ها
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-light">
-                                        <li>
-                                            <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'selling', 'type' => 'selling'])}}">
-                                                فروش کالا
-                                            </a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a class="dropdown-item dropdown-toggle" href="">
-                                                کار و استخدام
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-light">
-                                                <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'employment', 'type' => 'employer'])}}">
-                                                        کارجو
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'employment', 'type' => 'employee'])}}">
-                                                        کارفرما
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a class="dropdown-item dropdown-toggle" href="">
-                                                شراکت و سرمایه گذاری
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-light">
-                                                <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'investment', 'type' => 'invested'])}}">
-                                                        سرمایه پذیر
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="{{route('get-activities', ['r_name' => 'investment', 'type' => 'investor'])}}">
-                                                        سرمایه گذار
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-item" href="#">
-                                        کسب و کار ها
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-item" href="#">
-                                        پروژه ها
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-item" href="#">
-                                        مزایده و مناقصه
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-item" href="#">
-                                        متخحصصین و نیروی انسانی
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if(Route::currentRouteName() == 'get-activities')
+                            <!-- Search bar-->
+                            <li>
+                                @livewire('frontend.pages.activity.activity-all.components.hero')
+                            </li>
+                        @elseif(Route::currentRouteName() == 'home-page')
+                            <!-- Search bar-->
+                            <li>
+                                @livewire('frontend.pages.home.components.hero')
+                            </li>
+                        @endif
                     </ul> 
                 </div>
-                
+
                 <div class="d-flex justify-content-center align-items-center">
-                  
                     <a class="btn btn-sm header-about-us-element" href="{{route('about-us')}}" role="button">
                         درباره زی ساز
                     </a>
                     
-                    <a class="btn btn-sm header-contact-element" href="{{route('contact-us')}}" role="button">
+                    <a class="btn btn-sm header-contact-element" href="{{route('support')}}" role="button">
                         پشتیبانی
                     </a>
 

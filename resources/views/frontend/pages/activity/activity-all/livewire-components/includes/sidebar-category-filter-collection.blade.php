@@ -18,29 +18,31 @@
     </h5>
    
     @if(count($sidebarCategoryFilterCollectionAds) && count($sidebarCategoryFilterCollectionAds->pluck('subactivity')->where('type', $type)))
-        <div class="row">
+        <div class="row row-cols-xl-3 row-cols-sm-2 row-cols-1 gy-4 gx-3 gx-xxl-4 py-4">
             @foreach ($sidebarCategoryFilterCollectionAds as $filteredSidebarAdsItem)
 
                 @if($filteredSidebarAdsItem->subactivity->type == $type)
 
                     <!-- Item-->
-                    <div class="col-xl-4 col-lg-12 col-sm-12 d-flex justify-content-center home-page-card-item">
-                        <div class="card border-0 shadow-sm card-hover card-horizontal mb-4">
-                            <a class="card-img-top" href="{{route('activity', $filteredSidebarAdsItem->slug)}}" style="background-image: url('{{$filteredSidebarAdsItem->adsImagesUrl()}}');"></a>
-                            <div class="d-flex flex-column justify-content-between p-3">
-                                <h4 class="fs-6 pt-1 mb-2">
-                                    <a class="nav-link" href="{{route('activity', $filteredSidebarAdsItem->slug)}}">
-                                        {{$filteredSidebarAdsItem->subactivity->item_title}}
-                                    </a>
-                                </h4>
-                                <a class="text-decoration-none" href="{{route('activity', $filteredSidebarAdsItem->slug)}}">
-                                    <div class="text-body fs-xs">
-                                        <span class="me-2 pe-1">
-                                            {{jdate($filteredSidebarAdsItem->updated_at)->ago()}}
-                                        </span>
-                                    </div>
-                                </a>
+                    <div class="col pb-sm-2">
+                        <div class="position-relative">
+                            <div class="position-relative mb-3">
+                                <button class="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="نشان کردن" data-bs-original-title="نشان کردن">
+                                    <i class="fi-bookmark"></i>
+                                </button>
+                                <img class="rounded-3" src="{{$filteredSidebarAdsItem->adsImagesUrl()}}" alt="Article img">
                             </div>
+                            <h3 class="mb-2 fs-lg">
+                                <a class="nav-link stretched-link" href="{{route('activity', $filteredSidebarAdsItem->slug)}}">
+                                    {{$filteredSidebarAdsItem->subactivity->item_title}}
+                                </a>
+                            </h3>
+                            <ul class="list-inline mb-0 fs-sm">
+                                <li class="list-inline-item pe-1">
+                                    <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
+                                    {{jdate($filteredSidebarAdsItem->updated_at)->ago()}}
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
