@@ -16,4 +16,6 @@
     @include('frontend.pages.activity.activity-single.ads_registration.investment.investor')
 @elseif($activity->subactivity->type == 'invested')
     @include('frontend.pages.activity.activity-single.ads_registration.investment.invested')
+@elseif($activity->subactivity->type == 'resume')
+    @include('frontend.pages.activity.activity-single.resume.resume')
 @endif    

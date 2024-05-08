@@ -159,12 +159,12 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                     </ul> 
                 </div>
 
-                <div class="d-flex justify-content-center align-items-center">
-                    <a class="btn btn-sm header-about-us-element" href="{{route('about-us')}}" role="button">
+                <div class="d-flex justify-content-center align-items-center d-none d-lg-flex">
+                    <a class="btn btn-sm " href="{{route('about-us')}}" role="button">
                         درباره زی ساز
                     </a>
                     
-                    <a class="btn btn-sm header-contact-element" href="{{route('support')}}" role="button">
+                    <a class="btn btn-sm " href="{{route('support')}}" role="button">
                         پشتیبانی
                     </a>
 

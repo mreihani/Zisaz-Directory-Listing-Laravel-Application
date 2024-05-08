@@ -1,16 +1,16 @@
 <footer class="footer d-lg-none fixed-bottom bg-secondary">
     <nav class="footer-mobile border-top pt-2 pb-2">
         <div class="d-flex align-items-center justify-content-center">
-            <a class="btn btn-sm d-flex flex-column mb-2" href="{{route('home-page')}}">
-                <img class="d-block" src="{{asset('assets/frontend/img/logo/zsaz.png')}}" width="35" alt="زی ساز">
-                {{-- <span>
-                    زی ساز    
-                </span> --}}
-            </a>
             <a class="btn btn-sm d-flex flex-column" href="{{route('get-activities')}}">
                 <i class="fi-list"></i>
                 <span>
                     دسته ها
+                </span>
+            </a>
+            <a class="btn btn-sm d-flex flex-column" href="{{route('user.create-activity.index', ['type' => 'selling'])}}">
+                <i class="fi-entertainment"></i>
+                <span>
+                    ثبت آگهی
                 </span>
             </a>
             <a class="btn btn-sm d-flex flex-column" href="{{route('user.create-activity.index')}}">

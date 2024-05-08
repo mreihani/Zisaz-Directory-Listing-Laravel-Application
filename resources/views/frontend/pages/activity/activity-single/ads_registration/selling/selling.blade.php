@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <!-- Thumbnails nav-->
-                        <ul class="tns-thumbnails mb-4" id="thumbnails">
+                        <ul class="tns-thumbnails" id="thumbnails">
                             @foreach($activity->adsImages as $adsImageItem)
                                 <li class="tns-thumbnail">
                                     <img src="{{asset($adsImageItem->image)}}" alt="Thumbnail">
@@ -52,7 +52,7 @@
                 @endif
 
                 <!-- Page title + Features-->
-                <div class="order-lg-2 order-1">
+                <div class="order-lg-2 order-1 mt-3">
                     <h1 class="h2 mb-2">
                         {{$activity->subactivity->item_title}}
                     </h1>
@@ -213,7 +213,7 @@
                     </li>
                     <li class="me-3 pe-3 border-end">شماره آگهی: 
                         <b>
-                            {{$activity->subactivity->id}}
+                            {{$activity->id}}
                         </b>
                     </li>
                     <li class="me-3 pe-3">بازدید: <b>100 نفر</b></li>
@@ -225,7 +225,7 @@
 
 
 <!-- Recently viewed-->
-@if($similarItemsCount > 3)
+@if($similarItemsCount > 4)
     <section class="container mb-5 pb-2 pb-lg-4">
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="h3 mb-0">
