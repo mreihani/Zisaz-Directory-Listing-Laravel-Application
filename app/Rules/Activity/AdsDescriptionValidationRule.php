@@ -20,5 +20,17 @@ class AdsDescriptionValidationRule implements ValidationRule
         if(($value == "") && ($this->adsType == "investment") && ($this->investmentAdsType == "invested")) {
             $fail('لطفا شرح آگهی را وارد نمایید.');
         }
+
+        if(($value == "") && ($this->adsType == "bid")) {
+            $fail('لطفا شرح آگهی را وارد نمایید.');
+        }
+
+        if(($value == "") && ($this->adsType == "inquiry")) {
+            $fail('لطفا شرح آگهی را وارد نمایید.');
+        }
+
+        if(($value == "") && ($this->adsType == "contractor")) {
+            $fail('لطفا شرح آگهی را وارد نمایید.');
+        }
     }
 }

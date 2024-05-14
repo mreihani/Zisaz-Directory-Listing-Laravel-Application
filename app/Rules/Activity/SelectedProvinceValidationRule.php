@@ -21,11 +21,11 @@ class SelectedProvinceValidationRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(($this->resumeGoal != "") && ($this->selectedProvinceId == "")) {
+        if(($this->resumeGoal != "") && ($this->selectedProvinceId == "") && ($this->adsType != "contractor")) {
             $fail('لطفا استان را انتخاب کنید!');
         }
 
-        if(($this->adsType != "") && ($this->selectedProvinceId == "") && ($this->employmentAdsType != "employer")) {
+        if(($this->adsType != "") && ($this->selectedProvinceId == "") && ($this->employmentAdsType != "employer") && ($this->adsType != "contractor")) {
             $fail('لطفا استان را انتخاب کنید!');
         }
     }

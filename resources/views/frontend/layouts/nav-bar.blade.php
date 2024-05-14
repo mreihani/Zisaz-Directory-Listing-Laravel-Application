@@ -39,7 +39,7 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="">
+                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'contractor'])}}">
                                                     خدمات مهندسی و پیمانکاری
                                                 </a>
                                             </li>
@@ -73,6 +73,52 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                                                     <li>
                                                         <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'type' => 'investor'])}}">
                                                             سرمایه گذار
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid'])}}">
+                                                    مزایده و مناقصه
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-light">
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid', 'type' => 'auction'])}}">
+                                                            مزایده
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="">
+                                                            مناقصه
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-light">
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid', 'type' => 'tender_buy'])}}">
+                                                                    مناقصه خرید
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid', 'type' => 'tender_project'])}}">
+                                                                    مناقصه اجرای پروژه
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry'])}}">
+                                                    استعلام قیمت
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-light">
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry', 'type' => 'inquiry_buy'])}}">
+                                                            خرید
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry', 'type' => 'inquiry_project'])}}">
+                                                            اجرای پروژه
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -168,11 +214,11 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                         پشتیبانی
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-activity.index')}}">
-                        ثبت فعالیت
+                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-activity.index', ['type' => 'custom_page'])}}">
+                        ثبت کسب و کار
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-activity.index', ['type' => 'selling'])}}">
+                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
                         ثبت آگهی
                     </a>
                 </div>

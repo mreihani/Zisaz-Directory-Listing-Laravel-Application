@@ -10,9 +10,9 @@
                 <a href="{{route('home-page')}}">خانه</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="">آگهی فروش</a>
+                <a href="">آگهی استعلام قیمت</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">آگهی فروش کالا</li>
+            <li class="breadcrumb-item active" aria-current="page">استعلام قیمت خرید</li>
         </ol>
     </nav>
     <div class="row gy-5 pt-lg-2">
@@ -117,91 +117,56 @@
                     <div class="card-body">
                         <h5 class="mb-0 pb-3">مشخصات</h5>
                         <ul class="list-unstyled mt-n2 mb-0">
-                            <li class="mt-2 mb-0">
-                                <b>دسته بندی آگهی: </b>
-                                {{$activity->activityGroups->first()->title}}
-                            </li>
-                            <li class="mt-2 mb-0">
-                                <b>تولید کننده: </b>
-                                @if($activity->subactivity->manufacturer == "iran_overseas")
-                                    <span>
-                                        ایرانی و خارجی
-                                    </span>
-                                @elseif($activity->subactivity->manufacturer == "iran")
-                                    <span>
-                                        ایرانی
-                                    </span>
-                                @else
-                                    <span>
-                                        خارجی
-                                    </span>
-                                @endif
-                            </li>
+                            @if($activity->activityGroups->count())
+                                <li class="mt-2 mb-0">
+                                    <b>زمینه فعالیت: </b>
+                                    {{$activity->activityGroups->pluck('title')->implode('، ')}}
+                                </li>
+                            @endif
                             <li class="mt-2 mb-0">
                                 <b>موقعیت مکانی: </b>
                                 {{$activity->subactivity->city->province->title}}،
                                 {{$activity->subactivity->city->title}}
                             </li>
-                            <li class="mt-2 mb-0">
-                                <b>قیمت: </b>
-                                @if($activity->subactivity->price && !$activity->subactivity->price_by_agreement)
-                                    <span>
-                                        {{$activity->subactivity->price}}
-                                        تومان
-                                    </span>
-                                @else    
-                                    <span>
-                                        توافقی
-                                    </span>
-                                @endif
-                            </li>
                             <li class="mt-2 mb-0 d-flex">
                                 <b>تلفن:&nbsp;</b>
                                 @livewire('frontend.auth.login.open-login-modal', ['phone' => $activity->user->phone])
                             </li>
-                            @if($activity->subactivity->product_brand)
+                            @if($activity->subactivity->inquirer)
                                 <li class="mt-2 mb-0">
-                                    <b>برند کالا: </b>
-                                    {{$activity->subactivity->product_brand}}
+                                    <b>استعلام کننده: </b>
+                                    @if($activity->subactivity->inquirer == "private_company")
+                                    شرکت خصوصی
+                                    @elseif($activity->subactivity->inquirer == "public_company")
+                                    شرکت دولتی
+                                    @elseif($activity->subactivity->inquirer == "individual")
+                                    شخص حقیقی
+                                    @endif
                                 </li>
                             @endif
-                            @if($activity->adsStats->count())
+                            @if($activity->subactivity->inquiry_number)
                                 <li class="mt-2 mb-0">
-                                    <b>وضعیت آگهی: </b>
-                                    {{$activity->adsStats->pluck('title')->implode('، ')}}
+                                    <b>شماره استعلام: </b>
+                                    {{$activity->subactivity->inquiry_number}}
                                 </li>
                             @endif
-                            @if($activity->paymentMethod->count())
+                            @if($activity->subactivity->inquiry_exp_date_start && $activity->subactivity->inquiry_exp_date_end)
                                 <li class="mt-2 mb-0">
-                                    <b>روش پرداخت: </b>
-                                    {{$activity->paymentMethod->pluck('title')->implode('، ')}}
+                                    <b>تاریخ اعتبار استعلام: </b>
+                                    {{$activity->subactivity->inquiry_exp_date_start}}
+                                    الی
+                                    {{$activity->subactivity->inquiry_exp_date_end}}
                                 </li>
                             @endif
                         </ul>
                     </div>
                 </div>
 
-                <!-- Map-->
-                @if($activity->subactivity->lt && $activity->subactivity->ln)
-                    <div class="card border-0 mb-4">
-                        <div class="row" id="jaban-map-container" wire:ignore>
-                            <div class="col-12 mb-4 mt-3">
-                                <div id="map" style="height: 400px;" x-init="
-                                    let marker; 
-                                    const map = new L.Map('map', {
-                                        key: 'web.e4b772dc75484285a83a98d6466a4c10',
-                                        maptype: 'neshan',
-                                        poi: false,
-                                        traffic: false,
-                                        center: [@js($activity->subactivity->lt), @js($activity->subactivity->ln)],
-                                        zoom: 14,
-                                    }); 
-                                    L.marker([@js($activity->subactivity->lt), @js($activity->subactivity->ln)]).addTo(map);
-                                    ">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @if($activity->license->count())
+                    <a class="btn btn-lg btn-primary w-100 mb-3" href="{{route('get-license-item-zip', [$activity->id])}}">
+                        <i class="fi-download-file"></i>
+                        دانلود مدارک
+                    </a>
                 @endif
                 
                 <!-- Post meta-->
@@ -231,7 +196,7 @@
             <h2 class="h3 mb-0">
                 آگهی های مشابه
             </h2>
-            <a class="btn btn-link fw-normal p-0" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'ads'])}}">
+            <a class="btn btn-link fw-normal p-0" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry', 'type' => 'inquiry_buy'])}}">
                 مشاهده همه
                 <i class="fi-arrow-long-left ms-2"></i>
             </a>
@@ -276,4 +241,3 @@
 @endif
 
 @endsection
-

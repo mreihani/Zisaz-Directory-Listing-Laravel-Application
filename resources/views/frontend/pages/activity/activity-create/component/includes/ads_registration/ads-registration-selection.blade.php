@@ -10,6 +10,9 @@
                 <option value="selling">آگهی فروش</option>
                 <option value="employment">آگهی استخدام</option>
                 <option value="investment">آگهی شراکت و سرمایه گذاری</option>
+                <option value="bid">آگهی مزایده و مناقصه</option>
+                <option value="inquiry">آگهی استعلام قیمت</option>
+                <option value="contractor">آگهی پیمانکاری</option>
             </select>
         </div>
     </div>
@@ -17,5 +20,8 @@
     @include('frontend.pages.activity.activity-create.component.includes.ads_registration.selling.selling-selection')
     @include('frontend.pages.activity.activity-create.component.includes.ads_registration.employment.employment-selection')
     @include('frontend.pages.activity.activity-create.component.includes.ads_registration.investment.investment-selection')
+    @include('frontend.pages.activity.activity-create.component.includes.ads_registration.bid.bid-selection')
+    @include('frontend.pages.activity.activity-create.component.includes.ads_registration.inquiry.inquiry-selection')
+    @include('frontend.pages.activity.activity-create.component.includes.ads_registration.contractor.contractor')
 
 </div>

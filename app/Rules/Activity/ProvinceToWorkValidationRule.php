@@ -19,7 +19,13 @@ class ProvinceToWorkValidationRule implements ValidationRule
     {
         if(($this->adsType == "employment") && ($this->employmentAdsType == "employer")) {
             if(!in_array(true, $value)) {
-                $fail('لطفا استان های که متقاضی کار می تواند در آنجا مشغول به کار شود را تعیین نمایید.');
+                $fail('لطفا استان هایی که متقاضی کار می تواند در آنجا مشغول به کار شود را تعیین نمایید.');
+            }
+        }
+
+        if(($this->adsType == "contractor")) {
+            if(!in_array(true, $value)) {
+                $fail('لطفا استان هایی که پیمانکار می تواند در آن جا فعالیت کند را تعیین نمایید.');
             }
         }
     }

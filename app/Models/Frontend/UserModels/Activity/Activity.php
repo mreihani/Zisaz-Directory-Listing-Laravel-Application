@@ -15,8 +15,11 @@ use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 use App\Models\Frontend\ReferenceData\ContractType\ContractType;
+use App\Models\Frontend\UserModels\Activity\AdsRegistration\Bid;
+use App\Models\Frontend\UserModels\Activity\AdsRegistration\Inquiry;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\AdsImage;
+use App\Models\Frontend\UserModels\Activity\AdsRegistration\Contractor;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Employment;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Investment;
 
@@ -91,5 +94,17 @@ class Activity extends Model
     // This is for slug, it gets the last ID to create a unique random string
     public static function getLatestId() {
         return self::latest()->first() ? self::latest()->first()->id : 0;
+    }
+
+    public function bid() {
+        return $this->hasOne(Bid::class);
+    }
+
+    public function inquiry() {
+        return $this->hasOne(Inquiry::class);
+    }
+
+    public function contractor() {
+        return $this->hasOne(Contractor::class);
     }
 }

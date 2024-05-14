@@ -17,7 +17,7 @@ class AgreeToTermsValidationRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if($this->adsType == "selling" || $this->adsType == "employment" || $this->adsType == "investment") {
+        if($this->adsType == "selling" || $this->adsType == "employment" || $this->adsType == "investment" || $this->adsType == "bid" || $this->adsType == "inquiry" || $this->adsType == "contractor") {
             if(!$value) {
                 $fail('لطفا قوانین و مقررات را تأیید نمایید.');
             }

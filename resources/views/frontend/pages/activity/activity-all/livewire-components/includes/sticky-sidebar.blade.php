@@ -162,6 +162,111 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="list-unstyled mt-2">
+                                        <label>
+                                            مزایده و مناقصه
+                                        </label>
+                                        <ul>
+                                            <li class="list-unstyled mt-2">
+                                                <label>
+                                                    مزایده
+                                                </label>
+                                                <ul class="category-filter-last-loop-ul">
+                                                    @foreach($actGrpsAuctionArray as $actGrpsAuctionItem)
+                                                        <li class="list-unstyled mt-2">
+                                                            <label wire:click="loadSpecificCategorySidebarFilterAds({{$actGrpsAuctionItem->id}}, 'auction')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                                                {{$actGrpsAuctionItem->title}}
+                                                            </label>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                            <li class="list-unstyled mt-2">
+                                                <label>
+                                                    مناقصه
+                                                </label>
+                                                <ul class="category-filter-last-loop-ul">
+                                                    <li class="list-unstyled mt-2">
+                                                        <label>
+                                                            مناقصه خرید
+                                                        </label>
+                                                        <ul class="category-filter-last-loop-ul">
+                                                            @foreach($actGrpsTenderBuyArray as $actGrpsTenderBuyItem)
+                                                                <li class="list-unstyled mt-2">
+                                                                    <label wire:click="loadSpecificCategorySidebarFilterAds({{$actGrpsTenderBuyItem->id}}, 'tender_buy')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                                                        {{$actGrpsTenderBuyItem->title}}
+                                                                    </label>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                    <li class="list-unstyled mt-2">
+                                                        <label>
+                                                            مناقصه اجرای پروژه
+                                                        </label>
+                                                        <ul class="category-filter-last-loop-ul">
+                                                            @foreach($actGrpsTenderProjectArray as $actGrpsTenderProjectItem)
+                                                                <li class="list-unstyled mt-2">
+                                                                    <label wire:click="loadSpecificCategorySidebarFilterAds({{$actGrpsTenderProjectItem->id}}, 'tender_project')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                                                        {{$actGrpsTenderProjectItem->title}}
+                                                                    </label>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="list-unstyled mt-2">
+                                        <label>
+                                            استعلام قیمت
+                                        </label>
+                                        <ul>
+                                            <li class="list-unstyled mt-2">
+                                                <label>
+                                                    استعلام خرید
+                                                </label>
+                                                <ul class="category-filter-last-loop-ul">
+                                                    @foreach($actGrpsInquiryBuyProjectArray as $actGrpsInquiryBuyProjectItem)
+                                                        <li class="list-unstyled mt-2">
+                                                            <label wire:click="loadSpecificCategorySidebarFilterAds({{$actGrpsInquiryBuyProjectItem->id}}, 'inquiry_buy')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                                                {{$actGrpsInquiryBuyProjectItem->title}}
+                                                            </label>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                            <li class="list-unstyled mt-2">
+                                                <label>
+                                                    استعلام اجرای پروژه
+                                                </label>
+                                                <ul class="category-filter-last-loop-ul">
+                                                    @foreach($actGrpsInquiryProjectArray as $actGrpsInquiryProjectItem)
+                                                        <li class="list-unstyled mt-2">
+                                                            <label wire:click="loadSpecificCategorySidebarFilterAds({{$actGrpsInquiryProjectItem->id}}, 'inquiry_project')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                                                {{$actGrpsInquiryProjectItem->title}}
+                                                            </label>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="list-unstyled mt-2">
+                                        <label>
+                                            خدمات مهندسی و پیمانکاری
+                                        </label>
+                                        <ul class="category-filter-last-loop-ul">
+                                            @foreach($actGrpsContractorArray as $actGrpsContractorItem)
+                                                <li class="list-unstyled mt-2">
+                                                    <label wire:click="loadSpecificCategorySidebarFilterAds({{$actGrpsContractorItem->id}}, 'contractor')" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                                        {{$actGrpsContractorItem->title}}
+                                                    </label>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

@@ -3,7 +3,8 @@
 
 @push('page-styles')
     <link rel="stylesheet" href="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.css')}}"/>    
-    
+    <link rel="stylesheet" href="{{asset('assets/frontend/vendor/jalalidatepicker/jalalidatepicker.css')}}"/>    
+   
     <style>
         input[type='file'] {
             display: block !important;
@@ -13,6 +14,18 @@
 
 @push('page-scripts-top')
     <script src="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.js')}}"></script>
+
+@push('page-scripts')
+    <script src="{{asset('assets/frontend/vendor/jalalidatepicker/jalalidatepicker.js')}}"></script>
+
+    <script>
+        jalaliDatepicker.startWatch({
+            separatorChar: "/",
+            changeMonthRotateYear: true,
+            showTodayBtn: true,
+            showEmptyBtn: true
+        });
+    </script>
 @endpush
 
 <div class="container mt-5 mb-md-4 py-5">

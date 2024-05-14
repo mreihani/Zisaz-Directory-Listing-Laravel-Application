@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend\Pages\Activity\ActivityCreate;
 
+use File;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -12,9 +13,11 @@ use App\Rules\Activity\GenderValidationRule;
 use App\Rules\Activity\WorkExpValidationRule;
 use App\Rules\Activity\AcademicValidationRule;
 use App\Rules\Activity\AdsTitleValidationRule;
+use App\Rules\Activity\InquirerValidationRule;
 use App\Rules\Activity\JobTitleValidationRule;
 use App\Rules\Activity\shopNameValidationRule;
 use App\Rules\Activity\AdsImagesValidationRule;
+use App\Rules\Activity\AuctioneerValidationRule;
 use App\Rules\Activity\ReturnTimeValidationRule;
 use App\Rules\Activity\shopAddressValidationRule;
 use App\Rules\Activity\AgreeToTermsValidationRule;
@@ -29,11 +32,11 @@ use App\Rules\Activity\ProvinceToWorkValidationRule;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use App\Rules\Activity\SelectedProvinceValidationRule;
 use App\Rules\Activity\SellingActGrpsIdValidationRule;
+use App\Rules\Activity\SelectedActGrpsIdValidationRule;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
 use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 use App\Rules\Activity\SelectedPaymentMethodValidationRule;
-use App\Rules\Activity\SelectedShopActGrpsIdValidationRule;
 use App\Rules\Activity\SelectedInvestmentCityValidationRule;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
@@ -108,6 +111,7 @@ class Index extends Component
     public $adsType;
     public $employmentAdsType;
     public $investmentAdsType;
+    public $bidAdsType;
     public $adsTitle;
     public $adsDescription;
     public $sellingAdsManufacturereType;
@@ -152,6 +156,29 @@ class Index extends Component
     public $actGrpsManagerAdsArray;
     public $latitude;
     public $longitude;
+    public $actGrpsAuctionAdsArray;
+    public $auctioneer;
+    public $auctioneerValidation;
+    public $auctionNumber;
+    public $auctionExpDateStart;
+    public $auctionExpDateEnd;
+    public $tenderAdsType;
+    public $actGrpsTenderBuyAdsArray;
+    public $actGrpsTenderProjectAdsArray;
+    public $inquiryAdsType;
+    public $actGrpsInquiryBuyAdsArray;
+    public $inquirer;
+    public $inquirerValidation;
+    public $inquiryNumber;
+    public $inquiryExpDateStart;
+    public $inquiryExpDateEnd;
+    public $actGrpsInquiryProjectAdsArray;
+    public $actGrpsContractorAdsArray;
+    public $websiteAddress;
+    public $whatsappAddress;
+    public $telegramAddress;
+    public $eitaaAddress;
+    public $adsHaveDiscount;
 
     // custom web page
     public $customWebPage;
@@ -165,7 +192,7 @@ class Index extends Component
             'jobTitle' => new JobTitleValidationRule($this->section, $this->resumeGoal, $this->jobTitle),
             'shopName' => new shopNameValidationRule($this->resumeGoal, $this->shopName),
             'address' => new shopAddressValidationRule($this->resumeGoal, $this->address),
-            'actGrpsId' => new SelectedShopActGrpsIdValidationRule($this->resumeGoal, $this->adsType),
+            'actGrpsId' => new SelectedActGrpsIdValidationRule($this->resumeGoal, $this->adsType),
             'companyTitle' => new CompanyTitleValidationRule($this->resumeGoal, $this->companyTitle),
             'companyRegNum' => new CompanyRegNumValidationRule($this->resumeGoal, $this->companyRegNum),
             'sellingActGrpsIdValidation' => new SellingActGrpsIdValidationRule($this->sellingActGrpsId, $this->adsType),
@@ -180,22 +207,26 @@ class Index extends Component
             'academicLevel' => new AcademicLevelValidationRule($this->adsType, $this->employmentAdsType),
             'employerGender' => new EmployerGenderValidationRule($this->adsType, $this->employmentAdsType),
             'returnTimeValidation' => new ReturnTimeValidationRule($this->adsType, $this->returnTime),
-            'licenseTypeValue.*' => 'required_if:resumeGoal,==,5',
-            'licenseImage.*' => 'required_if:resumeGoal,==,5',
+            'licenseTypeValue.*' => 'required_if:resumeGoal,==,5|required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company|required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
+            'licenseImage.*' => 'required_if:resumeGoal,==,5|required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company|required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
             'provinceToWork' => new ProvinceToWorkValidationRule($this->adsType, $this->employmentAdsType),
             'adsDescription' => new AdsDescriptionValidationRule($this->adsType, $this->investmentAdsType),
+            'auctioneerValidation' => new AuctioneerValidationRule($this->auctioneer, $this->adsType, $this->bidAdsType, $this->tenderAdsType),
+            'auctionNumber' => 'required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company',
+            'inquirerValidation' => new InquirerValidationRule($this->inquirer, $this->adsType),
+            'inquiryNumber' => 'required_if:inquirer,==,private_company|required_if:inquirer,==,public_company',
         ];
     }
 
     protected $messages = [
         'licenseTypeValue.*.required_if' => 'لطفا نوع مجوز را انتخاب نمایید.',
         'licenseImage.*.required_if' => 'لطفا تصویر مجوز را بارگذاری نمایید.',
+        'auctionNumber.required_if' => 'لطفا شماره مزایده را وارد نمایید.',
+        'inquiryNumber.required_if' => 'لطفا شماره استعلام را وارد نمایید.',
     ];
 
     public function mount() {
-        // این رو بعدا پاک کن برای فراخوانی فایل های شخصی است
-        // $this->licenseImage = route('assets', [auth()->user()->id, $licenseItem->license_image]);
-
+       
         // Get activity type directly by url and show the relevant form
         $this->getActivityTypeUrl();
 
@@ -238,6 +269,7 @@ class Index extends Component
         // ads section
         $this->employmentAdsType = "";
         $this->investmentAdsType = "";
+        $this->bidAdsType = "";
         $this->sellingAdsManufacturereType = "";
         $this->adsStatus = [];
         $this->adsStatusArray = AdsStat::all();
@@ -263,6 +295,17 @@ class Index extends Component
         $this->actGrpsEngAdsArray = $this->actGrpsEngArray;
         $this->actGrpsManagerAdsArray = $this->actGrpsManagerArray;
         $this->actGrpsTechnicalAdsArray = $this->actGrpsTechnicalArray;
+        $this->actGrpsAuctionAdsArray = ActCat::find(20)->activityGroup->chunk($this->calculateChunkNumber(20))->toArray();
+        $this->auctioneer = "";
+        $this->tenderAdsType = "";
+        $this->actGrpsTenderBuyAdsArray = ActCat::find(21)->activityGroup->chunk($this->calculateChunkNumber(21))->toArray();
+        $this->actGrpsTenderProjectAdsArray = ActCat::find(22)->activityGroup->chunk($this->calculateChunkNumber(22))->toArray();
+        $this->actGrpsInquiryBuyAdsArray = ActCat::find(23)->activityGroup->chunk($this->calculateChunkNumber(23))->toArray();
+        $this->actGrpsInquiryProjectAdsArray = ActCat::find(24)->activityGroup->chunk($this->calculateChunkNumber(24))->toArray();
+        $this->actGrpsContractorAdsArray = ActCat::find(25)->activityGroup->chunk($this->calculateChunkNumber(25))->toArray();
+        $this->inquiryAdsType = "";
+        $this->inquirer = "";
+        $this->adsHaveDiscount = "no";
         
         // custom web page
         $this->customWebPage = "";
@@ -278,7 +321,7 @@ class Index extends Component
         }
 
         // ثبت آگهی
-        if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'selling') {
+        if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'ads') {
             $this->activityType = 'ads_registration';
             $this->section = 'ads_registration';
             $this->adsType = "";
@@ -366,6 +409,9 @@ class Index extends Component
     public function changeInvestmentAdsType($value) {
         $this->investmentAdsType = $value;
     }
+    public function changeBidAdsType($value) {
+        $this->bidAdsType = $value;
+    }
     public function changePriceByAgreement() {
         //        
     }
@@ -373,6 +419,12 @@ class Index extends Component
         $selectedInvestmentProvinceId = $this->selectedInvestmentProvinceId;
         $this->investmentCities = Province::find($selectedInvestmentProvinceId)->city;
         $this->selectedInvestmentCityId = $this->investmentCities->first()->id;
+    }
+    public function changeTenderAdsType($value) {
+        $this->tenderAdsType = $value;
+    }
+    public function changeInquiryAdsType($value) {
+        $this->inquiryAdsType = $value;
     }
 
     // custom page section
@@ -389,12 +441,13 @@ class Index extends Component
 
         $dir = "activity/$folderId/$filename";
        
+        // upload all license images into private folder
         $img = Image::make($licenseImage)->encode('jpg')->resize(1200, null, function ($constraint) {
             $constraint->aspectRatio();
         });
         Storage::disk('private')->put($dir, $img);
 
-        return $dir;
+        return $filename;
     }
     // public banner image upload handler
     private function handlePublicFileUpload($activity) {
@@ -723,7 +776,7 @@ class Index extends Component
     private function saveProvinceHandler($activity) {
         // get items which are true
         $grpArray = [];
-        foreach ($this->contractType as $key => $value) {
+        foreach ($this->provinceToWork as $key => $value) {
             if($value) {
                 $grpArray[] = Purify::clean($key);
             }
@@ -780,6 +833,13 @@ class Index extends Component
         }
 
         $activity->gender()->attach($grpArray);
+    }
+    // save bid activity group into DB
+    private function saveBidActivityGroupHandler($activity) {
+        // get items which are true
+        $grpArray = [0 => $this->bidActGrpsId];
+        
+        $activity->activityGroups()->attach($grpArray);
     }
 
     // save ads registration into DB
@@ -927,7 +987,142 @@ class Index extends Component
             // upload ads image
             $this->handlePublicAdsSingleFileUpload($activity);
         }
+
+        // ثبت آگهی
+        // آگهی مزایده و مناقصه
+        // آگهی مزایده
+        if($this->adsType == "bid" && $this->bidAdsType == "auction") {
+            $ads = $activity->bid()->create([
+                'type' => Purify::clean($this->bidAdsType),
+                'item_title' => Purify::clean($this->adsTitle),
+                'item_description' => Purify::clean($this->adsDescription),
+                'auctioneer' => Purify::clean($this->auctioneer),
+                'city_id' => Purify::clean($this->selectedCityId),
+                'auction_number' => Purify::clean($this->auctionNumber),
+                'address' => Purify::clean($this->address),
+                'auction_exp_date_start' => Purify::clean($this->auctionExpDateStart),
+                'auction_exp_date_end' => Purify::clean($this->auctionExpDateEnd),
+            ]);
+
+            // upload ads image
+            $this->handlePublicAdsSingleFileUpload($activity);
+
+            // save activity group handler
+            $this->saveActivityGroupHandler($activity);
+
+            // save license image and title
+            $this->saveLicenseHandler($activity);
+        }
         
+        // ثبت آگهی
+        // آگهی مزایده و مناقصه
+        // آگهی مناقصه
+        if($this->adsType == "bid" && $this->bidAdsType == "tender") {
+            $ads = $activity->bid()->create([
+                'type' => Purify::clean($this->tenderAdsType),
+                'item_title' => Purify::clean($this->adsTitle),
+                'item_description' => Purify::clean($this->adsDescription),
+                'auctioneer' => Purify::clean($this->auctioneer),
+                'city_id' => Purify::clean($this->selectedCityId),
+                'auction_number' => Purify::clean($this->auctionNumber),
+                'address' => Purify::clean($this->address),
+                'auction_exp_date_start' => Purify::clean($this->auctionExpDateStart),
+                'auction_exp_date_end' => Purify::clean($this->auctionExpDateEnd),
+            ]);
+
+            // upload ads image
+            $this->handlePublicAdsSingleFileUpload($activity);
+
+            // save activity group handler
+            $this->saveActivityGroupHandler($activity);
+
+            // save license image and title
+            $this->saveLicenseHandler($activity);
+        }
+
+        // ثبت آگهی
+        // آگهی استعلام قیمت
+        // خرید
+        if($this->adsType == "inquiry" && $this->inquiryAdsType == "inquiry_buy") {
+            $ads = $activity->inquiry()->create([
+                'type' => Purify::clean($this->inquiryAdsType),
+                'item_title' => Purify::clean($this->adsTitle),
+                'item_description' => Purify::clean($this->adsDescription),
+                'inquirer' => Purify::clean($this->inquirer),
+                'city_id' => Purify::clean($this->selectedCityId),
+                'inquiry_number' => Purify::clean($this->inquiryNumber),
+                'address' => Purify::clean($this->address),
+                'inquiry_exp_date_start' => Purify::clean($this->inquiryExpDateStart),
+                'inquiry_exp_date_end' => Purify::clean($this->inquiryExpDateEnd),
+            ]);
+
+            // upload ads image
+            $this->handlePublicAdsSingleFileUpload($activity);
+
+            // save activity group handler
+            $this->saveActivityGroupHandler($activity);
+
+            // save license image and title
+            $this->saveLicenseHandler($activity);
+        }
+
+        // ثبت آگهی
+        // آگهی استعلام قیمت
+        // اجرای پروژه
+        if($this->adsType == "inquiry" && $this->inquiryAdsType == "inquiry_project") {
+            $ads = $activity->inquiry()->create([
+                'type' => Purify::clean($this->inquiryAdsType),
+                'item_title' => Purify::clean($this->adsTitle),
+                'item_description' => Purify::clean($this->adsDescription),
+                'inquirer' => Purify::clean($this->inquirer),
+                'city_id' => Purify::clean($this->selectedCityId),
+                'inquiry_number' => Purify::clean($this->inquiryNumber),
+                'address' => Purify::clean($this->address),
+                'inquiry_exp_date_start' => Purify::clean($this->inquiryExpDateStart),
+                'inquiry_exp_date_end' => Purify::clean($this->inquiryExpDateEnd),
+            ]);
+
+            // upload ads image
+            $this->handlePublicAdsSingleFileUpload($activity);
+
+            // save activity group handler
+            $this->saveActivityGroupHandler($activity);
+
+            // save license image and title
+            $this->saveLicenseHandler($activity);
+        }
+
+        // ثبت آگهی
+        // فرم ثبت آگهی پیمانکاری
+        if($this->adsType == "contractor") {
+            $ads = $activity->contractor()->create([
+                'item_title' => Purify::clean($this->adsTitle),
+                'item_description' => Purify::clean($this->adsDescription),
+                'website_address' => Purify::clean($this->websiteAddress),
+                'whatsapp_address' => Purify::clean($this->whatsappAddress),
+                'telegram_address' => Purify::clean($this->telegramAddress),
+                'eitaa_address' => Purify::clean($this->eitaaAddress),
+                'price' => Purify::clean($this->price),
+                'price_by_agreement' => Purify::clean($this->priceByAgreement) == true ? 1 : 0,
+                'ads_have_discount' => Purify::clean($this->adsHaveDiscount) == "yes" ? 1 : 0,
+            ]);
+
+            // save activity group handler
+            $this->saveActivityGroupHandler($activity);
+
+            // save selling ads status type into DB
+            $this->saveSellingAdsStatusHandler($activity);
+
+            // upload ads image
+            $this->handlePublicAdsFileUpload($activity);
+ 
+            // save payment method into DB
+            $this->savePaymentMethodHandler($activity);
+
+            // save province into DB
+            $this->saveProvinceHandler($activity);
+        }
+
         $activity->update([
             'subactivity_id' => $ads->id,
             'subactivity_type' => get_class($ads),

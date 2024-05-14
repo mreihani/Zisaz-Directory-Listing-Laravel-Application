@@ -23,6 +23,12 @@ class MainContent extends Component
     public $actGrpsManagerAdsArray;
     public $actGrpsTechnicalAdsArray;
     public $actGrpsShopArray;
+    public $actGrpsAuctionArray;
+    public $actGrpsTenderBuyArray;
+    public $actGrpsTenderProjectArray;
+    public $actGrpsInquiryBuyProjectArray;
+    public $actGrpsInquiryProjectArray;
+    public $actGrpsContractorArray;
 
     // سرچ بار
     public $searchResults;
@@ -41,6 +47,20 @@ class MainContent extends Component
         $this->actGrpsEngAdsArray = ActCat::find(15)->activityGroup;
         $this->actGrpsManagerAdsArray = ActCat::find(16)->activityGroup;
         $this->actGrpsShopArray = ActCat::find(19)->activityGroup;
+        $this->actGrpsAuctionArray = ActCat::find(20)->activityGroup;
+        $this->actGrpsTenderBuyArray = ActCat::find(21)->activityGroup;
+        $this->actGrpsTenderProjectArray = ActCat::find(22)->activityGroup;
+        $this->actGrpsInquiryBuyProjectArray = ActCat::find(23)->activityGroup;
+        $this->actGrpsInquiryProjectArray = ActCat::find(24)->activityGroup;
+        $this->actGrpsContractorArray = ActCat::find(25)->activityGroup;
+    }
+
+    // فیلتر صفحه اصلی برای آیتم هایی که دسته بندی ست نشده روشون
+    // مثل سرمایه گذار و سرمایه پذیر
+    public function loadSpecificCategory($categoryFilter, $type) {
+        $this->searchResults = null;
+        $this->type = $type;
+        $this->sidebarCategoryFilterCollectionAds = $categoryFilter::where('type', $type)->get()->pluck('activity');
     }
 
     // فیلتر سایدبار برای آگهی ها

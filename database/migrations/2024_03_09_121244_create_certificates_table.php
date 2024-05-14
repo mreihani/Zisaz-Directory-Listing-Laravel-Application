@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('activity_type', ['resume', 'custom_page', 'ads_registration', 'jaban_ads'])->default('resume');
+            $table->enum('activity_type', ['resume', 'custom_page', 'ads_registration'])->default('resume');
             $table->unsignedBigInteger('subactivity_id')->nullable();
             $table->string('subactivity_type')->nullable();
             $table->string('slug')->unique();
@@ -46,7 +46,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-            $table->enum('license_type', ['eng_license', 'ocp_license', 'news_ads', 'business_license', 'other'])->default('eng_license');
+            $table->enum('license_type', ['eng_license', 'ocp_license', 'news_ads', 'business_license', 'bid_license', 'other'])->default('eng_license');
             $table->text('description')->nullable();
             $table->string('license_image')->nullable();
             $table->timestamps();

@@ -20,5 +20,9 @@ class AdsImagesValidationRule implements ValidationRule
         if((empty($this->adsImages)) && ($this->adsType == "selling")) {
             $fail('لطفا تصویر آگهی را وارد نمایید!');
         }
+
+        if((empty($this->adsImages)) && ($this->adsType == "contractor")) {
+            $fail('لطفا تصویر آگهی را وارد نمایید!');
+        }
     }
 }

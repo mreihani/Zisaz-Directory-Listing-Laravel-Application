@@ -28,5 +28,17 @@ class AdsTitleValidationRule implements ValidationRule
         if(($this->adsTitle == "") && ($this->adsType == "investment")) {
             $fail('لطفا عنوان آگهی را وارد نمایید!');
         }
+
+        if(($this->adsTitle == "") && ($this->adsType == "bid")) {
+            $fail('لطفا عنوان آگهی را وارد نمایید!');
+        }
+
+        if(($this->adsTitle == "") && ($this->adsType == "inquiry")) {
+            $fail('لطفا عنوان آگهی را وارد نمایید!');
+        }
+
+        if(($this->adsTitle == "") && ($this->adsType == "contractor")) {
+            $fail('لطفا عنوان آگهی را وارد نمایید!');
+        }
     }
 }

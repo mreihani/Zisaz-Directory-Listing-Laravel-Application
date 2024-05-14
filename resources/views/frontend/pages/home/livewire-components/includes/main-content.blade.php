@@ -26,24 +26,24 @@
                         </span>
                     </a>
 
-                    <a class="text-decoration-none text-dark text-center" href="">
-                        <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/auction.jpg')}}" alt="auction">    
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid'])}}">
+                        <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/auction.jpg')}}" alt="bid">    
                         <span>
                             مزایده و مناقصه
                         </span>
                     </a>
 
-                    <a class="text-decoration-none text-dark text-center" href="">
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/tender.jpg')}}" alt="tender">    
                         <span>
                             استعلام قیمت
                         </span>
                     </a>
 
-                    <a class="text-decoration-none text-dark text-center" href="">
+                    <a class="text-decoration-none text-dark text-center" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'contractor'])}}">
                         <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/eng_manager.jpg')}}" alt="eng_manager">    
                         <span>
-                            پیمانکاران
+                            خدمات مهندسی و پیمانکاری
                         </span>
                     </a>
 

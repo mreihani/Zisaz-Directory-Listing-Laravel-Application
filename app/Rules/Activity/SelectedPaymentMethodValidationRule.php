@@ -17,7 +17,7 @@ class SelectedPaymentMethodValidationRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if($this->adsType == "selling") {
+        if($this->adsType == "selling" || $this->adsType == "contractor") {
             if(!in_array(true, $value)) {
                 $fail('لطفا روش پرداخت کالا را مشخص نمایید.');
             }

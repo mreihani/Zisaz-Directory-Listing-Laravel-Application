@@ -21,11 +21,11 @@ class SelectedCityValidationRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(($this->resumeGoal != "") && ($this->selectedCityId == "")) {
+        if(($this->resumeGoal != "") && ($this->selectedCityId == "") && ($this->adsType != "contractor")) {
             $fail('لطفا شهر را انتخاب کنید!');
         }
 
-        if(($this->adsType != "") && ($this->selectedCityId == "") && ($this->employmentAdsType != "employer")) {
+        if(($this->adsType != "") && ($this->selectedCityId == "") && ($this->employmentAdsType != "employer") && ($this->adsType != "contractor")) {
             $fail('لطفا شهر را انتخاب کنید!');
         }
     }
