@@ -5,7 +5,7 @@
                 <!-- Links-->
                 <div class="row">
                     <div class="col-sm-4 mb-4">
-                        <h3 class="h6 mb-2 pb-1 fs-base text-dark">سایت فایندر</h3>
+                        <h3 class="h6 mb-2 pb-1 fs-base text-dark">سایت زیساز</h3>
                         <ul class="list-unstyled fs-sm">
                             <li>
                                 <a class="nav-link" href="#">درباره ما</a>
