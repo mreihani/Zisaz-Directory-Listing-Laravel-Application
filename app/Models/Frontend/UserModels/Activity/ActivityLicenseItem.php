@@ -7,7 +7,7 @@ use App\Models\Frontend\UserModels\Activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 
-class LicenseItem extends Model
+class ActivityLicenseItem extends Model
 {
     protected $guarded = [];
 

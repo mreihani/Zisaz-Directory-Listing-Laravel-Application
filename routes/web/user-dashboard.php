@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\Activity\UserActivityController;
+use App\Http\Controllers\Frontend\PrivatePage\UserPrivatePageController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileActivityController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileSettingsController;
 use App\Http\Controllers\Frontend\Profile\ProfilePages\UserProfileNotificationsController;
@@ -16,4 +17,7 @@ Route::controller(UserProfileActivityController::class)->group(function () {
 });
 Route::controller(UserActivityController::class)->group(function () {
     Route::get('/create-activity', 'index')->name('user.create-activity.index');
+});
+Route::controller(UserPrivatePageController::class)->group(function () {
+    Route::get('/create-private-page', 'index')->name('user.create-private-page.index');
 });

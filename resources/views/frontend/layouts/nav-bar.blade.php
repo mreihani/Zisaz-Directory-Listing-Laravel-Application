@@ -214,7 +214,7 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                         پشتیبانی
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-activity.index', ['type' => 'custom_page'])}}">
+                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-private-page.index')}}">
                         ثبت کسب و کار
                     </a>
 

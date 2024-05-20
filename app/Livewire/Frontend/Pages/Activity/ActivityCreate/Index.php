@@ -180,9 +180,6 @@ class Index extends Component
     public $eitaaAddress;
     public $adsHaveDiscount;
 
-    // custom web page
-    public $customWebPage;
-
     protected function rules() {
         return [
             'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->resumeGoal, $this->selectedProvinceId, $this->adsType, $this->employmentAdsType),
@@ -306,9 +303,6 @@ class Index extends Component
         $this->inquiryAdsType = "";
         $this->inquirer = "";
         $this->adsHaveDiscount = "no";
-        
-        // custom web page
-        $this->customWebPage = "";
     }
 
     // Get activity type directly by url and show the relevant form
@@ -331,13 +325,6 @@ class Index extends Component
        if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'resume') {
             $this->activityType = 'resume';
             $this->section = 'resume';
-            $this->adsType = "";
-        }
-
-        // ثبت فروشگاه / شرکت
-       if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'custom_page') {
-            $this->activityType = 'custom_page';
-            $this->section = 'custom_page';
             $this->adsType = "";
         }
     }
@@ -425,11 +412,6 @@ class Index extends Component
     }
     public function changeInquiryAdsType($value) {
         $this->inquiryAdsType = $value;
-    }
-
-    // custom page section
-    public function changeCustomPage() {
-        //
     }
 
     // save into db handlers section
@@ -642,20 +624,6 @@ class Index extends Component
             'subactivity_id' => $resume->id,
             'subactivity_type' => get_class($resume),
         ]);
-    }
-
-    // save custom page into Db
-    private function saveCustomPageHandler() {
-        if($this->customWebPage != "") {
-            // create activity item
-            $activity = auth()->user()->activity()->create([
-                'activity_type' => Purify::clean($this->section),
-                'slug' => Str::random() .''. Activity::getLatestId(),
-            ]);
-
-            // To Do
-            // اطلاعات مربوط به صفحه اختصاصی باید در مدل و مایگریشن مخصوص اینجا ریخه شود
-        }
     }
 
     // save selling activity group into DB
@@ -1136,11 +1104,6 @@ class Index extends Component
         // saving resume into DB
         if($this->section == "resume") {
             $this->saveResumeHandler();
-        }
-
-        // ساخت صفحه اختصاصی
-        if($this->section == "custom_page") {
-            $this->saveCustomPageHandler();
         }
 
         // ثبت آگهی

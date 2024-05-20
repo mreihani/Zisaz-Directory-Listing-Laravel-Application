@@ -7,6 +7,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Frontend\UserModels\ActiveCode;
 use App\Models\Frontend\UserModels\Activity\Activity;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\Profile\UserProfile;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -79,5 +80,9 @@ class User extends Authenticatable
    
     public function activity() {
         return $this->hasOne(Activity::class);
+    }
+
+    public function privateSite() {
+        return $this->hasMany(Psite::class);
     }
 }

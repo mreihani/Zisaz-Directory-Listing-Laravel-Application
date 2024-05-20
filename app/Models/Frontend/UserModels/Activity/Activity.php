@@ -8,7 +8,7 @@ use App\Models\Frontend\ReferenceData\Gender\Gender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
-use App\Models\Frontend\UserModels\Activity\LicenseItem;
+use App\Models\Frontend\UserModels\Activity\ActivityLicenseItem;
 use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
@@ -36,7 +36,7 @@ class Activity extends Model
     }
 
     public function license() {
-        return $this->hasMany(LicenseItem::class);
+        return $this->hasMany(ActivityLicenseItem::class);
     }
 
     public function activityGroups() {

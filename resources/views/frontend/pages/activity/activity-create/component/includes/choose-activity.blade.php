@@ -12,7 +12,6 @@
         <select class="form-select form-select-md" wire:model="activityType" wire:change="changeActivityType($event.target.value)">
             <option value="" disabled="">انتخاب نوع فعالیت</option>
             <option value="resume">معرفی رزومه</option>
-            <option value="custom_page">ساخت صفحه اختصاصی</option>
             <option value="ads_registration">ثبت آگهی</option>
         </select>
     </div>

@@ -6,10 +6,8 @@
 
             @include('frontend.pages.activity.activity-create.component.includes.resume.resume-goal-selection')
             @include('frontend.pages.activity.activity-create.component.includes.ads_registration.ads-registration-selection')
-            @include('frontend.pages.activity.activity-create.component.includes.custom_page.custom-web-page')
 
         </div>
     </form> 
-    
 </div>
 

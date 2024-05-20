@@ -20,10 +20,6 @@ class UserActivityController extends Controller
         // route('user.create-activity.index', ['type' => 'resume'])
         // رزومه رو میاره
 
-        // create-activity?type=custom_page
-        // route('user.create-activity.index', ['type' => 'custom_page'])
-        // ثبت فروشگاه یا شرکت رو میاره
-        
         $activityTypeUrl = $request->type;
         
         return view('frontend.pages.activity.activity-create.index', compact('activityTypeUrl'));

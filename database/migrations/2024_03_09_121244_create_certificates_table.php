@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('activity_type', ['resume', 'custom_page', 'ads_registration'])->default('resume');
+            $table->enum('activity_type', ['resume', 'ads_registration'])->default('resume');
             $table->unsignedBigInteger('subactivity_id')->nullable();
             $table->string('subactivity_type')->nullable();
             $table->string('slug')->unique();
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('license_items', function (Blueprint $table) {
+        Schema::create('activity_license_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
@@ -186,7 +186,7 @@ return new class extends Migration
         Schema::dropIfExists('ads_stat_activity');
         Schema::dropIfExists('sellings');
         Schema::dropIfExists('act_grp_activity');
-        Schema::dropIfExists('license_items');
+        Schema::dropIfExists('activity_license_items');
         Schema::dropIfExists('resumes');
         Schema::dropIfExists('activities');
     }
