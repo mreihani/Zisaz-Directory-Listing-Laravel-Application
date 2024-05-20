@@ -63,6 +63,7 @@ class Index extends Component
         $this->slideIteration = 1;
 
         $this->color = "#155bd5";
+        
     }
 
     // slider images repeater form
