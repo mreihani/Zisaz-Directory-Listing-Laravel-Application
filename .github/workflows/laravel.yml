@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           password: ${{ secrets.PASSWORD }}
-          script: "cd /home/jaban/domains/jaban.ir/app/jaban.ir && ./deployer.sh"
+          script: "cd domains/zisaz.ir/zisaz.ir && ./deployer.sh"
