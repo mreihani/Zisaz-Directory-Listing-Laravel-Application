@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Storage;
 class Index extends Component
 {
     use WithFileUploads;
+    
+    public $isDisplayed;
+    public $headerDescription;
 
     // protected function rules() {
     //     return [
@@ -28,36 +31,46 @@ class Index extends Component
 
     // }
 
+    // private function handleVideoUpload($psite) {
+
+    // }
+
+    public function back() {
+        $this->dispatch('privateSiteSectionNumber', 
+            privateSiteSectionNumber: 3, 
+        );
+    }
+
+    // check if private site id is related to the owner
+    private function isPsiteOwner($privateSiteId) {
+        $psite = Psite::findOrFail($this->privateSiteId);
+
+        if($psite->user->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return $psite;
+    }
+
     public function save() {  
        
-        $this->validate();
-
-        // $psite = auth()->user()->privateSite()->create([
-        //     'business_type' => Purify::clean($this->businessType),
-        //     'slug' => str_replace(' ', '-', Purify::clean($this->slug)),
-        // ]);
+        // $this->validate();
         
-        // $hero = $psite->hero()->create([
-        //     'title' => Purify::clean($this->title),
-        //     'description' => Purify::clean($this->description),
-        //     'is_video_displayed' => $this->showPromotionalVideo == true ? 1 : 0,
-        // ]);
-        
-        //save addresses into DB
-        $this->handleSlideUpload($psite, $hero);
+        // save video into DB
+        // $this->handleVideoUpload($psite);
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 2, 
+            privateSiteSectionNumber: 5, 
         );
 
-        // Show Toaster
-        $this->dispatch('showToaster', 
-            title: '', 
-            message: '
-                اطلاعات با موفقیت ذخیره شد.
-            ', 
-            type: 'bg-success'
-        );
+        // // Show Toaster
+        // $this->dispatch('showToaster', 
+        //     title: '', 
+        //     message: '
+        //         اطلاعات با موفقیت ذخیره شد.
+        //     ', 
+        //     type: 'bg-success'
+        // );
     }
 
     public function render()

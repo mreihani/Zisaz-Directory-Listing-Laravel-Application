@@ -62,7 +62,6 @@
             </h2>
 
             @foreach ($itemInputs as $itemKey => $itemValue)
-
                <div class="row mt-3">
                     <div class="col-sm-10">
 
@@ -103,10 +102,6 @@
                 <i class="fi-plus fs-sm me-2"></i>
                 افزودن خدمت دیگر
             </button>
-
-
-
-
         </div>
 
         <div class="d-flex flex-column flex-sm-row bg-light rounded-3 p-4 px-md-5">

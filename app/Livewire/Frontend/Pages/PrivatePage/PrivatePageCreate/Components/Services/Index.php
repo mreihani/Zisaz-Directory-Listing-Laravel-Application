@@ -50,23 +50,22 @@ class Index extends Component
     private function loadInitialValues() {
         if(is_null($this->privateSiteId)) {
 
-            // $this->headerDescription;
-            // $this->isDisplayed;
-
             // service item repeater form
             $this->itemTitle = [null];
             $this->itemDescription = [null];
             $this->itemInputs = [0];
             $this->itemIteration = 1;
         } else {
-            // $this->headerDescription;
-            // $this->isDisplayed;
+            $psite = Psite::findOrFail($this->privateSiteId);
 
+            $this->headerDescription = is_null($psite->services) ? "" : $psite->services->header_description; 
+            $this->isDisplayed = (!is_null($psite->services) && $psite->services->is_displayed == 1) ? true : false;
+            
             // service item repeater form
-            $this->itemTitle = [null];
-            $this->itemDescription = [null];
-            $this->itemInputs = [0];
-            $this->itemIteration = 1;
+            $this->itemTitle = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_title')->toArray();
+            $this->itemDescription = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_description')->toArray();
+            $this->itemInputs = is_null($psite->services) ? [0] : $psite->services->psiteServiceItem->keys()->toArray();
+            $this->itemIteration = is_null($psite->services) ? 1 : $psite->services->psiteServiceItem->count();
         }
     }
 
@@ -95,11 +94,11 @@ class Index extends Component
 
     // store item repeater inputs inti DB
     private function handleServiceItemStore($psite, $service) {
-        if(count($this->itemTitle) == 0) {
+        if(count($this->itemTitle) == 0 || count($this->itemDescription) == 0) {
             return;
         }
         
-        $dir = 'upload/private-website-resources/' . $psite->id . '/hero';
+        $service->psiteServiceItem()->delete();
 
         foreach ($this->itemTitle as $key => $titleValue) {
             if($key > 8) {
@@ -129,12 +128,14 @@ class Index extends Component
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
-        $service = $psite->services()->create([
+        $service = $psite->services()->updateOrCreate([
+            'psite_id' => $psite->id
+        ],[
             'is_displayed' => $this->isDisplayed == true ? 1 : 0,
             'header_description' => Purify::clean($this->headerDescription),
         ]);
 
-        //save addresses into DB
+        //save service items into DB
         $this->handleServiceItemStore($psite, $service);
         
         $this->dispatch('privateSiteSectionNumber', 
@@ -144,15 +145,6 @@ class Index extends Component
         $this->dispatch('privateSiteId', 
             privateSiteId: $psite->id, 
         );
-
-        // Show Toaster
-        // $this->dispatch('showToaster', 
-        //     title: '', 
-        //     message: '
-        //         اطلاعات با موفقیت ذخیره شد.
-        //     ', 
-        //     type: 'bg-success'
-        // );
     }
 
     public function render()
