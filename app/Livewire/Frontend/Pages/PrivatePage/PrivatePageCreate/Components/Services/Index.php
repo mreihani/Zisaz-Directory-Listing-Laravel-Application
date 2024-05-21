@@ -61,7 +61,6 @@ class Index extends Component
             $this->headerDescription = is_null($psite->services) ? "" : $psite->services->header_description; 
             $this->isDisplayed = (!is_null($psite->services) && $psite->services->is_displayed == 1) ? true : false;
             
-            
             // service item repeater form
             $this->itemTitle = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_title')->toArray();
             $this->itemDescription = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_description')->toArray();
