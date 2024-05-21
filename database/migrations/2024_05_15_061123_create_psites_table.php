@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('business_type')->unique();
+            $table->string('business_type')->nullable();
             $table->string('slug')->unique();
-            $table->string('color')->unique();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
 
@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->boolean('is_video_displayed')->default(0);
-            
             $table->timestamps();
         });
 
@@ -37,7 +36,6 @@ return new class extends Migration
             $table->unsignedBigInteger('psite_hero_id');
             $table->foreign('psite_hero_id')->references('id')->on('psite_heroes')->onDelete('cascade');
             $table->string('slider_image')->nullable();
-            
             $table->timestamps();
         });
 
@@ -51,18 +49,26 @@ return new class extends Migration
             $table->text('about_us')->nullable();
             $table->text('licenses')->nullable();
             $table->text('contact_us')->nullable();
-            
             $table->timestamps();
         });
 
-        // Schema::create('psite_services', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger('psite_id');
-        //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
-            
-        //     $table->timestamps();
-        // });
+        Schema::create('psite_services', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('psite_id');
+            $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
+            $table->boolean('is_displayed')->default(0);
+            $table->string('header_description')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('psite_service_items', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('psite_service_id');
+            $table->foreign('psite_service_id')->references('id')->on('psite_services')->onDelete('cascade');
+            $table->string('card_title')->nullable();
+            $table->string('card_description')->nullable();
+            $table->timestamps();
+        });
 
         // Schema::create('psite_promotional_videos', function (Blueprint $table) {
         //     $table->id();
@@ -170,7 +176,8 @@ return new class extends Migration
         // Schema::dropIfExists('psite_license_items');
         // Schema::dropIfExists('psite_projects');
         // Schema::dropIfExists('psite_promotional_videos');
-        // Schema::dropIfExists('psite_services');
+        Schema::dropIfExists('psite_service_items');
+        Schema::dropIfExists('psite_services');
         Schema::dropIfExists('psite_about_us');
         Schema::dropIfExists('psite_hero_sliders');
         Schema::dropIfExists('psite_heroes');

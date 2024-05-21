@@ -24,7 +24,7 @@
 
             <div class="row">
                 <div class="col-md-12 mb-4">
-                    <div class="form-check mb-4">
+                    <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isDisplayed">
                         <label class="form-check-label" for="is-section-displayed">
                             با تایید این گزینه این بخش در وبسایت شما نمایش داده خواهد شد
@@ -119,12 +119,18 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            @if($image !== "") 
+                            @if($image !== "" && !is_string($image)) 
                                 <div class="border rounded-3 p-1" style="width: 150px;">
                                     <div class="d-flex justify-content-center p-1">
                                         <img src="{{$image->temporaryUrl()}}">    
                                     </div>
-                                </div>  
+                                </div>
+                            @elseif($image !== "" && is_string($image))
+                                <div class="border rounded-3 p-1" style="width: 150px;">
+                                    <div class="d-flex justify-content-center p-1">
+                                        <img src="{{asset($image)}}">    
+                                    </div>
+                                </div>
                             @endif
                         </div>
                     </div>

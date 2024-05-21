@@ -5,12 +5,13 @@ namespace App\Livewire\Frontend\Pages\PrivatePage\PrivatePageCreate\Components\A
 use File;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Gate;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
+use App\Rules\PrivateSite\Hero\PrivateSiteSliderImagesValidationRule;
 
 class Index extends Component
 {
@@ -28,7 +29,7 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'image' => 'required|mimes:jpg,jpeg,png,bmp|max:4096',
+            'image' => new PrivateSiteSliderImagesValidationRule(),
             'title' => 'required',
             'aboutUs' => 'required',
             'licenses' => 'required',
@@ -37,9 +38,6 @@ class Index extends Component
     }
 
     protected $messages = [
-        'image.required' => 'لطفا تصویر مربوط به درباره ما را بارگذاری نمایید',
-        'image.mimes' => 'لطفا تصویر با فرمت مجاز را بارگذاری نمایید.',
-        'image.max' => 'حجم تصویر بیشتر از مقدار مجاز است.',
         'title.required' => 'لطفا عنوان اصلی را وارد نمایید',
         'aboutUs.required' => 'لطفا اطلاعات مربوط به درباره ما را وارد نمایید',
         'licenses.required' => 'لطفا اطلاعات مربوط به مجوز ها و افتخارات را وارد نمایید',
@@ -48,19 +46,44 @@ class Index extends Component
 
     public function mount() {
         $this->privateSiteSectionNumber = 2; 
-        $this->image = ""; 
+
+        if(is_null($this->privateSiteId)) {
+            $this->image = ""; 
+            $this->isDisplayed = false;
+        } else {
+            $psite = Psite::findOrFail($this->privateSiteId);
+            
+            $this->title = is_null($psite->aboutUs) ? "" : $psite->aboutUs->title; 
+            $this->image = is_null($psite->aboutUs) ? "" : $psite->aboutUs->image; 
+            $this->aboutUs = is_null($psite->aboutUs) ? "" : $psite->aboutUs->about_us; 
+            $this->licenses = is_null($psite->aboutUs) ? "" : $psite->aboutUs->licenses; 
+            $this->contactUs = is_null($psite->aboutUs) ? "" : $psite->aboutUs->contact_us; 
+            $this->isDisplayed = (!is_null($psite->aboutUs) && $psite->aboutUs->is_displayed == 1) ? true : false;
+        }
     }
 
     private function handleImageUpload($psite) {
-        $dir = 'upload/private-website-resources/' . $psite->id . '/about-us';
 
-        $unique_image_name = hexdec(uniqid());
-        $filename = $unique_image_name . '.' . 'jpg';
-        $img = Image::make($this->image)->fit(576, 562)->encode('jpg');
-        $image_path = $dir . '/' . $filename;
-        Storage::disk('public')->put($image_path, $img);
+        if(!is_string($this->image)) {
 
-        return 'storage/upload/private-website-resources/' . $psite->id . '/about-us' . '/' . $filename;
+            // remove previous image if available
+            if(!is_null($psite->aboutUs) && !is_null($psite->aboutUs->image)) {
+                $image = $psite->aboutUs->image;
+                unlink($image);
+            }
+
+            $dir = 'upload/private-website-resources/' . $psite->id . '/about-us';
+
+            $unique_image_name = hexdec(uniqid());
+            $filename = $unique_image_name . '.' . 'jpg';
+            $img = Image::make($this->image)->fit(576, 562)->encode('jpg');
+            $image_path = $dir . '/' . $filename;
+            Storage::disk('public')->put($image_path, $img);
+
+            return 'storage/upload/private-website-resources/' . $psite->id . '/about-us' . '/' . $filename;
+        } else {
+            return $this->image;
+        }
     }
 
     public function back() {
@@ -86,7 +109,9 @@ class Index extends Component
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
-        $aboutUs = $psite->aboutUs()->create([
+        $aboutUs = $psite->aboutUs()->updateOrCreate([
+            'psite_id' => $psite->id
+        ],[
             'is_displayed' => $this->isDisplayed == true ? 1 : 0,
             'title' => Purify::clean($this->title),
             'about_us' => Purify::clean($this->aboutUs),
@@ -99,14 +124,9 @@ class Index extends Component
             privateSiteSectionNumber: 3, 
         );
 
-        // Show Toaster
-        // $this->dispatch('showToaster', 
-        //     title: '', 
-        //     message: '
-        //         اطلاعات با موفقیت ذخیره شد.
-        //     ', 
-        //     type: 'bg-success'
-        // );
+        $this->dispatch('privateSiteId', 
+            privateSiteId: $psite->id, 
+        );
     }
 
     public function render()

@@ -11,15 +11,13 @@ use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteFooter;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMember;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAboutUs;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteProject;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PSiteService;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteService;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteLicenseItem;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMiddleBanner;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTrustedCustomer;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsitePromotionalVideo;
-
-
 
 class Psite extends Model
 {
@@ -66,7 +64,7 @@ class Psite extends Model
     }
 
     public function services() {
-        return $this->hasOne(PSiteService::class);
+        return $this->hasOne(PsiteService::class);
     }
 
     public function testimonials() {

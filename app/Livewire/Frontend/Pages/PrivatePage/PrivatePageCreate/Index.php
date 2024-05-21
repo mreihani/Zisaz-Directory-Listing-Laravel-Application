@@ -19,6 +19,7 @@ class Index extends Component
     public $privateSiteSectionNumber;
    
     public function mount() {
+        $this->privateSiteId = null;
         $this->privateSiteSectionNumber = 1;
     }
 

@@ -48,7 +48,7 @@
                     </a>
 
                     <a class="text-decoration-none text-dark text-center" href="">
-                        <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/technical.jpg')}}" alt="technical">    
+                        <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/technical.svg')}}" alt="technical">    
                         <span>
                             نیروهای فنی ساختمان
                         </span>
@@ -56,7 +56,7 @@
 
                     <a class="text-decoration-none text-dark text-center" href="">
                         <div>
-                            <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/projects.jpg')}}" alt="projects">    
+                            <img class="d-block rounded-circle mx-auto mx-md-0 mb-2" src="{{asset('assets/frontend/img/jaban/categories/projects.svg')}}" alt="projects">    
                             <span>
                                 پروژه های خاص
                             </span>

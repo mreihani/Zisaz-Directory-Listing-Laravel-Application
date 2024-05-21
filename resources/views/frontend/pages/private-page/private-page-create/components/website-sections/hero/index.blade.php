@@ -3,6 +3,8 @@
     <form wire:submit.prevent="save" novalidate>
         <div class="bg-light rounded-3 p-4 p-md-5 mb-3">
 
+            <input type="hidden" wire:model="privateSiteId">
+            
             <!-- Hero Alert message-->
             <div class="alert alert-accent" role="alert">
                 <h4 class="pt-2 alert-heading">به طراحی صفحه اختصاصی خوش آمدید!</h4>
@@ -88,13 +90,12 @@
                     @endif
                 </div>
 
-                <div class="col-md-12 mb-4 jquery-palette-color-picker-master-body" wire:ignore x-init="
+                {{-- <div class="col-md-12 mb-4 jquery-palette-color-picker-master-body" wire:ignore x-init="
                     $(document).ready(function(){
                         const submitBtn =  $(this).closest('form').find(':submit');
 
                         $('form').on('click', $(submitBtn), function(e) {
                             let selectedColor = $(this).find('.palette-color-picker-button .active').data('color');
-                            console.log(selectedColor);
                             @this.color = selectedColor;
                         });
                     });
@@ -105,7 +106,7 @@
                     <div class="jquery-palette-color-picker-master-plugin" id="sample-id-3b">
                         <input type="text" id="unique-id-3b" name="unique-name-3b" wire:model="color" data-palette='["#D50000", "#155bd5","#69F0AE","#FFFF00"]' value="#155bd5">
                     </div>
-                </div>
+                </div> --}}
               
             </div>
 
@@ -163,50 +164,98 @@
             <hr class="mb-4 mt-2">
 
             @foreach ($slideInputs as $slideKey => $slideValue)
-                <div class="row">
-                    <div class="col-sm-10">
 
-                        <!-- File uploader -->
-                        <div class="mb-2">
-                            <label class="form-label fw-bold" for="pr-description">
-                                تصویر اسلایدر را بارگذاری نمایید
-                                <span class="text-danger">*</span>
-                            </label>
+                @if(count($slideImages) && isset($slideImages[$slideValue]) && is_string($slideImages[$slideValue]))
+                    <div class="row mt-3">
+                        <div class="col-sm-10">
 
-                            <label>
-                                (فرمت مجاز تصویر PNG، JPG و حداکثر حجم مجاز 4 مگابایت است)
-                            </label>
+                            <!-- File uploader -->
+                            <div class="mb-2">
+                                <label class="form-label fw-bold" for="pr-description">
+                                    تصویر اسلایدر را بارگذاری نمایید
+                                    <span class="text-danger">*</span>
+                                </label>
 
-                            @error('slideImages.'.$slideValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-3">
-                                        <input class="form-control" type="file" wire:model="slideImages.{{$slideValue}}">
+                                <label>
+                                    (فرمت مجاز تصویر PNG، JPG و حداکثر حجم مجاز 4 مگابایت است)
+                                </label>
+
+                                @error('slideImages.'.$slideValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <input class="form-control image-input-selector" type="file" wire:model="slideImages.{{$slideValue}}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    @if(count($slideImages) && isset($slideImages[$slideValue])) 
+                                    <div class="col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-12 d-flex justify-content-center">
                                                 <div class="border rounded-3 p-1" style="width: 150px;">
                                                     <div class="d-flex justify-content-center p-1">
-                                                        <img src="{{$slideImages[$slideValue]->temporaryUrl()}}">    
+                                                        <img src="{{asset($slideImages[$slideValue])}}">    
                                                     </div>
                                                 </div>  
                                             </div>
                                         </div>
-                                    @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-2 d-flex justify-content-center align-items-center">
+                            <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removeSlide({{$slideKey}})">
+                                <i class="fi-trash fs-sm me-2"></i>
+                                حذف
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-sm-2 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removeSlide({{$slideKey}})">
-                            <i class="fi-trash fs-sm me-2"></i>
-                            حذف
-                        </button>
+                @else
+                    <div class="row mt-3">
+                        <div class="col-sm-10">
+
+                            <!-- File uploader -->
+                            <div class="mb-2">
+                                <label class="form-label fw-bold" for="pr-description">
+                                    تصویر اسلایدر را بارگذاری نمایید
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <label>
+                                    (فرمت مجاز تصویر PNG، JPG و حداکثر حجم مجاز 4 مگابایت است)
+                                </label>
+
+                                @error('slideImages.'.$slideValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <input class="form-control" type="file" wire:model="slideImages.{{$slideValue}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @if(count($slideImages) && isset($slideImages[$slideValue])) 
+                                            <div class="row">
+                                                <div class="col-sm-12 d-flex justify-content-center">
+                                                    <div class="border rounded-3 p-1" style="width: 150px;">
+                                                        <div class="d-flex justify-content-center p-1">
+                                                            <img src="{{$slideImages[$slideValue]->temporaryUrl()}}">    
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 d-flex justify-content-center align-items-center">
+                            <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removeSlide({{$slideKey}})">
+                                <i class="fi-trash fs-sm me-2"></i>
+                                حذف
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
+
             @endforeach
             
             <button class="btn btn-link btn-lg text-primary px-0 mb-md-n2" type="button" wire:click="addSlide({{$slideIteration}})">
