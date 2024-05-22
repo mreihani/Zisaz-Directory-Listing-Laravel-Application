@@ -44,6 +44,7 @@ class Index extends Component
     public function mount() {
         $this->privateSiteSectionNumber = 3; 
 
+        
         $this->loadInitialValues();
     }
 
