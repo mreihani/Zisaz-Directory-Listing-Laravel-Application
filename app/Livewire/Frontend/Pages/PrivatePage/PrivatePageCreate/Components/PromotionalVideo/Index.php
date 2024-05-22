@@ -14,22 +14,19 @@ class Index extends Component
 {
     use WithFileUploads;
     
-    public $isDisplayed;
+    public $isHidden;
     public $headerDescription;
+    public $video;
 
-    // protected function rules() {
-    //     return [
-    //         'businessType' => 'required',
-    //     ];
-    // }
+    protected function rules() {
+        return [
+            'headerDescription' => 'required',
+        ];
+    }
 
-    // protected $messages = [
-    //     'businessType.required' => 'لطفا نوع کسب و کار خود را انتخاب نمایید.',
-    // ];
-
-    // public function mount() {
-
-    // }
+    protected $messages = [
+        'headerDescription.required' => 'لطفا شرح خدمات را وارد نمایید.',
+    ];
 
     // private function handleVideoUpload($psite) {
 
@@ -54,8 +51,17 @@ class Index extends Component
 
     public function save() {  
        
-        // $this->validate();
+        $this->validate();
         
+        $psite = $this->isPsiteOwner($this->privateSiteId);
+
+        $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
+            'psite_id' => $psite->id
+        ],[
+            'is_hidden' => $this->isHidden == true ? 1 : 0,
+            'header_description' => Purify::clean($this->headerDescription),
+        ]);
+
         // save video into DB
         // $this->handleVideoUpload($psite);
 

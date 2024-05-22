@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isDisplayed">
+                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden">
                         <label class="form-check-label" for="is-section-displayed">
                             با تایید این گزینه این بخش در وبسایت شما نمایش داده خواهد شد
                         </label>
@@ -110,8 +110,12 @@
                         (فرمت مجاز تصویر PNG، JPG و حداکثر حجم مجاز 4 مگابایت است)
                     </label>
 
-                    @error('image') <div class="text-danger error mb-2">{{ $message }}</div> @enderror
-            
+                    <input type="hidden" wire:model="imageValidation">
+
+                    @if($errors->has('imageValidation'))
+                        <div class="text-danger">{{ $errors->first('imageValidation') }}</div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-6 mt-2">
                             <div class="mb-3">
@@ -119,13 +123,13 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-center align-items-center">
-                            @if($image !== "" && !is_string($image)) 
+                            @if($image !== null && !is_string($image)) 
                                 <div class="border rounded-3 p-1" style="width: 150px;">
                                     <div class="d-flex justify-content-center p-1">
                                         <img src="{{$image->temporaryUrl()}}">    
                                     </div>
                                 </div>
-                            @elseif($image !== "" && is_string($image))
+                            @elseif($image !== null && is_string($image))
                                 <div class="border rounded-3 p-1" style="width: 150px;">
                                     <div class="d-flex justify-content-center p-1">
                                         <img src="{{asset($image)}}">    

@@ -16,8 +16,8 @@
                 </ul>
             </div>
 
-            <!-- Display settins-->
-            <h2 class="h5 font-vazir mb-4 mt-3">
+             <!-- Display settins-->
+             <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-eye-on text-primary fs-5 mt-n1 me-2"></i>
                 تنظیمات نمایش بخش
             </h2>
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isDisplayed">
+                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden">
                         <label class="form-check-label" for="is-section-displayed">
                             با تایید این گزینه این بخش در وبسایت شما نمایش داده خواهد شد
                         </label>
@@ -35,20 +35,42 @@
 
             <!-- About information-->
             <h2 class="h5 font-vazir mb-4 mt-3">
+                <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
+                اطلاعات خدمات ما
+            </h2>
+
+            <div class="row">
+
+                <div class="col-md-12 mb-4">
+                    <label class="form-label fw-bold" for="pr-business-header-description">
+                        توضیحات
+                    </label>
+                    <span class="text-danger">*</span>
+                    <input class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription">
+
+                    @if($errors->has('headerDescription'))
+                        <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
+                    @endif
+                </div>
+            
+            </div>
+
+            <!-- About information-->
+            <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-video text-primary fs-5 mt-n1 me-2"></i>
-                اطلاعات ویدئو
+                بارگذاری ویدئو
             </h2>
 
             <div class="row">
                 <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-header-description">
+                    <label class="form-label fw-bold" for="pr-business-upload-video">
                         شرح خدمات
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="headerDescription">
+                    <input class="form-control form-control-md" type="text" id="pr-business-upload-video" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="video">
 
-                    @if($errors->has('headerDescription'))
-                        <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
+                    @if($errors->has('video'))
+                        <span class="text-danger">{{ $errors->first('video') }}</span>
                     @endif
                 </div>
             </div>

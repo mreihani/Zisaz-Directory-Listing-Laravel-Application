@@ -43,7 +43,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('psite_id');
             $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-            $table->boolean('is_displayed')->default(0);
+            $table->boolean('is_hidden')->default(0);
             $table->string('image')->nullable();
             $table->string('title')->nullable();
             $table->text('about_us')->nullable();
@@ -56,7 +56,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('psite_id');
             $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-            $table->boolean('is_displayed')->default(0);
+            $table->boolean('is_hidden')->default(0);
             $table->string('header_description')->nullable();
             $table->timestamps();
         });
@@ -74,7 +74,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -83,7 +83,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -102,7 +102,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -111,7 +111,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -120,7 +120,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -129,7 +129,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -138,7 +138,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });
@@ -147,7 +147,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->unsignedBigInteger('psite_id');
         //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_displayed')->default(0);
+        //     $table->boolean('is_hidden')->default(0);
             
         //     $table->timestamps();
         // });

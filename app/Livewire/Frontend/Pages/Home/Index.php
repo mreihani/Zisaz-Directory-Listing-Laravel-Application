@@ -34,6 +34,7 @@ class Index extends Component
     public $fifthSlideLinkUrl;
 
     public function mount() {
+        echo phpInfo();
         $this->searchResults = null;
         $this->getAdsRegistrations();
 

@@ -19,7 +19,7 @@ class Index extends Component
     public $privateSiteSectionNumber;
 
     public $headerDescription;
-    public $isDisplayed;
+    public $isHidden;
 
     // service item repeater form
     public $itemTitle;
@@ -43,7 +43,6 @@ class Index extends Component
 
     public function mount() {
         $this->privateSiteSectionNumber = 3; 
-
         
         $this->loadInitialValues();
     }
@@ -60,7 +59,7 @@ class Index extends Component
             $psite = Psite::findOrFail($this->privateSiteId);
 
             $this->headerDescription = is_null($psite->services) ? "" : $psite->services->header_description; 
-            $this->isDisplayed = (!is_null($psite->services) && $psite->services->is_displayed == 1) ? true : false;
+            $this->isHidden = (!is_null($psite->services) && $psite->services->is_hidden == 1) ? true : false;
             
             // service item repeater form
             $this->itemTitle = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_title')->toArray();
@@ -132,7 +131,7 @@ class Index extends Component
         $service = $psite->services()->updateOrCreate([
             'psite_id' => $psite->id
         ],[
-            'is_displayed' => $this->isDisplayed == true ? 1 : 0,
+            'is_hidden' => $this->isHidden == true ? 1 : 0,
             'header_description' => Purify::clean($this->headerDescription),
         ]);
 

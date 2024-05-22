@@ -11,7 +11,7 @@ use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
-use App\Rules\PrivateSite\Hero\PrivateSiteSliderImagesValidationRule;
+use App\Rules\PrivateSite\AboutUs\PrivateSiteAboutUsImageValidationRule;
 
 class Index extends Component
 {
@@ -21,15 +21,16 @@ class Index extends Component
     public $privateSiteSectionNumber;
 
     public $image;
+    public $imageValidation;
     public $title;
     public $aboutUs;
     public $licenses;
     public $contactUs;
-    public $isDisplayed;
+    public $isHidden;
 
     protected function rules() {
         return [
-            'image' => new PrivateSiteSliderImagesValidationRule(),
+            'imageValidation' => new PrivateSiteAboutUsImageValidationRule($this->image),
             'title' => 'required',
             'aboutUs' => 'required',
             'licenses' => 'required',
@@ -48,17 +49,17 @@ class Index extends Component
         $this->privateSiteSectionNumber = 2; 
 
         if(is_null($this->privateSiteId)) {
-            $this->image = ""; 
-            $this->isDisplayed = false;
+            $this->image = null; 
+            $this->isHidden = false;
         } else {
             $psite = Psite::findOrFail($this->privateSiteId);
             
             $this->title = is_null($psite->aboutUs) ? "" : $psite->aboutUs->title; 
-            $this->image = is_null($psite->aboutUs) ? "" : $psite->aboutUs->image; 
+            $this->image = is_null($psite->aboutUs) ? null : $psite->aboutUs->image; 
             $this->aboutUs = is_null($psite->aboutUs) ? "" : $psite->aboutUs->about_us; 
             $this->licenses = is_null($psite->aboutUs) ? "" : $psite->aboutUs->licenses; 
             $this->contactUs = is_null($psite->aboutUs) ? "" : $psite->aboutUs->contact_us; 
-            $this->isDisplayed = (!is_null($psite->aboutUs) && $psite->aboutUs->is_displayed == 1) ? true : false;
+            $this->isHidden = (!is_null($psite->aboutUs) && $psite->aboutUs->is_hidden == 1) ? true : false;
         }
     }
 
@@ -112,7 +113,7 @@ class Index extends Component
         $aboutUs = $psite->aboutUs()->updateOrCreate([
             'psite_id' => $psite->id
         ],[
-            'is_displayed' => $this->isDisplayed == true ? 1 : 0,
+            'is_hidden' => $this->isHidden == true ? 1 : 0,
             'title' => Purify::clean($this->title),
             'about_us' => Purify::clean($this->aboutUs),
             'licenses' => Purify::clean($this->licenses),
