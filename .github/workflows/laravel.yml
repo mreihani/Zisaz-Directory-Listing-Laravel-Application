@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to server
-      - uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
           node-version: 20.x
           host: ${{ secrets.HOST }}
