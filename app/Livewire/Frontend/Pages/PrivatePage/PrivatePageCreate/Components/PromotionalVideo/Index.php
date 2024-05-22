@@ -49,6 +49,10 @@ class Index extends Component
         return $psite;
     }
 
+    public function changeDisplayStatus() {
+        //
+    }
+
     public function save() {  
        
         $this->validate();

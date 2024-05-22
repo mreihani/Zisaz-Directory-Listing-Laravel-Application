@@ -29,16 +29,16 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'headerDescription' => 'required',
-            'itemTitle.*' => 'required',
-            'itemDescription.*' => 'required',
+            'headerDescription' => 'required_if:isHidden,==,false',
+            'itemTitle.*' => 'required_if:isHidden,==,false',
+            'itemDescription.*' => 'required_if:isHidden,==,false',
         ];
     }
 
     protected $messages = [
-        'headerDescription.required' => 'لطفا شرح خدمات را وارد نمایید.',
-        'itemTitle.*.required' => 'لطفا عنوان خدمت را وارد نمایید.',
-        'itemDescription.*.required' => 'لطفا توضیحات خدمت را وارد نمایید.',
+        'headerDescription.required_if' => 'لطفا شرح خدمات را وارد نمایید.',
+        'itemTitle.*.required_if' => 'لطفا عنوان خدمت را وارد نمایید.',
+        'itemDescription.*.required_if' => 'لطفا توضیحات خدمت را وارد نمایید.',
     ];
 
     public function mount() {
@@ -122,21 +122,33 @@ class Index extends Component
         return $psite;
     }
 
+    public function changeDisplayStatus() {
+        //
+    }
+
     public function save() {  
        
         $this->validate();
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
-        $service = $psite->services()->updateOrCreate([
-            'psite_id' => $psite->id
-        ],[
-            'is_hidden' => $this->isHidden == true ? 1 : 0,
-            'header_description' => Purify::clean($this->headerDescription),
-        ]);
+        if($this->isHidden) {
+            $service = $psite->services()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+            ]);
+        } else {
+            $service = $psite->services()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_description' => Purify::clean($this->headerDescription),
+            ]);
 
-        //save service items into DB
-        $this->handleServiceItemStore($psite, $service);
+            //save service items into DB
+            $this->handleServiceItemStore($psite, $service);
+        }
         
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 4, 

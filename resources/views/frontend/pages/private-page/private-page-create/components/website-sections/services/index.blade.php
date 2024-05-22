@@ -25,9 +25,9 @@
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden">
+                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden" wire:change="changeDisplayStatus()">
                         <label class="form-check-label" for="is-section-displayed">
-                            با تایید این گزینه این بخش در وبسایت شما نمایش داده خواهد شد
+                            با تایید این گزینه این بخش در وبسایت شما مخفی خواهد شد
                         </label>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         شرح خدمات
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="headerDescription">
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="headerDescription">
 
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
@@ -70,18 +70,17 @@
                                 خدمت مورد نظر را شرح دهید
                                 <span class="text-danger">*</span>
                             </label>
-
                             
                             <div class="row">
                                 <div class="col-sm-12 mb-3">
                                     <div>
-                                        <input class="form-control" type="text" wire:model="itemTitle.{{$itemValue}}" placeholder="عنوان خدمت را وارد نمایید">
+                                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control" type="text" wire:model="itemTitle.{{$itemValue}}" placeholder="عنوان خدمت را وارد نمایید">
                                     </div>
                                     @error('itemTitle.'.$itemValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="col-sm-12 mb-3">
                                     <div>
-                                        <textarea class="form-control" wire:model="itemDescription.{{$itemValue}}" rows="5" placeholder="توضیحات کوتاه در مورد خدمت وارد کنید"></textarea>
+                                        <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control" wire:model="itemDescription.{{$itemValue}}" rows="5" placeholder="توضیحات کوتاه در مورد خدمت وارد کنید"></textarea>
                                     </div>
                                     @error('itemDescription.'.$itemValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
                                 </div>

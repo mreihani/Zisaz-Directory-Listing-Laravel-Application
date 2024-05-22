@@ -30,19 +30,19 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'imageValidation' => new PrivateSiteAboutUsImageValidationRule($this->image),
-            'title' => 'required',
-            'aboutUs' => 'required',
-            'licenses' => 'required',
-            'contactUs' => 'required',
+            'imageValidation' => new PrivateSiteAboutUsImageValidationRule($this->image, $this->isHidden),
+            'title' => 'required_if:isHidden,==,false',
+            'aboutUs' => 'required_if:isHidden,==,false',
+            'licenses' => 'required_if:isHidden,==,false',
+            'contactUs' => 'required_if:isHidden,==,false',
         ];
     }
 
     protected $messages = [
-        'title.required' => 'لطفا عنوان اصلی را وارد نمایید',
-        'aboutUs.required' => 'لطفا اطلاعات مربوط به درباره ما را وارد نمایید',
-        'licenses.required' => 'لطفا اطلاعات مربوط به مجوز ها و افتخارات را وارد نمایید',
-        'contactUs.required' => 'لطفا اطلاعات تماس با ما را وارد نمایید',
+        'title.required_if' => 'لطفا عنوان اصلی را وارد نمایید',
+        'aboutUs.required_if' => 'لطفا اطلاعات مربوط به درباره ما را وارد نمایید',
+        'licenses.required_if' => 'لطفا اطلاعات مربوط به مجوز ها و افتخارات را وارد نمایید',
+        'contactUs.required_if' => 'لطفا اطلاعات تماس با ما را وارد نمایید',
     ];
 
     public function mount() {
@@ -104,22 +104,34 @@ class Index extends Component
         return $psite;
     }
 
+    public function changeDisplayStatus() {
+        //
+    }
+
     public function save() {  
       
         $this->validate();
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
-        $aboutUs = $psite->aboutUs()->updateOrCreate([
-            'psite_id' => $psite->id
-        ],[
-            'is_hidden' => $this->isHidden == true ? 1 : 0,
-            'title' => Purify::clean($this->title),
-            'about_us' => Purify::clean($this->aboutUs),
-            'licenses' => Purify::clean($this->licenses),
-            'contact_us' => Purify::clean($this->contactUs),
-            'image' => $this->handleImageUpload($psite),
-        ]);
+        if($this->isHidden) {
+            $aboutUs = $psite->aboutUs()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+            ]);
+        } else {
+            $aboutUs = $psite->aboutUs()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'title' => Purify::clean($this->title),
+                'about_us' => Purify::clean($this->aboutUs),
+                'licenses' => Purify::clean($this->licenses),
+                'contact_us' => Purify::clean($this->contactUs),
+                'image' => $this->handleImageUpload($psite),
+            ]);
+        }
         
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 3, 

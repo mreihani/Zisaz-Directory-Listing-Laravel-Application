@@ -25,9 +25,9 @@
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden">
+                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden" wire:change="changeDisplayStatus()">
                         <label class="form-check-label" for="is-section-displayed">
-                            با تایید این گزینه این بخش در وبسایت شما نمایش داده خواهد شد
+                            با تایید این گزینه این بخش در وبسایت شما مخفی خواهد شد
                         </label>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                 <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
                 اطلاعات درباره ما
             </h2>
-
+           
             <div class="row">
 
                 <div class="col-md-12 mb-4">
@@ -46,7 +46,7 @@
                         عنوان اصلی
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control form-control-md" type="text" id="pr-business-about-us-title" placeholder="عنوان اصلی بخش درباره ما را وارد کنید" wire:model="title">
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-about-us-title" placeholder="عنوان اصلی بخش درباره ما را وارد کنید" wire:model="title">
 
                     @if($errors->has('title'))
                         <span class="text-danger">{{ $errors->first('title') }}</span>
@@ -59,7 +59,7 @@
                     </label>
                     <span class="text-danger">*</span>
 
-                    <textarea class="form-control" rows="5" id="pr-business-about-us" placeholder="توضیحات کوتاه در مورد کسب و کار خود وارد کنید" wire:model="aboutUs"></textarea>
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control" rows="5" id="pr-business-about-us" placeholder="توضیحات کوتاه در مورد کسب و کار خود وارد کنید" wire:model="aboutUs"></textarea>
 
                     @if($errors->has('aboutUs'))
                         <span class="text-danger">{{ $errors->first('aboutUs') }}</span>
@@ -72,7 +72,7 @@
                     </label>
                     <span class="text-danger">*</span>
 
-                    <textarea class="form-control" rows="5" id="pr-business-about-us" placeholder="توضیحات کوتاه در مورد مجوز ها و افتخارات خود وارد کنید" wire:model="licenses"></textarea>
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control" rows="5" id="pr-business-about-us" placeholder="توضیحات کوتاه در مورد مجوز ها و افتخارات خود وارد کنید" wire:model="licenses"></textarea>
 
                     @if($errors->has('licenses'))
                         <span class="text-danger">{{ $errors->first('licenses') }}</span>
@@ -85,7 +85,7 @@
                     </label>
                     <span class="text-danger">*</span>
 
-                    <textarea class="form-control" rows="5" id="pr-business-about-us" placeholder="توضیحات کوتاه تماس با ما را وارد کنید" wire:model="contactUs"></textarea>
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control" rows="5" id="pr-business-about-us" placeholder="توضیحات کوتاه تماس با ما را وارد کنید" wire:model="contactUs"></textarea>
 
                     @if($errors->has('contactUs'))
                         <span class="text-danger">{{ $errors->first('contactUs') }}</span>
@@ -119,7 +119,7 @@
                     <div class="row">
                         <div class="col-md-6 mt-2">
                             <div class="mb-3">
-                                <input class="form-control" type="file" wire:model="image">
+                                <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control" type="file" wire:model="image">
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-center align-items-center">

@@ -14,14 +14,16 @@ class PrivateSiteAboutUsImageValidationRule implements ValidationRule
      */
 
     public $image;
+    public $isHidden;
 
-    public function __construct($image) {
+    public function __construct($image, $isHidden) {
         $this->image = $image;
+        $this->isHidden = $isHidden;
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!is_string($this->image)) {
+        if(!is_string($this->image) && !$this->isHidden) {
             if(!isset($this->image) || $this->image == null) {
                 $fail('لطفا تصویر را بارگذاری نمایید.');
             }

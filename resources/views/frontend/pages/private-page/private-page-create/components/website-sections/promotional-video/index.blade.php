@@ -25,9 +25,9 @@
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden">
+                        <input class="form-check-input" type="checkbox" id="is-section-displayed" wire:model="isHidden" wire:change="changeDisplayStatus()">
                         <label class="form-check-label" for="is-section-displayed">
-                            با تایید این گزینه این بخش در وبسایت شما نمایش داده خواهد شد
+                            با تایید این گزینه این بخش در وبسایت شما مخفی خواهد شد
                         </label>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         توضیحات
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription">
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription">
 
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
@@ -67,7 +67,7 @@
                         شرح خدمات
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control form-control-md" type="text" id="pr-business-upload-video" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="video">
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-upload-video" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="video">
 
                     @if($errors->has('video'))
                         <span class="text-danger">{{ $errors->first('video') }}</span>
