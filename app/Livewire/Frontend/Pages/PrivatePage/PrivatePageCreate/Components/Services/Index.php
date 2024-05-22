@@ -50,7 +50,6 @@ class Index extends Component
     private function loadInitialValues() {
         if(is_null($this->privateSiteId)) {
 
-            
             // service item repeater form
             $this->itemTitle = [null];
             $this->itemDescription = [null];
