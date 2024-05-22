@@ -21,7 +21,6 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
-          node-version: 20.x
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
