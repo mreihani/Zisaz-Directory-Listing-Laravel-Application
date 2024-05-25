@@ -70,14 +70,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Schema::create('psite_promotional_videos', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger('psite_id');
-        //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_hidden')->default(0);
-            
-        //     $table->timestamps();
-        // });
+        Schema::create('psite_promotional_videos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('psite_id');
+            $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
+            $table->boolean('is_hidden')->default(0);
+            $table->string('header_description')->nullable();
+            $table->string('video')->nullable();
+            $table->timestamps();
+        });
 
         // Schema::create('psite_projects', function (Blueprint $table) {
         //     $table->id();
@@ -175,7 +176,7 @@ return new class extends Migration
         // Schema::dropIfExists('psite_members');
         // Schema::dropIfExists('psite_license_items');
         // Schema::dropIfExists('psite_projects');
-        // Schema::dropIfExists('psite_promotional_videos');
+        Schema::dropIfExists('psite_promotional_videos');
         Schema::dropIfExists('psite_service_items');
         Schema::dropIfExists('psite_services');
         Schema::dropIfExists('psite_about_us');

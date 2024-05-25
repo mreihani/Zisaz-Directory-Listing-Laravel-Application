@@ -162,3 +162,8 @@ input[type=number] {
 .footer-mobile span {
   font-size: 10px;
 }
+
+/* create private page video section styles */
+.private-page progress {
+  width: 100%;
+}

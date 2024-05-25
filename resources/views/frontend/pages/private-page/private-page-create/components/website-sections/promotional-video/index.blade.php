@@ -40,7 +40,6 @@
             </h2>
 
             <div class="row">
-
                 <div class="col-md-12 mb-4">
                     <label class="form-label fw-bold" for="pr-business-header-description">
                         توضیحات
@@ -52,8 +51,16 @@
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
                     @endif
                 </div>
-            
             </div>
+
+            <div
+                x-data="{ uploading: false, progress: 0 }"
+                x-on:livewire-upload-start="uploading = true"
+                x-on:livewire-upload-finish="uploading = false"
+                x-on:livewire-upload-cancel="uploading = false"
+                x-on:livewire-upload-error="uploading = false"
+                x-on:livewire-upload-progress="progress = $event.detail.progress"
+            >
 
             <!-- About information-->
             <h2 class="h5 font-vazir mb-4 mt-3">
@@ -64,14 +71,27 @@
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <label class="form-label fw-bold" for="pr-business-upload-video">
-                        شرح خدمات
+                        ویدئوی تبلیغاتی خود را بارگذاری نمایید
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-upload-video" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="video">
 
-                    @if($errors->has('video'))
-                        <span class="text-danger">{{ $errors->first('video') }}</span>
+                    <label class="" for="pr-business-upload-video">
+                        (حداکثر حجم مجاز 100 مگابایت و نوع فایل مجاز mp4 ،flv و mkv است)
+                    </label>
+                    
+                    <input class="form-control form-control-md" {{ $isHidden == true ? 'disabled' : '' }} type="file" wire:model="video" accept=".mp4, .avi, .mkv">
+
+                    <input type="hidden" wire:model="videoValidation">
+
+                    @if($errors->has('videoValidation'))
+                        <div class="text-danger">{{ $errors->first('videoValidation') }}</div>
                     @endif
+                    
+                    <div class="mt-3 private-page">
+                        <div x-show="uploading">
+                            <progress max="100" x-bind:value="progress"></progress>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

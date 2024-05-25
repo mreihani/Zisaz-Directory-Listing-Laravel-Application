@@ -63,7 +63,6 @@ return [
             'visibility' => 'private',
             'throw' => true,
         ],
-
     ],
 
     /*

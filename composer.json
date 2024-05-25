@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
         "morilog/jalali": "3.*",
+        "pbmedia/laravel-ffmpeg": "^8.5",
         "stevebauman/purify": "^6.1"
     },
     "require-dev": {

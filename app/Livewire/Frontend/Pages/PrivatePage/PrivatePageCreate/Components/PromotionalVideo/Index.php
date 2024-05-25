@@ -5,32 +5,78 @@ namespace App\Livewire\Frontend\Pages\PrivatePage\PrivatePageCreate\Components\P
 use File;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use FFMpeg\Format\Video\X264;
 use Livewire\WithFileUploads;
-use Stevebauman\Purify\Facades\Purify;
+use FFMpeg\Coordinate\Dimension;
+use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
+use FFMpeg\Filters\Video\VideoFilters;
+use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
+use ProtoneMedia\LaravelFFMpeg\Filters\WatermarkFactory;
+use App\Jobs\PrivatePage\PromotionalVideo\ConvertPromotionalVideo;
+use App\Rules\PrivateSite\PromotionalVideo\PrivateSitePromotionalVideoValidationRule;
 
 class Index extends Component
 {
     use WithFileUploads;
     
+    public $privateSiteId;
+    public $privateSiteSectionNumber;
+    
     public $isHidden;
     public $headerDescription;
     public $video;
+    public $videoValidation;
 
     protected function rules() {
         return [
-            'headerDescription' => 'required',
+            'headerDescription' => 'required_if:isHidden,==,false',
+            'videoValidation' => new PrivateSitePromotionalVideoValidationRule($this->video, $this->isHidden),
         ];
     }
 
     protected $messages = [
-        'headerDescription.required' => 'لطفا شرح خدمات را وارد نمایید.',
+        'headerDescription.required_if' => 'لطفا شرح خدمات را وارد نمایید.',
     ];
 
-    // private function handleVideoUpload($psite) {
+    public function mount() {
+        if(is_null($this->privateSiteId)) {
+            $this->image = null; 
+            $this->isHidden = false;
+        } else {
+            $psite = Psite::findOrFail($this->privateSiteId);
+            
+            $this->headerDescription = is_null($psite->promotionalVideo) ? "" : $psite->promotionalVideo->header_description; 
+            $this->isHidden = (!is_null($psite->promotionalVideo) && $psite->promotionalVideo->is_hidden == 1) ? true : false;
+        }
+    }
 
-    // }
+    private function handleVideoUpload($psite) {
+        if(!is_string($this->video)) {
+
+            // remove previous video if available
+            // if(!is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video)) {
+            //     $video = $psite->promotionalVideo->video;
+            //     unlink($video);
+            // }
+
+            $filename = hexdec(uniqid()) . '.' . 'mp4';
+            $dir = 'upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
+
+            //dispatch a job to convert video by FFmpeg
+            dispatch(new ConvertPromotionalVideo([
+                'path' => $this->video->getRealPath(),
+                'dir' => $dir,
+            ]));
+
+            return 'storage/upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
+        } else {
+            return $this->video;
+        }
+    }
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
@@ -59,28 +105,25 @@ class Index extends Component
         
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
-        $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
-            'psite_id' => $psite->id
-        ],[
-            'is_hidden' => $this->isHidden == true ? 1 : 0,
-            'header_description' => Purify::clean($this->headerDescription),
-        ]);
-
-        // save video into DB
-        // $this->handleVideoUpload($psite);
+        if($this->isHidden) {
+            $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+            ]);
+        } else {
+            $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_description' => Purify::clean($this->headerDescription),
+                'video' => $this->handleVideoUpload($psite),
+            ]);
+        }
 
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 5, 
         );
-
-        // // Show Toaster
-        // $this->dispatch('showToaster', 
-        //     title: '', 
-        //     message: '
-        //         اطلاعات با موفقیت ذخیره شد.
-        //     ', 
-        //     type: 'bg-success'
-        // );
     }
 
     public function render()

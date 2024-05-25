@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\PrivatePage\PrivatePageCreate;
+namespace App\Livewire\Frontend\Pages\PrivatePage\PrivatePageCreate\Components\ContactUs;
 
 use File;
 use Livewire\Component;
