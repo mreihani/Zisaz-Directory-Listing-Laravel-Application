@@ -15,15 +15,17 @@ class PrivateSitePromotionalVideoValidationRule implements ValidationRule
 
     public $video;
     public $isHidden;
+    public $videoUploaded;
 
-    public function __construct($video, $isHidden) {
+    public function __construct($video, $isHidden, $videoUploaded) {
         $this->video = $video;
         $this->isHidden = $isHidden;
+        $this->videoUploaded = $videoUploaded;
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!is_string($this->video) && !$this->isHidden) {
+        if(!is_string($this->video) && !$this->isHidden && !$this->videoUploaded) {
             if(!isset($this->video) || $this->video == null) {
                 $fail('لطفا فایل ویدئویی را بارگذاری نمایید.');
             }

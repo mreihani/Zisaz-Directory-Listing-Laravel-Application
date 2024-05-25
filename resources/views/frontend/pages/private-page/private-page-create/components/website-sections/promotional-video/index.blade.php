@@ -69,30 +69,41 @@
             </h2>
 
             <div class="row">
-                <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-upload-video">
-                        ویدئوی تبلیغاتی خود را بارگذاری نمایید
-                    </label>
-                    <span class="text-danger">*</span>
-
-                    <label class="" for="pr-business-upload-video">
-                        (حداکثر حجم مجاز 100 مگابایت و نوع فایل مجاز mp4 ،flv و mkv است)
-                    </label>
-                    
-                    <input class="form-control form-control-md" {{ $isHidden == true ? 'disabled' : '' }} type="file" wire:model="video" accept=".mp4, .avi, .mkv">
-
-                    <input type="hidden" wire:model="videoValidation">
-
-                    @if($errors->has('videoValidation'))
-                        <div class="text-danger">{{ $errors->first('videoValidation') }}</div>
-                    @endif
-                    
-                    <div class="mt-3 private-page">
-                        <div x-show="uploading">
-                            <progress max="100" x-bind:value="progress"></progress>
+                @if ($videoUploaded)
+                    <div class="col-md-12 mb-4">
+                        <div class="alert alert-success d-flex align-items-center" role="alert">
+                            <i class="fi-check-circle me-2 me-sm-3 lead"></i>
+                            <div>
+                                ویدئو با موفقیت بارگذاری گردید و پس از تأیید مدیریت در سامانه نمایش داده خواهد شد.
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="col-md-12 mb-4">
+                        <label class="form-label fw-bold" for="pr-business-upload-video">
+                            ویدئوی تبلیغاتی خود را بارگذاری نمایید
+                        </label>
+                        <span class="text-danger">*</span>
+
+                        <label class="" for="pr-business-upload-video">
+                            (حداکثر حجم مجاز 100 مگابایت و نوع فایل مجاز mp4 ،flv و mkv است)
+                        </label>
+                        
+                        <input class="form-control form-control-md" {{ $isHidden == true ? 'disabled' : '' }} type="file" wire:model="video" accept=".mp4, .flv, .mkv">
+
+                        <input type="hidden" wire:model="videoValidation">
+
+                        @if($errors->has('videoValidation'))
+                            <div class="text-danger">{{ $errors->first('videoValidation') }}</div>
+                        @endif
+                        
+                        <div class="mt-3 private-page">
+                            <div x-show="uploading">
+                                <progress max="100" x-bind:value="progress"></progress>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -101,7 +112,13 @@
                 <i class="fi-chevron-left fs-sm me-2"></i>
                 مرحله قبل
             </a>
-            <button type="submit" class="btn btn-primary btn-lg rounded-pill ms-sm-auto">
+
+            <button disabled type="button" class="btn btn-black btn-lg rounded-pill ms-sm-auto" wire:loading wire:target="video">
+                <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                در حال بارگذاری
+            </button>
+
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill ms-sm-auto" wire:loading.remove wire:target="video">
                 مرحله بعد
                 <i class="fi-chevron-right fs-sm ms-2"></i>
             </button>

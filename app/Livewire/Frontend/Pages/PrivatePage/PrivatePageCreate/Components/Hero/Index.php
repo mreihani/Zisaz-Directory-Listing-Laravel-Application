@@ -196,7 +196,7 @@ class Index extends Component
             'is_video_displayed' => $this->showPromotionalVideo == true ? 1 : 0,
         ]);
         
-        //save addresses into DB
+        //save slides into DB
         $this->handleSlideUpload($psite, $hero);
 
         $this->dispatch('privateSiteSectionNumber', 

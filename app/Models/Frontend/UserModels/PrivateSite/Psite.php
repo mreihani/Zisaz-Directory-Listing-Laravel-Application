@@ -10,10 +10,10 @@ use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteHero;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteFooter;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMember;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAboutUs;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteLicense;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteProject;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteService;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteLicenseItem;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMiddleBanner;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTrustedCustomer;
@@ -27,8 +27,8 @@ class Psite extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function license() {
-        return $this->hasMany(PsiteLicenseItem::class);
+    public function licenses() {
+        return $this->hasOne(PsiteLicense::class);
     }
 
     public function aboutUs() {

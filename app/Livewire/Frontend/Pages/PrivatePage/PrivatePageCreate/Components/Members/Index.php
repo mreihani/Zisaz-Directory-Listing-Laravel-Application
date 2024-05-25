@@ -6,13 +6,20 @@ use File;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Stevebauman\Purify\Facades\Purify;
 use Intervention\Image\Facades\Image;
+use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class Index extends Component
 {
     use WithFileUploads;
+
+    public $privateSiteId;
+    public $privateSiteSectionNumber;
+    
+    public $isHidden;
+    public $headerDescription;
 
     // protected function rules() {
     //     return [
@@ -27,6 +34,27 @@ class Index extends Component
     // public function mount() {
 
     // }
+
+    public function back() {
+        $this->dispatch('privateSiteSectionNumber', 
+            privateSiteSectionNumber: 6, 
+        );
+    }
+
+    // check if private site id is related to the owner
+    private function isPsiteOwner($privateSiteId) {
+        $psite = Psite::findOrFail($this->privateSiteId);
+
+        if($psite->user->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return $psite;
+    }
+
+    public function changeDisplayStatus() {
+        //
+    }
 
     public function save() {  
        
@@ -44,20 +72,20 @@ class Index extends Component
         // ]);
         
         //save addresses into DB
-        $this->handleSlideUpload($psite, $hero);
+        //$this->handleSlideUpload($psite, $hero);
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 2, 
+            privateSiteSectionNumber: 8, 
         );
 
         // Show Toaster
-        $this->dispatch('showToaster', 
-            title: '', 
-            message: '
-                اطلاعات با موفقیت ذخیره شد.
-            ', 
-            type: 'bg-success'
-        );
+        // $this->dispatch('showToaster', 
+        //     title: '', 
+        //     message: '
+        //         اطلاعات با موفقیت ذخیره شد.
+        //     ', 
+        //     type: 'bg-success'
+        // );
     }
 
     public function render()

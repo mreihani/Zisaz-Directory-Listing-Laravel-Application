@@ -80,24 +80,33 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Schema::create('psite_projects', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger('psite_id');
-        //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->boolean('is_hidden')->default(0);
-            
-        //     $table->timestamps();
-        // });
+        Schema::create('psite_projects', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('psite_id');
+            $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
+            $table->boolean('is_hidden')->default(0);
+            $table->string('header_description')->nullable();
 
-        // Schema::create('psite_license_items', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger('psite_id');
-        //     $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
-        //     $table->enum('license_type', ['eng_license', 'ocp_license', 'news_ads', 'business_license', 'bid_license', 'other'])->default('eng_license');
-        //     $table->text('description')->nullable();
-        //     $table->string('license_image')->nullable();
-        //     $table->timestamps();
-        // });
+            $table->timestamps();
+        });
+
+        Schema::create('psite_licenses', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('psite_id');
+            $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
+            $table->boolean('is_hidden')->default(0);
+            $table->string('header_description')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('psite_license_items', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('psite_license_id');
+            $table->foreign('psite_license_id')->references('id')->on('psite_licenses')->onDelete('cascade');
+            $table->string('item_image')->nullable();
+            $table->text('item_description')->nullable();
+            $table->timestamps();
+        });
 
         // Schema::create('psite_members', function (Blueprint $table) {
         //     $table->id();
@@ -174,8 +183,9 @@ return new class extends Migration
         // Schema::dropIfExists('psite_testimonials');
         // Schema::dropIfExists('psite_middle_banners');
         // Schema::dropIfExists('psite_members');
-        // Schema::dropIfExists('psite_license_items');
-        // Schema::dropIfExists('psite_projects');
+        Schema::dropIfExists('psite_license_items');
+        Schema::dropIfExists('psite_licenses');
+        Schema::dropIfExists('psite_projects');
         Schema::dropIfExists('psite_promotional_videos');
         Schema::dropIfExists('psite_service_items');
         Schema::dropIfExists('psite_services');

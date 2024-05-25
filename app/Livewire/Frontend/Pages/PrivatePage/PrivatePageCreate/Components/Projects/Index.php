@@ -19,19 +19,26 @@ class Index extends Component
     public $privateSiteSectionNumber;
     
     public $isHidden;
+    public $headerDescription;
     
-    // protected function rules() {
-    //     return [
-    //         'businessType' => 'required',
-    //     ];
-    // }
+    protected function rules() {
+        return [
+            'headerDescription' => 'required_if:isHidden,==,false',
+        ];
+    }
 
-    // protected $messages = [
-    //     'businessType.required' => 'لطفا نوع کسب و کار خود را انتخاب نمایید.',
-    // ];
+    protected $messages = [
+        'headerDescription.required_if' => 'لطفا شرح پروژه ها را وارد نمایید.',
+    ];
 
     public function mount() {
-        $this->isHidden = false;
+        if(is_null($this->privateSiteId)) {
+            $this->isHidden = false;
+        } else {
+            $psite = Psite::findOrFail($this->privateSiteId);
+            $this->isHidden = (!is_null($psite->projects) && $psite->projects->is_hidden == 1) ? true : false;
+            $this->headerDescription = is_null($psite->projects) ? "" : $psite->projects->header_description; 
+        }
     }
 
     public function back() {
@@ -57,20 +64,28 @@ class Index extends Component
 
     public function save() {  
        
-        //$this->validate();
+        $this->validate();
+
+        $psite = $this->isPsiteOwner($this->privateSiteId);
+
+        if($this->isHidden) {
+            $promotionalVideo = $psite->projects()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+            ]);
+        } else {
+            $promotionalVideo = $psite->projects()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_description' => Purify::clean($this->headerDescription),
+            ]);
+        }
 
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 6, 
         );
-
-        // Show Toaster
-        // $this->dispatch('showToaster', 
-        //     title: '', 
-        //     message: '
-        //         اطلاعات با موفقیت ذخیره شد.
-        //     ', 
-        //     type: 'bg-success'
-        // );
     }
 
     public function render()

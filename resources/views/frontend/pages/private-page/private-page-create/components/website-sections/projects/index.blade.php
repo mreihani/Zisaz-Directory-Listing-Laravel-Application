@@ -8,7 +8,7 @@
             <div class="alert alert-accent" role="alert">
                 <ul class="mb-0">
                     <li>
-                        در این بخش می توانید یک ویدئو تبلیغاتی در مورد کسب و کار خود را برای کاربران نمایش دهید.
+                        در این بخش می توانید پروژه های خود را برای کاربران نمایش دهید.
                     </li>
                     <li>
                         این بخش اختیاری است بنابراین نمایش یا عدم نمایش آن را می توانید با چک باکس زیر کنترل کنید.
@@ -33,10 +33,10 @@
                 </div>
             </div>
 
-            <!-- About information-->
-            {{-- <h2 class="h5 font-vazir mb-4 mt-3">
+           <!-- About information-->
+           <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
-                اطلاعات خدمات ما
+                اطلاعات پروژه ها
             </h2>
 
             <div class="row">
@@ -45,13 +45,13 @@
                         توضیحات
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription">
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با پروژه های خود را وارد نمایید" wire:model="headerDescription">
 
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
                     @endif
                 </div>
-            </div> --}}
+            </div>
 
         <div class="d-flex flex-column flex-sm-row bg-light rounded-3 p-4 px-md-5">
             <a class="btn btn-outline-primary btn-lg rounded-pill mb-3 mb-sm-0" wire:click.prevent="back">

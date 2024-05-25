@@ -30,11 +30,12 @@ class Index extends Component
     public $headerDescription;
     public $video;
     public $videoValidation;
+    public $videoUploaded;
 
     protected function rules() {
         return [
             'headerDescription' => 'required_if:isHidden,==,false',
-            'videoValidation' => new PrivateSitePromotionalVideoValidationRule($this->video, $this->isHidden),
+            'videoValidation' => new PrivateSitePromotionalVideoValidationRule($this->video, $this->isHidden, $this->videoUploaded),
         ];
     }
 
@@ -46,22 +47,18 @@ class Index extends Component
         if(is_null($this->privateSiteId)) {
             $this->image = null; 
             $this->isHidden = false;
+            $this->videoUploaded = false;
         } else {
             $psite = Psite::findOrFail($this->privateSiteId);
             
             $this->headerDescription = is_null($psite->promotionalVideo) ? "" : $psite->promotionalVideo->header_description; 
             $this->isHidden = (!is_null($psite->promotionalVideo) && $psite->promotionalVideo->is_hidden == 1) ? true : false;
+            $this->videoUploaded = !is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video) ? true : false;
         }
     }
 
     private function handleVideoUpload($psite) {
-        if(!is_string($this->video)) {
-
-            // remove previous video if available
-            // if(!is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video)) {
-            //     $video = $psite->promotionalVideo->video;
-            //     unlink($video);
-            // }
+        if(!$this->videoUploaded) {
 
             $filename = hexdec(uniqid()) . '.' . 'mp4';
             $dir = 'upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
@@ -73,9 +70,7 @@ class Index extends Component
             ]));
 
             return 'storage/upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
-        } else {
-            return $this->video;
-        }
+        } 
     }
 
     public function back() {
@@ -105,19 +100,29 @@ class Index extends Component
         
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
+        // here the user wants to skip the promotional video section
         if($this->isHidden) {
             $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
             ]);
-        } else {
+            // here the user is trying to upload a video for the first time
+        } elseif(!$this->isHidden && !$this->videoUploaded) {
             $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
                 'header_description' => Purify::clean($this->headerDescription),
                 'video' => $this->handleVideoUpload($psite),
+            ]);
+            // here the video has been uploaded, the user cannot upload another video
+        } elseif(!$this->isHidden && $this->videoUploaded) {
+            $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_description' => Purify::clean($this->headerDescription),
             ]);
         }
 
