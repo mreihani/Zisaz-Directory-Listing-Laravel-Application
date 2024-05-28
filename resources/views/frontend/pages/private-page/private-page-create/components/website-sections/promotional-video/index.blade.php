@@ -16,8 +16,8 @@
                 </ul>
             </div>
 
-             <!-- Display settins-->
-             <h2 class="h5 font-vazir mb-4 mt-3">
+            <!-- Display settins-->
+            <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-eye-on text-primary fs-5 mt-n1 me-2"></i>
                 تنظیمات نمایش بخش
             </h2>
@@ -45,8 +45,8 @@
                         توضیحات
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription">
-
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription"></textarea>
+                    
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
                     @endif
@@ -61,49 +61,50 @@
                 x-on:livewire-upload-error="uploading = false"
                 x-on:livewire-upload-progress="progress = $event.detail.progress"
             >
+                <!-- About information-->
+                <h2 class="h5 font-vazir mb-4 mt-3">
+                    <i class="fi-video text-primary fs-5 mt-n1 me-2"></i>
+                    بارگذاری ویدئو
+                </h2>
 
-            <!-- About information-->
-            <h2 class="h5 font-vazir mb-4 mt-3">
-                <i class="fi-video text-primary fs-5 mt-n1 me-2"></i>
-                بارگذاری ویدئو
-            </h2>
-
-            <div class="row">
-                @if ($videoUploaded)
-                    <div class="col-md-12 mb-4">
-                        <div class="alert alert-success d-flex align-items-center" role="alert">
-                            <i class="fi-check-circle me-2 me-sm-3 lead"></i>
-                            <div>
-                                ویدئو با موفقیت بارگذاری گردید و پس از تأیید مدیریت در سامانه نمایش داده خواهد شد.
+                <div class="row">
+                    @if ($videoUploaded)
+                        <div class="col-md-12 mb-4">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <i class="fi-check-circle me-2 me-sm-3 lead"></i>
+                                <div>
+                                    ویدئو با موفقیت بارگذاری گردید و پس از تأیید مدیریت در سامانه نمایش داده خواهد شد.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @else
-                    <div class="col-md-12 mb-4">
-                        <label class="form-label fw-bold" for="pr-business-upload-video">
-                            ویدئوی تبلیغاتی خود را بارگذاری نمایید
-                        </label>
-                        <span class="text-danger">*</span>
+                    @else
+                        <div class="col-md-12 mb-4">
+                            <label class="form-label fw-bold" for="pr-business-upload-video">
+                                ویدئوی تبلیغاتی خود را بارگذاری نمایید
+                            </label>
+                            <span class="text-danger">*</span>
 
-                        <label class="" for="pr-business-upload-video">
-                            (حداکثر حجم مجاز 100 مگابایت و نوع فایل مجاز mp4 ،flv و mkv است)
-                        </label>
-                        
-                        <input class="form-control form-control-md" {{ $isHidden == true ? 'disabled' : '' }} type="file" wire:model="video" accept=".mp4, .flv, .mkv">
+                            <label class="" for="pr-business-upload-video">
+                                (حداکثر حجم مجاز 100 مگابایت و نوع فایل مجاز mp4 ،flv و mkv است)
+                            </label>
+                            
+                            <input class="form-control form-control-md" {{ $isHidden == true ? 'disabled' : '' }} type="file" wire:model="video" accept=".mp4, .flv, .mkv">
 
-                        <input type="hidden" wire:model="videoValidation">
+                            <input type="hidden" wire:model="videoValidation">
 
-                        @if($errors->has('videoValidation'))
-                            <div class="text-danger">{{ $errors->first('videoValidation') }}</div>
-                        @endif
-                        
-                        <div class="mt-3 private-page">
-                            <div x-show="uploading">
-                                <progress max="100" x-bind:value="progress"></progress>
+                            @if($errors->has('videoValidation'))
+                                <div class="text-danger">{{ $errors->first('videoValidation') }}</div>
+                            @endif
+                            
+                            <div class="mt-3 private-page">
+                                <div x-show="uploading">
+                                    <progress max="100" x-bind:value="progress"></progress>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
+
             </div>
         </div>
 
@@ -123,6 +124,5 @@
                 <i class="fi-chevron-right fs-sm ms-2"></i>
             </button>
         </div>
-
     </form> 
 </div>

@@ -46,7 +46,7 @@
                         شرح خدمات
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="headerDescription">
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="شرح مختصری از خدمات را وارد کنید" wire:model="headerDescription"></textarea>
 
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>

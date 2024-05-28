@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Rules\PrivateSite\Licenses;
+namespace App\Rules\PrivateSite\TrustedCustomers;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class PrivateSitelicenseImagesValidationRule implements ValidationRule
+class PrivateSiteTrustedCustomersImagesValidationRule implements ValidationRule
 {
     /**
      * Run the validation rule.

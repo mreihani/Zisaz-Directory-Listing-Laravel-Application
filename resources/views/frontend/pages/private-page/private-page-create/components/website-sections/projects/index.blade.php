@@ -45,13 +45,14 @@
                         توضیحات
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با پروژه های خود را وارد نمایید" wire:model="headerDescription">
-
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با پروژه های خود را وارد نمایید" wire:model="headerDescription"></textarea>
+                    
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
                     @endif
                 </div>
             </div>
+        </div>
 
         <div class="d-flex flex-column flex-sm-row bg-light rounded-3 p-4 px-md-5">
             <a class="btn btn-outline-primary btn-lg rounded-pill mb-3 mb-sm-0" wire:click.prevent="back">

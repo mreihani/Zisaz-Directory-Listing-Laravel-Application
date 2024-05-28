@@ -95,8 +95,9 @@ class Index extends Component
         
         $dir = 'upload/private-website-resources/' . $psite->id . '/hero';
 
+        // for more than 1 item iteration
         foreach ($this->slideImages as $key => $value) {
-            
+        
             // allow only 5 slides
             if($key > 5) {
                 break;
@@ -119,6 +120,7 @@ class Index extends Component
                     'slider_image' => 'storage/upload/private-website-resources/' . $psite->id . '/hero' . '/' . $filename,
                 ]);
             } else {
+                
                 // this is for items already stored in the database and server
                 $psite = Psite::findOrFail($this->privateSiteId);
                 $slides = $psite->hero->psiteHeroSliders;

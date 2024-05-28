@@ -6,57 +6,86 @@ use File;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Stevebauman\Purify\Facades\Purify;
 use Intervention\Image\Facades\Image;
+use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class Index extends Component
 {
     use WithFileUploads;
 
-    // protected function rules() {
-    //     return [
-    //         'businessType' => 'required',
-    //     ];
-    // }
+    public $privateSiteId;
+    public $privateSiteSectionNumber;
+    
+    public $isHidden;
+    public $headerDescription;
 
-    // protected $messages = [
-    //     'businessType.required' => 'لطفا نوع کسب و کار خود را انتخاب نمایید.',
-    // ];
+    protected function rules() {
+        return [
+            'headerDescription' => 'required_if:isHidden,==,false',
+        ];
+    }
 
-    // public function mount() {
+    protected $messages = [
+        'headerDescription.required_if' => 'لطفا توضیحات را وارد نمایید.',
+    ];
 
-    // }
+    public function mount() {
+        if(is_null($this->privateSiteId)) {
+            $this->isHidden = false;
+
+        } else {
+            $psite = Psite::findOrFail($this->privateSiteId);
+            $this->isHidden = (!is_null($psite->blog) && $psite->blog->is_hidden == 1) ? true : false;
+            $this->headerDescription = is_null($psite->blog) ? "" : $psite->blog->header_description; 
+        }
+    }
+
+    public function back() {
+        $this->dispatch('privateSiteSectionNumber', 
+            privateSiteSectionNumber: 9, 
+        );
+    }
+
+    // check if private site id is related to the owner
+    private function isPsiteOwner($privateSiteId) {
+        $psite = Psite::findOrFail($this->privateSiteId);
+
+        if($psite->user->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return $psite;
+    }
+
+    public function changeDisplayStatus() {
+        //
+    }
 
     public function save() {  
        
         $this->validate();
 
-        // $psite = auth()->user()->privateSite()->create([
-        //     'business_type' => Purify::clean($this->businessType),
-        //     'slug' => str_replace(' ', '-', Purify::clean($this->slug)),
-        // ]);
+        $psite = $this->isPsiteOwner($this->privateSiteId);
         
-        // $hero = $psite->hero()->create([
-        //     'title' => Purify::clean($this->title),
-        //     'description' => Purify::clean($this->description),
-        //     'is_video_displayed' => $this->showPromotionalVideo == true ? 1 : 0,
-        // ]);
-        
-        //save addresses into DB
-        $this->handleSlideUpload($psite, $hero);
+        if($this->isHidden) {
+            $blog = $psite->blog()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+            ]);
+        } else {
+            $blog = $psite->blog()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_description' => Purify::clean($this->headerDescription),
+            ]);
+        }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 2, 
-        );
-
-        // Show Toaster
-        $this->dispatch('showToaster', 
-            title: '', 
-            message: '
-                اطلاعات با موفقیت ذخیره شد.
-            ', 
-            type: 'bg-success'
+            privateSiteSectionNumber: 11, 
         );
     }
 

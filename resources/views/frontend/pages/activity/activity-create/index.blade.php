@@ -14,6 +14,7 @@
 
 @push('page-scripts-top')
     <script src="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.js')}}"></script>
+@endpush
 
 @push('page-scripts')
     <script src="{{asset('assets/frontend/vendor/jalalidatepicker/jalalidatepicker.js')}}"></script>

@@ -23,6 +23,7 @@ class Index extends Component
 
     // service item repeater form
     public $itemTitle;
+    public $itemTitleValidation;
     public $itemDescription;
     public $itemInputs;
     public $itemIteration;
@@ -50,6 +51,8 @@ class Index extends Component
     private function loadInitialValues() {
         if(is_null($this->privateSiteId)) {
 
+            $this->isHidden = false;
+            
             // service item repeater form
             $this->itemTitle = [null];
             $this->itemDescription = [null];
@@ -62,10 +65,21 @@ class Index extends Component
             $this->isHidden = (!is_null($psite->services) && $psite->services->is_hidden == 1) ? true : false;
             
             // service item repeater form
-            $this->itemTitle = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_title')->toArray();
-            $this->itemDescription = is_null($psite->services) ? [null] : $psite->services->psiteServiceItem->pluck('card_description')->toArray();
-            $this->itemInputs = is_null($psite->services) ? [0] : $psite->services->psiteServiceItem->keys()->toArray();
-            $this->itemIteration = is_null($psite->services) ? 1 : $psite->services->psiteServiceItem->count();
+            $this->getRepeaterInitialValues($psite);
+        }
+    }
+
+    private function getRepeaterInitialValues($psite) {
+        if(is_null($psite->services) || (!is_null($psite->services) && count($psite->services->psiteServiceItem) === 0)) {
+            $this->itemTitle = [null];
+            $this->itemDescription = [null];
+            $this->itemInputs = [0];
+            $this->itemIteration = 1;
+        } elseif(!is_null($psite->services) && count($psite->services->psiteServiceItem) > 0) {
+            $this->itemTitle = $psite->services->psiteServiceItem->pluck('card_title')->toArray();
+            $this->itemDescription = $psite->services->psiteServiceItem->pluck('card_description')->toArray();
+            $this->itemInputs = $psite->services->psiteServiceItem->keys()->toArray();
+            $this->itemIteration = $psite->services->psiteServiceItem->count();
         }
     }
 

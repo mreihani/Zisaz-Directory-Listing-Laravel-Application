@@ -138,7 +138,7 @@
                         توضیحات کوتاه
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control form-control-md" type="text" id="pr-business-description" placeholder="توضیحات کوتاه در مورد کسب و کار خود وارد کنید" wire:model="description">
+                    <textarea class="form-control form-control-md" type="text" id="pr-business-description" placeholder="توضیحات کوتاه در مورد کسب و کار خود وارد کنید" wire:model="description"></textarea>
 
                     @if($errors->has('description'))
                         <span class="text-danger">{{ $errors->first('description') }}</span>
@@ -185,7 +185,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input class="form-control image-input-selector" type="file" wire:model="slideImages.{{$slideValue}}">
+                                            <input disabled class="form-control image-input-selector" type="file" wire:model="slideImages.{{$slideValue}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

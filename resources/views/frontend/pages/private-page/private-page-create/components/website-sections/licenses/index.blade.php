@@ -45,8 +45,8 @@
                         توضیحات
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با مجوزهای خود را وارد نمایید" wire:model="headerDescription">
-
+                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با مجوزهای خود را وارد نمایید" wire:model="headerDescription"></textarea>
+                    
                     @if($errors->has('headerDescription'))
                         <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
                     @endif
@@ -78,7 +78,7 @@
                                                             <span class="text-danger">*</span>
                                                         </label>
                                                         <div>
-                                                            <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control" type="text" wire:model="itemTitle.{{$itemValue}}" placeholder="عنوان مجوز را وارد نمایید">
+                                                            <input disabled class="form-control" type="text" wire:model="itemTitle.{{$itemValue}}" placeholder="عنوان مجوز را وارد نمایید">
                                                         </div>
                                                         @error('itemTitle.'.$itemValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
                                                     </div>
@@ -96,7 +96,7 @@
                                                     </div>
         
                                                     <div class="mb-3">
-                                                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control" type="file" wire:model="itemImages.{{$itemValue}}">
+                                                        <input disabled class="form-control" type="file" wire:model="itemImages.{{$itemValue}}">
                                                         @error('itemImages.'.$itemValue) <div class="text-danger error">{{ $message }}</div> @enderror
                                                     </div>
                                                 </div>
@@ -183,6 +183,7 @@
                     </button>
                 </div>
             </div>
+        </div>
 
         <div class="d-flex flex-column flex-sm-row bg-light rounded-3 p-4 px-md-5">
             <a class="btn btn-outline-primary btn-lg rounded-pill mb-3 mb-sm-0" wire:click.prevent="back">

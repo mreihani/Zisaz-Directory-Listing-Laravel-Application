@@ -6,57 +6,121 @@ use File;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Stevebauman\Purify\Facades\Purify;
 use Intervention\Image\Facades\Image;
+use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
+use App\Rules\PrivateSite\MiddleBanner\PrivateSiteMiddleBannerImageValidationRule;
 
 class Index extends Component
 {
     use WithFileUploads;
 
-    // protected function rules() {
-    //     return [
-    //         'businessType' => 'required',
-    //     ];
-    // }
+    public $privateSiteId;
+    public $privateSiteSectionNumber;
+    
+    public $isHidden;
+    public $headerTitle;
+    public $headerDescription;
+    public $image;
+    public $imageValidation;
 
-    // protected $messages = [
-    //     'businessType.required' => 'لطفا نوع کسب و کار خود را انتخاب نمایید.',
-    // ];
+    protected function rules() {
+        return [
+            // 'imageValidation' => new PrivateSiteMiddleBannerImageValidationRule($this->image, $this->isHidden),
+            'headerTitle' => 'required_if:isHidden,==,false',
+            'headerDescription' => 'required_if:isHidden,==,false',
+        ];
+    }
 
-    // public function mount() {
+    protected $messages = [
+        'headerTitle.required_if' => 'لطفا عنوان اصلی بنر تبلیغاتی را وارد نمایید.',
+        'headerDescription.required_if' => 'لطفا توضیحات بنر تبلیغاتی را وارد نمایید.',
+    ];
 
-    // }
+    public function mount() {
+        if(is_null($this->privateSiteId)) {
+            $this->isHidden = false;
+            $this->image = null; 
+        } else {
+            $psite = Psite::findOrFail($this->privateSiteId);
+            $this->isHidden = (!is_null($psite->middleBanner) && $psite->middleBanner->is_hidden == 1) ? true : false;
+            $this->image = is_null($psite->middleBanner) ? null : $psite->middleBanner->image; 
+            $this->headerTitle = is_null($psite->middleBanner) ? "" : $psite->middleBanner->header_title; 
+            $this->headerDescription = is_null($psite->middleBanner) ? "" : $psite->middleBanner->header_description; 
+        }
+    }
+
+    private function handleImageUpload($psite) {
+
+        if(!is_string($this->image) && !is_null($this->image)) {
+
+            // remove previous image if available
+            if(!is_null($psite->middleBanner) && !is_null($psite->middleBanner->image)) {
+                $image = $psite->middleBanner->image;
+                unlink($image);
+            }
+
+            $dir = 'upload/private-website-resources/' . $psite->id . '/middle-banner';
+
+            $unique_image_name = hexdec(uniqid());
+            $filename = $unique_image_name . '.' . 'jpg';
+            $img = Image::make($this->image)->fit(1734, 891)->encode('jpg');
+            $image_path = $dir . '/' . $filename;
+            Storage::disk('public')->put($image_path, $img);
+
+            return 'storage/upload/private-website-resources/' . $psite->id . '/middle-banner' . '/' . $filename;
+        } else {
+            return $this->image;
+        }
+    }
+
+    public function back() {
+        $this->dispatch('privateSiteSectionNumber', 
+            privateSiteSectionNumber: 7, 
+        );
+    }
+
+    // check if private site id is related to the owner
+    private function isPsiteOwner($privateSiteId) {
+        $psite = Psite::findOrFail($this->privateSiteId);
+
+        if($psite->user->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return $psite;
+    }
+
+    public function changeDisplayStatus() {
+        //
+    }
 
     public function save() {  
        
         $this->validate();
 
-        // $psite = auth()->user()->privateSite()->create([
-        //     'business_type' => Purify::clean($this->businessType),
-        //     'slug' => str_replace(' ', '-', Purify::clean($this->slug)),
-        // ]);
-        
-        // $hero = $psite->hero()->create([
-        //     'title' => Purify::clean($this->title),
-        //     'description' => Purify::clean($this->description),
-        //     'is_video_displayed' => $this->showPromotionalVideo == true ? 1 : 0,
-        // ]);
-        
-        //save addresses into DB
-        $this->handleSlideUpload($psite, $hero);
+        $psite = $this->isPsiteOwner($this->privateSiteId);
+
+        if($this->isHidden) {
+            $middleBanner = $psite->middleBanner()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+            ]);
+        } else {
+            $middleBanner = $psite->middleBanner()->updateOrCreate([
+                'psite_id' => $psite->id
+            ],[
+                'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_title' => Purify::clean($this->headerTitle),
+                'header_description' => Purify::clean($this->headerDescription),
+                'image' => $this->handleImageUpload($psite),
+            ]);
+        }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 2, 
-        );
-
-        // Show Toaster
-        $this->dispatch('showToaster', 
-            title: '', 
-            message: '
-                اطلاعات با موفقیت ذخیره شد.
-            ', 
-            type: 'bg-success'
+            privateSiteSectionNumber: 9, 
         );
     }
 

@@ -32,7 +32,7 @@ class Index extends Component
         return [
             'headerDescription' => 'required_if:isHidden,==,false',
             'itemTitle.*' => 'required_if:isHidden,==,false',
-            'itemImages.*' => new PrivateSitelicenseImagesValidationRule(),
+            'itemImages.*' => new PrivateSitelicenseImagesValidationRule($this->isHidden),
         ];
     }
 
@@ -42,24 +42,34 @@ class Index extends Component
     ];
 
     public function mount() {
+        $this->loadInitialValues();
+    }
+
+    private function loadInitialValues() {
         if(is_null($this->privateSiteId)) {
             $this->isHidden = false;
-
-            // license images repeater form
-            $this->itemImages = [null];
-            $this->itemTitle = [null];
-            $this->itemInputs = [0];
-            $this->itemIteration = 1;
         } else {
             $psite = Psite::findOrFail($this->privateSiteId);
+
             $this->isHidden = (!is_null($psite->licenses) && $psite->licenses->is_hidden == 1) ? true : false;
             $this->headerDescription = is_null($psite->licenses) ? "" : $psite->licenses->header_description; 
 
             // licnese images repeater form
-            $this->itemImages = is_null($psite->licenses) ? [null] : $psite->licenses->psiteLicenseItem->pluck('item_image')->toArray();
-            $this->itemTitle = is_null($psite->licenses) ? [null] : $psite->licenses->psiteLicenseItem->pluck('item_description')->toArray();
-            $this->itemInputs = is_null($psite->licenses) ? [0] : $psite->licenses->psiteLicenseItem->keys()->toArray();
-            $this->itemIteration = is_null($psite->licenses) ? 1 : $psite->licenses->psiteLicenseItem->count();
+            $this->getRepeaterInitialValues($psite);
+        }
+    }
+
+    private function getRepeaterInitialValues($psite) {
+        if(is_null($psite->licenses) || (!is_null($psite->licenses) && count($psite->licenses->psiteLicenseItem) === 0)) {
+            $this->itemImages = [null];
+            $this->itemTitle = [null];
+            $this->itemInputs = [0];
+            $this->itemIteration = 1;
+        } elseif(!is_null($psite->licenses) && count($psite->licenses->psiteLicenseItem) > 0) {
+            $this->itemImages = $psite->licenses->psiteLicenseItem->pluck('item_image')->toArray();
+            $this->itemTitle = $psite->licenses->psiteLicenseItem->pluck('item_description')->toArray();
+            $this->itemInputs = $psite->licenses->psiteLicenseItem->keys()->toArray();
+            $this->itemIteration = $psite->licenses->psiteLicenseItem->count();
         }
     }
 
@@ -88,7 +98,7 @@ class Index extends Component
             if(!is_string($value)) {
                 $unique_image_name = hexdec(uniqid());
                 $filename = $unique_image_name . '.' . 'jpg';
-                $img = Image::make($value)->fit(1000, 800)->encode('jpg');
+                $img = Image::make($value)->fit(416, 416)->encode('jpg');
                 $image_path = $dir . '/' . $filename;
                 Storage::disk('public')->put($image_path, $img);
 
@@ -102,13 +112,21 @@ class Index extends Component
                 $items = $psite->licenses->psiteLicenseItem;
                
                 // delete items from DB and server
-                foreach ($items as $item) {
+                foreach ($items as $itemKey => $item) {
                     if(!in_array($item->item_image, $this->itemImages)) {
                         // here delete item from database
                         $item->delete();
 
                         // here remove image from server disk
                         unlink($item->item_image);
+                    } else {
+                        // here it updates the description field without any image change
+                        // but first, itemKey needs to be checked of available since one element can be deleted by the user
+                        if(isset($this->itemTitle[$itemKey])) {
+                            $item->update([
+                                'item_description' => Purify::clean(trim($this->itemTitle[$itemKey])),
+                            ]);
+                        }
                     }
                 }
             }
@@ -117,6 +135,7 @@ class Index extends Component
     public function addItem($itemIteration) {
         if(count($this->itemInputs) < 6) { 
             $this->itemImages[$itemIteration] = null;
+            $this->itemTitle[$itemIteration] = null;
             $this->itemIteration = $itemIteration + 1;
             array_push($this->itemInputs, $itemIteration);
         }
@@ -124,6 +143,7 @@ class Index extends Component
     public function removeItem($itemKey) {
         if(count($this->itemInputs) > 1) {
             unset($this->itemInputs[$itemKey]);    
+            unset($this->itemTitle[$itemKey]);     
             unset($this->itemImages[$itemKey]);    
         }
     }
@@ -168,10 +188,10 @@ class Index extends Component
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
                 'header_description' => Purify::clean($this->headerDescription),
             ]);
-        }
 
-        //save licenses into DB
-        $this->handleImageUpload($psite, $licenses);
+            //save licenses into DB
+            $this->handleImageUpload($psite, $licenses);
+        }
 
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 7, 
