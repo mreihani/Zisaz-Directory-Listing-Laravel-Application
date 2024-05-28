@@ -36,7 +36,7 @@ return [
             'username' => env('MELI_PAYAMAK_USERNAME'),
             'password' => env('MELI_PAYAMAK_PASSWORD'),
             'pattern-code' => [
-                'opt' => "196386",
+                'opt' => "220185",
                 'auth-welcome-message' => "",
             ],
         ],
