@@ -20,7 +20,7 @@ class Index extends Component
     public $privateSiteSectionNumber;
    
     public function mount() {
-        $this->privateSiteId = 6;
+        $this->privateSiteId = null;
         $this->privateSiteSectionNumber = 1;
         $this->isUserAuthorized();
     }
