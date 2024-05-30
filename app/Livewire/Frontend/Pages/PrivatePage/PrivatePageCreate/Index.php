@@ -20,12 +20,17 @@ class Index extends Component
     public $privateSiteSectionNumber;
    
     public function mount() {
-        $this->privateSiteId = 6;
+        $this->privateSiteId = null;
         $this->privateSiteSectionNumber = 1;
         $this->isUserAuthorized();
     }
 
     private function isUserAuthorized() {
+
+        if(is_null($this->privateSiteId)) {
+            return true;
+        }
+
         $psite = Psite::findOrFail($this->privateSiteId);
 
         if($psite->user->id !== auth()->user()->id) {
