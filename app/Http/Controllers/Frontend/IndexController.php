@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Frontend\UserModels\Activity\Activity;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
 
 class IndexController extends Controller
@@ -113,5 +117,47 @@ class IndexController extends Controller
 
     public function support() {
         return view('frontend.pages.support.index');
+    }
+
+    // load users private websites
+    public function site($slug) {
+        $psite = Psite::where('slug', $slug)
+        ->with([
+            'licenses',
+            'licenses.psiteLicenseItem',
+            'aboutUs',
+            'blog',
+            'contactUs',
+            'contactUs.psiteContactUsAddressItems',
+            'contactUs.psiteContactUsOfficePhoneItems',
+            'contactUs.psiteContactUsMobilePhoneItems',
+            'contactUs.psiteContactUsEmailItems',
+            'contactUs.psiteContactUsSocialMediaItems',
+            'contactUs.psiteContactUsPostalCodeItems',
+            'contactUs.psiteContactUsWorkingHourItems',
+            'footer',
+            'hero',
+            'hero.psiteHeroSliders',
+            'members',
+            'members.psiteMemberItem',
+            'middleBanner',
+            'promotionalVideo',
+            'services',
+            'services.psiteServiceItem',
+            'testimonials',
+            'testimonials.psiteTestimonialItem',
+            'trustedCustomer.psiteTrustedCustomerItem',
+            'projects',
+            'ads'
+            ])
+        ->first();
+
+        if(!$psite) {
+            abort(404);
+        }
+
+        $qrCode = QrCode::size(150)->generate(URL::to('/site') . '/' . $psite->slug);
+        
+        return view('frontend.pages.private-page.private-page-index.index', compact('psite', 'qrCode'));
     }
 }

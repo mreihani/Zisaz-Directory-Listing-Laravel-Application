@@ -43,10 +43,10 @@
 
                 <div class="col-md-12 mb-4">
                     <label class="form-label fw-bold" for="pr-business-about-us-title">
-                        عنوان اصلی
+                        نام کسب و کار
                     </label>
                     <span class="text-danger">*</span>
-                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-about-us-title" placeholder="عنوان اصلی بخش درباره ما را وارد کنید" wire:model="title">
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-about-us-title" placeholder="نام کسب و کار خود را وارد کنید" wire:model="title">
 
                     @if($errors->has('title'))
                         <span class="text-danger">{{ $errors->first('title') }}</span>

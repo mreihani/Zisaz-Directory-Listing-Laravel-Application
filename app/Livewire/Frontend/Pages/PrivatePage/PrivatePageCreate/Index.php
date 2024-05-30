@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
 
 class Index extends Component
@@ -19,8 +20,19 @@ class Index extends Component
     public $privateSiteSectionNumber;
    
     public function mount() {
-        $this->privateSiteId = null;
+        $this->privateSiteId = 6;
         $this->privateSiteSectionNumber = 1;
+        $this->isUserAuthorized();
+    }
+
+    private function isUserAuthorized() {
+        $psite = Psite::findOrFail($this->privateSiteId);
+
+        if($psite->user->id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return true;
     }
 
     // receive section number from sub-components

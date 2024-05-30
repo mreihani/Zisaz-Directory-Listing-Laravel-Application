@@ -65,7 +65,7 @@ class Index extends Component
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 10, 
+            privateSiteSectionNumber: 11, 
         );
     }
 
@@ -174,7 +174,7 @@ class Index extends Component
         }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 12, 
+            privateSiteSectionNumber: 13, 
         );
 
         // Show Toaster

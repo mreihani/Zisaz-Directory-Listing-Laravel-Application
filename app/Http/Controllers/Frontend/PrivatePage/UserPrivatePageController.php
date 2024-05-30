@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\PrivatePage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserPrivatePageController extends Controller
 {

@@ -83,10 +83,10 @@ class Index extends Component
             $this->isHidden = false;
         } else {
             $psite = Psite::findOrFail($this->privateSiteId);
-            $this->isHidden = false;
+            $this->isHidden = (!is_null($psite->contactUs) && $psite->contactUs->is_hidden == 1) ? true : false;
             $this->contactUsFormEmail = is_null($psite->contactUs) ? "" : $psite->contactUs->email; 
-            $this->latitude = is_null($psite->contactUs) ? "35.699756" : $psite->contactUs->lt; 
-            $this->longitude = is_null($psite->contactUs) ? "51.338076" : $psite->contactUs->ln; 
+            $this->latitude = (is_null($psite->contactUs) || is_null($psite->contactUs->lt)) ? "35.699756" : $psite->contactUs->lt; 
+            $this->longitude = (is_null($psite->contactUs) || is_null($psite->contactUs->ln)) ? "51.338076" : $psite->contactUs->ln; 
 
             // repeater forms
             $this->getAddressesRepeaterFormInitialValues($psite);
@@ -442,7 +442,7 @@ class Index extends Component
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 11, 
+            privateSiteSectionNumber: 12, 
         );
     }
 
@@ -506,7 +506,7 @@ class Index extends Component
         }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 13, 
+            privateSiteSectionNumber: 14, 
         );
     }
 

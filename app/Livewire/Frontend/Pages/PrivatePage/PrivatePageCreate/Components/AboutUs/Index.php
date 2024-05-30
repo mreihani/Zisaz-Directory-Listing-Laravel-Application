@@ -39,7 +39,7 @@ class Index extends Component
     }
 
     protected $messages = [
-        'title.required_if' => 'لطفا عنوان اصلی را وارد نمایید',
+        'title.required_if' => 'لطفا نام کسب و کار را وارد نمایید',
         'aboutUs.required_if' => 'لطفا اطلاعات مربوط به درباره ما را وارد نمایید',
         'licenses.required_if' => 'لطفا اطلاعات مربوط به مجوز ها و افتخارات را وارد نمایید',
         'contactUs.required_if' => 'لطفا اطلاعات تماس با ما را وارد نمایید',

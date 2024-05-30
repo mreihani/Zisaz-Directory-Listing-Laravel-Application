@@ -5,7 +5,7 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">1</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(1)">1</span>
                 </div>
                 <div class="step-label">
                     هدر وبسایت
@@ -15,7 +15,7 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">2</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(2)">2</ style="cursor: pointer;">
                 </div>
                 <div class="step-label">
                     درباره ما
@@ -25,7 +25,7 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">3</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(3)">3</span>
                 </div>
                 <div class="step-label">
                     خدمات ما
@@ -35,7 +35,7 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">4</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(4)">4</span>
                 </div>
                 <div class="step-label">
                     ویدئوی تبلیغاتی
@@ -45,7 +45,7 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">5</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(5)">5</span>
                 </div>
                 <div class="step-label">
                     پروژه ها
@@ -55,77 +55,87 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">6</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(6)">6</span>
                 </div>
                 <div class="step-label">
-                    مجوز ها
+                    آگهی ها
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 7 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">7</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(7)">7</span>
                 </div>
                 <div class="step-label">
-                    همکاران ما
+                    مجوز ها
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 8 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">8</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(8)">8</span>
                 </div>
                 <div class="step-label">
-                    بنر میانی
+                    همکاران ما
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 9 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">9</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(9)">9</span>
                 </div>
                 <div class="step-label">
-                    نظرات
+                    بنر میانی
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 10 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">10</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(10)">10</span>
                 </div>
                 <div class="step-label">
-                    مقالات
+                    نظرات
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 11 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">11</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(11)">11</span>
                 </div>
                 <div class="step-label">
-                    مشتریان ما
+                    مقالات
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 12 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">12</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(12)">12</span>
                 </div>
                 <div class="step-label">
-                    تماس با ما
+                    مشتریان ما
                 </div>
             </div>
             <div class="step {{$privateSiteSectionNumber >= 13 ? 'active' : ''}}">
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number">13</span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(13)">13</span>
+                </div>
+                <div class="step-label">
+                    تماس با ما
+                </div>
+            </div>
+            <div class="step {{$privateSiteSectionNumber >= 14 ? 'active' : ''}}">
+                <div class="step-progress">
+                    <span class="step-progress-start"></span>
+                    <span class="step-progress-end"></span>
+                    <span class="step-number {{$isNavItemActive ? 'zisaz-psite-navigation-btn' : ''}}" wire:click="navigate(14)">14</span>
                 </div>
                 <div class="step-label">
                     فوتر وبسایت

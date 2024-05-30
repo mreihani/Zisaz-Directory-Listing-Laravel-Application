@@ -19,25 +19,8 @@
             </div>
 
             @if(auth()->user()->role == "construction")
-                {{-- <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">ناحیه کاربری</a>
-                    <ul class="dropdown-menu dropdown-menu-light">
-                        <li>
-                            <a class="dropdown-item" href="{{route('user.dashboard.profile-settings.index')}}">پروفایل من</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{route('user.dashboard.account-notifications.index')}}">
-                                تنظیمات اطلاع رسانی
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
                 <li>
                     <a class="dropdown-item" href="{{route('user.dashboard.profile-settings.index')}}">پروفایل من</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{{route('user.dashboard.account-notifications.index')}}">
-                        تنظیمات اطلاع رسانی
-                    </a>
                 </li>
             @elseif(auth()->user()->role == "admin")
                 <li>

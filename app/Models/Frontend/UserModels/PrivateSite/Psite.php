@@ -5,6 +5,7 @@ namespace App\Models\Frontend\UserModels\PrivateSite;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAds;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteBlog;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteHero;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteFooter;
@@ -77,5 +78,9 @@ class Psite extends Model
 
     public function projects() {
         return $this->hasOne(PsiteProject::class);
+    }
+
+    public function ads() {
+        return $this->hasOne(PsiteAds::class);
     }
 }

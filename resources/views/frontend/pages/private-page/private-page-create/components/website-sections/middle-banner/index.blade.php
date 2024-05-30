@@ -65,8 +65,8 @@
                 </div>
             </div>
 
-             <!-- Upload Image -->
-             <h2 class="h5 font-vazir mb-4 mt-3">
+            <!-- Upload Image -->
+            <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-image text-primary fs-5 mt-n1 me-2"></i>
                 بارگذاری تصویر
                 <span>

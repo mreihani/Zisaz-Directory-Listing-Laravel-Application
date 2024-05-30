@@ -150,7 +150,7 @@ class Index extends Component
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 5, 
+            privateSiteSectionNumber: 6, 
         );
     }
 
@@ -194,7 +194,7 @@ class Index extends Component
         }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 7, 
+            privateSiteSectionNumber: 8, 
         );
     }
 

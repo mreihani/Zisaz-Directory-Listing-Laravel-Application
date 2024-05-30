@@ -90,13 +90,18 @@
                     @endif
                 </div>
 
-                {{-- <div class="col-md-12 mb-4 jquery-palette-color-picker-master-body" wire:ignore x-init="
+                <div class="col-md-12 mb-4 jquery-palette-color-picker-master-body" x-init="
                     $(document).ready(function(){
                         const submitBtn =  $(this).closest('form').find(':submit');
 
                         $('form').on('click', $(submitBtn), function(e) {
                             let selectedColor = $(this).find('.palette-color-picker-button .active').data('color');
                             @this.color = selectedColor;
+                        });
+
+                        $('#unique-id-3b').paletteColorPicker({
+                            custom_class: 'force-left',
+                            insert: 'after', // default -> 'before'
                         });
                     });
                     ">
@@ -106,7 +111,7 @@
                     <div class="jquery-palette-color-picker-master-plugin" id="sample-id-3b">
                         <input type="text" id="unique-id-3b" name="unique-name-3b" wire:model="color" data-palette='["#D50000", "#155bd5","#69F0AE","#FFFF00"]' value="#155bd5">
                     </div>
-                </div> --}}
+                </div>
               
             </div>
 

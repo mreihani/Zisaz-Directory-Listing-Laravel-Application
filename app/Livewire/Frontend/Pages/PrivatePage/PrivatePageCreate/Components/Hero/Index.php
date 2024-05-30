@@ -152,6 +152,7 @@ class Index extends Component
         }
     }
 
+
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
 
@@ -167,17 +168,17 @@ class Index extends Component
         } else {
             $psite = Psite::findOrFail($this->privateSiteId);
 
+            // the user is trying to edit a private website that does not belong to himself/herself
+            if($psite->user->id !== auth()->user()->id) {
+                abort(403);
+            } 
+
             // update incoming inputs
             $psite->update([
                 'business_type' => Purify::clean($this->businessType),
                 'slug' => strtolower(str_replace(' ', '-', Purify::clean(trim($this->slug)))),
                 'color' => Purify::clean($this->color),
             ]);
-
-            // the user is trying to edit a private website that does not belong to himself/herself
-            if($psite->user->id !== auth()->user()->id) {
-                abort(403);
-            } 
         }
        
         // the user has finally authorized to edit a private website item that belongs to himself/herself
@@ -203,6 +204,11 @@ class Index extends Component
 
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 2, 
+        );
+
+        // set navigation class status to true, therefore the number link will ba clickable
+        $this->dispatch('isNavItemActive', 
+            isNavItemActive: true, 
         );
 
         $this->dispatch('privateSiteId', 

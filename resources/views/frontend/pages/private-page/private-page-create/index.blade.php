@@ -56,7 +56,7 @@
                     با توجه به نیاز خود می توانید یک وب سایت یا صفحه اختصاصی در زمینه های مختلف ایجاد نمایید.
                 </p>
             </div>
-        
+
             <!-- Livewire component-->
             @livewire('frontend.pages.private-page.private-page-create.index')
 

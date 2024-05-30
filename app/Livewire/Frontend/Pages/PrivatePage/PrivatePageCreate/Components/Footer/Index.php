@@ -10,6 +10,7 @@ use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
+use App\Rules\PrivateSite\Footer\PrivateSiteFooterLogoImageValidationRule;
 
 class Index extends Component
 {
@@ -18,31 +19,51 @@ class Index extends Component
     public $privateSiteId;
     public $privateSiteSectionNumber;
 
-    // protected function rules() {
-    //     return [
-    //         'businessType' => 'required',
-    //     ];
-    // }
+    public $logo;
+    public $logoValidation;
 
-    // protected $messages = [
-    //     'businessType.required' => 'لطفا نوع کسب و کار خود را انتخاب نمایید.',
-    // ];
-
-    public function mount() {
-        //$this->loadInitialValues();
+    protected function rules() {
+        return [
+            'logoValidation' => new PrivateSiteFooterLogoImageValidationRule($this->logo),
+        ];
     }
 
-    private function loadInitialValues() {
+    public function mount() {
         if(is_null($this->privateSiteId)) {
-            //
+            $this->logo = null; 
         } else {
             $psite = Psite::findOrFail($this->privateSiteId);
+            $this->logo = is_null($psite->footer) ? null : $psite->footer->logo; 
+        }
+    }
+
+    private function handleImageUpload($psite) {
+
+        if(!is_string($this->logo) && !is_null($this->logo)) {
+
+            // remove previous logo if available
+            if(!is_null($psite->footer) && !is_null($psite->footer->logo)) {
+                $logo = $psite->footer->logo;
+                unlink($logo);
+            }
+
+            $dir = 'upload/private-website-resources/' . $psite->id . '/footer';
+
+            $unique_logo_name = hexdec(uniqid());
+            $filename = $unique_logo_name . '.' . 'jpg';
+            $img = Image::make($this->logo)->fit(200, 200)->encode('jpg');
+            $logo_path = $dir . '/' . $filename;
+            Storage::disk('public')->put($logo_path, $img);
+
+            return 'storage/upload/private-website-resources/' . $psite->id . '/footer' . '/' . $filename;
+        } else {
+            return $this->logo;
         }
     }
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 12, 
+            privateSiteSectionNumber: 13, 
         );
     }
 
@@ -63,11 +84,11 @@ class Index extends Component
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
-        // $trustedCustomers = $psite->trustedCustomer()->updateOrCreate([
-        //     'psite_id' => $psite->id
-        // ],[
-        //     'header_description' => Purify::clean($this->headerDescription),
-        // ]);
+        $footer = $psite->footer()->updateOrCreate([
+            'psite_id' => $psite->id
+        ],[
+            'logo' => $this->handleImageUpload($psite),
+        ]);
 
         // Show Toaster
         $this->dispatch('showToaster', 
