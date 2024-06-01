@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
 
-class PsiteContactUsWorkingHour extends Model
+class PsiteContactUsWh extends Model
 {
     protected $guarded = [];
 

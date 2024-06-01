@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
 
-class PsiteContactUsAddress extends Model
+class PsiteContactUsAd extends Model
 {
     protected $guarded = [];
 

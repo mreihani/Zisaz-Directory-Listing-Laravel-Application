@@ -5,13 +5,13 @@ namespace App\Models\Frontend\UserModels\PrivateSite\Sections;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsEmail;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsWorkingHour;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsMobilePhone;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsPostalCode;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsSocial;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsAddress;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsOfficePhone;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsEm;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsWh;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsMo;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsPc;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsSo;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsAd;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs\PsiteContactUsOp;
 
 class PsiteContactUs extends Model
 {
@@ -22,30 +22,30 @@ class PsiteContactUs extends Model
     }
 
     public function psiteContactUsAddressItems() {
-        return $this->hasMany(PsiteContactUsAddress::class);
+        return $this->hasMany(PsiteContactUsAd::class);
     }
 
     public function psiteContactUsOfficePhoneItems() {
-        return $this->hasMany(PsiteContactUsOfficePhone::class);
+        return $this->hasMany(PsiteContactUsOp::class);
     }
 
     public function psiteContactUsMobilePhoneItems() {
-        return $this->hasMany(PsiteContactUsMobilePhone::class);
+        return $this->hasMany(PsiteContactUsMo::class);
     }
 
     public function psiteContactUsEmailItems() {
-        return $this->hasMany(PsiteContactUsEmail::class);
+        return $this->hasMany(PsiteContactUsEm::class);
     }
 
     public function psiteContactUsSocialMediaItems() {
-        return $this->hasMany(PsiteContactUsSocial::class);
+        return $this->hasMany(PsiteContactUsSo::class);
     }
 
     public function psiteContactUsPostalCodeItems() {
-        return $this->hasMany(PsiteContactUsPostalCode::class);
+        return $this->hasMany(PsiteContactUsPc::class);
     }
 
     public function psiteContactUsWorkingHourItems() {
-        return $this->hasMany(PsiteContactUsWorkingHour::class);
+        return $this->hasMany(PsiteContactUsWh::class);
     }
 }
