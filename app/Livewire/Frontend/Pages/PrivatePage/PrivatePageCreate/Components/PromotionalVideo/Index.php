@@ -17,6 +17,7 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use ProtoneMedia\LaravelFFMpeg\Filters\WatermarkFactory;
 use App\Jobs\PrivatePage\PromotionalVideo\ConvertPromotionalVideo;
+use App\Jobs\PrivatePage\PromotionalVideo\CreateImageThumbnailPromotionalVideo;
 use App\Rules\PrivateSite\PromotionalVideo\PrivateSitePromotionalVideoValidationRule;
 
 class Index extends Component
@@ -73,6 +74,22 @@ class Index extends Component
         } 
     }
 
+    private function handleThumbnailUpload($psite) {
+        if(!$this->videoUploaded) {
+
+            $filename = hexdec(uniqid()) . '.' . 'png';
+            $dir = 'upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
+
+            //dispatch a job to convert video by FFmpeg
+            dispatch(new CreateImageThumbnailPromotionalVideo([
+                'path' => $this->video->getRealPath(),
+                'dir' => $dir,
+            ]));
+
+            return 'storage/upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
+        } 
+    }
+
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
             privateSiteSectionNumber: 3, 
@@ -115,6 +132,7 @@ class Index extends Component
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
                 'header_description' => Purify::clean($this->headerDescription),
                 'video' => $this->handleVideoUpload($psite),
+                'thumbnail' => $this->handleThumbnailUpload($psite),
             ]);
             // here the video has been uploaded, the user cannot upload another video
         } elseif(!$this->isHidden && $this->videoUploaded) {

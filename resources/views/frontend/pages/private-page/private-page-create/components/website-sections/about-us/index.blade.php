@@ -54,6 +54,19 @@
                 </div>
 
                 <div class="col-md-12 mb-4">
+                    <label class="form-label fw-bold" for="pr-business-about-us-title">
+                        سر تیتر درباره ما
+                    </label>
+                    <span class="text-danger">*</span>
+                    <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-about-us-header" placeholder="عبارت سر تیتر این بخش را وارد کنید" wire:model="headerDescription">
+
+                    @if($errors->has('headerDescription'))
+                        <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
+                    @endif
+                </div>
+
+
+                <div class="col-md-12 mb-4">
                     <label class="form-label fw-bold" for="pr-business-about-us">
                         درباره ما
                     </label>

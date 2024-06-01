@@ -1686,6 +1686,211 @@ p {
     visibility: visible
 }
 
+/* ads section */
+.ads-three {
+    padding-top: 100px;
+    padding-bottom: 100px
+}
+
+@media only screen and (min-width:768px) and (max-width:991px) {
+    .ads-three {
+        padding: 80px
+    }
+}
+
+@media(max-width:767px) {
+    .ads-three {
+        padding: 60px 0
+    }
+}
+
+.ads-three .ads-menu {
+    margin-bottom: 30px
+}
+
+@media only screen and (min-width:768px) and (max-width:991px),(max-width:767px) {
+    .ads-three .ads-menu {
+        margin-bottom: 15px
+    }
+}
+
+.ads-three .ads-menu button {
+    border: none;
+    background: 100% 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-3);
+    line-height: 48px;
+    padding: 0 30px;
+    position: relative;
+    display: inline-block;
+    z-index: 5;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -ms-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+    transition: all .3s ease-out 0s;
+    cursor: pointer;
+    margin: 0 2px;
+    text-transform: uppercase
+}
+
+@media only screen and (min-width:768px) and (max-width:991px) {
+    .ads-three .ads-menu button {
+        font-size: 14px;
+        padding: 0 26px
+    }
+}
+
+@media(max-width:767px) {
+    .ads-three .ads-menu button {
+        font-size: 14px;
+        padding: 0 22px;
+        line-height: 42px
+    }
+}
+
+.ads-three .ads-menu button::before {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary);
+    z-index: -1;
+    opacity: 0;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -ms-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+    transition: all .3s ease-out 0s;
+    border-radius: 4px
+}
+
+.ads-three .ads-menu button:hover, .ads-three .ads-menu button.active {
+    color: var(--primary)
+}
+
+    .ads-three .ads-menu button:hover::before, .ads-three .ads-menu button.active::before {
+        opacity: 1
+    }
+
+.ads-three .hide {
+    display: none
+}
+
+.ads-three .show {
+    display: block
+}
+
+.ads-style-three {
+    margin-top: 30px
+}
+
+    .ads-style-three .ads-image {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px
+    }
+
+        .ads-style-three .ads-image img {
+            width: 100%;
+            -webkit-transition: all .3s ease-out 0s;
+            -moz-transition: all .3s ease-out 0s;
+            -ms-transition: all .3s ease-out 0s;
+            -o-transition: all .3s ease-out 0s;
+            transition: all .3s ease-out 0s
+        }
+
+        .ads-style-three .ads-image .ads-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition: all .5s ease-out 0s;
+            -moz-transition: all .5s ease-out 0s;
+            -ms-transition: all .5s ease-out 0s;
+            -o-transition: all .5s ease-out 0s;
+            transition: all .5s ease-out 0s;
+            background-color: rgba(255,255,255,.8);
+            -webkit-transform: scale(.95);
+            -moz-transform: scale(.95);
+            -ms-transform: scale(.95);
+            -o-transform: scale(.95);
+            transform: scale(.95);
+            border-radius: 8px
+        }
+
+        .ads-style-three .ads-image .ads-content {
+            padding: 16px
+        }
+
+        .ads-style-three .ads-image .ads-icon {
+            position: relative;
+            display: inline-block;
+            margin: 0 5px
+        }
+
+            .ads-style-three .ads-image .ads-icon a {
+                font-size: 28px;
+                color: var(--white);
+                position: relative;
+                z-index: 5;
+                line-height: 60px;
+                height: 60px;
+                width: 60px;
+                text-align: center;
+                line-height: 60px;
+                background-color: var(--primary);
+                border-radius: 8px;
+                -webkit-transition: all .3s ease-out 0s;
+                -moz-transition: all .3s ease-out 0s;
+                -ms-transition: all .3s ease-out 0s;
+                -o-transition: all .3s ease-out 0s;
+                transition: all .3s ease-out 0s
+            }
+
+                .ads-style-three .ads-image .ads-icon a:hover {
+                    background-color: var(--primary-dark)
+                }
+
+    .ads-style-three .ads-text {
+        padding-top: 16px
+    }
+
+    .ads-style-three .ads-title a {
+        color: var(--black);
+        font-size: 24px;
+        line-height: 30px
+    }
+
+@media only screen and (min-width:992px) and (max-width:1199px) {
+    .ads-style-three .ads-title a {
+        font-size: 20px
+    }
+}
+
+@media(max-width:767px) {
+    .ads-style-three .ads-title a {
+        font-size: 20px
+    }
+}
+
+.ads-style-three .text {
+    color: var(--black);
+    margin-top: 8px
+}
+
+.ads-style-three:hover .ads-overlay {
+    opacity: 1;
+    visibility: visible
+}
+/* ads section */
+
 .pricing-style-fifteen .primary-btn {
     background: var(--primary);
     color: var(--white);

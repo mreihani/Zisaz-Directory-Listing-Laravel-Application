@@ -46,6 +46,7 @@ return new class extends Migration
             $table->boolean('is_hidden')->default(0);
             $table->string('image')->nullable();
             $table->string('title')->nullable();
+            $table->string('header_description')->nullable();
             $table->text('about_us')->nullable();
             $table->text('licenses')->nullable();
             $table->text('contact_us')->nullable();
@@ -76,6 +77,7 @@ return new class extends Migration
             $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
             $table->boolean('is_hidden')->default(0);
             $table->string('header_description')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->string('video')->nullable();
             $table->timestamps();
         });

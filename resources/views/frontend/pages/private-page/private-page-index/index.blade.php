@@ -6,11 +6,11 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset($psite->footer->logo)}}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{$psite->footer ? asset($psite->footer->logo) : asset('assets/frontend/img/logo/zsaz_sm.png')}}" />
         <title>
-            {{ $psite->aboutUs->title }}
+            {{ $psite->aboutUs ? $psite->aboutUs->title : 'سایت ساز زی ساز' }}
         </title>
-        <link rel="shortcut icon" href="{{asset($psite->footer->logo)}}" type="image/svg" />
+        <link rel="shortcut icon" href="{{$psite->footer ? asset($psite->footer->logo) : asset('assets/frontend/img/logo/zsaz_sm.png')}}" type="image/svg" />
         <link rel="stylesheet" href="{{asset('assets/frontend/css/private-site-styles/bootstrap.min.css')}}" />
         <link rel="stylesheet" href="{{asset('assets/frontend/css/private-site-styles/lineicons.css')}}" />
         <link rel="stylesheet" href="{{asset('assets/frontend/css/private-site-styles/tiny-slider.rtl.css')}}" />
@@ -36,7 +36,7 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="index.html"> 
-                                <img width="50" src="{{asset($psite->footer->logo)}}" alt="Logo" /> 
+                                <img width="50" src="{{$psite->footer ? asset($psite->footer->logo) : asset('assets/frontend/img/logo/zsaz.png')}}" alt="Logo" /> 
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNine" aria-controls="navbarNine" aria-expanded="false" aria-label="Toggle navigation"> <span class="toggler-icon"></span> <span class="toggler-icon"></span> <span class="toggler-icon"></span> </button>
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarNine">
@@ -93,28 +93,48 @@
                 </div>
             </div>
         </div>
+
         <div class="overlay-left"></div>
+
+        <!-- Hero section -->
         <section id="hero-area" class="header-area header-eight is-rtl">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="header-content">
-                            <h1>راه اندازی سایت‌های شرکتی و تجاری کسب و کار با بوت استرپ.</h1>
-                            <p>
-                                ما یک آژانس دیجیتالی هستیم که به برندها کمک می کنیم تا به نتایج تجاری خود برسند. ما تکنولوژی را ابزاری برای خلق چیزهای شگفت انگیز می بینیم.
-                            </p>
-                            <div class="button d-flex justify-content-center align-items-center">
-                                <a href="javascript:void(0)" class="btn primary-btn">شروع کنید</a>
-                                <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&amp;fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM" class="glightbox video-button mt-0">
-                                    <span class="btn icon-btn rounded-full">
-                                        <i class="lni lni-play"></i>
-                                    </span> <span class="text">تماشای ویدئو</span>
-                                </a>
+                            @if($psite->hero && $psite->hero->title)
+                                <h1>
+                                    {{$psite->hero->title}}
+                                </h1>
+                            @endif
+                            @if($psite->hero && $psite->hero->description)
+                                <p>
+                                    {{$psite->hero->description}}
+                                </p>
+                            @endif
+                            <div class="button d-flex justify-content-start align-items-center">
+                                @if($psite->contactUs)
+                                    <a href="#contactUs" class="btn primary-btn">
+                                        تماس بگیرید
+                                    </a>
+                                @endif
+                                @if($psite->hero 
+                                && $psite->hero->is_video_displayed 
+                                && $psite->promotionalVideo 
+                                && !$psite->promotionalVideo->is_hidden 
+                                && $psite->promotionalVideo->video)
+                                    <a href="{{asset($psite->promotionalVideo->video)}}" class="glightbox video-button mt-0">
+                                        <span class="btn icon-btn rounded-full">
+                                            <i class="lni lni-play"></i>
+                                        </span> 
+                                        <span class="text">تماشای ویدئو</span>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
-                        @if($psite->hero->psiteHeroSliders->count() > 1)
+                        @if($psite->hero && $psite->hero->psiteHeroSliders->count() > 1)
                             <div class="col-12 testimonial-5 pb-0 pt-0 mt-5 ">
                                 <div class="hero-section-slider ">
                                     @foreach ($psite->hero->psiteHeroSliders as $heroSliderItem)
@@ -124,7 +144,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                        @else
+                        @elseif($psite->hero && $psite->hero->psiteHeroSliders->count() == 1)
                             <div class="header-image transform-180"> 
                                 <img src="{{asset($psite->hero->psiteHeroSliders->first()->slider_image)}}" alt="#" /> 
                             </div>
@@ -133,609 +153,736 @@
                 </div>
             </div>
         </section>
-        <section class="about-area about-five is-rtl">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-12">
-                        <div class="about-image-five">
-                            <svg class="shape transform-180" width="106" height="134" viewBox="0 0 106 134" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="1.66654" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="1.66654" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.3333" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.3333" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.3333" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.3333" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.333" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.333" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.333" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.333" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.333" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="16.333" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="30.9998" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6665" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="30.9998" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6665" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="30.9998" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6665" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="30.9998" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6665" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="31" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6668" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="31" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6668" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="31" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6668" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="31" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6668" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="31" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6668" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="31" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="74.6668" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="45.6665" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="89.3333" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.3333" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="1.66679" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.3333" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="16.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.3333" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="31.0001" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.3333" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="45.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.333" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="60.3335" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.333" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="88.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.333" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="117.667" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.333" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="74.6668" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.333" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="103" r="1.66667" fill="#DADADA" />
-                                <circle cx="60.333" cy="132" r="1.66667" fill="#DADADA" />
-                                <circle cx="104" cy="132" r="1.66667" fill="#DADADA" />
-                            </svg> <img src="{{asset('assets/frontend/img/jaban/private-site-images/about/about-img1.jpg')}}" alt="about" />
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="about-five-content">
-                            <h6 class="small-title text-lg">داستان ما</h6>
-                            <h2 class="main-title fw-bold">
-                                تیم ما با تجربه و دانش همراه است
-                            </h2>
-                            <div class="about-five-tab">
-                                <nav>
-                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <button class="nav-link active" id="nav-who-tab" data-bs-toggle="tab" data-bs-target="#nav-who" type="button" role="tab" aria-controls="nav-who" aria-selected="true">ما کی هستیم</button>
-                                        <button class="nav-link" id="nav-vision-tab" data-bs-toggle="tab" data-bs-target="#nav-vision" type="button" role="tab" aria-controls="nav-vision" aria-selected="false">چشم انداز ما</button>
-                                        <button class="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab" aria-controls="nav-history" aria-selected="false">تاریخ ما</button>
-                                    </div>
-                                </nav>
-                                <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-who" role="tabpanel" aria-labelledby="nav-who-tab">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نـامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چـاپـگـرهـا و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کـاربردهتای متنوع بـا هـدف بهبود ابـزارهـای کـاربـردی می باشـد.</p>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نـامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چـاپـگـرهـا و متون است.</p>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-vision" role="tabpanel" aria-labelledby="nav-vision-tab">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نـامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چـاپـگـرهـا و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کـاربردهتای متنوع بـا هـدف بهبود ابـزارهـای کـاربـردی می باشـد.</p>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نـامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چـاپـگـرهـا و متون است.</p>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نـامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چـاپـگـرهـا و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کـاربردهتای متنوع بـا هـدف بهبود ابـزارهـای کـاربـردی می باشـد.</p>
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نـامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چـاپـگـرهـا و متون است.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="services" class="services-area services-eight is-rtl">
-            <div class="section-title-five">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content">
-                                <h6>سرویس‌ها</h6>
-                                <h2 class="fw-bold">بهترین خدمات ما</h2>
-                                <p>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها و متون بلکه روزنامه است.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services">
-                            <div class="service-icon"> <i class="lni lni-capsule"></i> </div>
-                            <div class="service-content">
-                                <h4>طراحی باطراوت</h4>
-                                <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services">
-                            <div class="service-icon"> <i class="lni lni-bootstrap"></i> </div>
-                            <div class="service-content">
-                                <h4>بر پایه بوت استرپ</h4>
-                                <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services">
-                            <div class="service-icon"> <i class="lni lni-shortcode"></i> </div>
-                            <div class="service-content">
-                                <h4>کامپوننت های مجزا</h4>
-                                <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services">
-                            <div class="service-icon"> <i class="lni lni-dashboard"></i> </div>
-                            <div class="service-content">
-                                <h4>سرعت بهینه</h4>
-                                <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services">
-                            <div class="service-icon"> <i class="lni lni-layers"></i> </div>
-                            <div class="service-content">
-                                <h4>کاملا سفارشی</h4>
-                                <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services">
-                            <div class="service-icon"> <i class="lni lni-reload"></i> </div>
-                            <div class="service-content">
-                                <h4>آپدیت های منظم</h4>
-                                <p> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان  گرافیک چاپگرها است. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="video-area video-one is-rtl">
-            <div class="section-title-five">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content">
-                                <h6>معرفی تیم ما</h6>
-                                <h2 class="fw-bold">ویدئو تبلیغاتی ما را تماشا کنید</h2>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک چاپگرها و متون بلکه روزنامه است. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="video-content text-center">
-                            <img src="{{asset('assets/frontend/img/jaban/private-site-images/video/video-bg.png')}}" alt="Video" />
-                            <a class="video-popup glightbox" href="https://www.youtube.com/watch?v=NJbXptdalP0"> <i class="lni lni-play"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="portfolio" class="portfolio-area portfolio-three is-rtl">
-            <div class="section-title-five">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content">
-                                <h6>نمونه کارها</h6>
-                                <h2 class="fw-bold">آخرین پروژه های ما</h2>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک چاپگرها و متون بلکه روزنامه است. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="portfolio-menu text-center">
-                            <button data-filter="all" class="active">تمام پروژه ها</button>
-                            <button data-filter="branding">برندینگ</button>
-                            <button data-filter="marketing">بازاریابی</button>
-                            <button data-filter="planning">برنامه ریزی</button>
-                            <button data-filter="research">تحقیقاتی</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row grid">
-                    <div class="col-lg-4 col-sm-6 branding-3 planning-3" data-filter="branding">
-                        <div class="portfolio-style-three">
-                            <div class="portfolio-image">
-                                <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf1.jpg')}}" alt="image" />
-                                <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                    <div class="portfolio-content">
-                                        <div class="portfolio-icon">
-                                            <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf1.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                        </div>
-                                        <div class="portfolio-icon">
-                                            <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-text">
-                                <h4 class="portfolio-title">
-                                    <a href="javascript:void(0)">طراحی گرافیکی</a>
-                                </h4>
-                                <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6" data-filter="research">
-                        <div class="portfolio-style-three">
-                            <div class="portfolio-image">
-                                <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf2.jpg')}}" alt="image" />
-                                <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                    <div class="portfolio-content">
-                                        <div class="portfolio-icon">
-                                            <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf2.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                        </div>
-                                        <div class="portfolio-icon">
-                                            <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-text">
-                                <h4 class="portfolio-title">
-                                    <a href="javascript:void(0)">توسعه دهنده وب</a>
-                                </h4>
-                                <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6" data-filter="marketing">
-                        <div class="portfolio-style-three">
-                            <div class="portfolio-image">
-                                <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf3.jpg')}}" alt="image" />
-                                <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                    <div class="portfolio-content">
-                                        <div class="portfolio-icon">
-                                            <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf3.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                        </div>
-                                        <div class="portfolio-icon">
-                                            <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-text">
-                                <h4 class="portfolio-title">
-                                    <a href="javascript:void(0)">توسعه دهنده اپلیکیشن</a>
-                                </h4>
-                                <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6" data-filter="planning">
-                        <div class="portfolio-style-three">
-                            <div class="portfolio-image">
-                                <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf4.jpg')}}" alt="image" />
-                                <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                    <div class="portfolio-content">
-                                        <div class="portfolio-icon">
-                                            <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf4.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                        </div>
-                                        <div class="portfolio-icon">
-                                            <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-text">
-                                <h4 class="portfolio-title">
-                                    <a href="javascript:void(0)">دیجتیال مارکتینگ</a>
-                                </h4>
-                                <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6" data-filter="branding">
-                        <div class="portfolio-style-three">
-                            <div class="portfolio-image">
-                                <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf5.jpg')}}" alt="image" />
-                                <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                    <div class="portfolio-content">
-                                        <div class="portfolio-icon">
-                                            <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf5.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                        </div>
-                                        <div class="portfolio-icon">
-                                            <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-text">
-                                <h4 class="portfolio-title">
-                                    <a href="javascript:void(0)">خدمات سئو</a>
-                                </h4>
-                                <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6" data-filter="marketing">
-                        <div class="portfolio-style-three">
-                            <div class="portfolio-image">
-                                <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf6.jpg')}}" alt="image" />
-                                <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                    <div class="portfolio-content">
-                                        <div class="portfolio-icon">
-                                            <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf6.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                        </div>
-                                        <div class="portfolio-icon">
-                                            <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-text">
-                                <h4 class="portfolio-title">
-                                    <a href="javascript:void(0)">طراحی محصول</a>
-                                </h4>
-                                <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- ./Hero section -->
 
-        <section id="pricing" class="pricing-area pricing-fourteen is-rtl">
-            <div class="section-title-five">
+        <!-- about us section -->
+        @if($psite->aboutUs && !$psite->aboutUs->is_hidden)
+            <section class="about-area about-five is-rtl">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content">
-                                <h6>تعرفه ها</h6>
-                                <h2 class="fw-bold">طرح های قیمتی</h2>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک چاپگرها و متون بلکه روزنامه است. </p>
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-12">
+                            <div class="about-image-five">
+                                <svg class="shape transform-180" width="106" height="134" viewBox="0 0 106 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="1.66654" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="1.66654" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.3333" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.3333" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.3333" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.3333" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.333" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.333" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.333" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.333" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.333" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="16.333" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="30.9998" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6665" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="30.9998" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6665" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="30.9998" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6665" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="30.9998" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6665" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="31" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6668" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="31" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6668" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="31" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6668" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="31" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6668" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="31" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6668" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="31" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="74.6668" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="45.6665" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="89.3333" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.3333" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="1.66679" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.3333" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="16.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.3333" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="31.0001" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.3333" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="45.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.333" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="60.3335" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.333" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="88.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.333" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="117.667" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.333" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="74.6668" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.333" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="103" r="1.66667" fill="#DADADA" />
+                                    <circle cx="60.333" cy="132" r="1.66667" fill="#DADADA" />
+                                    <circle cx="104" cy="132" r="1.66667" fill="#DADADA" />
+                                </svg> 
+                                @if($psite->aboutUs->image)
+                                    <img src="{{asset($psite->aboutUs->image)}}" alt="about" />
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="about-five-content">
+                                <h6 class="small-title text-lg">
+                                    ما را بشناسید
+                                </h6>
+                                
+                                @if($psite->aboutUs->header_description)
+                                    <h2 class="main-title fw-bold">
+                                        {{$psite->aboutUs->header_description}}
+                                    </h2>
+                                @endif
+                                
+                                <div class="about-five-tab">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            @if($psite->aboutUs->about_us)
+                                                <button class="nav-link active" id="nav-who-tab" data-bs-toggle="tab" data-bs-target="#nav-who" type="button" role="tab" aria-controls="nav-who" aria-selected="true">
+                                                    درباره ما
+                                                </button>
+                                            @endif
+                                            @if($psite->aboutUs->licenses)
+                                                <button class="nav-link" id="nav-vision-tab" data-bs-toggle="tab" data-bs-target="#nav-vision" type="button" role="tab" aria-controls="nav-vision" aria-selected="false">
+                                                    مجوز ها و افتخارات
+                                                </button>
+                                            @endif
+                                            @if($psite->aboutUs->contact_us)
+                                                <button class="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab" aria-controls="nav-history" aria-selected="false">
+                                                    تماس با ما
+                                                </button>
+                                            @endif
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        @if($psite->aboutUs->about_us)
+                                            <div class="tab-pane fade show active" id="nav-who" role="tabpanel" aria-labelledby="nav-who-tab">
+                                                <p>
+                                                    {{$psite->aboutUs->about_us}}
+                                                </p>
+                                            </div>
+                                        @endif
+                                        @if($psite->aboutUs->licenses)
+                                            <div class="tab-pane fade" id="nav-vision" role="tabpanel" aria-labelledby="nav-vision-tab">
+                                                <p>
+                                                    {{$psite->aboutUs->licenses}}
+                                                </p>
+                                            </div>
+                                        @endif
+                                        @if($psite->aboutUs->contact_us)
+                                            <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+                                                <p>
+                                                    {{$psite->aboutUs->contact_us}}
+                                                </p>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="pricing-style-fourteen">
-                            <div class="table-head">
-                                <h6 class="title">ساده</h6>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.</p>
-                                <div class="price">
-                                    <h2 class="amount">
-                                        <span class="currency">تومان</span>0<span class="duration">/ماهیانه </span>
-                                    </h2>
+            </section>
+        @endif
+        <!-- ./about us section -->
+
+        <!-- services section -->
+        @if($psite->services && !$psite->services->is_hidden)
+            <section id="services" class="services-area services-eight is-rtl">
+                <div class="section-title-five">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <h2 class="fw-bold">خدمات ما</h2>
+                                    @if($psite->services->header_description)
+                                        <p>
+                                           {{$psite->services->header_description}}
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="light-rounded-buttons">
-                                <a href="javascript:void(0)" class="btn primary-btn-outline">
-                                    آزمایشی رایگان شروع کنید
+                        </div>
+                    </div>
+                </div>
+                @if($psite->services->psiteServiceItem->count())
+                    <div class="container">
+                        <div class="row">
+                            @foreach ($psite->services->psiteServiceItem as $psiteServiceItem)
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="single-services">
+                                        {{-- <div class="service-icon"> 
+                                            <i class="lni lni-capsule"></i> 
+                                        </div> --}}
+                                        <div class="service-content">
+                                            <h4>
+                                                {{$psiteServiceItem->card_title}}
+                                            </h4>
+                                            <p> 
+                                                {{$psiteServiceItem->card_description}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </section>
+        @endif
+        <!-- ./services section -->
+
+        <!-- promotional video section -->
+        @if($psite->promotionalVideo && !$psite->promotionalVideo->is_hidden)
+            <section class="video-area video-one is-rtl">
+                <div class="section-title-five">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <h6>معرفی تیم ما</h6>
+                                    <h2 class="fw-bold">
+                                        ویدئو تبلیغاتی ما را تماشا کنید
+                                    </h2>
+                                    <p>
+                                        {{$psite->promotionalVideo->header_description}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="video-content text-center">
+                                <img src="{{asset($psite->promotionalVideo->thumbnail)}}" alt="Video" />
+                                <a class="video-popup glightbox" href="{{asset($psite->promotionalVideo->video)}}"> 
+                                    <i class="lni lni-play"></i> 
                                 </a>
                             </div>
-                            <div class="table-content">
-                                <ul class="table-list">
-                                    <li> <i class="lni lni-checkmark-circle"></i> 1گیگابیت فضای هاست</li>
-                                    <li> <i class="lni lni-checkmark-circle"></i> درگاه پرداخت بانکی</li>
-                                    <li> <i class="lni lni-checkmark-circle deactive"></i> اپبیکیشن موبایل</li>
-                                    <li> <i class="lni lni-checkmark-circle deactive"></i> درگاه پرداخت ارزی</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="pricing-style-fourteen middle">
-                            <div class="table-head">
-                                <h6 class="title">ویژه</h6>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.</p>
-                                <div class="price">
-                                    <h2 class="amount">
-                                        <span class="currency">تومان</span>99<span class="duration">/ماهیانه </span>
+                </div>
+            </section>
+        @endif
+        <!-- ./promotional video section -->
+
+        <!-- projects section -->
+        {{-- @if($psite->projects && !$psite->projects->is_hidden)
+            <section id="portfolio" class="portfolio-area portfolio-three is-rtl">
+                <div class="section-title-five">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <h6>
+                                        نمونه کارها
+                                    </h6>
+                                    <h2 class="fw-bold">
+                                        آخرین پروژه های ما
                                     </h2>
+                                    @if($psite->projects->header_description)
+                                        <p>
+                                            {{$psite->projects->header_description}}
+                                        </p>
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="light-rounded-buttons">
-                                <a href="javascript:void(0)" class="btn primary-btn">
-                                    آزمایشی رایگان شروع کنید
-                                </a>
-                            </div>
-                            <div class="table-content">
-                                <ul class="table-list">
-                                    <li> <i class="lni lni-checkmark-circle"></i> 10گیگابیت فضای هاست</li>
-                                    <li> <i class="lni lni-checkmark-circle"></i> درگاه پرداخت بانکی</li>
-                                    <li> <i class="lni lni-checkmark-circle"></i> اپبیکیشن موبایل</li>
-                                    <li> <i class="lni lni-checkmark-circle deactive"></i> درگاه پرداخت ارزی</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="pricing-style-fourteen">
-                            <div class="table-head">
-                                <h6 class="title">پریمیوم</h6>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است.</p>
-                                <div class="price">
-                                    <h2 class="amount">
-                                        <span class="currency">تومان</span>150<span class="duration">/ماهیانه </span>
-                                    </h2>
-                                </div>
-                            </div>
-                            <div class="light-rounded-buttons">
-                                <a href="javascript:void(0)" class="btn primary-btn-outline">
-                                    آزمایشی رایگان شروع کنید
-                                </a>
-                            </div>
-                            <div class="table-content">
-                                <ul class="table-list">
-                                    <li> <i class="lni lni-checkmark-circle"></i> فضای هاست نامحدود</li>
-                                    <li> <i class="lni lni-checkmark-circle"></i> درگاه پرداخت بانکی</li>
-                                    <li> <i class="lni lni-checkmark-circle"></i> اپبیکیشن موبایل</li>
-                                    <li> <i class="lni lni-checkmark-circle"></i> درگاه پرداخت ارزی</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="team" class="team-area is-rtl">
-
-            <div class="section-title-five">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="content">
-                                <h6>تیم‌ما</h6>
-                                <h2 class="fw-bold">تیم خلاق ما</h2>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک چاپگرها و متون بلکه روزنامه است. </p>
+                        <div class="col-lg-12">
+                            <div class="portfolio-menu text-center">
+                                <button data-filter="all" class="active">تمام پروژه ها</button>
+                                <button data-filter="branding">برندینگ</button>
+                                <button data-filter="marketing">بازاریابی</button>
+                                <button data-filter="planning">برنامه ریزی</button>
+                                <button data-filter="research">تحقیقاتی</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row grid">
+                        <div class="col-lg-4 col-sm-6 branding-3 planning-3" data-filter="branding">
+                            <div class="portfolio-style-three">
+                                <div class="portfolio-image">
+                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf1.jpg')}}" alt="image" />
+                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf1.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
+                                            </div>
+                                            <div class="portfolio-icon">
+                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h4 class="portfolio-title">
+                                        <a href="javascript:void(0)">طراحی گرافیکی</a>
+                                    </h4>
+                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6" data-filter="research">
+                            <div class="portfolio-style-three">
+                                <div class="portfolio-image">
+                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf2.jpg')}}" alt="image" />
+                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf2.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
+                                            </div>
+                                            <div class="portfolio-icon">
+                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h4 class="portfolio-title">
+                                        <a href="javascript:void(0)">توسعه دهنده وب</a>
+                                    </h4>
+                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6" data-filter="marketing">
+                            <div class="portfolio-style-three">
+                                <div class="portfolio-image">
+                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf3.jpg')}}" alt="image" />
+                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf3.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
+                                            </div>
+                                            <div class="portfolio-icon">
+                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h4 class="portfolio-title">
+                                        <a href="javascript:void(0)">توسعه دهنده اپلیکیشن</a>
+                                    </h4>
+                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6" data-filter="planning">
+                            <div class="portfolio-style-three">
+                                <div class="portfolio-image">
+                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf4.jpg')}}" alt="image" />
+                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf4.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
+                                            </div>
+                                            <div class="portfolio-icon">
+                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h4 class="portfolio-title">
+                                        <a href="javascript:void(0)">دیجتیال مارکتینگ</a>
+                                    </h4>
+                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6" data-filter="branding">
+                            <div class="portfolio-style-three">
+                                <div class="portfolio-image">
+                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf5.jpg')}}" alt="image" />
+                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf5.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
+                                            </div>
+                                            <div class="portfolio-icon">
+                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h4 class="portfolio-title">
+                                        <a href="javascript:void(0)">خدمات سئو</a>
+                                    </h4>
+                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6" data-filter="marketing">
+                            <div class="portfolio-style-three">
+                                <div class="portfolio-image">
+                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf6.jpg')}}" alt="image" />
+                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf6.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
+                                            </div>
+                                            <div class="portfolio-icon">
+                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-text">
+                                    <h4 class="portfolio-title">
+                                        <a href="javascript:void(0)">طراحی محصول</a>
+                                    </h4>
+                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="team-style-six text-center">
-                            <div class="team-image"> <img src="{{asset('assets/frontend/img/jaban/private-site-images/team/team-1.jpg')}}" alt="Team" /> </div>
-                            <div class="team-content">
-                                <div class="team-social">
-                                    <ul class="social">
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-twitter-original"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-linkedin-original"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-pinterest"></i> </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4 class="team-name">جفری رایلی</h4> <span class="sub-title">کارگردان هنری</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="team-style-six text-center">
-                            <div class="team-image"> <img src="{{asset('assets/frontend/img/jaban/private-site-images/team/team-2.jpg')}}" alt="Team" /> </div>
-                            <div class="team-content">
-                                <div class="team-social">
-                                    <ul class="social">
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-twitter-original"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-linkedin-original"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-pinterest"></i> </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4 class="team-name">رایلی بیاتا</h4> <span class="sub-title">توسعه دهنده وب</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="team-style-six text-center">
-                            <div class="team-image"> <img src="{{asset('assets/frontend/img/jaban/private-site-images/team/team-3.jpg')}}" alt="Team" /> </div>
-                            <div class="team-content">
-                                <div class="team-social">
-                                    <ul class="social">
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-twitter-original"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-linkedin-original"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)"> <i class="lni lni-pinterest"></i> </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4 class="team-name">مارک الون</h4> <span class="sub-title">طراح رابط کاربری</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        @endif --}}
+        <!-- ./projects section -->
 
-        <section id="call-action" class="call-action is-rtl">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
-                        <div class="inner-content">
-                            <h2>
-                                ما دوست داریم راه حل های عالی
-                                <br /> برای کسب و کارتان ایجاد کنیم
-                            </h2>
-                            <p>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                <br />
-                                چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                            </p>
-                            <div class="light-rounded-buttons"> <a href="javascript:void(0)" class="btn primary-btn-outline">شروع کنید</a> </div>
+        <!-- ads section -->
+        @if($psite->ads && !$psite->ads->is_hidden && $showAdsSection)
+            <section id="ads" class="ads-area ads-three is-rtl">
+                <div class="section-title-five">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <h6>
+                                        آگهی ها
+                                    </h6>
+                                    <h2 class="fw-bold">
+                                        آخرین آگهی های ما
+                                    </h2>
+                                    @if($psite->ads->header_description)
+                                        <p>
+                                            {{$psite->ads->header_description}}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ads-menu text-center">
+                                <button data-filter-ads="allAds" class="active">
+                                    تمام آگهی ها
+                                </button>
+                                @if($selling->count() && $psite->ads->is_selling)
+                                    <button data-filter-ads="selling">
+                                        آگهی فروش کالا
+                                    </button>
+                                @endif
+                                @if($investment->count() && $psite->ads->is_investment)
+                                    <button data-filter-ads="investment">
+                                        آگهی شراکت و سرمایه گذاری
+                                    </button>
+                                @endif
+                                @if($bid->count() && $psite->ads->is_bid)
+                                    <button data-filter-ads="bid">
+                                        آگهی مزایده و مناقصه
+                                    </button>
+                                @endif
+                                @if($inquiry->count() && $psite->ads->is_inquiry)
+                                    <button data-filter-ads="inquiry">
+                                        آگهی استعلام قیمت
+                                    </button>
+                                @endif
+                                @if($contractor->count() && $psite->ads->is_contractor)
+                                    <button data-filter-ads="contractor">
+                                        آگهی پیمانکاری
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row adsGrid">
+                        @if($selling->count() && $psite->ads->is_selling)
+                            @foreach ($selling as $sellingItem)
+                                <div class="col-lg-4 col-sm-6 selling-3 bid-3" data-filter-ads="selling">
+                                    <div class="ads-style-three">
+                                        <div class="ads-image">
+                                            <a href="{{route('activity', $sellingItem->activity->slug)}}">
+                                                <img src="{{asset($sellingItem->activity->adsImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="ads-text">
+                                            <h4 class="ads-title">
+                                                <a href="{{route('activity', $sellingItem->activity->slug)}}">
+                                                    {{$sellingItem->item_title}}
+                                                </a>
+                                            </h4>
+                                            <p class="text">
+                                                {{$sellingItem->item_description}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if($investment->count() && $psite->ads->is_investment)
+                            @foreach ($investment as $investmentItem)
+                                <div class="col-lg-4 col-sm-6 investment-3 bid-3" data-filter-ads="investment">
+                                    <div class="ads-style-three">
+                                        <div class="ads-image">
+                                            <a href="{{route('activity', $investmentItem->activity->slug)}}">
+                                                <img src="{{asset($investmentItem->activity->adsImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="ads-text">
+                                            <h4 class="ads-title">
+                                                <a href="{{route('activity', $investmentItem->activity->slug)}}">
+                                                    {{$investmentItem->item_title}}
+                                                </a>
+                                            </h4>
+                                            <p class="text">
+                                                {{$investmentItem->item_description}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if($bid->count() && $psite->ads->is_bid)
+                            @foreach ($bid as $bidItem)
+                                <div class="col-lg-4 col-sm-6 bid-3 bid-3" data-filter-ads="bid">
+                                    <div class="ads-style-three">
+                                        <div class="ads-image">
+                                            <a href="{{route('activity', $bidItem->activity->slug)}}">
+                                                <img src="{{asset($bidItem->activity->adsImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="ads-text">
+                                            <h4 class="ads-title">
+                                                <a href="{{route('activity', $bidItem->activity->slug)}}">
+                                                    {{$bidItem->item_title}}
+                                                </a>
+                                            </h4>
+                                            <p class="text">
+                                                {{$bidItem->item_description}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if($inquiry->count() && $psite->ads->is_inquiry)
+                            @foreach ($inquiry as $inquiryItem)
+                                <div class="col-lg-4 col-sm-6 inquiry-3 inquiry-3" data-filter-ads="inquiry">
+                                    <div class="ads-style-three">
+                                        <div class="ads-image">
+                                            <a href="{{route('activity', $inquiryItem->activity->slug)}}">
+                                                <img src="{{asset($inquiryItem->activity->adsImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="ads-text">
+                                            <h4 class="ads-title">
+                                                <a href="{{route('activity', $inquiryItem->activity->slug)}}">
+                                                    {{$inquiryItem->item_title}}
+                                                </a>
+                                            </h4>
+                                            <p class="text">
+                                                {{$inquiryItem->item_description}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if($contractor->count() && $psite->ads->is_contractor)
+                            @foreach ($contractor as $contractorItem)
+                                <div class="col-lg-4 col-sm-6 contractor-3 contractor-3" data-filter-ads="contractor">
+                                    <div class="ads-style-three">
+                                        <div class="ads-image">
+                                            <a href="{{route('activity', $contractorItem->activity->slug)}}">
+                                                <img src="{{asset($contractorItem->activity->adsImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="ads-text">
+                                            <h4 class="ads-title">
+                                                <a href="{{route('activity', $contractorItem->activity->slug)}}">
+                                                    {{$contractorItem->item_title}}
+                                                </a>
+                                            </h4>
+                                            <p class="text">
+                                                {{$contractorItem->item_description}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </section>
+        @endif
+        <!-- ./ads section -->
+
+        <!-- licenses section -->
+        @if($psite->licenses && !$psite->licenses->is_hidden && $psite->licenses->psiteLicenseItem->count())
+            <section id="pricing" class="pricing-area pricing-fourteen is-rtl">
+                <div class="section-title-five">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <h6>
+                                        مجوز ها و افتخارات
+                                    </h6>
+                                    <h2 class="fw-bold">
+                                        مجوز ها و انتخارات ما را مشاهده بفرمایید
+                                    </h2>
+                                    @if($psite->licenses->header_description)
+                                        <p>
+                                            {{$psite->licenses->header_description}}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        @foreach ($psite->licenses->psiteLicenseItem as $licenseItem)
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="pricing-style-fourteen">
+                                    <div class="light-rounded-buttons">
+                                        <img src="{{asset($licenseItem->item_image)}}" alt="">
+                                    </div>
+                                    <p class="title mb-0">
+                                        {{$licenseItem->item_description}}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
+        <!-- ./licenses section -->
+
+        <!-- members section -->
+        @if($psite->members && !$psite->members->is_hidden && $psite->members->psiteMemberItem->count())
+            <section id="team" class="team-area is-rtl">
+
+                <div class="section-title-five">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <h6>همکاران ما</h6>
+                                    <h2 class="fw-bold">
+                                        همکاران ما را ملاحضه کنید
+                                    </h2>
+                                    @if($psite->members->header_description)
+                                        <p>
+                                            {{$psite->members->header_description}}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        @foreach ($psite->members->psiteMemberItem as $memberItem)
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="team-style-six text-center">
+                                    <div class="team-image"> 
+                                        <img src="{{asset($memberItem->item_image)}}" alt="Team" /> 
+                                    </div>
+                                    <div class="team-content">
+                                        <h4 class="team-name">
+                                            {{$memberItem->item_fullname}}
+                                        </h4> 
+                                        <span class="sub-title">
+                                            {{$memberItem->item_role}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
+        <!-- ./members section -->
+        
+        <!-- middle banner section -->
+        @if($psite->middleBanner && !$psite->middleBanner->is_hidden)
+            <section id="call-action" class="call-action is-rtl" style="{{$showMiddleBannerImageStyle}}">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-9">
+                            <div class="inner-content">
+                                @if($psite->middleBanner->header_title)
+                                    <h2>
+                                        {{$psite->middleBanner->header_title}}
+                                    </h2>
+                                @endif
+                                @if($psite->middleBanner->header_description)
+                                    <p>
+                                        {{$psite->middleBanner->header_description}}
+                                    </p>
+                                @endif
+                                <div class="light-rounded-buttons"> 
+                                    <a href="javascript:void(0)" class="btn primary-btn-outline">
+                                        شروع کنید
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+        <!-- ./middle banner section -->
 
         <section id="testimonial" class="testimonial-5 is-rtl">
             <div class="section-title-five">
@@ -1079,61 +1226,63 @@
             </div>
         </section>
 
-        <footer class="footer-area footer-eleven is-rtl">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="inner-content">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="footer-widget f-about">
-                                    <div class="logo">
-                                        <a href="index.html"> 
-                                            <img width="50" src="{{asset($psite->footer->logo)}}" alt="#" class="img-fluid" /> 
-                                        </a>
+        @if($psite->footer)
+            <footer class="footer-area footer-eleven is-rtl">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="inner-content">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="footer-widget f-about">
+                                        <div class="logo">
+                                            <a href="index.html"> 
+                                                <img width="50" src="{{asset($psite->footer->logo)}}" alt="#" class="img-fluid" /> 
+                                            </a>
+                                        </div>
+                                        <p class="copyright-text"> <span>© 1404 تمامی حقوق محفوظ است.</span>
+                                        ممنون که با قالب کسب و کار خلق کردید <a href="https://www.rtl-theme.com/author/nad3r/products/" rel="nofollow">سایر قالب های من</a>
+                                        </p>
                                     </div>
-                                    <p class="copyright-text"> <span>© 1404 تمامی حقوق محفوظ است.</span>
-                                    ممنون که با قالب کسب و کار خلق کردید <a href="https://www.rtl-theme.com/author/nad3r/products/" rel="nofollow">سایر قالب های من</a>
-                                    </p>
                                 </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-12">
-                                <div class="footer-widget f-link">
-                                    <h5>سایر دسته بندی</h5>
-                                    <ul>
-                                        <li><a href="javascript:void(0)">بازاریابی</a></li>
-                                        <li><a href="javascript:void(0)">آنالیز و آمار</a></li>
-                                        <li><a href="javascript:void(0)">فروشگاهی</a></li>
-                                        <li><a href="javascript:void(0)">ایده‌ها</a></li>
-                                    </ul>
+                                <div class="col-lg-2 col-md-6 col-12">
+                                    <div class="footer-widget f-link">
+                                        <h5>سایر دسته بندی</h5>
+                                        <ul>
+                                            <li><a href="javascript:void(0)">بازاریابی</a></li>
+                                            <li><a href="javascript:void(0)">آنالیز و آمار</a></li>
+                                            <li><a href="javascript:void(0)">فروشگاهی</a></li>
+                                            <li><a href="javascript:void(0)">ایده‌ها</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-2 col-md-6 col-12">
-                                <div class="footer-widget f-link">
-                                    <h5>دسترسی سریع</h5>
-                                    <ul>
-                                        <li><a href="javascript:void(0)">تعرفه ها</a></li>
-                                        <li><a href="javascript:void(0)">مستند سازی</a></li>
-                                        <li><a href="javascript:void(0)">راهنمایی</a></li>
-                                        <li><a href="javascript:void(0)">وضعیت API</a></li>
-                                    </ul>
+                                <div class="col-lg-2 col-md-6 col-12">
+                                    <div class="footer-widget f-link">
+                                        <h5>دسترسی سریع</h5>
+                                        <ul>
+                                            <li><a href="javascript:void(0)">تعرفه ها</a></li>
+                                            <li><a href="javascript:void(0)">مستند سازی</a></li>
+                                            <li><a href="javascript:void(0)">راهنمایی</a></li>
+                                            <li><a href="javascript:void(0)">وضعیت API</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center">
-                                <div class="footer-widget d-flex flex-column align-items-center">
-                                    <a href="" id="container">
-                                        {!! $qrCode !!}
-                                    </a>
-                                    <br/>
-                                    <button id="download" class="btn primary-btn btn-sm text-light" onclick="downloadSVG()">
-                                        دانلود qr code
-                                    </button>
+                                <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                                    <div class="footer-widget d-flex flex-column align-items-center">
+                                        <a href="" id="container">
+                                            {!! $qrCode !!}
+                                        </a>
+                                        <br/>
+                                        <button id="download" class="btn primary-btn btn-sm text-light" onclick="downloadSVG()">
+                                            دانلود qr code
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        @endif
         
         <a href="#" class="scroll-top btn-hover"> <i class="lni lni-chevron-up"></i> </a>
         <script src="{{asset('assets/frontend/js/private-site-scripts/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
@@ -1164,9 +1313,8 @@
         <script type="text/javascript">
             //========= glightbox
             GLightbox({
-                'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
                 'type': 'video',
-                'source': 'youtube', //vimeo, youtube or local
+                'source': 'local', //vimeo, youtube or local
                 'width': 900,
                 'autoplayVideos': true,
             });

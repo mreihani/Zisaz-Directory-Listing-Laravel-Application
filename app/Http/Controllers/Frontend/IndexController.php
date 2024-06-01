@@ -157,7 +157,37 @@ class IndexController extends Controller
         }
 
         $qrCode = QrCode::size(150)->generate(URL::to('/site') . '/' . $psite->slug);
+
+        // load five types of ads items related to the user
+        $user = $psite->user;
+
+        $selling = !is_null($user->activity) ? $user->activity->with(['selling'])->get()->pluck('selling')->filter()->take(3) : collect([]);
+        $investment = !is_null($user->activity) ? $user->activity->with(['investment'])->get()->pluck('investment')->filter()->take(3) : collect([]);
+        $bid = !is_null($user->activity) ? $user->activity->with(['bid'])->get()->pluck('bid')->filter()->take(3) : collect([]);
+        $inquiry = !is_null($user->activity) ? $user->activity->with(['inquiry'])->get()->pluck('inquiry')->filter()->take(3) : collect([]);
+        $contractor = !is_null($user->activity) ? $user->activity->with(['contractor'])->get()->pluck('contractor')->filter()->take(3) : collect([]);
+
+        // check if there is at least one item available
+        if($selling->count() || $investment->count() || $bid->count() || $inquiry->count() || $contractor->count()) {
+            $showAdsSection = true;
+        } else {
+            $showAdsSection = false;
+        }
+
+        // create dynamic background style for the middle banner section
+        $middleBannerImageUrl = ($psite->middleBanner && !$psite->middleBanner->is_hidden && $psite->middleBanner->image) ? asset($psite->middleBanner->image) : null;
+        $showMiddleBannerImageStyle = !is_null($middleBannerImageUrl) ? "background-image: url('$middleBannerImageUrl'); height: 100%; width: 100%; background-size: cover;" : '';
         
-        return view('frontend.pages.private-page.private-page-index.index', compact('psite', 'qrCode'));
+        return view('frontend.pages.private-page.private-page-index.index', compact(
+            'psite', 
+            'qrCode', 
+            'selling', 
+            'investment', 
+            'bid', 
+            'inquiry', 
+            'contractor',
+            'showAdsSection',
+            'showMiddleBannerImageStyle'
+        ));
     }
 }

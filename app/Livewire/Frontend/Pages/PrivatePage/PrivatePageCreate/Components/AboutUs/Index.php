@@ -23,6 +23,7 @@ class Index extends Component
     public $image;
     public $imageValidation;
     public $title;
+    public $headerDescription;
     public $aboutUs;
     public $licenses;
     public $contactUs;
@@ -32,6 +33,7 @@ class Index extends Component
         return [
             'imageValidation' => new PrivateSiteAboutUsImageValidationRule($this->image, $this->isHidden),
             'title' => 'required_if:isHidden,==,false',
+            'headerDescription' => 'required_if:isHidden,==,false',
             'aboutUs' => 'required_if:isHidden,==,false',
             'licenses' => 'required_if:isHidden,==,false',
             'contactUs' => 'required_if:isHidden,==,false',
@@ -40,6 +42,7 @@ class Index extends Component
 
     protected $messages = [
         'title.required_if' => 'لطفا نام کسب و کار را وارد نمایید',
+        'headerDescription.required_if' => 'لطفا سر تیتر را وارد نمایید',
         'aboutUs.required_if' => 'لطفا اطلاعات مربوط به درباره ما را وارد نمایید',
         'licenses.required_if' => 'لطفا اطلاعات مربوط به مجوز ها و افتخارات را وارد نمایید',
         'contactUs.required_if' => 'لطفا اطلاعات تماس با ما را وارد نمایید',
@@ -55,6 +58,7 @@ class Index extends Component
             $psite = Psite::findOrFail($this->privateSiteId);
             
             $this->title = is_null($psite->aboutUs) ? "" : $psite->aboutUs->title; 
+            $this->headerDescription = is_null($psite->aboutUs) ? "" : $psite->aboutUs->header_description; 
             $this->image = is_null($psite->aboutUs) ? null : $psite->aboutUs->image; 
             $this->aboutUs = is_null($psite->aboutUs) ? "" : $psite->aboutUs->about_us; 
             $this->licenses = is_null($psite->aboutUs) ? "" : $psite->aboutUs->licenses; 
@@ -126,6 +130,7 @@ class Index extends Component
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
                 'title' => Purify::clean($this->title),
+                'header_description' => Purify::clean($this->headerDescription),
                 'about_us' => Purify::clean($this->aboutUs),
                 'licenses' => Purify::clean($this->licenses),
                 'contact_us' => Purify::clean($this->contactUs),
