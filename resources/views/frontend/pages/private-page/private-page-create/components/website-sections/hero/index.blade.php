@@ -278,4 +278,12 @@
             </button>
         </div>
     </form> 
+
+    <script>
+        $('#unique-id-3b').paletteColorPicker({
+            custom_class: 'force-left',
+            insert: 'after',
+            clear_btn: null, 
+        });
+    </script>
 </div>
