@@ -1164,7 +1164,7 @@
                                         <div class="col-12 col-md-6 col-xl-12">
                                             <div class="contact-item">
                                                 <div class="contact-icon"> 
-                                                    <i class="lni lni-envelope"></i> 
+                                                    <i class="lni lni-world"></i> 
                                                 </div>
                                                 <div class="contact-content">
                                                     <h4>
