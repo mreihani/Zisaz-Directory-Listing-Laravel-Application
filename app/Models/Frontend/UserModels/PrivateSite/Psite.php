@@ -15,7 +15,7 @@ use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteLicense;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteProject;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteService;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTest;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMiddleBanner;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTrustedCustomer;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsitePromotionalVideo;
@@ -69,7 +69,7 @@ class Psite extends Model
     }
 
     public function testimonials() {
-        return $this->hasOne(PsiteTestimonial::class);
+        return $this->hasOne(PsiteTest::class);
     }
 
     public function trustedCustomer() {

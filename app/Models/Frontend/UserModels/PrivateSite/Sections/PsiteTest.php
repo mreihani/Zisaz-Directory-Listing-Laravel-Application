@@ -5,9 +5,9 @@ namespace App\Models\Frontend\UserModels\PrivateSite\Sections;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial\PsiteTestimonialItem;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial\PsiteTestItem;
 
-class PsiteTestimonial extends Model
+class PsiteTest extends Model
 {
     protected $guarded = [];
 
@@ -16,6 +16,6 @@ class PsiteTestimonial extends Model
     }
 
     public function psiteTestimonialItem() {
-        return $this->hasMany(PsiteTestimonialItem::class);
+        return $this->hasMany(PsiteTestItem::class);
     }
 }

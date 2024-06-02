@@ -154,7 +154,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('psite_testimonials', function (Blueprint $table) {
+        Schema::create('psite_tests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('psite_id');
             $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
@@ -163,10 +163,10 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('psite_testimonial_items', function (Blueprint $table) {
+        Schema::create('psite_test_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('psite_testimonial_id');
-            $table->foreign('psite_testimonial_id')->references('id')->on('psite_testimonials')->onDelete('cascade');
+            $table->unsignedBigInteger('psite_test_id');
+            $table->foreign('psite_test_id')->references('id')->on('psite_tests')->onDelete('cascade');
             $table->string('item_fullname')->nullable();
             $table->string('item_description')->nullable();
             $table->string('item_image')->nullable();
@@ -293,8 +293,8 @@ return new class extends Migration
         Schema::dropIfExists('psite_trusted_customer_items');
         Schema::dropIfExists('psite_trusted_customers');
         Schema::dropIfExists('psite_blogs');
-        Schema::dropIfExists('psite_testimonial_items');
-        Schema::dropIfExists('psite_testimonials');
+        Schema::dropIfExists('psite_test_items');
+        Schema::dropIfExists('psite_tests');
         Schema::dropIfExists('psite_middle_banners');
         Schema::dropIfExists('psite_member_items');
         Schema::dropIfExists('psite_members');

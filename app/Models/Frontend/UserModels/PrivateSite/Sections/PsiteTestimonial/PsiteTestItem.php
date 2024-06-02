@@ -4,13 +4,13 @@ namespace App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTestimonial;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTest;
 
-class PsiteTestimonialItem extends Model
+class PsiteTestItem extends Model
 {
     protected $guarded = [];
 
     public function psiteTestimonial() {
-        return $this->belongsTo(PsiteTestimonial::class);
+        return $this->belongsTo(PsiteTest::class);
     }
 }
