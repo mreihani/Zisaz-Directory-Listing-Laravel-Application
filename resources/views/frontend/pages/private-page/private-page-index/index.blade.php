@@ -1309,16 +1309,18 @@
                                                 <img width="70" src="{{asset($psite->footer->logo)}}" alt="#" class="img-fluid" /> 
                                             </a>
                                         </div>
-                                        <p class="copyright-text"> 
-                                            ارائه شده توسط
-                                            <a href="#" rel="nofollow">
-                                                {{$psite->aboutUs->title}}
-                                            </a>
-                                            در پلتفرم
-                                            <a href="{{URL::to('/')}}" rel="nofollow">
-                                                زی ساز
-                                            </a>
-                                        </p>
+                                        @if($psite->aboutUs && $psite->aboutUs->title)
+                                            <p class="copyright-text"> 
+                                                ارائه شده توسط
+                                                <a href="#" rel="nofollow">
+                                                    {{$psite->aboutUs->title}}
+                                                </a>
+                                                در پلتفرم
+                                                <a href="{{URL::to('/')}}" rel="nofollow">
+                                                    زی ساز
+                                                </a>
+                                            </p>
+                                        @endif
                                         <p class="copyright-text mt-2"> 
                                             تمامی حقوق ماده و معنوی این صفحه برای 
                                             <a href="{{URL::to('/')}}" rel="nofollow">
