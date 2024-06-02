@@ -273,7 +273,7 @@
                 اطلاعات فرم تماس با ما
             </h2>
             
-            <dov class="row">
+            <div class="row">
                 <div class="col-md-12 mb-4">
                     <label class="form-label fw-bold" for="pr-business-header-description">
                         ایمیل مربوط به فرم تماس با ما را وارد نمایید
@@ -291,7 +291,7 @@
                         <span class="text-danger">{{ $errors->first('contactUsFormEmail') }}</span>
                     @endif
                 </div>
-            </dov>
+            </div>
 
             <!-- Geolocation-->
             <h2 class="h5 font-vazir mb-4 mt-3">

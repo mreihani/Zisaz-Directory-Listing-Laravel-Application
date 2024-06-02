@@ -247,7 +247,7 @@ class Index extends Component
 
     // social media repeater form
     public function addSocialMedia($socialMediaIteration) {
-        if(count($this->socialMediaInputs) < 4) {
+        if(count($this->socialMediaInputs) < 5) {
             $this->socialMedia[$socialMediaIteration] = null;
             $this->socialMediaTypeValue[$socialMediaIteration] = "";
             $this->socialMediaIteration = $socialMediaIteration + 1;
