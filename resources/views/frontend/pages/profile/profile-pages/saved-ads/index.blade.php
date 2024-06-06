@@ -16,18 +16,19 @@
                 </a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                تنظیمات اطلاع رسانی
+                آگهی های من
             </li>
         </ol>
     </nav>
     <!-- Page content-->
     <div class="row">
         <!-- Sidebar-->
-        @include('frontend.pages.profile.layouts.sidebar')   
+        @include('frontend.pages.profile.layouts.sidebar')    
 
         <!-- main content-->
-        @livewire('frontend.pages.profile.profile-pages.account-notifications.index')
+        @livewire('frontend.pages.profile.profile-pages.saved-ads.index')
     </div>
 </div>
+
 
 @endsection

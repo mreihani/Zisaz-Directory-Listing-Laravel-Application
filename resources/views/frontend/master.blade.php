@@ -80,6 +80,9 @@
     <!-- Back to top button-->
     <a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted fs-sm ms-2">بالا</span><i class="btn-scroll-top-icon fi-chevron-up">   </i></a>
 
+    <!-- Page JS -->
+    @stack('page-scripts')
+
     <script src="{{asset('assets/frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.js')}}"></script>
     <script src="{{asset('assets/frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js')}}"></script>
@@ -88,9 +91,6 @@
     <script src="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.js')}}"></script>
     <script src="{{asset('assets/frontend/js/theme.min.js')}}"></script>
 
-    <!-- Page JS -->
-    @stack('page-scripts')
-    
     @vite('resources/js/frontend/master/auth-modals-scripts.js')
     @vite('resources/js/frontend/master/toast-timer-hide.js')
     

@@ -13,10 +13,13 @@ Route::controller(UserProfileNotificationsController::class)->group(function () 
     Route::get('/dashboard/account-notifications', 'index')->name('user.dashboard.account-notifications.index');
 });
 Route::controller(UserProfileActivityController::class)->group(function () {
-    Route::get('/dashboard/saved-activities', 'index')->name('user.dashboard.saved-activities.index');
+    Route::get('/dashboard/saved-ads', 'index')->name('user.dashboard.saved-ads.index');
 });
 Route::controller(UserActivityController::class)->group(function () {
     Route::get('/create-activity', 'index')->name('user.create-activity.index');
+});
+Route::controller(UserActivityController::class)->group(function () {
+    Route::get('/activity/{id}/edit', 'edit')->name('user.activity.edit');
 });
 Route::controller(UserPrivatePageController::class)->group(function () {
     Route::get('/create-private-page', 'index')->name('user.create-private-page.index');

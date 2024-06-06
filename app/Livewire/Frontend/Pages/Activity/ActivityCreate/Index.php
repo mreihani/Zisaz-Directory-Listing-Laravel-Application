@@ -820,7 +820,6 @@ class Index extends Component
         ]);
         
         // ثبت آگهی
-        // آگهی استخدام
         // آکهی فروش کالا
         if($this->adsType == "selling") {
             $ads = $activity->selling()->create([
@@ -891,10 +890,7 @@ class Index extends Component
                 'type' => Purify::clean($this->employmentAdsType),
                 'item_title' => Purify::clean($this->adsTitle),
                 'item_description' => Purify::clean($this->adsDescription),
-                'age' => Purify::clean($this->age),
                 'work_exp' => Purify::clean($this->workExp),
-                'work_exp_description' => Purify::clean($this->workExpDescription),
-                'address' => Purify::clean($this->address),
             ]);
 
             // save academic into DB
@@ -1078,9 +1074,6 @@ class Index extends Component
             // save activity group handler
             $this->saveActivityGroupHandler($activity);
 
-            // save selling ads status type into DB
-            $this->saveSellingAdsStatusHandler($activity);
-
             // upload ads image
             $this->handlePublicAdsFileUpload($activity);
  
@@ -1119,6 +1112,8 @@ class Index extends Component
             ', 
             type: 'bg-success'
         );
+
+        return redirect(route('user.dashboard.saved-ads.index'));
     }
 
    

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Activity;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Frontend\UserModels\Activity\Activity;
 
 class UserActivityController extends Controller
 {
@@ -54,7 +55,14 @@ class UserActivityController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+
+        // check if user is authorized to edit activity item
+        if(!auth()->check() || auth()->user()->id != $activity->user->id) {
+           abort(403);
+        }
+        
+        return view('frontend.pages.activity.activity-edit.index', compact('activity'));
     }
 
     /**

@@ -1,4 +1,4 @@
-<div>
+<div class="col-lg-8 col-md-7 mb-5">
     <h1 class="h4 py-4 mt-3 mb-2 font-vazir">تنظیمات اطلاع رسانی من</h1>
     <div class="border-bottom pb-4 mb-4">
         <div class="form-check form-switch">

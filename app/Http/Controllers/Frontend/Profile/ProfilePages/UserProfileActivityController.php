@@ -12,7 +12,7 @@ class UserProfileActivityController extends Controller
      */
     public function index()
     {
-        return view('frontend.pages.profile.profile-pages.saved-activities.index');
+        return view('frontend.pages.profile.profile-pages.saved-ads.index');
     }
 
     /**
