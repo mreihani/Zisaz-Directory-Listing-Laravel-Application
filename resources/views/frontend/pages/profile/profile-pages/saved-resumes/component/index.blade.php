@@ -144,7 +144,7 @@
                             {{jdate($resumeItem->updated_at)->ago()}}
                         </span>
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
-                            شماره آگهی:
+                            شماره رزومه:
                             {{$resumeItem->id}}
                         </span>
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3">
