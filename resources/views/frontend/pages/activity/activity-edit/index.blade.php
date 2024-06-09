@@ -57,8 +57,8 @@
         
             @if($activity->activity_type == 'ads_registration')
                 @include('frontend.pages.activity.activity-edit.ads_registration.ads-registration-selection', ['activity' => $activity])
-            {{-- @elseif($activity->activity_type == 'resume')
-                @include('frontend.pages.activity.activity-edit.resume', ['activity' => $activity]) --}}
+            @elseif($activity->activity_type == 'resume')
+                @include('frontend.pages.activity.activity-edit.resume.resume-selection', ['activity' => $activity])
             @endif
 
         </div>

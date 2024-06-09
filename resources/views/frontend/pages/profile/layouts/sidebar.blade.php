@@ -29,10 +29,23 @@
                 </ul>
             </div>
         </div>
-        <a class="btn btn-primary btn-lg w-100 mb-3" href="real-estate-add-property.html">
-            <i class="fi-plus me-2"></i> 
-            ثبت ملک
-        </a>
+       <div class="d-flex justify-content-center">
+            <div class="me-1">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
+                    ثبت آگهی
+                </a>
+            </div>
+            <div class="me-1">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.create-private-page.index')}}">
+                    ثبت کسب و کار
+                </a>
+            </div>
+            <div class="me-1">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="">
+                    ثبت پروژه
+                </a>
+            </div>
+       </div>
         <a class="btn btn-outline-secondary d-block d-md-none w-100 mb-3" href="#account-nav" data-bs-toggle="collapse">
             <i class="fi-align-justify me-2"></i>
             منو
@@ -42,6 +55,10 @@
                 <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.profile-settings.index' ? 'active' : ''}}" href="{{route('user.dashboard.profile-settings.index')}}">
                     <i class="fi-user opacity-60 me-2"></i>
                     اطلاعات حساب کاربری
+                </a>
+                <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.saved-resumes.index' ? 'active' : ''}}" href="{{route('user.dashboard.saved-resumes.index')}}">
+                    <i class="fi-file opacity-60 me-2"></i>
+                    رزومه های من
                 </a>
                 <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.saved-ads.index' ? 'active' : ''}}" href="{{route('user.dashboard.saved-ads.index')}}">
                     <i class="fi-billboard-house opacity-60 me-2"></i>
@@ -58,6 +75,10 @@
                 <a class="card-nav-link" href="">
                     <i class="fi-bookmark opacity-60 me-2"></i>
                     موردعلاقه ها
+                </a>
+                <a class="card-nav-link" href="">
+                    <i class="fi-edit opacity-60 me-2"></i>
+                    مقالات من
                 </a>
                 <a class="card-nav-link" href="">
                     <i class="fi-messenger opacity-60 me-2"></i>

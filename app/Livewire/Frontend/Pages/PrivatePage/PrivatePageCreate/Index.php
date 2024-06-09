@@ -30,7 +30,7 @@ class Index extends Component
         if(!is_null($this->privateSiteId)) {
             $psite = Psite::findOrFail($this->privateSiteId);
 
-            if($psite->user->id !== auth()->user()->id) {
+            if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
                 abort(403);
             }
         }

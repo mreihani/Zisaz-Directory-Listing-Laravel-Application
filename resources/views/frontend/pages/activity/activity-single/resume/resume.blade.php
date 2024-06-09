@@ -172,7 +172,7 @@
                             {{jdate($activity->subactivity->updated_at)->ago()}}    
                         </b>
                     </li>
-                    <li class="me-3 pe-3 border-end">شماره آگهی: 
+                    <li class="me-3 pe-3 border-end">شماره رزومه: 
                         <b>
                             {{$activity->id}}
                         </b>
@@ -190,7 +190,7 @@
     <section class="container mb-5 pb-2 pb-lg-4">
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="h3 mb-0">
-                آگهی های مشابه
+                رزومه های مشابه
             </h2>
             <a class="btn btn-link fw-normal p-0" href="{{route('get-activities', ['activity_type' => 'resume', 'r_name' => 'resume', 'type' => 'resume'])}}">
                 مشاهده همه

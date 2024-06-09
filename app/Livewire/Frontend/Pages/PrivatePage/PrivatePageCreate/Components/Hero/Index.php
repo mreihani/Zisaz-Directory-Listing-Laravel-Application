@@ -169,7 +169,7 @@ class Index extends Component
             $psite = Psite::findOrFail($this->privateSiteId);
 
             // the user is trying to edit a private website that does not belong to himself/herself
-            if($psite->user->id !== auth()->user()->id) {
+            if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
                 abort(403);
             } 
 

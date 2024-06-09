@@ -183,7 +183,7 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <label class="form-label fw-bold" for="pr-title">
-                            مدارک مزایده را بارگذاری کنید 
+                            مدارک استعلام را بارگذاری کنید 
                         </label>
                         <span class="text-danger">*</span>
                         @error('licenseTypeValue.'.$licenseValue) <span class="text-danger error">{{ $message }}</span>@enderror
@@ -194,7 +194,7 @@
                                         نوع مدرک را انتخاب نمایید
                                     </option>
                                     <option value="bid_license">
-                                        تصویر مجوز مناقصه
+                                        تصویر مدرک استعلام
                                     </option>
                                     <option value="other">
                                         سایر
@@ -249,7 +249,7 @@
             @else
                 <div class="row">
                     <div class="col-sm-10">
-                        <label class="form-label fw-bold" for="pr-title">مدارک مزایده را بارگذاری کنید 
+                        <label class="form-label fw-bold" for="pr-title">مدارک استعلام را بارگذاری کنید 
                         </label>
                         <span class="text-danger">*</span>
                         @error('licenseTypeValue.'.$licenseValue) <span class="text-danger error">{{ $message }}</span>@enderror
@@ -260,7 +260,7 @@
                                         نوع مدرک را انتخاب نمایید
                                     </option>
                                     <option value="bid_license">
-                                        تصویر مجوز مناقصه
+                                        تصویر مدرک استعلام
                                     </option>
                                     <option value="other">
                                         سایر

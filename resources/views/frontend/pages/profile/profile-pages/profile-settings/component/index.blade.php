@@ -101,6 +101,46 @@
             </div>
         </div>
 
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <div class="border rounded-3 p-3" id="auth-info">
+                    <!-- Email-->
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="ps-2">
+                                <label class="form-label fw-bold">پست الکترونیکی</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="form-control mt-3" type="email" wire:model="email" placeholder="آدرس ایمیل خود را وارد نمایید">
+                        </div>
+                        @if($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                        @endif
+                    </div>
+                    <!-- Username-->
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="ps-2">
+                                <label class="form-label fw-bold">نام کاربری</label>
+                                <span class="text-danger">*</span>
+                                <span>
+                                    (با انتخاب نام کاربری می توانید از طریق آن به کلیه مقالات خود دسترسی پیدا کنید)
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="form-control mt-3" type="text" wire:model="username" placeholder="نام کاربری مورد نظر خود را وارد نمایید">
+                        </div>
+                        @if($errors->has('username'))
+                            <span class="text-danger">{{ $errors->first('username') }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="d-flex align-items-center justify-content-between mt-4 pb-1">
             <button class="btn btn-primary px-3 px-sm-4" type="submit">
                 ذخیره تغییرات

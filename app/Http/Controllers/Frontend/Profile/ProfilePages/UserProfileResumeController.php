@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Frontend\Profile\ProfilePages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserProfileActivityController extends Controller
+class UserProfileResumeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('frontend.pages.profile.profile-pages.saved-ads.index');
+        return view('frontend.pages.profile.profile-pages.saved-resumes.index');
     }
 
     /**

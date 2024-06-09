@@ -4,16 +4,36 @@ namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\ProfileSettings;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+
 
 class Index extends Component
 {
     use WithFileUploads;
 
     public $profile_image;
-    public $activityGroupObj;
+    public $email;
+    public $username;
+
+    protected function rules() {
+        return [
+            'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
+            'username' => ['required', 'string', 'regex:/^[A-z0-9\- ]+$/', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
+        ];
+    }
+
+    protected $messages = [
+        'email.required' => 'لطفا ایمیل خود را وارد نمایید!',
+        'email.email' => 'لطفا ایمیل صحیح وارد نمایید!',
+        'email.unique' => 'ایمیل مورد نظر قبلا در سامانه ثبت شده است. لطفا ایمیل دیگری انتخاب نمایید.',
+        'username.required' => 'لطفا نام کاربری خود را وارد نمایید!',
+        'username.string' => 'لطفا نام کاربری صحیح وارد نمایید.',
+        'username.regex' => 'لطفا نام کاربری را به انگلیسی با حروف لاتین وارد نمایید.',
+        'username.unique' => 'نام کاربری مورد نظر قبلا در سامانه ثبت شده است. لطفا عبارت دیگری انتخاب نمایید.',
+    ];
 
     public function mount() {
         $this->profile_image = (
@@ -21,15 +41,25 @@ class Index extends Component
         && auth()->user()->userProfile->profile_image
         ) ? asset(auth()->user()->userProfile->profile_image) :
         null;
+
+        $this->email = auth()->user()->email;
+        $this->username = auth()->user()->username;
     }
 
     public function saveProfile() {    
+
+        $this->validate();
         
         // Get uploaded image address
         $profileImageAddress = $this->handleFileUpload();
 
+        auth()->user()->update([
+            'email' => Purify::clean(strtolower(trim($this->email))),
+            'username' => Purify::clean(strtolower(trim($this->username))),
+        ]);
+
         // Save user profile
-       $userProfile = auth()->user()->userProfile()->updateOrCreate(
+        $userProfile = auth()->user()->userProfile()->updateOrCreate(
         [
             'user_id' => auth()->user()->id,
         ],[

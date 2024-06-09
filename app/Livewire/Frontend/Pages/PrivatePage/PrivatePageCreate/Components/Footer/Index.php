@@ -71,7 +71,7 @@ class Index extends Component
     private function isPsiteOwner($privateSiteId) {
         $psite = Psite::findOrFail($this->privateSiteId);
 
-        if($psite->user->id !== auth()->user()->id) {
+        if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
         }
 

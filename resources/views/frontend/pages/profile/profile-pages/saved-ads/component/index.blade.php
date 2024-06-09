@@ -3,14 +3,8 @@
         <h1 class="h2 mb-0">
             آگهی های من
         </h1>
-        <a class="fw-bold text-decoration-none" href="#">
-            <i class="fi-trash mt-n1 me-2"></i>
-            حذف همه
-        </a>
     </div>
-    <p class="pt-1 mb-4">
-        در اینجا می توانید پیشنهادات ملک خود را مشاهده کرده و به راحتی آنها را ویرایش کنید.
-    </p>
+    
     <!-- Nav tabs-->
     <ul class="nav nav-tabs border-bottom mb-4" role="tablist">
         <li class="nav-item mb-3">
@@ -21,8 +15,14 @@
         </li>
         <li class="nav-item mb-3">
             <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-file-clean fs-base me-2"></i>
-                پیش نویس
+                <i class="fi-rotate-right fs-base me-2"></i>
+                در انتظار تأیید
+            </a>
+        </li>
+        <li class="nav-item mb-3">
+            <a class="nav-link" href="#" role="tab" aria-selected="false">
+                <i class="fi-x fs-base me-2"></i>
+                رد شده
             </a>
         </li>
         <li class="nav-item mb-3">
@@ -45,7 +45,7 @@
                     </div>
                 </a>
                 <div class="card-body position-relative pb-3">
-                    <div class="dropdown position-absolute zindex-5 top-0 end-0 mt-3 me-3">
+                    {{-- <div class="dropdown position-absolute zindex-5 top-0 end-0 mt-3 me-3">
                         <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fi-dots-vertical"></i>
                         </button>
@@ -75,7 +75,7 @@
                                 </button>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                     @if($adItem->subactivity->type == 'selling')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
@@ -124,7 +124,7 @@
                     @endif
 
                     <h3 class="h6 mb-2 fs-base">
-                        <a class="nav-link stretched-link" href="{{route('activity', $adItem->slug)}}">
+                        <a class="nav-link" href="{{route('activity', $adItem->slug)}}">
                             {{$adItem->subactivity->item_title}}
                         </a>
                     </h3>
@@ -137,7 +137,27 @@
                         <b>زمینه فعالیت: </b>
                         {{$adItem->activityGroups->pluck('title')->implode('، ')}}
                     </div>
-                    <div class="d-flex align-items-center justify-content-center justify-content-sm-start border-top pt-3 pb-2 mt-3 text-nowrap">
+                    <div class="d-flex align-items-center justify-content-center border-top pt-3 pb-2 mt-3">
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
+                            <a class="dropdown-item" href="{{route('user.activity.edit', $adItem->id)}}">
+                                <i class="fi-edit opacity-60 me-2"></i>
+                                ویرایش
+                            </a>
+                        </span>
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
+                            <a class="dropdown-item" href="">
+                                <i class="fi-archive opacity-60 me-2"></i>
+                                آرشیو
+                            </a>
+                        </span>
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3">
+                            <a class="dropdown-item" href="">
+                                <i class="fi-trash opacity-60 me-2"></i>
+                                حذف
+                            </a>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center border-top pt-3 pb-2 mt-3">
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
                             زمان انتشار:

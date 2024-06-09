@@ -16,8 +16,6 @@
     @include('frontend.pages.activity.activity-single.ads_registration.investment.investor')
 @elseif($activity->subactivity->type == 'invested')
     @include('frontend.pages.activity.activity-single.ads_registration.investment.invested')
-@elseif($activity->subactivity->type == 'resume')
-    @include('frontend.pages.activity.activity-single.ads_registration.resume.resume')
 @elseif($activity->subactivity->type == 'auction')
     @include('frontend.pages.activity.activity-single.ads_registration.bid.auction')
 @elseif($activity->subactivity->type == 'tender_buy')
@@ -30,4 +28,6 @@
     @include('frontend.pages.activity.activity-single.ads_registration.inquiry.inquiry_project')
 @elseif($activity->subactivity->type == 'contractor')
     @include('frontend.pages.activity.activity-single.ads_registration.contractor.contractor')
+@elseif($activity->subactivity->type == 'resume')
+    @include('frontend.pages.activity.activity-single.resume.resume')
 @endif    

@@ -133,7 +133,7 @@ class Index extends Component
     private function isOwner() {
         $userId = $this->activity->user->id;
         
-        if($userId !== auth()->user()->id) {
+        if(!auth()->check() || $userId !== auth()->user()->id) {
             abort(403);
         }
     }

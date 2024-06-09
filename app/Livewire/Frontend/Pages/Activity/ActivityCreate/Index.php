@@ -1097,25 +1097,35 @@ class Index extends Component
         // saving resume into DB
         if($this->section == "resume") {
             $this->saveResumeHandler();
+
+            // Show Toaster
+            $this->dispatch('showToaster', 
+                title: '', 
+                message: '
+                    اطلاعات با موفقیت ذخیره شد.
+                ', 
+                type: 'bg-success'
+            );
+
+            return redirect(route('user.dashboard.saved-resumes.index'));
         }
 
         // ثبت آگهی
         if($this->section == "ads_registration") {
             $this->saveAdsRegistrationHandler();
+
+            // Show Toaster
+                $this->dispatch('showToaster', 
+                title: '', 
+                message: '
+                    اطلاعات با موفقیت ذخیره شد.
+                ', 
+                type: 'bg-success'
+            );
+
+            return redirect(route('user.dashboard.saved-ads.index'));
         }
-
-        // Show Toaster
-        $this->dispatch('showToaster', 
-            title: '', 
-            message: '
-                اطلاعات با موفقیت ذخیره شد.
-            ', 
-            type: 'bg-success'
-        );
-
-        return redirect(route('user.dashboard.saved-ads.index'));
     }
-
    
     public function render()
     {
