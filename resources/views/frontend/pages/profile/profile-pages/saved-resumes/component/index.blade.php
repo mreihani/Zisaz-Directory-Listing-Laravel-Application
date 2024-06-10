@@ -37,7 +37,8 @@
         @foreach ($userResumes as $resumeItem)
             <!-- Item-->
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                <a class="card-img-top" href="{{route('activity', $resumeItem->slug)}}" style="background-image: url('{{$resumeItem->adsImagesUrl()}}');">
+                <a class="card-img-top d-flex justify-content-center align-items-center" href="{{route('activity', $resumeItem->slug)}}">
+                    <img width="250" src="{{auth()->user()->avatar()}}" alt="">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
                         <span class="d-table badge bg-info">
                             تأیید شده
