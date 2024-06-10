@@ -15,30 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('activity_type', ['resume', 'ads_registration'])->default('resume');
+            $table->enum('activity_type', ['ads_registration'])->default('ads_registration');
             $table->unsignedBigInteger('subactivity_id')->nullable();
             $table->string('subactivity_type')->nullable();
             $table->string('slug')->unique();
-            $table->timestamps();
-        });
-
-        Schema::create('resumes', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('activity_id');
-            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-            $table->enum('type', ['resume'])->default('resume');
-            $table->enum('resume_goal', ['1', '2', '3', '4', '5', '6'])->default('1');
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->text('address')->nullable();
-            $table->string('postalcode')->nullable();
-            $table->string('landline_phone')->nullable();
-            $table->string('item_title')->nullable();
-            $table->string('reg_num')->nullable();
-            $table->boolean('business_license')->default(0);
-            $table->string('banner_image')->nullable();
-            $table->text('resume_description')->nullable();
-            $table->text('project_description')->nullable();
             $table->timestamps();
         });
 
@@ -187,7 +167,6 @@ return new class extends Migration
         Schema::dropIfExists('sellings');
         Schema::dropIfExists('act_grp_activity');
         Schema::dropIfExists('activity_license_items');
-        Schema::dropIfExists('resumes');
         Schema::dropIfExists('activities');
     }
 };

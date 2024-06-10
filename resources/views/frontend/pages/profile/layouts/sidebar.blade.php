@@ -56,10 +56,6 @@
                     <i class="fi-user opacity-60 me-2"></i>
                     اطلاعات حساب کاربری
                 </a>
-                <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.saved-resumes.index' ? 'active' : ''}}" href="{{route('user.dashboard.saved-resumes.index')}}">
-                    <i class="fi-file opacity-60 me-2"></i>
-                    رزومه های من
-                </a>
                 <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.saved-ads.index' ? 'active' : ''}}" href="{{route('user.dashboard.saved-ads.index')}}">
                     <i class="fi-billboard-house opacity-60 me-2"></i>
                     آگهی های من

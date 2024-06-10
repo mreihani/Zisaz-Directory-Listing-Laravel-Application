@@ -14,17 +14,12 @@ use App\Rules\Activity\WorkExpValidationRule;
 use App\Rules\Activity\AcademicValidationRule;
 use App\Rules\Activity\AdsTitleValidationRule;
 use App\Rules\Activity\InquirerValidationRule;
-use App\Rules\Activity\JobTitleValidationRule;
-use App\Rules\Activity\shopNameValidationRule;
 use App\Rules\Activity\AdsImagesValidationRule;
 use App\Rules\Activity\AuctioneerValidationRule;
 use App\Rules\Activity\ReturnTimeValidationRule;
-use App\Rules\Activity\shopAddressValidationRule;
 use App\Rules\Activity\AgreeToTermsValidationRule;
-use App\Rules\Activity\CompanyTitleValidationRule;
 use App\Rules\Activity\SelectedCityValidationRule;
 use App\Rules\Activity\AcademicLevelValidationRule;
-use App\Rules\Activity\CompanyRegNumValidationRule;
 use App\Models\Frontend\ReferenceData\Gender\Gender;
 use App\Rules\Activity\AdsDescriptionValidationRule;
 use App\Rules\Activity\EmployerGenderValidationRule;
@@ -35,7 +30,6 @@ use App\Rules\Activity\SellingActGrpsIdValidationRule;
 use App\Rules\Activity\SelectedActGrpsIdValidationRule;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
-use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 use App\Rules\Activity\SelectedPaymentMethodValidationRule;
 use App\Rules\Activity\SelectedInvestmentCityValidationRule;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
@@ -60,7 +54,6 @@ class Index extends Component
     public $selectedInvestmentCityIdValidation;
 
     // resume section
-    public $resumeGoal;
     public $provinces;
     public $selectedProvinceId;
     public $cities;
@@ -75,7 +68,7 @@ class Index extends Component
     public $otherDescriptionStatus;
     public $licenseImage;
     public $licenseItem;
-    public $resumeDescription;
+    
     public $licenseInputs;
     public $licenseIteration;
     public $actGrpsId;
@@ -182,16 +175,11 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->resumeGoal, $this->selectedProvinceId, $this->adsType, $this->employmentAdsType),
-            'selectedCityIdValidation' => new SelectedCityValidationRule($this->resumeGoal, $this->selectedCityId, $this->adsType, $this->employmentAdsType),
+            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->selectedProvinceId, $this->adsType, $this->employmentAdsType),
+            'selectedCityIdValidation' => new SelectedCityValidationRule($this->selectedCityId, $this->adsType, $this->employmentAdsType),
             'selectedInvestmentProvinceIdValidation' => new SelectedInvestmentProvinceValidationRule($this->selectedInvestmentProvinceId, $this->adsType, $this->investmentAdsType),
             'selectedInvestmentCityIdValidation' => new SelectedInvestmentCityValidationRule($this->selectedInvestmentCityId, $this->adsType, $this->investmentAdsType),
-            'jobTitle' => new JobTitleValidationRule($this->section, $this->resumeGoal, $this->jobTitle),
-            'shopName' => new shopNameValidationRule($this->resumeGoal, $this->shopName),
-            'address' => new shopAddressValidationRule($this->resumeGoal, $this->address),
-            'actGrpsId' => new SelectedActGrpsIdValidationRule($this->resumeGoal, $this->adsType),
-            'companyTitle' => new CompanyTitleValidationRule($this->resumeGoal, $this->companyTitle),
-            'companyRegNum' => new CompanyRegNumValidationRule($this->resumeGoal, $this->companyRegNum),
+            'actGrpsId' => new SelectedActGrpsIdValidationRule($this->adsType),
             'sellingActGrpsIdValidation' => new SellingActGrpsIdValidationRule($this->sellingActGrpsId, $this->adsType),
             'adsTitle' => new AdsTitleValidationRule($this->adsTitle, $this->adsType),
             'adsImages' => new AdsImagesValidationRule($this->adsImages, $this->adsType),
@@ -204,8 +192,8 @@ class Index extends Component
             'academicLevel' => new AcademicLevelValidationRule($this->adsType, $this->employmentAdsType),
             'employerGender' => new EmployerGenderValidationRule($this->adsType, $this->employmentAdsType),
             'returnTimeValidation' => new ReturnTimeValidationRule($this->adsType, $this->returnTime),
-            'licenseTypeValue.*' => 'required_if:resumeGoal,==,5|required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company|required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
-            'licenseImage.*' => 'required_if:resumeGoal,==,5|required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company|required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
+            'licenseTypeValue.*' => 'required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company|required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
+            'licenseImage.*' => 'required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company|required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
             'provinceToWork' => new ProvinceToWorkValidationRule($this->adsType, $this->employmentAdsType),
             'adsDescription' => new AdsDescriptionValidationRule($this->adsType, $this->investmentAdsType),
             'auctioneerValidation' => new AuctioneerValidationRule($this->auctioneer, $this->adsType, $this->bidAdsType, $this->tenderAdsType),
@@ -320,23 +308,8 @@ class Index extends Component
             $this->section = 'ads_registration';
             $this->adsType = "";
         }
-
-       // ثبت تخصص و تجربه
-       if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'resume') {
-            $this->activityType = 'resume';
-            $this->section = 'resume';
-            $this->adsType = "";
-        }
     }
 
-    public function changeActivityType($value) {
-        $this->section = $value;
-    }
-
-    // resume section
-    public function changeResumeGoal($value) {
-        $this->resumeGoal = $value;
-    }
     public function loadCitiesByProvinceChange() {
         $selectedProvinceId = $this->selectedProvinceId;
         $this->cities = Province::find($selectedProvinceId)->city;
@@ -481,149 +454,6 @@ class Index extends Component
         }
         
         $activity->activityGroups()->attach($grpArray);
-    }
-
-    // save resume into DB
-    private function saveResumeHandler() {
-
-        // create activity item
-        $activity = auth()->user()->activity()->create([
-            'activity_type' => Purify::clean($this->section),
-            'slug' => Str::random() .''. Activity::getLatestId(),
-        ]);
-
-        // معرفی رزومه
-        // معرفی تخصص، تجربیات و پروژه های شخصی 
-        if($this->resumeGoal == 1) {
-            $resume = $activity->resume()->create([
-                'resume_goal' => Purify::clean($this->resumeGoal),
-                'city_id' => Purify::clean($this->selectedCityId),
-                'address' => Purify::clean($this->address),
-                'postalcode' => Purify::clean($this->postalcode),
-                'landline_phone' => Purify::clean($this->landline_phone),
-                'item_title' => Purify::clean($this->jobTitle),
-                'resume_description' => Purify::clean($this->resumeDescription),
-            ]);
-
-            // save license image and title
-            $this->saveLicenseHandler($activity);
-
-            // save activity group handler
-            $this->saveActivityGroupHandler($activity);
-        }
-        
-        // معرفی رزومه
-        // معرفی فروشگاه
-        if($this->resumeGoal == 2) {
-            $resume = $activity->resume()->create([
-                'resume_goal' => Purify::clean($this->resumeGoal),
-                'city_id' => Purify::clean($this->selectedCityId),
-                'address' => Purify::clean($this->address),
-                'postalcode' => Purify::clean($this->postalcode),
-                'landline_phone' => Purify::clean($this->landline_phone),
-                'item_title' => Purify::clean($this->shopName),
-                'business_license' => $this->shopLicense == 'yes' ? 1 : 0,
-                'resume_description' => Purify::clean($this->resumeDescription),
-                'banner_image' => $this->handlePublicFileUpload($activity),
-            ]);
-
-            // save license image and title
-            $this->saveLicenseHandler($activity);
-
-            // save activity group handler
-            $this->saveActivityGroupHandler($activity);
-        }
-
-        // معرفی رزومه
-        // معرفی شرکت ساختمانی
-        if($this->resumeGoal == 3) {
-            $resume = $activity->resume()->create([
-                'resume_goal' => Purify::clean($this->resumeGoal),
-                'city_id' => Purify::clean($this->selectedCityId),
-                'address' => Purify::clean($this->address),
-                'postalcode' => Purify::clean($this->postalcode),
-                'landline_phone' => Purify::clean($this->landline_phone),
-                'item_title' => Purify::clean($this->companyTitle),
-                'reg_num' => Purify::clean($this->companyRegNum),
-                'resume_description' => Purify::clean($this->resumeDescription),
-            ]);
-
-            // save license image and title
-            $this->saveLicenseHandler($activity);
-
-            // save activity group handler
-            $this->saveActivityGroupHandler($activity);
-        }
-
-        // معرفی رزومه
-        // معرفی دفتر طراحی و مهندسی
-        if($this->resumeGoal == 4) {
-            $resume = $activity->resume()->create([
-                'resume_goal' => Purify::clean($this->resumeGoal),
-                'city_id' => Purify::clean($this->selectedCityId),
-                'address' => Purify::clean($this->address),
-                'postalcode' => Purify::clean($this->postalcode),
-                'landline_phone' => Purify::clean($this->landline_phone),
-                'item_title' => Purify::clean($this->companyTitle),
-                'reg_num' => Purify::clean($this->companyRegNum),
-                'resume_description' => Purify::clean($this->resumeDescription),
-            ]);
-
-            // save license image and title
-            $this->saveLicenseHandler($activity);
-
-            // save activity group handler
-            $this->saveActivityGroupHandler($activity);
-        }
-
-        // معرفی رزومه
-        // معرفی آزمایشگاه مصالح ساختمانی
-        if($this->resumeGoal == 5) {
-            $resume = $activity->resume()->create([
-                'resume_goal' => Purify::clean($this->resumeGoal),
-                'city_id' => Purify::clean($this->selectedCityId),
-                'address' => Purify::clean($this->address),
-                'postalcode' => Purify::clean($this->postalcode),
-                'landline_phone' => Purify::clean($this->landline_phone),
-                'item_title' => Purify::clean($this->companyTitle),
-                'reg_num' => Purify::clean($this->companyRegNum),
-                'resume_description' => Purify::clean($this->resumeDescription),
-            ]);
-
-            // save license image and title
-            $this->saveLicenseHandler($activity);
-
-            // save activity group handler
-            $this->saveActivityGroupHandler($activity);
-        }
-
-        // معرفی رزومه
-        // معرفی کارخانه تولیدی
-        if($this->resumeGoal == 6) {
-            $resume = $activity->resume()->create([
-                'resume_goal' => Purify::clean($this->resumeGoal),
-                'city_id' => Purify::clean($this->selectedCityId),
-                'address' => Purify::clean($this->address),
-                'postalcode' => Purify::clean($this->postalcode),
-                'landline_phone' => Purify::clean($this->landline_phone),
-                'item_title' => Purify::clean($this->companyTitle),
-                'reg_num' => Purify::clean($this->companyRegNum),
-                'resume_description' => Purify::clean($this->resumeDescription),
-                'project_description' => Purify::clean($this->factoryProjectDescription),
-                'banner_image' => $this->handlePublicFileUpload($activity),
-            ]);
-
-            // save license image and title
-            $this->saveLicenseHandler($activity);
-
-            // save activity group handler
-            $this->saveActivityGroupHandler($activity);
-        }
-
-        $activity->update([
-            'subactivity_id' => $resume->id,
-            'subactivity_type' => get_class($resume),
-        ]);
     }
 
     // save selling activity group into DB
@@ -1074,6 +904,9 @@ class Index extends Component
             // save activity group handler
             $this->saveActivityGroupHandler($activity);
 
+            // save selling ads status type into DB
+            $this->saveSellingAdsStatusHandler($activity);
+
             // upload ads image
             $this->handlePublicAdsFileUpload($activity);
  
@@ -1094,38 +927,23 @@ class Index extends Component
       
         $this->validate();
 
-        // saving resume into DB
-        if($this->section == "resume") {
-            $this->saveResumeHandler();
-
-            // Show Toaster
-            $this->dispatch('showToaster', 
-                title: '', 
-                message: '
-                    اطلاعات با موفقیت ذخیره شد.
-                ', 
-                type: 'bg-success'
-            );
-
-            return redirect(route('user.dashboard.saved-resumes.index'));
-        }
-
         // ثبت آگهی
         if($this->section == "ads_registration") {
             $this->saveAdsRegistrationHandler();
-
-            // Show Toaster
-                $this->dispatch('showToaster', 
-                title: '', 
-                message: '
-                    اطلاعات با موفقیت ذخیره شد.
-                ', 
-                type: 'bg-success'
-            );
-
-            return redirect(route('user.dashboard.saved-ads.index'));
         }
+
+        // Show Toaster
+        $this->dispatch('showToaster', 
+            title: '', 
+            message: '
+                اطلاعات با موفقیت ذخیره شد.
+            ', 
+            type: 'bg-success'
+        );
+
+        return redirect(route('user.dashboard.saved-ads.index'));
     }
+
    
     public function render()
     {

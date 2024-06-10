@@ -61,8 +61,8 @@ class Index extends Component
             'sellingActGrpsIdValidation' => new SellingActGrpsIdValidationRule($this->sellingActGrpsId, "selling"),
             'adsTitle' => 'required',
             'sellingAdsManufacturerTypeValidation' => new SellingAdsManufacturerTypeValidationRule($this->sellingAdsManufacturereType, "selling"),
-            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule("", $this->selectedProvinceId, "selling", ""),
-            'selectedCityIdValidation' => new SelectedCityValidationRule("", $this->selectedCityId, "selling", ""),
+            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->selectedProvinceId, "selling", ""),
+            'selectedCityIdValidation' => new SelectedCityValidationRule($this->selectedCityId, "selling", ""),
             'paymentMethod' => new SelectedPaymentMethodValidationRule($this->paymentMethod, "selling"),
             'agreeToTerms' => new AgreeToTermsValidationRule($this->agreeToTerms, "selling"),
         ];

@@ -83,13 +83,13 @@ class Index extends Component
     
     protected function rules() {
         return [
-            'actGrpsId' => new SelectedActGrpsIdValidationRule("", "employment"),
+            'actGrpsId' => new SelectedActGrpsIdValidationRule("employment"),
             'adsTitle' => 'required',
             'academicValidation' => new AcademicValidationRule($this->academic, "employment", "employee"),
             'genderValidation' => new GenderValidationRule($this->gender, "employment", "employee"),
             'workExpValidation' => new WorkExpValidationRule($this->workExp, "employment"),
-            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule("", $this->selectedProvinceId, "employment", ""),
-            'selectedCityIdValidation' => new SelectedCityValidationRule("", $this->selectedCityId, "employment", ""),
+            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->selectedProvinceId, "employment", ""),
+            'selectedCityIdValidation' => new SelectedCityValidationRule($this->selectedCityId, "employment", ""),
             'agreeToTerms' => new AgreeToTermsValidationRule($this->agreeToTerms, "employment"),
         ];
     }

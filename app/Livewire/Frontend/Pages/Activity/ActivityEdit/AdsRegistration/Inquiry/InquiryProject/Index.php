@@ -73,11 +73,11 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'actGrpsId' => new SelectedActGrpsIdValidationRule("", "inquiry"),
+            'actGrpsId' => new SelectedActGrpsIdValidationRule("inquiry"),
             'adsTitle' => 'required',
             'adsDescription' => 'required',
-            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule("", $this->selectedProvinceId, "inquiry", "inquiry_buy"),
-            'selectedCityIdValidation' => new SelectedCityValidationRule("", $this->selectedCityId, "inquiry", "inquiry_buy"),
+            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->selectedProvinceId, "inquiry", "inquiry_buy"),
+            'selectedCityIdValidation' => new SelectedCityValidationRule($this->selectedCityId, "inquiry", "inquiry_buy"),
             'licenseTypeValue.*' => 'required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
             'licenseImage.*' => 'required_if:inquirer,==,public_company|required_if:inquirer,==,private_company',
             'inquirerValidation' => new InquirerValidationRule($this->inquirer, "inquiry"),

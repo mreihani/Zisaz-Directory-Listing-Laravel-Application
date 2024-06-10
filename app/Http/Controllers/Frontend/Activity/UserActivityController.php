@@ -17,10 +17,6 @@ class UserActivityController extends Controller
         // route('user.create-activity.index', ['type' => 'ads'])
         // آگهی های فروش رو میاره
 
-        // create-activity?type=resume
-        // route('user.create-activity.index', ['type' => 'resume'])
-        // رزومه رو میاره
-
         $activityTypeUrl = $request->type;
         
         return view('frontend.pages.activity.activity-create.index', compact('activityTypeUrl'));

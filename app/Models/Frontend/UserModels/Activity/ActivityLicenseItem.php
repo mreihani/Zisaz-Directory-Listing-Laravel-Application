@@ -5,7 +5,6 @@ namespace App\Models\Frontend\UserModels\Activity;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 
 class ActivityLicenseItem extends Model
 {

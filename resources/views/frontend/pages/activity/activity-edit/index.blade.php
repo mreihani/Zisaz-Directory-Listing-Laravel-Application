@@ -37,7 +37,7 @@
                 <a href="{{route('home-page')}}">خانه</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                ویرایش فعالیت
+                ویرایش آگهی
             </li>
         </ol>
     </nav>
@@ -48,17 +48,15 @@
             <!-- Page title-->
             <div class="text-center pb-4 mb-3">
                 <h1 class="h4 mb-4 font-vazir">
-                    ویرایش فعالیت
+                    ویرایش آگهی
                 </h1>
                 <p class="mb-1">
-                    در این بخش می توانید فعالیت خود را ویرایش و تغییرات مورد نظر را در آن ذخیره نمایید
+                    در این بخش می توانید آگهی خود را ویرایش و تغییرات مورد نظر را در آن ذخیره نمایید
                 </p>
             </div>
         
             @if($activity->activity_type == 'ads_registration')
                 @include('frontend.pages.activity.activity-edit.ads_registration.ads-registration-selection', ['activity' => $activity])
-            @elseif($activity->activity_type == 'resume')
-                @include('frontend.pages.activity.activity-edit.resume.resume-selection', ['activity' => $activity])
             @endif
 
         </div>

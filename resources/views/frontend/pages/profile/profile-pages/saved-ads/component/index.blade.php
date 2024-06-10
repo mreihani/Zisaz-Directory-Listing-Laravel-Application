@@ -3,6 +3,11 @@
         <h1 class="h2 mb-0">
             آگهی های من
         </h1>
+
+        <a class="fw-bold text-decoration-none" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
+            <i class="fi-plus mt-n1 me-2"></i>
+            افزودن آگهی جدید
+        </a>
     </div>
     
     <!-- Nav tabs-->
@@ -27,8 +32,14 @@
         </li>
         <li class="nav-item mb-3">
             <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-archive fs-base me-2"></i>
-                آرشیو
+                <i class="fi-eye-off fs-base me-2"></i>
+                غیر فعال شده
+            </a>
+        </li>
+        <li class="nav-item mb-3">
+            <a class="nav-link" href="#" role="tab" aria-selected="false">
+                <i class="fi-trash fs-base me-2"></i>
+                حذف شده
             </a>
         </li>
     </ul>
@@ -45,37 +56,6 @@
                     </div>
                 </a>
                 <div class="card-body position-relative pb-3">
-                    {{-- <div class="dropdown position-absolute zindex-5 top-0 end-0 mt-3 me-3">
-                        <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fi-dots-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
-                            <li>
-                                <a class="dropdown-item" href="{{route('user.activity.edit', $adItem->id)}}">
-                                    <i class="fi-edit opacity-60 me-2"></i>
-                                    ویرایش
-                                </a>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-flame opacity-60 me-2"></i>
-                                    نردبان
-                                </button>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-power opacity-60 me-2"></i>
-                                    غیرفعال
-                                </button>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-trash opacity-60 me-2"></i>
-                                    حذف
-                                </button>
-                            </li>
-                        </ul>
-                    </div> --}}
 
                     @if($adItem->subactivity->type == 'selling')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
@@ -139,19 +119,27 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-center border-top pt-3 pb-2 mt-3">
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
-                            <a class="dropdown-item" href="{{route('user.activity.edit', $adItem->id)}}">
+                            <a class="btn btn-secondary btn-sm" href="{{route('user.activity.edit', $adItem->id)}}">
                                 <i class="fi-edit opacity-60 me-2"></i>
                                 ویرایش
                             </a>
                         </span>
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3">
+                            <a class="btn btn-secondary btn-sm" href="">
+                                <i class="fi-star opacity-60 me-2"></i>
+                                ویژه کردن
+                            </a>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center border-top pt-3 pb-2 mt-3">
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
-                            <a class="dropdown-item" href="">
-                                <i class="fi-archive opacity-60 me-2"></i>
-                                آرشیو
+                            <a class="btn btn-secondary btn-sm" href="">
+                                <i class="fi-eye-off opacity-60 me-2"></i>
+                                غیر فعال کردن
                             </a>
                         </span>
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3">
-                            <a class="dropdown-item" href="">
+                            <a class="btn btn-secondary btn-sm" href="">
                                 <i class="fi-trash opacity-60 me-2"></i>
                                 حذف
                             </a>

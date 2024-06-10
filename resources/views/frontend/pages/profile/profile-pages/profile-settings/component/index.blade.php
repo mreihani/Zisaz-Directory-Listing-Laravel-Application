@@ -104,6 +104,91 @@
         <div class="row mt-3">
             <div class="col-lg-12">
                 <div class="border rounded-3 p-3" id="auth-info">
+                    <!-- Bio-->
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="ps-2">
+                                <label class="form-label fw-bold">
+                                    توضیح مختصر درباره خود بنویسید
+                                </label>
+                                <span class="">
+                                    (اختیاری)
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <textarea class="form-control" id="account-bio" rows="6" wire:model="bio" placeholder="بیوگرافی خود را اینجا بنویسید"></textarea>
+                        </div>
+                        @if($errors->has('bio'))
+                            <span class="text-danger">{{ $errors->first('bio') }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <div class="border rounded-3 p-3" id="auth-info">
+                    <!-- Social media-->
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="ps-2">
+                                <label class="form-label fw-bold">
+                                    آدرس شبکه های اجتماعی خود را وارد نمایید
+                                </label>
+                                <span class="">
+                                    (اختیاری)
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn btn-icon btn-light btn-xs shadow-sm rounded-circle pe-none flex-shrink-0 me-3">
+                                <i class="fi-instagram text-body"></i>
+                            </div>
+                            <input class="form-control" type="text" wire:model="instagram" placeholder="حساب کاربری اینستاگرام">
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn btn-icon btn-light btn-xs shadow-sm rounded-circle pe-none flex-shrink-0 me-3">
+                                <i class="fi-telegram text-body"></i> 
+                            </div>
+                            <input class="form-control" type="text" wire:model="telegram" placeholder="حساب کاربری تلگرام">
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn btn-icon btn-light btn-xs shadow-sm rounded-circle pe-none flex-shrink-0 me-3">
+                                <i class="fi-whatsapp text-body"></i> 
+                            </div>
+                            <input class="form-control" type="text" wire:model="whatsapp" placeholder="حساب کاربری واتس اپ">
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn btn-icon btn-light btn-xs shadow-sm rounded-circle pe-none flex-shrink-0 me-3">
+                                <img width="16" src="{{asset('assets/frontend/img/jaban/x-icon/X_icon.svg.png')}}" alt="">
+                            </div>
+                            <input class="form-control" type="text" wire:model="x" placeholder="حساب کاربری اکس">
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn btn-icon btn-light btn-xs shadow-sm rounded-circle pe-none flex-shrink-0 me-3">
+                                <i class="fi-linkedin text-body"></i> 
+                            </div>
+                            <input class="form-control" type="text" wire:model="linkedin" placeholder="حساب کاربری لینکدین">
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn btn-icon btn-light btn-xs shadow-sm rounded-circle pe-none flex-shrink-0 me-3">
+                                <img width="15" src="{{asset('assets/frontend/img/jaban/eitaa-icon/eitaa-icon-black.svg')}}" alt="">
+                            </div>
+                            <input class="form-control" type="text" wire:model="eitaa" placeholder="حساب کاربری ایتا">
+                        </div>
+                        @if($errors->has('bio'))
+                            <span class="text-danger">{{ $errors->first('bio') }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <div class="border rounded-3 p-3" id="auth-info">
                     <!-- Email-->
                     <div class="border-bottom pb-3 mb-3">
                         <div class="d-flex align-items-center justify-content-between">

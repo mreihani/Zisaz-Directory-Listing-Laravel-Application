@@ -67,7 +67,7 @@ class Index extends Component
     
     protected function rules() {
         return [
-            'actGrpsId' => new SelectedActGrpsIdValidationRule("", "employment"),
+            'actGrpsId' => new SelectedActGrpsIdValidationRule("employment"),
             'adsTitle' => 'required',
             'employerGender' => new EmployerGenderValidationRule("employment", "employer"),
             'academicLevel' => new AcademicLevelValidationRule("employment", "employer"),

@@ -3,7 +3,6 @@
 namespace App\Models\Frontend\ReferenceData\Construction\Skill;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Profile\Resume\ResumeField;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActCat;

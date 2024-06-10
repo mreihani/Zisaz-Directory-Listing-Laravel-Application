@@ -37,7 +37,7 @@
                 <a href="{{route('home-page')}}">خانه</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                ایجاد فعالیت
+                ایجاد آگهی
             </li>
         </ol>
     </nav>
@@ -48,11 +48,8 @@
             <!-- Page title-->
             <div class="text-center pb-4 mb-3">
                 <h1 class="h4 mb-4 font-vazir">
-                    ایجاد یک فعالیت
+                    افزودن آگهی
                 </h1>
-                <p class="mb-1">
-                    با توجه به نیاز خود می توانید یک فعالیت در زمینه <u>معرفی رزومه</u> و  <u>ثبت آگهی</u> ایجاد نمایید.
-                </p>
             </div>
         
             <!-- Livewire component-->

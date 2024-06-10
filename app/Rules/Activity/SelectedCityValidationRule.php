@@ -7,13 +7,11 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class SelectedCityValidationRule implements ValidationRule
 {
-    public $resumeGoal;
     public $selectedCityId;
     public $adsType;
     public $employmentAdsType;
 
-    public function __construct($resumeGoal, $selectedCityId, $adsType, $employmentAdsType) {
-        $this->resumeGoal = $resumeGoal;
+    public function __construct($selectedCityId, $adsType, $employmentAdsType) {
         $this->selectedCityId = $selectedCityId;
         $this->adsType = $adsType;
         $this->employmentAdsType = $employmentAdsType;
@@ -21,10 +19,6 @@ class SelectedCityValidationRule implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(($this->resumeGoal != "") && ($this->selectedCityId == "") && ($this->adsType != "contractor")) {
-            $fail('لطفا شهر را انتخاب کنید!');
-        }
-
         if(($this->adsType != "") && ($this->selectedCityId == "") && ($this->employmentAdsType != "employer") && ($this->adsType != "contractor")) {
             $fail('لطفا شهر را انتخاب کنید!');
         }

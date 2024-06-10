@@ -16,6 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('profile_image')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('telegram')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('x')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('eitaa')->nullable();
         });
 
         Schema::create('act_cats', function (Blueprint $table) {

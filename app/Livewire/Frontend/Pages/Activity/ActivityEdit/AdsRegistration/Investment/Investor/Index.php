@@ -48,8 +48,8 @@ class Index extends Component
         return [
             'adsTitle' => 'required',
             'returnTimeValidation' => new ReturnTimeValidationRule("investment", $this->returnTime),
-            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule("", $this->selectedProvinceId, "investment", "investor"),
-            'selectedCityIdValidation' => new SelectedCityValidationRule("", $this->selectedCityId, "investment", "investor"),
+            'selectedProvinceIdValidation' => new SelectedProvinceValidationRule($this->selectedProvinceId, "investment", "investor"),
+            'selectedCityIdValidation' => new SelectedCityValidationRule($this->selectedCityId, "investment", "investor"),
             'agreeToTerms' => new AgreeToTermsValidationRule($this->agreeToTerms, "investment"),
         ];
     }

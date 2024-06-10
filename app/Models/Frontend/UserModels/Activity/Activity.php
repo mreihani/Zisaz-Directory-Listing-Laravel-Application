@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
 use App\Models\Frontend\UserModels\Activity\ActivityLicenseItem;
-use App\Models\Frontend\UserModels\Activity\Resume\Resume;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
@@ -29,10 +28,6 @@ class Activity extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
-    }
-
-    public function resume() {
-        return $this->hasOne(Resume::class);
     }
 
     public function license() {
