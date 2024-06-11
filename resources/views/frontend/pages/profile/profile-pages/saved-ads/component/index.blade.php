@@ -149,7 +149,7 @@
                     </div> --}}
                     
                     <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
-                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end text-nowrap">
                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
                             {{jdate($adItem->updated_at)->ago()}}
                         </span>
@@ -157,9 +157,8 @@
                             شماره آگهی:
                             {{$adItem->id}}
                         </span>
-                        <span class="d-inline-block me-4 fs-sm me-3 pe-3">
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 text-nowrap">
                             <i class="fi-eye-on mt-n1 me-1 fs-base text-muted align-middle"></i>
-                            بازدید:
                             100
                         </span>
                     </div>
