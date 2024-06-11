@@ -153,7 +153,7 @@
                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
                             {{jdate($adItem->updated_at)->ago()}}
                         </span>
-                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
+                        <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end text-nowrap">
                             شماره آگهی:
                             {{$adItem->id}}
                         </span>
