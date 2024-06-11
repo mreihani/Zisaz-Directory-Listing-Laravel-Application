@@ -151,7 +151,6 @@
                     <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
-                            زمان انتشار:
                             {{jdate($adItem->updated_at)->ago()}}
                         </span>
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
