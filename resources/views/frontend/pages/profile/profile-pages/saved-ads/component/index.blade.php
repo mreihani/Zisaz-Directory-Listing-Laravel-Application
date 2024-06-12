@@ -4,7 +4,7 @@
             آگهی های من
         </h1>
 
-        <a class="fw-bold text-decoration-none" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
+        <a class="fw-bold text-decoration-none" href="{{route('user.activity.create', ['type' => 'ads'])}}">
             <i class="fi-plus mt-n1 me-2"></i>
             افزودن آگهی جدید
         </a>

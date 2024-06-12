@@ -78,7 +78,9 @@ return new class extends Migration
             $table->boolean('is_hidden')->default(0);
             $table->string('header_description')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_job_id')->nullable();
             $table->string('video')->nullable();
+            $table->string('video_job_id')->nullable();
             $table->timestamps();
         });
 

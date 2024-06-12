@@ -32,6 +32,7 @@ class Index extends Component
     public $video;
     public $videoValidation;
     public $videoUploaded;
+    public $promotionalVideo;
 
     protected function rules() {
         return [
@@ -54,20 +55,27 @@ class Index extends Component
             
             $this->headerDescription = is_null($psite->promotionalVideo) ? "" : $psite->promotionalVideo->header_description; 
             $this->isHidden = (!is_null($psite->promotionalVideo) && $psite->promotionalVideo->is_hidden == 1) ? true : false;
-            $this->videoUploaded = !is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video) ? true : false;
+            $this->videoUploaded = !is_null($psite->promotionalVideo) && !$psite->promotionalVideo->isVideoJobFinished() && !$psite->promotionalVideo->isThumbnailJobFinished() ? true : false;
+            $this->promotionalVideo = $psite->promotionalVideo;
         }
     }
 
     private function handleVideoUpload($psite) {
         if(!$this->videoUploaded) {
 
+            // remove existing file from server
+            if(!is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video) && file_exists($psite->promotionalVideo->video)) {
+                unlink($psite->promotionalVideo->video);
+            }
+
             $filename = hexdec(uniqid()) . '.' . 'mp4';
             $dir = 'upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
 
             //dispatch a job to convert video by FFmpeg
-            dispatch(new ConvertPromotionalVideo([
+            $videoJob = dispatch(new ConvertPromotionalVideo([
                 'path' => $this->video->getRealPath(),
                 'dir' => $dir,
+                'privateSiteId' => $this->privateSiteId
             ]));
 
             return 'storage/upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
@@ -77,6 +85,11 @@ class Index extends Component
     private function handleThumbnailUpload($psite) {
         if(!$this->videoUploaded) {
 
+            // remove existing file from server
+            if(!is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->thumbnail) && file_exists($psite->promotionalVideo->thumbnail)) {
+                unlink($psite->promotionalVideo->thumbnail);
+            }
+
             $filename = hexdec(uniqid()) . '.' . 'png';
             $dir = 'upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
 
@@ -84,6 +97,7 @@ class Index extends Component
             dispatch(new CreateImageThumbnailPromotionalVideo([
                 'path' => $this->video->getRealPath(),
                 'dir' => $dir,
+                'privateSiteId' => $this->privateSiteId
             ]));
 
             return 'storage/upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
@@ -131,7 +145,9 @@ class Index extends Component
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
                 'header_description' => Purify::clean($this->headerDescription),
+                'video_job_id' => NULL,
                 'video' => $this->handleVideoUpload($psite),
+                'thumbnail_job_id' => NULL,
                 'thumbnail' => $this->handleThumbnailUpload($psite),
             ]);
             // here the video has been uploaded, the user cannot upload another video

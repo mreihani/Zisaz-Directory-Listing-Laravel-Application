@@ -13,21 +13,17 @@ class UserActivityController extends Controller
      */
     public function index(Request $request)
     {
-        // create-activity?type=selling
-        // route('user.create-activity.index', ['type' => 'ads'])
-        // آگهی های فروش رو میاره
-
-        $activityTypeUrl = $request->type;
-        
-        return view('frontend.pages.activity.activity-create.index', compact('activityTypeUrl'));
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $activityTypeUrl = $request->type;
+        
+        return view('frontend.pages.activity.activity-create.index', compact('activityTypeUrl'));
     }
 
     /**

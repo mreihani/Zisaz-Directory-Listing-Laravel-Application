@@ -78,6 +78,16 @@
                             </div>
                         </div>
                     @else
+                        @if(!is_null($promotionalVideo) && !is_null($promotionalVideo->video) && file_exists($promotionalVideo->video))
+                            <template x-if="!progress">
+                                <div class="col-md-12 mb-4 private-website-video-iframe d-flex justify-content-center">
+                                    <video width="750" height="441" controls>
+                                        <source src="{{asset($promotionalVideo->video)}}" type="video/mp4">
+                                    </video>
+                                </div>
+                            </template>
+                        @endif
+
                         <div class="col-md-12 mb-4">
                             <label class="form-label fw-bold" for="pr-business-upload-video">
                                 ویدئوی تبلیغاتی خود را بارگذاری نمایید

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\PrivatePage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class UserPrivatePageController extends Controller
 {
@@ -13,7 +14,7 @@ class UserPrivatePageController extends Controller
      */
     public function index(Request $request)
     {
-        return view('frontend.pages.private-page.private-page-create.index');
+        //
     }
 
     /**
@@ -21,7 +22,7 @@ class UserPrivatePageController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.pages.private-page.private-page-create.index');
     }
 
     /**
@@ -45,7 +46,14 @@ class UserPrivatePageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $psite = Psite::findOrFail($id);
+
+        // check if user is authorized to edit psite item
+        if(!auth()->check() || auth()->user()->id != $psite->user->id) {
+           abort(403);
+        }
+        
+        return view('frontend.pages.private-page.private-page-edit.index', compact('id'));
     }
 
     /**

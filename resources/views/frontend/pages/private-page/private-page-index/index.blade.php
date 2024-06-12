@@ -157,7 +157,10 @@
                                 && $psite->hero->is_video_displayed 
                                 && $psite->promotionalVideo 
                                 && !$psite->promotionalVideo->is_hidden 
-                                && $psite->promotionalVideo->video)
+                                && $psite->promotionalVideo->video
+                                && file_exists($psite->promotionalVideo->video)
+                                && $psite->promotionalVideo->isVideoJobFinished()
+                                && $psite->promotionalVideo->isThumbnailJobFinished())
                                     <a href="{{asset($psite->promotionalVideo->video)}}" class="glightbox video-button mt-0">
                                         <span class="btn icon-btn rounded-full">
                                             <i class="lni lni-play"></i>
@@ -393,9 +396,13 @@
             </section>
         @endif
         <!-- ./services section -->
-
+            
         <!-- promotional video section -->
-        @if($psite->promotionalVideo && !$psite->promotionalVideo->is_hidden)
+        @if($psite->promotionalVideo && !$psite->promotionalVideo->is_hidden
+         && file_exists($psite->promotionalVideo->video)
+         && $psite->promotionalVideo->isVideoJobFinished()
+         && $psite->promotionalVideo->isThumbnailJobFinished()
+         )
             <section class="video-area video-one is-rtl">
                 <div class="section-title-five">
                     <div class="container">

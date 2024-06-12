@@ -214,11 +214,11 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                         پشتیبانی
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-private-page.index')}}">
+                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.personal-website.create')}}">
                         ثبت کسب و کار
                     </a>
 
-                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
+                    <a class="btn btn-primary btn-sm rounded-pill ms-2" href="{{route('user.activity.create', ['type' => 'ads'])}}">
                         ثبت آگهی
                     </a>
                 </div>

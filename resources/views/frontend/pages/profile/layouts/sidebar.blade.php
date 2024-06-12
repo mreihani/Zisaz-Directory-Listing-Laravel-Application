@@ -31,12 +31,12 @@
         </div>
        <div class="d-flex justify-content-center">
             <div class="me-1">
-                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.activity.create', ['type' => 'ads'])}}">
                     ثبت آگهی
                 </a>
             </div>
             <div class="me-1">
-                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.create-private-page.index')}}">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.personal-website.create')}}">
                     ثبت کسب و کار
                 </a>
             </div>
@@ -64,7 +64,7 @@
                     <i class="fi-apartment opacity-60 me-2"></i>
                     پروژه های من
                 </a>
-                <a class="card-nav-link" href="">
+                <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.saved-personal-websites.index' ? 'active' : ''}}" href="{{route('user.dashboard.saved-personal-websites.index')}}">
                     <i class="fi-globe opacity-60 me-2"></i>
                     کسب و کار های من
                 </a>

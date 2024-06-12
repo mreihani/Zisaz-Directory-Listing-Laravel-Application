@@ -7,13 +7,13 @@
                     دسته ها
                 </span>
             </a>
-            <a class="btn btn-sm d-flex flex-column" href="{{route('user.create-activity.index', ['type' => 'ads'])}}">
+            <a class="btn btn-sm d-flex flex-column" href="{{route('user.activity.create', ['type' => 'ads'])}}">
                 <i class="fi-entertainment"></i>
                 <span>
                     ثبت آگهی
                 </span>
             </a>
-            <a class="btn btn-sm d-flex flex-column" href="{{route('user.create-activity.index')}}">
+            <a class="btn btn-sm d-flex flex-column" href="{{route('user.activity.create')}}">
                 <i class="fi-plus-circle"></i>
                 <span>
                     ثبت فعالیت

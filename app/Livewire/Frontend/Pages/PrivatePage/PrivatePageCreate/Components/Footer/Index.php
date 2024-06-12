@@ -98,6 +98,8 @@ class Index extends Component
             ', 
             type: 'bg-success'
         );
+
+        return redirect(route('user.dashboard.saved-personal-websites.index'));
     }
 
     public function render()

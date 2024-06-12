@@ -152,7 +152,8 @@ class IndexController extends Controller
             ])
         ->first();
 
-        if(!$psite) {
+        // check if footer has been saved and logo has been uploaded
+        if(!$psite || !$psite->footer || !$psite->footer->logo) {
             abort(404);
         }
 
@@ -160,12 +161,12 @@ class IndexController extends Controller
 
         // load five types of ads items related to the user
         $user = $psite->user;
-
-        $selling = !is_null($user->activity) ? $user->activity->with(['selling'])->get()->pluck('selling')->filter()->take(3) : collect([]);
-        $investment = !is_null($user->activity) ? $user->activity->with(['investment'])->get()->pluck('investment')->filter()->take(3) : collect([]);
-        $bid = !is_null($user->activity) ? $user->activity->with(['bid'])->get()->pluck('bid')->filter()->take(3) : collect([]);
-        $inquiry = !is_null($user->activity) ? $user->activity->with(['inquiry'])->get()->pluck('inquiry')->filter()->take(3) : collect([]);
-        $contractor = !is_null($user->activity) ? $user->activity->with(['contractor'])->get()->pluck('contractor')->filter()->take(3) : collect([]);
+        
+        $selling = !is_null($user->activity) ? $user->activity()->with('selling')->get()->pluck('selling')->filter()->take(3) : collect([]);
+        $investment = !is_null($user->activity) ? $user->activity()->with('investment')->get()->pluck('investment')->filter()->take(3) : collect([]);
+        $bid = !is_null($user->activity) ? $user->activity()->with('bid')->get()->pluck('bid')->filter()->take(3) : collect([]);
+        $inquiry = !is_null($user->activity) ? $user->activity()->with('inquiry')->get()->pluck('inquiry')->filter()->take(3) : collect([]);
+        $contractor = !is_null($user->activity) ? $user->activity()->with('contractor')->get()->pluck('contractor')->filter()->take(3) : collect([]);
 
         // check if there is at least one item available
         if($selling->count() || $investment->count() || $bid->count() || $inquiry->count() || $contractor->count()) {

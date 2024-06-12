@@ -2,20 +2,21 @@
 
 namespace App\Jobs\PrivatePage\PromotionalVideo;
 
+use File;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use FFMpeg\Coordinate\Dimension;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use FFMpeg\Filters\Video\VideoFilters;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use ProtoneMedia\LaravelFFMpeg\Filters\WatermarkFactory;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
-use File;
 
 class CreateImageThumbnailPromotionalVideo implements ShouldQueue
 {
@@ -36,6 +37,9 @@ class CreateImageThumbnailPromotionalVideo implements ShouldQueue
      */
     public function handle(): void
     {
+        // set job id into promitional video table
+        $this->setJobIdIntoPromotionalVideoSection($this->job->getJobId());
+
         $video = $this->createObjectFromAbsolutePath($this->incoming['path']);
 
         // save thumbnail
@@ -60,5 +64,14 @@ class CreateImageThumbnailPromotionalVideo implements ShouldQueue
         $file = new UploadedFile( $path, $originalName, $mimeType, $size, $error, $test );
 
         return $file;
+    }
+
+    private function setJobIdIntoPromotionalVideoSection($jobId) {
+        $privateSiteId = $this->incoming['privateSiteId'];
+        $promotionalVideo = Psite::findOrFail($privateSiteId)->promotionalVideo;
+
+        $promotionalVideo->update([
+            'thumbnail_job_id' => $jobId
+        ]);
     }
 }
