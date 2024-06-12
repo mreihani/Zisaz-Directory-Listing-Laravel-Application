@@ -4,6 +4,7 @@ namespace App\Rules\PrivateSite\PromotionalVideo;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class PrivateSitePromotionalVideoValidationRule implements ValidationRule
 {
@@ -15,17 +16,24 @@ class PrivateSitePromotionalVideoValidationRule implements ValidationRule
 
     public $video;
     public $isHidden;
-    public $videoUploaded;
+    public $privateSiteId;
 
-    public function __construct($video, $isHidden, $videoUploaded) {
+    public function __construct($video, $isHidden, $privateSiteId) {
         $this->video = $video;
         $this->isHidden = $isHidden;
-        $this->videoUploaded = $videoUploaded;
+        $this->privateSiteId = $privateSiteId;
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!is_string($this->video) && !$this->isHidden && !$this->videoUploaded) {
+        // video has already been uploaded
+        $psite = Psite::findOrFail($this->privateSiteId);
+        if(!is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video)) {
+            return;
+        }
+
+        // video is being uploaded for the first time
+        if(is_null($this->video) && !$this->isHidden) {
             if(!isset($this->video) || $this->video == null) {
                 $fail('لطفا فایل ویدئویی را بارگذاری نمایید.');
             }

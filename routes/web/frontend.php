@@ -14,5 +14,5 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/activity/{slug}', 'activity')->name('activity');
     Route::get('/activities', 'getActivties')->name('get-activities');
     Route::get('/support', 'support')->name('support');
-    Route::get('/site/{slug}', 'site')->name('site');
+    Route::get('/portal/{slug}', 'site')->name('site');
 });

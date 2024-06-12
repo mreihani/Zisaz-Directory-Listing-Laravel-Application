@@ -68,16 +68,7 @@
                 </h2>
 
                 <div class="row">
-                    @if ($videoUploaded)
-                        <div class="col-md-12 mb-4">
-                            <div class="alert alert-success d-flex align-items-center" role="alert">
-                                <i class="fi-check-circle me-2 me-sm-3 lead"></i>
-                                <div>
-                                    ویدئو با موفقیت بارگذاری گردید و پس از تأیید مدیریت در سامانه نمایش داده خواهد شد.
-                                </div>
-                            </div>
-                        </div>
-                    @else
+                    @if($isUploadAllowed)
                         @if(!is_null($promotionalVideo) && !is_null($promotionalVideo->video) && file_exists($promotionalVideo->video))
                             <template x-if="!progress">
                                 <div class="col-md-12 mb-4 private-website-video-iframe d-flex justify-content-center">
@@ -87,7 +78,7 @@
                                 </div>
                             </template>
                         @endif
-                            
+                        
                         <div class="col-md-12 mb-4">
                             <label class="form-label fw-bold" for="pr-business-upload-video">
                                 ویدئوی تبلیغاتی خود را بارگذاری نمایید
@@ -109,6 +100,15 @@
                             <div class="mt-3 private-page">
                                 <div x-show="uploading">
                                     <progress max="100" x-bind:value="progress"></progress>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="col-md-12 mb-4">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <i class="fi-check-circle me-2 me-sm-3 lead"></i>
+                                <div>
+                                    ویدئو با موفقیت بارگذاری گردید و پس از تأیید مدیریت در سامانه نمایش داده خواهد شد.
                                 </div>
                             </div>
                         </div>
