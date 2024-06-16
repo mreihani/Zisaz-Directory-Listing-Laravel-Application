@@ -219,9 +219,7 @@
                             </div>
                             <input class="form-control" type="text" wire:model="eitaa" placeholder="حساب کاربری ایتا">
                         </div>
-                        @if($errors->has('bio'))
-                            <span class="text-danger">{{ $errors->first('bio') }}</span>
-                        @endif
+                       
                     </div>
                 </div>
             </div>

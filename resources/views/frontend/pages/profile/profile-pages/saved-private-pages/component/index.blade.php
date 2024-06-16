@@ -122,7 +122,7 @@
                     @endif
 
                     <h3 class="h6 mb-2 fs-base">
-                        <a class="nav-link" href="{{route('activity', $psiteItem->slug)}}">
+                        <a class="nav-link" href="{{route('site', $psiteItem->slug)}}">
                             {{$psiteItem->hero->title}}
                         </a>
                     </h3>

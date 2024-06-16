@@ -77,6 +77,8 @@ class SmsVerification extends Component
                     message: $toasterWelcomeMessage, 
                     type: 'bg-success'
                 );
+
+                return redirect(route('user.dashboard.profile-settings.index'));
             }
         }
     }

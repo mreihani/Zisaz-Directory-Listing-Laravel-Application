@@ -17,7 +17,6 @@ class Index extends Component
     public $privateSiteSectionNumber;
 
     public function mount() {
-        $this->privateSiteId = null;
         $this->privateSiteSectionNumber = 1;
     }
    
@@ -46,6 +45,9 @@ class Index extends Component
 
     // navigate through each section by click
     public function navigate($id) {
+        // first check if this is the owner
+        $this->isPsiteOwner($this->privateSiteId);
+
         $this->privateSiteSectionNumber = $id;
 
         $this->dispatch('privateSiteSectionNumber', 

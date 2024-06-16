@@ -15,7 +15,7 @@
                 <div class="step-progress">
                     <span class="step-progress-start"></span>
                     <span class="step-progress-end"></span>
-                    <span class="step-number zisaz-psite-navigation-btn" wire:click="navigate(2)">2</ style="cursor: pointer;">
+                    <span class="step-number zisaz-psite-navigation-btn" wire:click="navigate(2)">2</span>
                 </div>
                 <div class="step-label">
                     درباره ما

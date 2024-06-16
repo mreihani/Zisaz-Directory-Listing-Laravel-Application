@@ -15,6 +15,7 @@ use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActCat;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 use App\Models\Frontend\ReferenceData\ContractType\ContractType;
+use App\Models\Frontend\ReferenceData\ProjectWelfareFacility\WelfareFacility;
 
 class JabanUsersSeeder extends Seeder
 {
@@ -88,6 +89,14 @@ class JabanUsersSeeder extends Seeder
         foreach ($genderArr as $genderItem) {
             $genderObj = Gender::create([
                 'title' => $genderItem['title']
+            ]);
+        }
+
+        // اطلاعات لیست امکانات رفاهی پروژه ها در بخش 2 پروژه ها 
+        $welfareFacilityArr = config('jaban.welfare_facility');
+        foreach ($welfareFacilityArr as $welfareFacilityItem) {
+            $welfareFacilityObj = WelfareFacility::create([
+                'title' => $welfareFacilityItem['title']
             ]);
         }
 

@@ -1,6 +1,6 @@
 <div>
     <!-- load steps navigation bar component -->
-    @livewire('frontend.pages.private-page.private-page-edit.components.layouts.nav-bar.index')
+    @livewire('frontend.pages.private-page.private-page-edit.components.layouts.nav-bar.index', ['privateSiteId' => $privateSiteId])
 
     <!-- load each section component based on section number -->
     @if($privateSiteSectionNumber == 1)

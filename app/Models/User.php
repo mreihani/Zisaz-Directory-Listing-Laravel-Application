@@ -6,6 +6,7 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Frontend\UserModels\ActiveCode;
+use App\Models\Frontend\UserModels\Project\Project;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -84,5 +85,9 @@ class User extends Authenticatable
 
     public function privateSite() {
         return $this->hasMany(Psite::class);
+    }
+
+    public function project() {
+        return $this->hasMany(Project::class);
     }
 }

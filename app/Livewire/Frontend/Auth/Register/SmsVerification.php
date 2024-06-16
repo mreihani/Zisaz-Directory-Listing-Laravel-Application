@@ -63,6 +63,8 @@ class SmsVerification extends Component
                 message: 'ثبت نام با موفقیت انجام شد.', 
                 type: 'bg-success'
             );
+
+            return redirect(route('user.dashboard.profile-settings.index'));
             
         } else {
             auth()->logout();

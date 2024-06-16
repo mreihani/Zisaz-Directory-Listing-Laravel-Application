@@ -60,7 +60,7 @@
                     <i class="fi-billboard-house opacity-60 me-2"></i>
                     آگهی های من
                 </a>
-                <a class="card-nav-link" href="">
+                <a class="card-nav-link {{Route::currentRouteName() == 'user.dashboard.saved-projects.index' ? 'active' : ''}}" href="{{route('user.dashboard.saved-projects.index')}}">
                     <i class="fi-apartment opacity-60 me-2"></i>
                     پروژه های من
                 </a>

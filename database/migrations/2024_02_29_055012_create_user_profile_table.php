@@ -61,6 +61,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
         });
+        
+        Schema::create('welfare_facilities', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+        });
     }
 
     /**
@@ -68,6 +73,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('welfare_facilities');
         Schema::dropIfExists('genders');
         Schema::dropIfExists('academics');
         Schema::dropIfExists('contract_types');
