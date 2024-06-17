@@ -42,9 +42,6 @@ class Index extends Component
             $this->isUploadAllowed = $this->isUploadAllowedHandler($project);
             $this->projectVideo = $project->projectVideo;
         }
-        dd(
-            asset('assets/frontend/img/logo/zsaz_watermark_sm.png')
-        );
     }
 
     // find out if user is allowed to upload a new video or to replace the old one
