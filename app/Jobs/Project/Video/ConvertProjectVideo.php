@@ -50,8 +50,8 @@ class ConvertProjectVideo implements ShouldQueue
         ->open($video)
         ->addWatermark(function(WatermarkFactory $watermark) {
         $watermark->fromDisk('public')
-            // ->openUrl(asset('assets/frontend/img/logo/zsaz_watermark_sm.png'))
-            ->openUrl('https://zisaz.ir/assets/frontend/img/logo/zsaz_watermark_sm.png')
+            ->openUrl(asset('assets/frontend/img/logo/zsaz_watermark_sm.png'))
+            // ->openUrl('https://zisaz.ir/assets/frontend/img/logo/zsaz_watermark_sm.png')
             ->right(25)
             ->bottom(25);
         })
