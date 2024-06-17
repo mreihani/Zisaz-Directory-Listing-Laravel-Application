@@ -42,7 +42,7 @@ class ConvertProjectVideo implements ShouldQueue
         $this->setJobIdIntoVideoSection($this->job->getJobId());
         
         $video = $this->createObjectFromAbsolutePath($this->incoming['path']);
-        $watermarkImageUrl = asset('assets/frontend/img/logo/zsaz_watermark_sm.png');
+        
         
         $lowBitrate = (new X264)->setKiloBitrate(250);
         $highBitrate = (new X264)->setKiloBitrate(1000);
@@ -51,7 +51,7 @@ class ConvertProjectVideo implements ShouldQueue
         ->open($video)
         ->addWatermark(function(WatermarkFactory $watermark) use($watermarkImageUrl) {
         $watermark->fromDisk('public')
-            ->openUrl($watermarkImageUrl)
+            ->openUrl($this->incoming['watermarkImageUrl'])
             // ->openUrl('https://zisaz.ir/assets/frontend/img/logo/zsaz_watermark_sm.png')
             ->right(25)
             ->bottom(25);
