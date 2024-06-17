@@ -43,13 +43,12 @@ class ConvertProjectVideo implements ShouldQueue
         
         $video = $this->createObjectFromAbsolutePath($this->incoming['path']);
         
-        
         $lowBitrate = (new X264)->setKiloBitrate(250);
         $highBitrate = (new X264)->setKiloBitrate(1000);
 
         FFMpeg::fromDisk('public')
         ->open($video)
-        ->addWatermark(function(WatermarkFactory $watermark) use($watermarkImageUrl) {
+        ->addWatermark(function(WatermarkFactory $watermark) {
         $watermark->fromDisk('public')
             ->openUrl($this->incoming['watermarkImageUrl'])
             // ->openUrl('https://zisaz.ir/assets/frontend/img/logo/zsaz_watermark_sm.png')
