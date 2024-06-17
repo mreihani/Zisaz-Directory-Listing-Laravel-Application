@@ -9,10 +9,11 @@ use Livewire\WithFileUploads;
 use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\Project\Video\ConvertProjectVideo;
 use App\Models\Frontend\UserModels\Project\Project;
 use App\Rules\Project\Video\ProjectVideoValidationRule;
-use App\Jobs\PrivatePage\Project\Video\ConvertProjectVideo;
-use App\Jobs\PrivatePage\Project\Video\CreateImageThumbnailProjectVideo;
+use App\Jobs\Project\Video\CreateImageThumbnailProjectVideo;
+
 
 class Index extends Component
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\PrivatePage\Project\Video;
+namespace App\Jobs\Project\Video;
 
 use File;
 use FFMpeg\Format\Video\X264;
