@@ -71,14 +71,11 @@ class Index extends Component
         $filename = hexdec(uniqid()) . '.' . 'mp4';
         $dir = 'upload/project-resources/' . $project->id . '/video' . '/' . $filename;
 
-        $watermarkImageUrl = asset('assets/frontend/img/logo/zsaz_watermark_sm.png');
-
         //dispatch a job to convert video by FFmpeg
         $videoJob = dispatch(new ConvertProjectVideo([
             'path' => $this->video->getRealPath(),
             'dir' => $dir,
             'projectId' => $this->projectId,
-            'watermarkImageUrl' => $watermarkImageUrl
         ]));
 
         return 'storage/upload/project-resources/' . $project->id . '/video' . '/' . $filename;
