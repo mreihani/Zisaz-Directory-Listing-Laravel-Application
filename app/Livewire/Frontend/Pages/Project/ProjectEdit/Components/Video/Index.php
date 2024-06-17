@@ -14,6 +14,7 @@ use App\Rules\Project\Video\ProjectVideoValidationRule;
 use App\Jobs\PrivatePage\Project\Video\ConvertProjectVideo;
 use App\Jobs\PrivatePage\Project\Video\CreateImageThumbnailProjectVideo;
 
+
 class Index extends Component
 {
     use WithFileUploads;
@@ -36,13 +37,14 @@ class Index extends Component
     public function mount() {
         if(is_null($this->projectId)) {
             $this->isUploadAllowed = false;
-       
-
         } else {
             $project = Project::findOrFail($this->projectId);
             $this->isUploadAllowed = $this->isUploadAllowedHandler($project);
             $this->projectVideo = $project->projectVideo;
         }
+        dd(
+            asset('assets/frontend/img/logo/zsaz_watermark_sm.png')
+        );
     }
 
     // find out if user is allowed to upload a new video or to replace the old one
