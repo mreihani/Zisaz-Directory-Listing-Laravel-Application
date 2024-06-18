@@ -99,12 +99,12 @@ class Index extends Component
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
+                'header_description' => Purify::clean($this->headerDescription),
                 'is_selling' => $this->isSelling == true ? 1 : 0,
                 'is_investment' => $this->isInvestment == true ? 1 : 0,
                 'is_bid' => $this->isBid == true ? 1 : 0,
                 'is_inquiry' => $this->isInquiry == true ? 1 : 0,
                 'is_contractor' => $this->isContractor == true ? 1 : 0,
-                'header_description' => Purify::clean($this->headerDescription),
             ]);
         }
 

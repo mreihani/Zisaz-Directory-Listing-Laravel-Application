@@ -34,7 +34,8 @@
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.css')}}"/>
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/tiny-slider/dist/tiny-slider.css')}}"/>
     <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.css')}}"/>
-
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css')}}"/>
+    
     <!-- Page CSS -->
     @stack('page-styles')
 
@@ -86,9 +87,10 @@
     <script src="{{asset('assets/frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.js')}}"></script>
     <script src="{{asset('assets/frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/vendor/tiny-slider/dist/min/tiny-slider.js')}}"></script>
     <script src="{{asset('assets/frontend/vendor/parallax-js/dist/parallax.min.js')}}"></script>
     <script src="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/tiny-slider/dist/min/tiny-slider.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js')}}"></script>
     <script src="{{asset('assets/frontend/js/theme.min.js')}}"></script>
 
     @vite('resources/js/frontend/master/auth-modals-scripts.js')
@@ -97,3 +99,5 @@
   </body>
 
 </html>
+
+<script src=""></script>

@@ -20,6 +20,7 @@ class Index extends Component
     public $projectSectionNumber;
     
     // project information
+    public $title;
     public $projectType;
     public $totalArea;
     public $floorCount;
@@ -34,6 +35,7 @@ class Index extends Component
 
     protected function rules() {
         return [
+            'title' => 'required',
             'projectType' => 'required',
             'totalArea' => 'required',
             'floorCount' => 'required',
@@ -42,6 +44,7 @@ class Index extends Component
     }
 
     protected $messages = [
+        'title.required' => 'نام پروژه را مشخص نمایید.',
         'projectType.required' => 'نوع پروژه را مشخص نمایید.',
         'totalArea.required' => 'مساحت کل زمین را وارد نمایید.',
         'floorCount.required' => 'تعداد طبقات را وارد نمایید.',
@@ -63,6 +66,7 @@ class Index extends Component
             $project = Project::findOrFail($this->projectId);
             
             $this->projectType = $project->project_type;
+            $this->title = !is_null($project->projectInfo) && !is_null($project->projectInfo->title) ? $project->projectInfo->title : "";
             $this->totalArea = !is_null($project->projectInfo) && !is_null($project->projectInfo->total_area) ? $project->projectInfo->total_area : "";
             $this->floorCount = !is_null($project->projectInfo) && !is_null($project->projectInfo->floor_count) ? $project->projectInfo->floor_count : "";
             $this->residentialUnitCount = !is_null($project->projectInfo) && !is_null($project->projectInfo->residential_unit_count) ? $project->projectInfo->residential_unit_count : "";
@@ -117,7 +121,7 @@ class Index extends Component
                 // for large images
                 $unique_image_name = hexdec(uniqid());
                 $filename = $unique_image_name . '.' . 'jpg';
-                $img = Image::make($value)->fit(746,421)->encode('jpg');
+                $img = Image::make($value)->fit(1119,630)->encode('jpg');
                 $image_path = $dir . '/' . $filename;
                 Storage::disk('public')->put('upload/project-resources/' . $project->id . '/info' . '/' . $filename, $img);
 
@@ -189,6 +193,7 @@ class Index extends Component
         $project->projectInfo()->updateOrCreate([
             'project_id' => $project->id
         ],[
+            'title' => Purify::clean($this->title),
             'total_area' => Purify::clean($this->totalArea),
             'floor_count' => Purify::clean($this->floorCount),
             'residential_unit_count' => Purify::clean($this->residentialUnitCount),

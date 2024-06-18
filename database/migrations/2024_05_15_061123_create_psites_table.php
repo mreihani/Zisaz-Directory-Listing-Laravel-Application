@@ -90,7 +90,15 @@ return new class extends Migration
             $table->foreign('psite_id')->references('id')->on('psites')->onDelete('cascade');
             $table->boolean('is_hidden')->default(0);
             $table->string('header_description')->nullable();
-
+            $table->boolean('is_project_type_1')->default(0);
+            $table->boolean('is_project_type_2')->default(0);
+            $table->boolean('is_project_type_3')->default(0);
+            $table->boolean('is_project_type_4')->default(0);
+            $table->boolean('is_project_type_5')->default(0);
+            $table->boolean('is_project_type_6')->default(0);
+            $table->boolean('is_project_type_7')->default(0);
+            $table->boolean('is_project_type_8')->default(0);
+            $table->boolean('is_project_type_9')->default(0);
             $table->timestamps();
         });
 

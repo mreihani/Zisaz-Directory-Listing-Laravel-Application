@@ -124,12 +124,12 @@
                             سایر پروژه ها
                         </h4>
                     @endif
-
-                    {{-- <h3 class="h6 mb-2 fs-base">
+                      
+                    <h3 class="h6 mb-2 fs-base">
                         <a class="nav-link" href="{{route('project', $projectItem->slug)}}">
-                            {{$projectItem->title}}
+                            {{$projectItem->projectInfo->title}}
                         </a>
-                    </h3> --}}
+                    </h3>
                     
                     <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">

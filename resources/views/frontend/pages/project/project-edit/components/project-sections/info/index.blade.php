@@ -46,12 +46,26 @@
                     <input disabled class="form-control form-control-md" type="text" id="pr-sn" value="{{auth()->user()->phone}}" placeholder="">
                 </div>
             </div>
-
-           <!-- Business Type-->
+            
            <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
                 اطلاعات پروژه
             </h2>
+
+            <!-- Project title -->
+            <div class="col-md-12 mb-4">
+                <label class="form-label fw-bold" for="pr-business-project-name">
+                    نام پروژه
+                </label>
+                <span class="text-danger">*</span>
+                <input class="form-control form-control-md" type="text" id="pr-business-project-name" placeholder="نام پروژه را وارد نمایید" wire:model="title">
+
+                @if($errors->has('title'))
+                    <span class="text-danger">{{ $errors->first('title') }}</span>
+                @endif
+            </div>
+
+            <!-- Business Type-->
             <div class="row">
                 <div class="col-md-12 mb-4">
                     <label class="form-label fw-bold">

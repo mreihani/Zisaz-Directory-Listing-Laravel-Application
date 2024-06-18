@@ -33,6 +33,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->string('title')->nullable();
             $table->string('total_area')->nullable();
             $table->string('floor_count')->nullable();
             $table->string('residential_unit_count')->nullable();

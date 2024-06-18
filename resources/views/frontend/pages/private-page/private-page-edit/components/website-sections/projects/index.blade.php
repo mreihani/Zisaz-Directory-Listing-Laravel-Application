@@ -52,6 +52,75 @@
                     @endif
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <label class="form-label fw-bold">
+                        انتخاب نوع پروژه برای نمایش در سامانه
+                    </label>
+                    <span class="text-danger">*</span>
+
+                    @if($errors->has('projectValidation'))
+                        <span class="text-danger">{{ $errors->first('projectValidation') }}</span>
+                    @endif
+                    <input type="hidden" wire:model="projectValidation">
+                    
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-1-displayed" wire:model="isProjectType1">
+                        <label class="form-check-label" for="is-project-type-1-displayed">
+                            پروژه مسکونی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-2-displayed" wire:model="isProjectType2">
+                        <label class="form-check-label" for="is-project-type-2-displayed">
+                            پروژه تجاری
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-3-displayed" wire:model="isProjectType3">
+                        <label class="form-check-label" for="is-project-type-3-displayed">
+                            پروژه تجاری مسکونی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-4-displayed" wire:model="isProjectType4">
+                        <label class="form-check-label" for="is-project-type-4-displayed">
+                            پروژه تجاری اداری
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-5-displayed" wire:model="isProjectType5">
+                        <label class="form-check-label" for="is-project-type-5-displayed">
+                            پروژه تفریحی و ورزشی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-6-displayed" wire:model="isProjectType6">
+                        <label class="form-check-label" for="is-project-type-6-displayed">
+                            پروژه پزشکی درمانی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-7-displayed" wire:model="isProjectType7">
+                        <label class="form-check-label" for="is-project-type-7-displayed">
+                            پروژه آموزشی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-8-displayed" wire:model="isProjectType8">
+                        <label class="form-check-label" for="is-project-type-8-displayed">
+                            پروژه کشاورزی و صنعتی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input {{ $isHidden == true ? 'disabled' : '' }} class="form-check-input" type="checkbox" id="is-project-type-9-displayed" wire:model="isProjectType9">
+                        <label class="form-check-label" for="is-project-type-9-displayed">
+                            سایر پروژه ها
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="d-flex flex-column flex-sm-row bg-light rounded-3 p-4 px-md-5">

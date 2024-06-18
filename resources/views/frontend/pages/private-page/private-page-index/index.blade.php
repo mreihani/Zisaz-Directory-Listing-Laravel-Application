@@ -438,7 +438,7 @@
         <!-- ./promotional video section -->
 
         <!-- projects section -->
-        {{-- @if($psite->projects && !$psite->projects->is_hidden)
+        @if($psite->projects && !$psite->projects->is_hidden)
             <section id="portfolio" class="portfolio-area portfolio-three is-rtl">
                 <div class="section-title-five">
                     <div class="container">
@@ -446,7 +446,7 @@
                             <div class="col-12">
                                 <div class="content">
                                     <h6>
-                                        نمونه کارها
+                                        پروژه ها
                                     </h6>
                                     <h2 class="fw-bold">
                                         آخرین پروژه های ما
@@ -466,156 +466,293 @@
                         <div class="col-lg-12">
                             <div class="portfolio-menu text-center">
                                 <button data-filter="all" class="active">تمام پروژه ها</button>
-                                <button data-filter="branding">برندینگ</button>
-                                <button data-filter="marketing">بازاریابی</button>
-                                <button data-filter="planning">برنامه ریزی</button>
-                                <button data-filter="research">تحقیقاتی</button>
+                                @if($projectType1->count() && $psite->projects->is_project_type_1)
+                                    <button data-filter="project-type-1">
+                                        پروژه مسکونی
+                                    </button>
+                                @endif
+                                @if($projectType2->count() && $psite->projects->is_project_type_2)
+                                    <button data-filter="project-type-2">
+                                        پروژه تجاری
+                                    </button>
+                                @endif
+                                @if($projectType3->count() && $psite->projects->is_project_type_3)
+                                    <button data-filter="project-type-3">
+                                        پروژه تجاری مسکونی
+                                    </button>
+                                @endif
+                                @if($projectType4->count() && $psite->projects->is_project_type_4)
+                                    <button data-filter="project-type-4">
+                                        پروژه تجاری اداری
+                                    </button>
+                                @endif
+                                @if($projectType5->count() && $psite->projects->is_project_type_5)
+                                    <button data-filter="project-type-5">
+                                        پروژه تفریحی و ورزشی
+                                    </button>
+                                @endif
+                                @if($projectType6->count() && $psite->projects->is_project_type_6)
+                                    <button data-filter="project-type-6">
+                                        پروژه پزشکی درمانی
+                                    </button>
+                                @endif
+                                @if($projectType7->count() && $psite->projects->is_project_type_7)
+                                    <button data-filter="project-type-7">
+                                        پروژه آموزشی
+                                    </button>
+                                @endif
+                                @if($projectType8->count() && $psite->projects->is_project_type_8)
+                                    <button data-filter="project-type-8">
+                                        پروژه کشاورزی و صنعتی
+                                    </button>
+                                @endif
+                                @if($projectType9->count() && $psite->projects->is_project_type_9)
+                                    <button data-filter="project-type-9">
+                                        سایر پروژه ها
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
+
                     <div class="row grid">
-                        <div class="col-lg-4 col-sm-6 branding-3 planning-3" data-filter="branding">
-                            <div class="portfolio-style-three">
-                                <div class="portfolio-image">
-                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf1.jpg')}}" alt="image" />
-                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-icon">
-                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf1.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                            </div>
-                                            <div class="portfolio-icon">
-                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                            </div>
+                        @if($projectType1->count() && $psite->projects->is_project_type_1)
+                            @foreach ($projectType1 as $projectType1Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-1">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType1Item->slug)}}">
+                                                <img src="{{asset($projectType1Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType1Item->slug)}}">
+                                                    {{$projectType1Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType1Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType1Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="portfolio-text">
-                                    <h4 class="portfolio-title">
-                                        <a href="javascript:void(0)">طراحی گرافیکی</a>
-                                    </h4>
-                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6" data-filter="research">
-                            <div class="portfolio-style-three">
-                                <div class="portfolio-image">
-                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf2.jpg')}}" alt="image" />
-                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-icon">
-                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf2.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                            </div>
-                                            <div class="portfolio-icon">
-                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                            </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType2->count() && $psite->projects->is_project_type_2)
+                            @foreach ($projectType2 as $projectType2Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-2">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType2Item->slug)}}">
+                                                <img src="{{asset($projectType2Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType2Item->slug)}}">
+                                                    {{$projectType2Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType2Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType2Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="portfolio-text">
-                                    <h4 class="portfolio-title">
-                                        <a href="javascript:void(0)">توسعه دهنده وب</a>
-                                    </h4>
-                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6" data-filter="marketing">
-                            <div class="portfolio-style-three">
-                                <div class="portfolio-image">
-                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf3.jpg')}}" alt="image" />
-                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-icon">
-                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf3.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                            </div>
-                                            <div class="portfolio-icon">
-                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                            </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType3->count() && $psite->projects->is_project_type_3)
+                            @foreach ($projectType3 as $projectType3Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-3">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType3Item->slug)}}">
+                                                <img src="{{asset($projectType3Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType3Item->slug)}}">
+                                                    {{$projectType3Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType3Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType3Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="portfolio-text">
-                                    <h4 class="portfolio-title">
-                                        <a href="javascript:void(0)">توسعه دهنده اپلیکیشن</a>
-                                    </h4>
-                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6" data-filter="planning">
-                            <div class="portfolio-style-three">
-                                <div class="portfolio-image">
-                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf4.jpg')}}" alt="image" />
-                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-icon">
-                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf4.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                            </div>
-                                            <div class="portfolio-icon">
-                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                            </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType4->count() && $psite->projects->is_project_type_4)
+                            @foreach ($projectType4 as $projectType4Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-4">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType4Item->slug)}}">
+                                                <img src="{{asset($projectType4Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType4Item->slug)}}">
+                                                    {{$projectType4Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType4Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType4Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="portfolio-text">
-                                    <h4 class="portfolio-title">
-                                        <a href="javascript:void(0)">دیجتیال مارکتینگ</a>
-                                    </h4>
-                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6" data-filter="branding">
-                            <div class="portfolio-style-three">
-                                <div class="portfolio-image">
-                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf5.jpg')}}" alt="image" />
-                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-icon">
-                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf5.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                            </div>
-                                            <div class="portfolio-icon">
-                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                            </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType5->count() && $psite->projects->is_project_type_5)
+                            @foreach ($projectType5 as $projectType5Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-5">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType5Item->slug)}}">
+                                                <img src="{{asset($projectType5Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType5Item->slug)}}">
+                                                    {{$projectType5Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType5Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType5Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="portfolio-text">
-                                    <h4 class="portfolio-title">
-                                        <a href="javascript:void(0)">خدمات سئو</a>
-                                    </h4>
-                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6" data-filter="marketing">
-                            <div class="portfolio-style-three">
-                                <div class="portfolio-image">
-                                    <img src="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf6.jpg')}}" alt="image" />
-                                    <div class="portfolio-overlay d-flex align-items-center justify-content-center">
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-icon">
-                                                <a class="image-popup-three glightbox3" href="{{asset('assets/frontend/img/jaban/private-site-images/portfolio/pf6.jpg')}}"> <i class="lni lni-zoom-in"> </i> </a>
-                                            </div>
-                                            <div class="portfolio-icon">
-                                                <a href="javascript:void(0)"> <i class="lni lni-link"> </i> </a>
-                                            </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType6->count() && $psite->projects->is_project_type_6)
+                            @foreach ($projectType6 as $projectType6Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-6">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType6Item->slug)}}">
+                                                <img src="{{asset($projectType6Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType6Item->slug)}}">
+                                                    {{$projectType6Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType6Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType6Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="portfolio-text">
-                                    <h4 class="portfolio-title">
-                                        <a href="javascript:void(0)">طراحی محصول</a>
-                                    </h4>
-                                    <p class="text"> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحان گرافیک است. </p>
+                            @endforeach
+                        @endif
+
+                        @if($projectType7->count() && $psite->projects->is_project_type_7)
+                            @foreach ($projectType7 as $projectType7Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-7">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType7Item->slug)}}">
+                                                <img src="{{asset($projectType7Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType7Item->slug)}}">
+                                                    {{$projectType7Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType7Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType7Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType8->count() && $psite->projects->is_project_type_8)
+                            @foreach ($projectType8 as $projectType8Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-8">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType8Item->slug)}}">
+                                                <img src="{{asset($projectType8Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType8Item->slug)}}">
+                                                    {{$projectType8Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType8Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType8Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if($projectType9->count() && $psite->projects->is_project_type_9)
+                            @foreach ($projectType9 as $projectType9Item)
+                                <div class="col-lg-4 col-sm-6" data-filter="project-type-9">
+                                    <div class="portfolio-style-three">
+                                        <div class="portfolio-image">
+                                            <a href="{{route('project', $projectType9Item->slug)}}">
+                                                <img src="{{asset($projectType9Item->projectImagesUrl())}}" alt="image" />
+                                            </a>
+                                        </div>
+                                        <div class="portfolio-text">
+                                            <h4 class="portfolio-title">
+                                                <a href="{{route('project', $projectType9Item->slug)}}">
+                                                    {{$projectType9Item->projectInfo->title}}
+                                                </a>
+                                            </h4>
+                                            @if($projectType9Item->projectFacility->project_description)
+                                                <p class="text">
+                                                    {{$projectType9Item->projectFacility->project_description}}
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </section>
-        @endif --}}
+        @endif
         <!-- ./projects section -->
 
         <!-- ads section -->

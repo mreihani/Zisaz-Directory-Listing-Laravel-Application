@@ -20,15 +20,28 @@ class Index extends Component
     
     public $isHidden;
     public $headerDescription;
+
+    public $isProjectType1;
+    public $isProjectType2;
+    public $isProjectType3;
+    public $isProjectType4;
+    public $isProjectType5;
+    public $isProjectType6;
+    public $isProjectType7;
+    public $isProjectType8;
+    public $isProjectType9;
+    public $projectValidation;
     
     protected function rules() {
         return [
             'headerDescription' => 'required_if:isHidden,==,false',
+            'projectValidation' => $this->projectTypeSelectionValidationHanlder() ? 'required' : '',
         ];
     }
 
     protected $messages = [
         'headerDescription.required_if' => 'لطفا شرح پروژه ها را وارد نمایید.',
+        'projectValidation.required' => 'لطفا حداقل یک نوع پروژه برای نمایش انتخاب نمایید.'
     ];
 
     public function mount() {
@@ -38,7 +51,33 @@ class Index extends Component
             $psite = Psite::findOrFail($this->privateSiteId);
             $this->isHidden = (!is_null($psite->projects) && $psite->projects->is_hidden == 1) ? true : false;
             $this->headerDescription = is_null($psite->projects) ? "" : $psite->projects->header_description; 
+            $this->isProjectType1 = (!is_null($psite->projects) && $psite->projects->is_project_type_1 == 1) ? true : false;
+            $this->isProjectType2 = (!is_null($psite->projects) && $psite->projects->is_project_type_2 == 1) ? true : false;
+            $this->isProjectType3 = (!is_null($psite->projects) && $psite->projects->is_project_type_3 == 1) ? true : false;
+            $this->isProjectType4 = (!is_null($psite->projects) && $psite->projects->is_project_type_4 == 1) ? true : false;
+            $this->isProjectType5 = (!is_null($psite->projects) && $psite->projects->is_project_type_5 == 1) ? true : false;
+            $this->isProjectType6 = (!is_null($psite->projects) && $psite->projects->is_project_type_6 == 1) ? true : false;
+            $this->isProjectType7 = (!is_null($psite->projects) && $psite->projects->is_project_type_7 == 1) ? true : false;
+            $this->isProjectType8 = (!is_null($psite->projects) && $psite->projects->is_project_type_8 == 1) ? true : false;
+            $this->isProjectType9 = (!is_null($psite->projects) && $psite->projects->is_project_type_9 == 1) ? true : false;
         }
+    }
+
+    private function projectTypeSelectionValidationHanlder() {
+        if($this->isHidden
+         || ($this->isProjectType1
+         || $this->isProjectType2
+         || $this->isProjectType3 
+         || $this->isProjectType4 
+         || $this->isProjectType5 
+         || $this->isProjectType6 
+         || $this->isProjectType7 
+         || $this->isProjectType8 
+         || $this->isProjectType9)
+         ) {
+            return false;
+        }
+        return true;
     }
 
     public function back() {
@@ -80,6 +119,15 @@ class Index extends Component
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
                 'header_description' => Purify::clean($this->headerDescription),
+                'is_project_type_1' => $this->isProjectType1 == true ? 1 : 0,
+                'is_project_type_2' => $this->isProjectType2 == true ? 1 : 0,
+                'is_project_type_3' => $this->isProjectType3 == true ? 1 : 0,
+                'is_project_type_4' => $this->isProjectType4 == true ? 1 : 0,
+                'is_project_type_5' => $this->isProjectType5 == true ? 1 : 0,
+                'is_project_type_6' => $this->isProjectType6 == true ? 1 : 0,
+                'is_project_type_7' => $this->isProjectType7 == true ? 1 : 0,
+                'is_project_type_8' => $this->isProjectType8 == true ? 1 : 0,
+                'is_project_type_9' => $this->isProjectType9 == true ? 1 : 0,
             ]);
         }
 
