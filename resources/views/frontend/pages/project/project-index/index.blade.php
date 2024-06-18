@@ -75,7 +75,6 @@
                             @endforeach
                             <div>
                                 <div class="ratio ratio-16x9">
-                                    {{-- <iframe class="rounded-3" src="{{asset($project->projectVideo->video)}}" title="{{$project->projectInfo->title}}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                     <video class="rounded-3" width="750" height="441" controls>
                                         <source src="{{asset($project->projectVideo->video)}}" type="video/mp4">
                                     </video>
@@ -119,7 +118,7 @@
             </p>
 
             <!-- Addresses-->
-            <div class="card card-horizontal">
+            <div class="card card-horizontal" id="contactSection">
                 <div class="card-body p-4">
 
                     <!-- Project address-->
@@ -339,7 +338,7 @@
                         </div>
                     </div>
                 @endif
-                <a class="btn btn-lg btn-primary w-100 mb-3" href="#">
+                <a class="btn btn-lg btn-primary w-100 mb-3" href="#contactSection">
                     تماس با ما
                 </a>
                 
@@ -416,24 +415,5 @@
     </section>
     <!-- ./Project Plan Images -->
 @endif    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @endsection
