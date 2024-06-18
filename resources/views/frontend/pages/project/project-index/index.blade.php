@@ -75,7 +75,7 @@
                             @endforeach
                             <div>
                                 <div class="ratio ratio-16x9">
-                                    <iframe class="rounded-3" src="{{asset($project->projectVideo->video)}}" title="{{$project->projectInfo->title}}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe class="rounded-3" src="{{asset($project->projectVideo->video)}}" title="{{$project->projectInfo->title}}" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
