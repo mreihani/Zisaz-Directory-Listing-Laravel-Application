@@ -23,7 +23,7 @@ class ProjectPagesController extends Controller
         ->first();
 
         // check if all four project page/sections has been filled and saved by the user
-        if(!$project || !$project->projectInfo || !$project->projectFacility || !$project->projectContact || !$project->projectVideo) {
+        if(!$project || !$project->projectInfo || !$project->projectFacility || !$project->projectContact) {
             abort(404);
         }
 

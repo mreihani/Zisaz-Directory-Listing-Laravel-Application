@@ -222,20 +222,22 @@
                     تماس با ما
                 </a>
                 
-                <!-- Amenities-->
-                <div class="card border-0 bg-secondary mb-4">
-                    <div class="card-body">
-                        <h5>امکانات رفاهی</h5>
-                        <ul class="list-unstyled row row-cols-md-2 row-cols-1 gy-2 mb-0 text-nowrap">
-                            @foreach($project->welfareFacility as $facilityItem)
-                                <li class="col">
-                                    <i class="fi-check-circle mt-n1 me-2 fs-lg align-middle"></i>
-                                    {{$facilityItem->title}}
-                                </li>
-                            @endforeach
-                        </ul>
+                @if($project->welfareFacility->count())
+                    <!-- Amenities-->
+                    <div class="card border-0 bg-secondary mb-4">
+                        <div class="card-body">
+                            <h5>امکانات رفاهی</h5>
+                            <ul class="list-unstyled row row-cols-md-2 row-cols-1 gy-2 mb-0 text-nowrap">
+                                @foreach($project->welfareFacility as $facilityItem)
+                                    <li class="col">
+                                        <i class="fi-check-circle mt-n1 me-2 fs-lg align-middle"></i>
+                                        {{$facilityItem->title}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endif
                 
                 <!-- Post meta-->
                 {{-- <ul class="d-flex mb-4 list-unstyled fs-sm">
@@ -299,6 +301,25 @@
 <!-- Project Adress and video section -->
 <section class="container mb-5 pb-2 pb-lg-4">
     <div class="row">
+        <div class="col-md-6">
+            @if(
+            $project->projectVideo 
+            &&!is_null($project->projectVideo) 
+            && $project->projectVideo->video 
+            && !is_null($project->projectVideo->video)
+            && file_exists($project->projectVideo->video)
+            && $project->projectVideo->isVideoJobFinished() 
+            && $project->projectVideo->isThumbnailJobFinished()
+            )
+                <div>
+                    <div class="ratio ratio-16x9">
+                        <video class="rounded-3" width="750" height="441" controls>
+                            <source src="{{asset($project->projectVideo->video)}}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            @endif   
+        </div>
         <div class="col-md-6">
             <!-- Addresses-->
             <div class="card card-horizontal" id="contactSection">
@@ -423,15 +444,6 @@
                             @endif
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div>
-                <div class="ratio ratio-16x9">
-                    <video class="rounded-3" width="750" height="441" controls>
-                        <source src="{{asset($project->projectVideo->video)}}" type="video/mp4">
-                    </video>
                 </div>
             </div>
 
