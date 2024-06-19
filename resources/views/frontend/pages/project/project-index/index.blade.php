@@ -435,7 +435,7 @@
                 </div>
             </div>
 
-            <ul class="d-flex mb-4 list-unstyled fs-sm">
+            <ul class="d-flex mb-4 list-unstyled fs-sm justify-content-center mt-4">
                 <li class="me-3 pe-3 border-end">
                     زمان انتشار: 
                     <b> 
