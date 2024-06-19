@@ -102,16 +102,10 @@
 
                 <!-- Page title + Features-->
                 <div class="order-lg-2 order-1">
-                    <h1 class="h2 mb-4">
+                    <h1 class="h2 mt-2 mb-4 text-center">
                         پروژه
                         {{$project->projectInfo->title}}
                     </h1>
-                    <h2 class="h5">
-                        آدرس پروژه: 
-                    </h2>
-                    <p class="mb-2 pb-1 fs-base">
-                        {{$project->projectContact->project_address}}
-                    </p>
                 </div>
             </div>
 
