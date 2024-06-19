@@ -2,7 +2,7 @@
 @section('main')
 
 <!-- Page Content -->
-<section class="container mt-5 mb-lg-5 mb-4 pt-5 pb-lg-5">
+<section class="container mt-5 pt-5 pb-lg-5">
     <!-- Breadcrumb-->
     <nav class="mb-3 pt-md-3" aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -263,7 +263,7 @@
 
 <!-- Project Plan Images -->
 @if(count($project->projectFacility->projectPlanImages))
-    <section class="container mb-5 pb-2 pb-lg-4">
+    <section class="container pb-2 pb-lg-4">
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="h3 mb-0">نقشه های پروژه</h2>
         </div>
