@@ -73,13 +73,13 @@
                             @foreach($project->projectImages as $imageKey => $imageItem)
                                 <img class="rounded-3" src="{{asset($imageItem->image)}}" alt="Image">
                             @endforeach
-                            <div>
+                            {{-- <div>
                                 <div class="ratio ratio-16x9">
                                     <video class="rounded-3" width="750" height="441" controls>
                                         <source src="{{asset($project->projectVideo->video)}}" type="video/mp4">
                                     </video>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!-- Thumbnails nav-->
@@ -89,22 +89,26 @@
                                 <img src="{{asset($thumbnailImageItem->image)}}" alt="Thumbnail">
                             </li>
                         @endforeach
-                        <li class="tns-thumbnail">
+                        {{-- <li class="tns-thumbnail">
                             <div class="d-flex flex-column align-items-center justify-content-center h-100">
                                 <i class="fi-play-circle fs-4 mb-1"></i>
                                 <span>
                                     مشاهده ویدئو
                                 </span>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
 
                 <!-- Page title + Features-->
                 <div class="order-lg-2 order-1">
-                    <h1 class="h2 mb-2">
+                    <h1 class="h2 mb-4">
+                        پروژه
                         {{$project->projectInfo->title}}
                     </h1>
+                    <h2 class="h5">
+                        آدرس پروژه: 
+                    </h2>
                     <p class="mb-2 pb-1 fs-base">
                         {{$project->projectContact->project_address}}
                     </p>
@@ -112,11 +116,196 @@
             </div>
 
             <!-- Overview-->
-            <h2 class="h5">توضیحات</h2>
+            <h2 class="h5">
+                درباره پروژه
+            </h2>
             <p class="mb-4 pb-2">
                 {{$project->projectFacility->project_description}}
             </p>
 
+            <!-- Address and phone box used to be here-->
+
+            <!-- ./Address and phone box used to be here-->
+
+        </div>
+
+        <!-- Sidebar with details-->
+        <aside class="col-lg-5">
+            <div class="ps-lg-5">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div>
+                        <span class="badge bg-success me-2 mb-2">تایید شده</span>
+                        <span class="badge bg-info me-2 mb-2">جدید</span>
+                    </div>
+                    <div class="text-nowrap">
+                        <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="tooltip" aria-label="نشان کردن" data-bs-original-title="نشان کردن">
+                            <i class="fi-heart"></i>
+                        </button>
+                        <div class="dropdown d-inline-block" data-bs-toggle="tooltip" data-bs-original-title="اشتراک گذاری">
+                            <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="dropdown">
+                                <i class="fi-share"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end my-1">
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-facebook fs-base opacity-75 me-2"></i>
+                                    فیسبوک
+                                </button>
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-twitter fs-base opacity-75 me-2"></i>
+                                    توییتر
+                                </button>
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-instagram fs-base opacity-75 me-2"></i>
+                                    اینستاگرام
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="h5 mb-2">
+                    پروژه
+                    {{$project->projectInfo->title}}
+                </h3>
+                <!-- Property details-->
+                @if(!is_null($project->projectInfo))
+                    <div class="card border-0 bg-secondary mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-0 pb-3">مشخصات</h5>
+                            <ul class="list-unstyled mt-n2 mb-0">
+                                @if(!is_null($project->project_type))
+                                    <li class="mt-2 mb-0"><b>نوع پروژه: </b>
+                                        @if($project->project_type == '1')
+                                            پروژه مسکونی
+                                        @elseif($project->project_type == '2')
+                                            پروژه تجاری
+                                        @elseif($project->project_type == '3')
+                                            پروژه تجاری مسکونی
+                                        @elseif($project->project_type == '4')
+                                            پروژه تجاری اداری
+                                        @elseif($project->project_type == '5')
+                                            پروژه تفریحی و ورزشی
+                                        @elseif($project->project_type == '6')
+                                            پروژه پزشکی درمانی
+                                        @elseif($project->project_type == '7')
+                                            پروژه آموزشی
+                                        @elseif($project->project_type == '8')
+                                            پروژه کشاورزی و صنعتی
+                                        @elseif($project->project_type == '9')
+                                            سایر پروژه ها
+                                        @endif
+                                    </li>
+                                @endif
+                                @if(!is_null($project->projectInfo->total_area))
+                                    <li class="mt-2 mb-0"><b>مساحت کل زمین: </b>
+                                        {{$project->projectInfo->total_area}}
+                                    </li>
+                                @endif
+                                @if(!is_null($project->projectInfo->floor_count))
+                                    <li class="mt-2 mb-0"><b>تعداد طبقات: </b>
+                                        {{$project->projectInfo->floor_count}}
+                                    </li>
+                                @endif
+                                @if(!is_null($project->projectInfo->residential_unit_count) && $project->projectInfo->residential_unit_count)
+                                    <li class="mt-2 mb-0"><b>تعداد واحد های مسکونی: </b>
+                                        {{$project->projectInfo->residential_unit_count}}
+                                    </li>
+                                @endif
+                                @if(!is_null($project->projectInfo->commercial_unit_count) && $project->projectInfo->commercial_unit_count)
+                                    <li class="mt-2 mb-0"><b>تعداد واحد های تجاری: </b>
+                                        {{$project->projectInfo->commercial_unit_count}}
+                                    </li>
+                                @endif
+                                @if(!is_null($project->projectInfo->office_unit_count) && $project->projectInfo->office_unit_count)
+                                    <li class="mt-2 mb-0"><b>تعداد واحد های اداری: </b>
+                                        {{$project->projectInfo->office_unit_count}}
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+                <a class="btn btn-lg btn-primary w-100 mb-3" href="#contactSection">
+                    تماس با ما
+                </a>
+                
+                <!-- Amenities-->
+                <div class="card border-0 bg-secondary mb-4">
+                    <div class="card-body">
+                        <h5>امکانات رفاهی</h5>
+                        <ul class="list-unstyled row row-cols-md-2 row-cols-1 gy-2 mb-0 text-nowrap">
+                            @foreach($project->welfareFacility as $facilityItem)
+                                <li class="col">
+                                    <i class="fi-check-circle mt-n1 me-2 fs-lg align-middle"></i>
+                                    {{$facilityItem->title}}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Post meta-->
+                {{-- <ul class="d-flex mb-4 list-unstyled fs-sm">
+                    <li class="me-3 pe-3 border-end">
+                        زمان انتشار: 
+                        <b> 
+                            {{jdate($project->updated_at)->ago()}}    
+                        </b>
+                    </li>
+                    <li class="me-3 pe-3 border-end">
+                        شماره آگهی: 
+                        <b>
+                            {{$project->id}}
+                        </b>
+                    </li>
+                    <li class="me-3 pe-3">بازدید: 
+                        <b>48 نفر</b>
+                    </li>
+                </ul> --}}
+            </div>
+        </aside>
+    </div>
+</section>
+<!-- ./Page Content -->
+
+<!-- Project Plan Images -->
+@if(count($project->projectFacility->projectPlanImages))
+    <section class="container mb-5 pb-2 pb-lg-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h2 class="h3 mb-0">نقشه های پروژه</h2>
+        </div>
+        <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush mx-n2">
+            <div class="tns-carousel-inner row gx-4 mx-0 pt-3 pb-4" data-carousel-options="{&quot;items&quot;: 4, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;992&quot;:{&quot;items&quot;:4}}}">
+                @foreach($project->projectFacility->projectPlanImages as $projectPlanImageItem)
+                    <!-- Item-->
+                    <div class="col">
+                        <div class="card shadow-sm card-hover border-0 h-100">
+                            <div class="card-img-top card-img-bottom card-img-hover">
+                               
+                                <!-- Elements related to lightgallery jquery plugin-->
+                                <div data-simplebar>
+                                    <div class="gallery" data-thumbnails="true">
+                                        <div>
+                                            <a class="gallery-item rounded rounded-md-3" href="{{asset($projectPlanImageItem->image)}}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;نقشه پروژه&lt;/h6&gt;">
+                                                <img src="{{asset($projectPlanImageItem->image_sm)}}" alt="Gallery thumbnail">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif 
+<!-- ./Project Plan Images -->
+
+<!-- Project Adress and video section -->
+<section class="container mb-5 pb-2 pb-lg-4">
+    <div class="row">
+        <div class="col-md-6">
             <!-- Addresses-->
             <div class="card card-horizontal" id="contactSection">
                 <div class="card-body p-4">
@@ -243,177 +432,37 @@
                 </div>
             </div>
         </div>
-
-        <!-- Sidebar with details-->
-        <aside class="col-lg-5">
-            <div class="ps-lg-5">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div>
-                        <span class="badge bg-success me-2 mb-2">تایید شده</span>
-                        <span class="badge bg-info me-2 mb-2">جدید</span>
-                    </div>
-                    <div class="text-nowrap">
-                        <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="tooltip" aria-label="نشان کردن" data-bs-original-title="نشان کردن">
-                            <i class="fi-heart"></i>
-                        </button>
-                        <div class="dropdown d-inline-block" data-bs-toggle="tooltip" data-bs-original-title="اشتراک گذاری">
-                            <button class="btn btn-icon btn-light-primary btn-xs shadow-sm rounded-circle ms-2 mb-2" type="button" data-bs-toggle="dropdown">
-                                <i class="fi-share"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end my-1">
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-facebook fs-base opacity-75 me-2"></i>
-                                    فیسبوک
-                                </button>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-twitter fs-base opacity-75 me-2"></i>
-                                    توییتر
-                                </button>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-instagram fs-base opacity-75 me-2"></i>
-                                    اینستاگرام
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-md-6">
+            <div>
+                <div class="ratio ratio-16x9">
+                    <video class="rounded-3" width="750" height="441" controls>
+                        <source src="{{asset($project->projectVideo->video)}}" type="video/mp4">
+                    </video>
                 </div>
-                <h3 class="h5 mb-2">
-                    {{$project->projectInfo->title}}
-                </h3>
-                <!-- Property details-->
-                @if(!is_null($project->projectInfo))
-                    <div class="card border-0 bg-secondary mb-4">
-                        <div class="card-body">
-                            <h5 class="mb-0 pb-3">مشخصات</h5>
-                            <ul class="list-unstyled mt-n2 mb-0">
-                                @if(!is_null($project->project_type))
-                                    <li class="mt-2 mb-0"><b>نوع پروژه: </b>
-                                        @if($project->project_type == '1')
-                                            پروژه مسکونی
-                                        @elseif($project->project_type == '2')
-                                            پروژه تجاری
-                                        @elseif($project->project_type == '3')
-                                            پروژه تجاری مسکونی
-                                        @elseif($project->project_type == '4')
-                                            پروژه تجاری اداری
-                                        @elseif($project->project_type == '5')
-                                            پروژه تفریحی و ورزشی
-                                        @elseif($project->project_type == '6')
-                                            پروژه پزشکی درمانی
-                                        @elseif($project->project_type == '7')
-                                            پروژه آموزشی
-                                        @elseif($project->project_type == '8')
-                                            پروژه کشاورزی و صنعتی
-                                        @elseif($project->project_type == '9')
-                                            سایر پروژه ها
-                                        @endif
-                                    </li>
-                                @endif
-                                @if(!is_null($project->projectInfo->total_area))
-                                    <li class="mt-2 mb-0"><b>مساحت کل زمین: </b>
-                                        {{$project->projectInfo->total_area}}
-                                    </li>
-                                @endif
-                                @if(!is_null($project->projectInfo->floor_count))
-                                    <li class="mt-2 mb-0"><b>تعداد طبقات: </b>
-                                        {{$project->projectInfo->floor_count}}
-                                    </li>
-                                @endif
-                                @if(!is_null($project->projectInfo->residential_unit_count) && $project->projectInfo->residential_unit_count)
-                                    <li class="mt-2 mb-0"><b>تعداد واحد های مسکونی: </b>
-                                        {{$project->projectInfo->residential_unit_count}}
-                                    </li>
-                                @endif
-                                @if(!is_null($project->projectInfo->commercial_unit_count) && $project->projectInfo->commercial_unit_count)
-                                    <li class="mt-2 mb-0"><b>تعداد واحد های تجاری: </b>
-                                        {{$project->projectInfo->commercial_unit_count}}
-                                    </li>
-                                @endif
-                                @if(!is_null($project->projectInfo->office_unit_count) && $project->projectInfo->office_unit_count)
-                                    <li class="mt-2 mb-0"><b>تعداد واحد های اداری: </b>
-                                        {{$project->projectInfo->office_unit_count}}
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-                <a class="btn btn-lg btn-primary w-100 mb-3" href="#contactSection">
-                    تماس با ما
-                </a>
-                
-                <!-- Amenities-->
-                <div class="card border-0 bg-secondary mb-4">
-                    <div class="card-body">
-                        <h5>امکانات رفاهی</h5>
-                        <ul class="list-unstyled row row-cols-md-2 row-cols-1 gy-2 mb-0 text-nowrap">
-                            @foreach($project->welfareFacility as $facilityItem)
-                                <li class="col">
-                                    <i class="fi-check-circle mt-n1 me-2 fs-lg align-middle"></i>
-                                    {{$facilityItem->title}}
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Post meta-->
-                <ul class="d-flex mb-4 list-unstyled fs-sm">
-                    <li class="me-3 pe-3 border-end">
-                        زمان انتشار: 
-                        <b> 
-                            {{jdate($project->updated_at)->ago()}}    
-                        </b>
-                    </li>
-                    <li class="me-3 pe-3 border-end">
-                        شماره آگهی: 
-                        <b>
-                            {{$project->id}}
-                        </b>
-                    </li>
-                    <li class="me-3 pe-3">بازدید: 
-                        <b>48 نفر</b>
-                    </li>
-                </ul>
             </div>
-        </aside>
+
+            <ul class="d-flex mb-4 list-unstyled fs-sm">
+                <li class="me-3 pe-3 border-end">
+                    زمان انتشار: 
+                    <b> 
+                        {{jdate($project->updated_at)->ago()}}    
+                    </b>
+                </li>
+                <li class="me-3 pe-3 border-end">
+                    شماره آگهی: 
+                    <b>
+                        {{$project->id}}
+                    </b>
+                </li>
+                <li class="me-3 pe-3">بازدید: 
+                    <b>48 نفر</b>
+                </li>
+            </ul>
+        </div>
     </div>
 </section>
-<!-- ./Page Content -->
+<!-- ./Project Adress and video section -->
 
-<!-- Project Plan Images -->
-@if(count($project->projectFacility->projectPlanImages))
-    <section class="container mb-5 pb-2 pb-lg-4">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <h2 class="h3 mb-0">نقشه های پروژه</h2>
-        </div>
-        <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush mx-n2">
-            <div class="tns-carousel-inner row gx-4 mx-0 pt-3 pb-4" data-carousel-options="{&quot;items&quot;: 4, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;992&quot;:{&quot;items&quot;:4}}}">
-                @foreach($project->projectFacility->projectPlanImages as $projectPlanImageItem)
-                    <!-- Item-->
-                    <div class="col">
-                        <div class="card shadow-sm card-hover border-0 h-100">
-                            <div class="card-img-top card-img-bottom card-img-hover">
-                               
-                                <!-- Elements related to lightgallery jquery plugin-->
-                                <div data-simplebar>
-                                    <div class="gallery" data-thumbnails="true">
-                                        <div>
-                                            <a class="gallery-item rounded rounded-md-3" href="{{asset($projectPlanImageItem->image)}}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;نقشه پروژه&lt;/h6&gt;">
-                                                <img src="{{asset($projectPlanImageItem->image_sm)}}" alt="Gallery thumbnail">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <!-- ./Project Plan Images -->
-@endif    
+
 
 @endsection
