@@ -26,7 +26,11 @@
         @include('frontend.pages.profile.layouts.sidebar')    
 
         <!-- main content-->
-        @livewire('frontend.pages.profile.profile-pages.saved-private-pages.index')
+        @if(is_null($type))
+            @livewire('frontend.pages.profile.profile-pages.saved-private-pages.active-private-pages.index')
+        @elseif($type == 'trashed')
+            @livewire('frontend.pages.profile.profile-pages.saved-private-pages.trashed-private-pages.index', ['type' => $type])
+        @endif
     </div>
 </div>
 

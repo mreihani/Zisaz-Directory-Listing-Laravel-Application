@@ -17,6 +17,15 @@ class Kernel extends ConsoleKernel
 
         // Remove expired sms tokens
         $schedule->command('app:clear-expired-sms-tokes')->daily();
+        
+        // Delete soft-deleted activities and their folders after 6 month
+        $schedule->command('app:force-delete-trashed-activities')->daily();
+
+        // Delete soft-deleted private websites and their folders after 6 month
+        $schedule->command('app:force-delete-trashed-private-websites')->daily();
+
+        // Delete soft-deleted projects and their folders after 6 month
+        $schedule->command('app:force-delete-trashed-projects')->daily();
     }
 
     /**

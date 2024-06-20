@@ -26,7 +26,11 @@
         @include('frontend.pages.profile.layouts.sidebar')    
 
         <!-- main content-->
-        @livewire('frontend.pages.profile.profile-pages.saved-projects.index')
+        @if(is_null($type))
+            @livewire('frontend.pages.profile.profile-pages.saved-projects.active-projects.index')
+        @elseif($type == 'trashed')
+            @livewire('frontend.pages.profile.profile-pages.saved-projects.trashed-projects', ['type' => $type])
+        @endif
     </div>
 </div>
 

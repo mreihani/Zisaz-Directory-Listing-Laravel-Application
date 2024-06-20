@@ -10,35 +10,11 @@ use App\Models\Frontend\UserModels\PrivateSite\Psite;
 class UserPrivatePageController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         return view('frontend.pages.private-page.private-page-create.index');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -57,18 +33,32 @@ class UserPrivatePageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Undelete the soft deleted item
      */
-    public function update(Request $request, string $id)
+    public function restore(Psite $psite, Request $request)
     {
-        //
+        // check if user is authorized to restore website item
+        if(!auth()->check() || auth()->user()->id != $psite->user->id) {
+            abort(403);
+        }
+
+        $psite->restore();
+
+        return redirect()->route('user.dashboard.saved-personal-websites.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft-delete the specified item.
      */
-    public function destroy(string $id)
+    public function destroy(Psite $psite, Request $request)
     {
-        //
+        // check if user is authorized to delete website item
+        if(!auth()->check() || auth()->user()->id != $psite->user->id) {
+            abort(403);
+        }
+
+        $psite->delete();
+
+        return redirect()->route('user.dashboard.saved-personal-websites.index');
     }
 }

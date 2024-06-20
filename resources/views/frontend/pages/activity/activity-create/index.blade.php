@@ -53,7 +53,7 @@
             </div>
         
             <!-- Livewire component-->
-            @livewire('frontend.pages.activity.activity-create.index', ['activityTypeUrl' => $activityTypeUrl])
+            @livewire('frontend.pages.activity.activity-create.index')
 
         </div>
     </div>

@@ -10,10 +10,18 @@
         </a>
     </div>
     
+    <!-- Warning alert -->
+    @if(count($projects))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span class="fw-bold">توجه:</span> پروژه های حذف شده تا مدت 6 ماه در سامانه به صورت غیر فعال باقی می مانند، شما می توانید تا قبل از این زمان مجددا آن ها را بازگردانی نمایید؛ اما پس از گذشت این زمان به صورت خودکار برای همیشه از سامانه حذف خواهند شد.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <!-- Nav tabs-->
     <ul class="nav nav-tabs border-bottom mb-4" role="tablist">
         <li class="nav-item mb-3">
-            <a class="nav-link active" href="#" role="tab" aria-selected="true">
+            <a class="nav-link" href="{{route('user.dashboard.saved-projects.index')}}" role="tab" aria-selected="true">
                 <i class="fi-file fs-base me-2"></i>
                 منتشر شده
             </a>
@@ -31,13 +39,7 @@
             </a>
         </li>
         <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-eye-off fs-base me-2"></i>
-                غیر فعال شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
+            <a class="nav-link active" href="{{route('user.dashboard.saved-projects.index', ['type=trashed'])}}" role="tab" aria-selected="false">
                 <i class="fi-trash fs-base me-2"></i>
                 حذف شده
             </a>
@@ -48,10 +50,10 @@
         @foreach ($projects as $projectItem)
             <!-- Item-->
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
-                <a class="card-img-top" href="{{route('project', $projectItem->slug)}}" style="background-image: url('{{asset($projectItem->projectImages->first()->image_sm)}}');">
+                <a class="card-img-top" href="#" style="background-image: url('{{asset($projectItem->projectImages->first()->image_sm)}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
-                        <span class="d-table badge bg-info">
-                            تأیید شده
+                        <span class="d-table badge bg-danger">
+                            حذف شده
                         </span>
                     </div>
                 </a>
@@ -61,28 +63,10 @@
                         <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
                         <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
                             <li>
-                                <a class="dropdown-item" href="{{route('user.project.edit', $projectItem->id)}}">
-                                    <i class="fi-edit opacity-60 me-2"></i>
-                                    ویرایش  
+                                <a class="dropdown-item" href="{{route('user.project.restore', $projectItem->id)}}" onclick="if(confirm('آیا برای بازگردانی این آیتم اطمینان دارید؟')){return true}">
+                                    <i class="fi-upload-file opacity-60 me-2"></i>
+                                    بازگردانی
                                 </a>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-star opacity-60 me-2"></i>
-                                    ارتقا
-                                </button>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-eye-off opacity-60 me-2"></i>
-                                    غیر فعال کردن
-                                </button>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-trash opacity-60 me-2"></i>
-                                    حذف
-                                </button>
                             </li>
                         </ul>
                     </div>
@@ -126,7 +110,7 @@
                     @endif
                       
                     <h3 class="h6 mb-2 fs-base">
-                        <a class="nav-link" href="{{route('project', $projectItem->slug)}}">
+                        <a class="nav-link" href="#">
                             {{$projectItem->projectInfo->title}}
                         </a>
                     </h3>

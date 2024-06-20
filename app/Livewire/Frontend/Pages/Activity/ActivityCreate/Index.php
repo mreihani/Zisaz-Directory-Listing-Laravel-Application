@@ -44,8 +44,6 @@ class Index extends Component
 {
     use WithFileUploads;
 
-    public $activityTypeUrl;
-
     public $section;
     public $activityType;
     public $selectedProvinceIdValidation;
@@ -212,8 +210,9 @@ class Index extends Component
 
     public function mount() {
        
-        // Get activity type directly by url and show the relevant form
-        $this->getActivityTypeUrl();
+        $this->activityType = 'ads_registration';
+        $this->section = 'ads_registration';
+        $this->adsType = "";
 
         // resume section
         $this->resumeGoal = "";
@@ -291,23 +290,6 @@ class Index extends Component
         $this->inquiryAdsType = "";
         $this->inquirer = "";
         $this->adsHaveDiscount = "no";
-    }
-
-    // Get activity type directly by url and show the relevant form
-    private function getActivityTypeUrl() {
-
-        if(is_null($this->activityTypeUrl)) {
-            $this->activityType = "";
-            $this->section = null;
-            $this->adsType = "";
-        }
-
-        // ثبت آگهی
-        if(!is_null($this->activityTypeUrl) && $this->activityTypeUrl == 'ads') {
-            $this->activityType = 'ads_registration';
-            $this->section = 'ads_registration';
-            $this->adsType = "";
-        }
     }
 
     public function loadCitiesByProvinceChange() {

@@ -26,7 +26,12 @@
         @include('frontend.pages.profile.layouts.sidebar')    
 
         <!-- main content-->
-        @livewire('frontend.pages.profile.profile-pages.saved-ads.index')
+        @if(is_null($type))
+            @livewire('frontend.pages.profile.profile-pages.saved-ads.active-ads.index')
+        @elseif($type == 'trashed')
+            @livewire('frontend.pages.profile.profile-pages.saved-ads.trashed-ads.index', ['type' => $type])
+        @endif
+        
     </div>
 </div>
 

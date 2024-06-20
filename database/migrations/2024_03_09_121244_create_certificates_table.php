@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('subactivity_type')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('activity_license_items', function (Blueprint $table) {

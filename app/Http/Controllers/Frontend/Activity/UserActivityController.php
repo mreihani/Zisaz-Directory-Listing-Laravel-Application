@@ -4,51 +4,25 @@ namespace App\Http\Controllers\Frontend\Activity;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\Activity\Activity;
+use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class UserActivityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
     {
-        $activityTypeUrl = $request->type;
-        
-        return view('frontend.pages.activity.activity-create.index', compact('activityTypeUrl'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return view('frontend.pages.activity.activity-create.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Activity $activity, Request $request)
     {
-        $activity = Activity::findOrFail($id);
-
         // check if user is authorized to edit activity item
         if(!auth()->check() || auth()->user()->id != $activity->user->id) {
            abort(403);
@@ -58,18 +32,32 @@ class UserActivityController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Undelete the soft deleted item
      */
-    public function update(Request $request, string $id)
+    public function restore(Activity $activity, Request $request)
     {
-        //
+        // check if user is authorized to restore activity item
+        if(!auth()->check() || auth()->user()->id != $activity->user->id) {
+            abort(403);
+        }
+
+        $activity->restore();
+
+        return redirect()->route('user.dashboard.saved-ads.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft-delete the specified item.
      */
-    public function destroy(string $id)
+    public function destroy(Activity $activity, Request $request)
     {
-        //
+        // check if user is authorized to delete activity item
+        if(!auth()->check() || auth()->user()->id != $activity->user->id) {
+            abort(403);
+        }
+
+        $activity->delete();
+
+        return redirect()->route('user.dashboard.saved-ads.index');
     }
 }

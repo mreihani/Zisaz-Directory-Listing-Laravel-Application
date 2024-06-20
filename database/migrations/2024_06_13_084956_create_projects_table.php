@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('project_type')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('project_images', function (Blueprint $table) {

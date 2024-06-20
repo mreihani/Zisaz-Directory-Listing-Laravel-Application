@@ -4,16 +4,17 @@ namespace App\Models\Frontend\UserModels\Activity;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Frontend\ReferenceData\Gender\Gender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
-use App\Models\Frontend\UserModels\Activity\ActivityLicenseItem;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 use App\Models\Frontend\ReferenceData\ContractType\ContractType;
+use App\Models\Frontend\UserModels\Activity\ActivityLicenseItem;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Bid;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Inquiry;
 use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
@@ -24,6 +25,8 @@ use App\Models\Frontend\UserModels\Activity\AdsRegistration\Investment;
 
 class Activity extends Model
 {
+    use SoftDeletes;
+    
     protected $guarded = [];
 
     public function user() {

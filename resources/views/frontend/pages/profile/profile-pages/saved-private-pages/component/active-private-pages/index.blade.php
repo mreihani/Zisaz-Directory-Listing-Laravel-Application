@@ -1,12 +1,12 @@
 <div class="col-lg-8 col-md-7 mb-5">
     <div class="d-flex align-items-center justify-content-between mb-3">
         <h1 class="h2 mb-0">
-            آگهی های من
+            کسب و کارهای من
         </h1>
 
-        <a class="fw-bold text-decoration-none" href="{{route('user.activity.create', ['type' => 'ads'])}}">
+        <a class="fw-bold text-decoration-none" href="{{route('user.personal-website.create')}}">
             <i class="fi-plus mt-n1 me-2"></i>
-            افزودن آگهی جدید
+            افزودن کسب و کار جدید
         </a>
     </div>
     
@@ -19,7 +19,7 @@
             </a>
         </li>
         <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
+            <a class="nav-link" href="{{route('user.dashboard.saved-personal-websites.index')}}" role="tab" aria-selected="false">
                 <i class="fi-rotate-right fs-base me-2"></i>
                 در انتظار تأیید
             </a>
@@ -31,24 +31,18 @@
             </a>
         </li>
         <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-eye-off fs-base me-2"></i>
-                غیر فعال شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
+            <a class="nav-link" href="{{route('user.dashboard.saved-personal-websites.index', ['type=trashed'])}}" role="tab" aria-selected="false">
                 <i class="fi-trash fs-base me-2"></i>
                 حذف شده
             </a>
         </li>
     </ul>
 
-    @if(count($userAds))
-        @foreach ($userAds as $adItem)
+    @if(count($psites))
+        @foreach ($psites as $psiteItem)
             <!-- Item-->
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
-                <a class="card-img-top" href="{{route('activity', $adItem->slug)}}" style="background-image: url('{{$adItem->adsImagesUrl()}}');">
+                <a class="card-img-top" href="{{route('site', $psiteItem->slug)}}" style="background-image: url('{{asset($psiteItem->hero->psiteHeroSliders->first()->slider_image)}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
                         <span class="d-table badge bg-info">
                             تأیید شده
@@ -61,7 +55,7 @@
                         <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
                         <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
                             <li>
-                                <a class="dropdown-item" href="{{route('user.activity.edit', $adItem->id)}}">
+                                <a class="dropdown-item" href="{{route('user.personal-website.edit', $psiteItem->id)}}">
                                     <i class="fi-edit opacity-60 me-2"></i>
                                     ویرایش  
                                 </a>
@@ -73,89 +67,62 @@
                                 </button>
                             </li>
                             <li>
-                                <button class="dropdown-item" type="button">
-                                    <i class="fi-eye-off opacity-60 me-2"></i>
-                                    غیر فعال کردن
-                                </button>
-                            </li>
-                            <li>
-                                <button class="dropdown-item" type="button">
+                                <a class="dropdown-item" href="{{route('user.personal-website.destroy', $psiteItem->id)}}" onclick="if(confirm('آیا برای حذف این آیتم اطمینان دارید؟')){return true}">
                                     <i class="fi-trash opacity-60 me-2"></i>
                                     حذف
-                                </button>
+                                </a>
                             </li>
                         </ul>
                     </div>
 
-                    @if($adItem->subactivity->type == 'selling')
+                    @if($psiteItem->business_type == '1')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی فروش کالا
+                            معرفی فروشگاه
                         </h4>
-                    @elseif($adItem->subactivity->type == 'employee')
+                    @elseif($psiteItem->business_type == '2')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی استخدام (کارجو)
+                            معرفی شرکت ساختمانی
                         </h4>
-                    @elseif($adItem->subactivity->type == 'employer')
+                    @elseif($psiteItem->business_type == '3')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی استخدام (کارفرما)
+                            معرفی دفتر طراحی و مهندسی
                         </h4>
-                    @elseif($adItem->subactivity->type == 'investor')
+                    @elseif($psiteItem->business_type == '4')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی شراکت و سرمایه گذاری (سرمایه گذار)
+                            معرفی پروژه های انبوه سازی شخصی
                         </h4>
-                    @elseif($adItem->subactivity->type == 'invested')
+                    @elseif($psiteItem->business_type == '5')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی شراکت و سرمایه گذاری (سرمایه پذیر)
+                            معرفی و ارائه اطلاعات تماس و تجربیات شخصی
                         </h4>
-                    @elseif($adItem->subactivity->type == 'auction')
+                    @elseif($psiteItem->business_type == '6')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی مزایده
+                            معرفی آزمایشگاه مصالح ساختمانی
                         </h4>
-                    @elseif($adItem->subactivity->type == 'tender_buy')
+                    @elseif($psiteItem->business_type == '7')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی مناقصه (خرید)
+                            معرفی کارخانه تولید نیازهای ساخت و ساز
                         </h4>
-                    @elseif($adItem->subactivity->type == 'tender_project')
+                    @elseif($psiteItem->business_type == '8')
                         <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی مناقصه (اجرای پروژه)
-                        </h4>
-                    @elseif($adItem->subactivity->type == 'inquiry_buy')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی استعلام قیمت (خرید)
-                        </h4>
-                    @elseif($adItem->subactivity->type == 'inquiry_project')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی استعلام قیمت (اجرای پروژه)
-                        </h4>
-                    @elseif($adItem->subactivity->type == 'contractor')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            آگهی پیمانکاری
+                            معرفی فعالیت در زمینه ماشین آلات ساختمانی
                         </h4>
                     @endif
 
                     <h3 class="h6 mb-2 fs-base">
-                        <a class="nav-link" href="{{route('activity', $adItem->slug)}}">
-                            {{$adItem->subactivity->item_title}}
+                        <a class="nav-link" href="{{route('site', $psiteItem->slug)}}">
+                            {{$psiteItem->hero->title}}
                         </a>
                     </h3>
-                    {{-- @if($adItem->subactivity->item_description)
-                        <p class="mb-2 fs-sm text-muted">
-                            {{Str::of($adItem->subactivity->item_description)->limit(70)}}
-                        </p>
-                    @endif
-                    <div>
-                        <b>زمینه فعالیت: </b>
-                        {{$adItem->activityGroups->pluck('title')->implode('، ')}}
-                    </div> --}}
                     
                     <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end">
                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
-                            {{jdate($adItem->updated_at)->ago()}}
+                            {{jdate($psiteItem->updated_at)->ago()}}
                         </span>
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3 border-end text-nowrap">
-                            شماره آگهی:
-                            {{$adItem->id}}
+                            شماره وبسایت:
+                            {{$psiteItem->id}}
                         </span>
                         <span class="d-inline-block me-4 fs-sm me-3 pe-3">
                             <i class="fi-eye-on mt-n1 me-1 fs-base text-muted align-middle"></i>

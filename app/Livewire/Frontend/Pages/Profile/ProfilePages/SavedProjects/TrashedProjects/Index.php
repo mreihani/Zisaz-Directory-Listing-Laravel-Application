@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\SavedProjects;
+namespace App\Livewire\Frontend\Pages\Profile\ProfilePages\SavedProjects\TrashedProjects;
 
 use Livewire\Component;
 
@@ -9,7 +9,7 @@ class Index extends Component
     public $projects;
 
     public function mount() {
-        $this->projects = auth()->user()->project()->with([
+        $this->projects = auth()->user()->project()->onlyTrashed()->with([
             'projectImages',
             'projectInfo',
             'projectFacility',
@@ -21,6 +21,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('frontend.pages.profile.profile-pages.saved-projects.component.index');
+        return view('frontend.pages.profile.profile-pages.saved-projects.component.trashed-projects.index');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models\Frontend\UserModels\Project;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\Project\Sections\ProjectInfo;
 use App\Models\Frontend\UserModels\Project\Sections\ProjectImage;
@@ -14,6 +15,8 @@ use App\Models\Frontend\ReferenceData\ProjectWelfareFacility\WelfareFacility;
 
 class Project extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     public function user() {

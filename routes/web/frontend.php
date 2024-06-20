@@ -20,7 +20,7 @@ Route::controller(IndexController::class)->group(function () {
 
 // advertisement pages routes
 Route::controller(ActivityPagesController::class)->group(function () {
-    Route::get('/activity/{slug}', 'activity')->name('activity');
+    Route::get('/activity-item/{slug}', 'activity')->name('activity');
     Route::get('/activities', 'getActivties')->name('get-activities');
 });
 

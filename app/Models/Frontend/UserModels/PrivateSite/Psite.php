@@ -4,10 +4,12 @@ namespace App\Models\Frontend\UserModels\PrivateSite;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAds;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteBlog;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteHero;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTest;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteFooter;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMember;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAboutUs;
@@ -15,13 +17,14 @@ use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteLicense;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteProject;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteService;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTest;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMiddleBanner;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTrustedCustomer;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsitePromotionalVideo;
 
 class Psite extends Model
 {
+    use SoftDeletes;
+    
     protected $guarded = [];
 
     public function user() {

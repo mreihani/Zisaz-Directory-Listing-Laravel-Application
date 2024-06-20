@@ -10,9 +10,19 @@ class UserProfileProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('frontend.pages.profile.profile-pages.saved-projects.index');
+        $type = null;
+        if ($request->has('type')) {
+            $type = $request->input('type');
+        } 
+
+        // abort if user enters irrelevant query string
+        if(!is_null($type) && $type != 'trashed') {
+            abort(404);
+        }
+
+        return view('frontend.pages.profile.profile-pages.saved-projects.index', compact('type'));
     }
 
     /**

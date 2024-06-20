@@ -28,24 +28,24 @@ Route::controller(UserProfileNotificationsController::class)->group(function () 
 
 // ads routes
 Route::controller(UserActivityController::class)->group(function () {
-    Route::get('/activity/activity/create', 'create')->name('user.activity.create');
-});
-Route::controller(UserActivityController::class)->group(function () {
-    Route::get('/activity/{id}/edit', 'edit')->name('user.activity.edit');
+    Route::get('/activity/create', 'create')->name('user.activity.create');
+    Route::get('/activity/{activity}/edit', 'edit')->name('user.activity.edit');
+    Route::get('/activity/{activity}/restore', 'restore')->name('user.activity.restore')->withTrashed();
+    Route::get('/activity/{activity}/destroy', 'destroy')->name('user.activity.destroy');
 });
 
 // personal website routes
 Route::controller(UserPrivatePageController::class)->group(function () {
     Route::get('/personal-website/create', 'create')->name('user.personal-website.create');
-});
-Route::controller(UserPrivatePageController::class)->group(function () {
     Route::get('/personal-website/{id}/edit', 'edit')->name('user.personal-website.edit');
+    Route::get('/personal-website/{psite}/restore', 'restore')->name('user.personal-website.restore')->withTrashed();
+    Route::get('/personal-website/{psite}/destroy', 'destroy')->name('user.personal-website.destroy');
 });
 
 //projects routes
 Route::controller(UserProjectController::class)->group(function () {
     Route::get('/project/create', 'create')->name('user.project.create');
-});
-Route::controller(UserProjectController::class)->group(function () {
     Route::get('/project/{id}/edit', 'edit')->name('user.project.edit');
+    Route::get('/project/{project}/restore', 'restore')->name('user.project.restore')->withTrashed();
+    Route::get('/project/{project}/destroy', 'destroy')->name('user.project.destroy');
 });
