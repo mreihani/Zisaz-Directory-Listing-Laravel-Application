@@ -29,14 +29,27 @@ class VideoRenderService {
 
         $filename = hexdec(uniqid());
         $dir = 'upload/' . $this->dir . '/' . $filename . '.' . 'mp4';
-
+        
         // store temporary video
         $customTempFilePath = $this->video->storeAs('public/upload/' . $this->dir, $filename . '_temp.' . $this->video->getClientOriginalExtension());
-        $tempPath = Storage::url($customTempFilePath);
+        //$tempPath = Storage::url($customTempFilePath);
+        $tempPath = 'upload/' . $this->dir . $filename . '_temp.' . $this->video->getClientOriginalExtension();
 
+        //$variableTempPath = 'public/' . $tempPath;
+        $variableTempPath = asset($tempPath);
+        //$variableTempPath = Storage::url($tempPath);
+        //$variableTempPath = asset(Storage::url($tempPath));
+        //$variableTempPath = public_path(Storage::url($tempPath));
+        //$variableTempPath = public_path($tempPath);
+        //$variableTempPath = 'storage/' . $tempPath;
+
+        // dd(
+        //     file_get_contents($variableTempPath)
+        // );
+       
         //dispatch a job to convert video by FFmpeg
         $videoJob = dispatch(new ConvertMediaVideo([
-            'tempPath' => 'http://localhost/' . $tempPath,
+            'tempPath' => $variableTempPath,
             'dir' => $dir,
             'mediaId' => $this->mediaId,
             'width' => $width,

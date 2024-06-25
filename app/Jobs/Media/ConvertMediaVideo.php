@@ -46,8 +46,8 @@ class ConvertMediaVideo implements ShouldQueue
         $highBitrate = (new X264)->setKiloBitrate(1000);
 
         FFMpeg::fromDisk('public')
-        ->openUrl($tempraryVideoUrl)
-        //->open($video)
+        //->openUrl($tempraryVideoUrl)
+        ->open(file_get_contents($tempraryVideoUrl))
         ->addWatermark(function(WatermarkFactory $watermark) {
         $watermark->fromDisk('public')
             ->open('upload/zsaz_watermark_sm.png')

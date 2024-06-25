@@ -41,13 +41,13 @@ class CreateImageThumbnailMediaVideo implements ShouldQueue
         $this->setJobIdIntoVideoSection($this->job->getJobId());
 
         // get video temp file location
-        $videoFileObject = Media::findOrFail($this->incoming['mediaId']);
-        $tempraryVideoUrl = $videoFileObject->temp_path;
+        // $videoFileObject = Media::findOrFail($this->incoming['mediaId']);
+        // $tempraryVideoUrl = $videoFileObject->temp_path;
 
         // save thumbnail
         FFMpeg::fromDisk('public')
-        ->openUrl('http://localhost/' . $tempraryVideoUrl)
-        //->open($video)
+        //->openUrl('http://localhost/' . $tempraryVideoUrl)
+        ->open($this->incoming['dir'])
         ->getFrameFromSeconds(2)
         ->export()
         ->toDisk('public')
