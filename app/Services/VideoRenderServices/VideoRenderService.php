@@ -42,7 +42,7 @@ class VideoRenderService {
         //$variableTempPath = public_path(Storage::url($tempPath));
         //$variableTempPath = public_path($tempPath);
         //$variableTempPath = 'storage/' . $tempPath;
-        $variableTempPath = Storage::url($customTempFilePath);
+        //$variableTempPath = Storage::url($customTempFilePath);
 
         // dd(
         //     file_get_contents(asset($variableTempPath))

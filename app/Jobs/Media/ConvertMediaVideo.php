@@ -47,7 +47,8 @@ class ConvertMediaVideo implements ShouldQueue
 
         FFMpeg::fromDisk('public')
         //->openUrl($tempraryVideoUrl)
-        ->open(file_get_contents($tempraryVideoUrl))
+        //->open(file_get_contents($tempraryVideoUrl))
+        ->open('upload/1.mp4')
         ->addWatermark(function(WatermarkFactory $watermark) {
         $watermark->fromDisk('public')
             ->open('upload/zsaz_watermark_sm.png')
