@@ -40,35 +40,18 @@ class CreateImageThumbnailMediaVideo implements ShouldQueue
         // set job id into promitional video table
         $this->setJobIdIntoVideoSection($this->job->getJobId());
 
-        //$video = $this->createObjectFromAbsolutePath($this->incoming['path']);
-
         // get video temp file location
         $videoFileObject = Media::findOrFail($this->incoming['mediaId']);
-        $tempraryVideoUrl = asset($videoFileObject->file_path);
+        $tempraryVideoUrl = $videoFileObject->temp_path;
 
         // save thumbnail
         FFMpeg::fromDisk('public')
-        ->openUrl($tempraryVideoUrl)
-        // ->open($this->incoming['video'])
+        ->openUrl('http://localhost/' . $tempraryVideoUrl)
+        //->open($video)
         ->getFrameFromSeconds(2)
         ->export()
         ->toDisk('public')
         ->save($this->incoming['dir']);
-    }
-
-    // create an object form file absolute path
-    private function createObjectFromAbsolutePath($path) {
-        $name = File::name( $path );
-        $extension = File::extension( $path );
-        $originalName = $name . '.' . $extension;
-        $mimeType = File::mimeType( $path );
-        $size = File::size( $path );
-        $error = false;
-        $test = false;
-
-        $file = new UploadedFile( $path, $originalName, $mimeType, $size, $error, $test );
-
-        return $file;
     }
 
     private function setJobIdIntoVideoSection($jobId) {

@@ -40,15 +40,14 @@ class ConvertMediaVideo implements ShouldQueue
         // set job id into promitional video table
         $this->setJobIdIntoVideoSection($this->job->getJobId());
 
-        //$video = $this->createObjectFromAbsolutePath(asset($this->incoming['tempPath']));
-        $tempraryVideoUrl = public_path($this->incoming['tempPath']);
+        $tempraryVideoUrl = ($this->incoming['tempPath']);
         
         $lowBitrate = (new X264)->setKiloBitrate(250);
         $highBitrate = (new X264)->setKiloBitrate(1000);
 
         FFMpeg::fromDisk('public')
         ->openUrl($tempraryVideoUrl)
-        //->open(public_path($this->incoming['tempPath']))
+        //->open($video)
         ->addWatermark(function(WatermarkFactory $watermark) {
         $watermark->fromDisk('public')
             ->open('upload/zsaz_watermark_sm.png')
@@ -62,21 +61,6 @@ class ConvertMediaVideo implements ShouldQueue
         ->toDisk('public')
         ->inFormat($lowBitrate)
         ->save($this->incoming['dir']);
-    }
-
-    // create an object form file absolute path
-    private function createObjectFromAbsolutePath($path) {
-        $name = File::name( $path );
-        $extension = File::extension( $path );
-        $originalName = $name . '.' . $extension;
-        $mimeType = File::mimeType( $path );
-        $size = File::size( $path );
-        $error = false;
-        $test = false;
-
-        $file = new UploadedFile( $path, $originalName, $mimeType, $size, $error, $test );
-
-        return $file;
     }
 
     private function setJobIdIntoVideoSection($jobId) {

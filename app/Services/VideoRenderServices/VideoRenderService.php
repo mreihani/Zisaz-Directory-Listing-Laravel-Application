@@ -33,20 +33,16 @@ class VideoRenderService {
         // store temporary video
         $customTempFilePath = $this->video->storeAs('public/upload/' . $this->dir, $filename . '_temp.' . $this->video->getClientOriginalExtension());
         $tempPath = Storage::url($customTempFilePath);
-        
-        // dd(
-        //     asset($tempPath)
-        // );
 
         //dispatch a job to convert video by FFmpeg
         $videoJob = dispatch(new ConvertMediaVideo([
-            'tempPath' => $tempPath,
+            'tempPath' => 'http://localhost/' . $tempPath,
             'dir' => $dir,
             'mediaId' => $this->mediaId,
             'width' => $width,
             'height' => $height,
         ]));
-
+        
         return [
             'file_path' => 'storage/upload/' . $this->dir . '/' . $filename . '.' . 'mp4',
             'temp_path' => 'storage/upload/' . $this->dir . '/' . $filename . '_temp' . '.' . 'mp4'
