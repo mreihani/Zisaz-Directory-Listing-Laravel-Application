@@ -36,20 +36,21 @@ class VideoRenderService {
         $tempPath = 'upload/' . $this->dir . $filename . '_temp.' . $this->video->getClientOriginalExtension();
 
         //$variableTempPath = 'public/' . $tempPath;
-        $variableTempPath = asset($tempPath);
+        $variableTempPath = asset($dir);
         //$variableTempPath = Storage::url($tempPath);
         //$variableTempPath = asset(Storage::url($tempPath));
         //$variableTempPath = public_path(Storage::url($tempPath));
         //$variableTempPath = public_path($tempPath);
         //$variableTempPath = 'storage/' . $tempPath;
+        $variableTempPath = Storage::url($customTempFilePath);
 
         // dd(
-        //     file_get_contents($variableTempPath)
+        //     file_get_contents(asset($variableTempPath))
         // );
        
         //dispatch a job to convert video by FFmpeg
         $videoJob = dispatch(new ConvertMediaVideo([
-            'tempPath' => $variableTempPath,
+            'tempPath' => asset($variableTempPath),
             'dir' => $dir,
             'mediaId' => $this->mediaId,
             'width' => $width,
