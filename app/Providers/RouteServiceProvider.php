@@ -30,11 +30,11 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+            ->prefix('api')
+            ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
             ->group(base_path('routes/web/frontend.php'));
@@ -42,9 +42,45 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web','auth.user'])
             ->group(base_path('routes/web/user-dashboard.php'));
 
+            // admin dashboard home page
             Route::middleware(['web','auth', 'role:admin'])
             ->prefix('admin')
-            ->group(base_path('routes/web/admin-dashboard.php'));
+            ->group(base_path('routes/web/dashboards/admin/home/index.php'));
+
+            // admin dashboard profile page
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/account/profile/index.php'));
+
+            // admin dashboard account settings page
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/account/account-settings/index.php'));
+
+            // admin dashboard categories page
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/category/index.php'));
+
+            // admin dashboard banners
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/banner/index.php'));
+
+            // admin dashboard magazine categories
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/magazine/magazine-category/index.php'));
+
+            // admin dashboard magazine posts
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/magazine/magazine-post/index.php'));
+
+            // admin dashboard media
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/media/index.php'));
 
             Route::middleware(['web', 'auth'])
                 ->group(base_path('routes/web/assets.php'));

@@ -3,9 +3,9 @@
         <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <li class="paginate_button page-item previous disabled" aria-disabled="true" aria-label="@lang('pagination.previous')" id="DataTables_Table_0_previous">
+                <li class="paginate_button page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')" id="DataTables_Table_0_previous">
                     <a aria-controls="DataTables_Table_0" aria-disabled="true" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">قبلی</a>
-                </li class="paginate_button page-item previous" id="DataTables_Table_0_previous">
+                </li>
             @else
                 <li class="paginate_button page-item">
                     <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-controls="DataTables_Table_0" aria-label="@lang('pagination.previous')" role="link" data-dt-idx="previous" tabindex="0" class="page-link">
@@ -47,13 +47,13 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <li class="paginate_button page-item next" id="DataTables_Table_0_next">
+                <li class="paginate_button page-item" id="DataTables_Table_0_next">
                     <a href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')" aria-controls="DataTables_Table_0" role="link" data-dt-idx="next" tabindex="0" class="page-link">
                         بعدی
                     </a>
                 </li>
             @else
-                <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next" aria-disabled="true" aria-label="@lang('pagination.next')">
+                <li class="paginate_button page-item disabled" id="DataTables_Table_0_next" aria-disabled="true" aria-label="@lang('pagination.next')">
                     <span aria-hidden="true" aria-controls="DataTables_Table_0" aria-disabled="true" role="link" data-dt-idx="next" tabindex="-1" class="page-link">
                         بعدی
                     </span>

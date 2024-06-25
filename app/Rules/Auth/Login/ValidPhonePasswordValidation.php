@@ -24,8 +24,10 @@ class ValidPhonePasswordValidation implements ValidationRule
 
         if(is_null($this->password) || $this->password == '') {
             $fail('کلمه عبور خود را وارد نمایید.');
+        } elseif($user->role != 'admin') {
+            $fail('فقط مدیر اجازه دسترسی به این بخش را دارد.');
         } elseif (is_null($user) || !Hash::check($this->password, $user->password)) {
             $fail('شماره تلفن یا کلمه عبور نادرست است.');
-        } 
+        }
     }
 }

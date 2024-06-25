@@ -65,16 +65,9 @@
                         </form>
                     </div>
                     <div class="col-md-7 d-flex justify-content-md-end">
-                        <div class="text-end pt-3 pt-md-0">
-                            <div class="btn-group flex-wrap">
-                                <span class="btn btn-primary">
-                                    <i class="ti ti-plus me-sm-1"></i> 
-                                    <a href="{{route('admin.dashboard.category.create')}}" class="text-white">
-                                        افزودن دسته بندی
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
+                        <a href="{{route('admin.dashboard.category.create')}}" class="text-white btn btn-primary waves-effect waves-light">
+                            افزودن دسته بندی
+                        </a>
                     </div>
                 </div>
             </div>
@@ -129,19 +122,25 @@
                                                     @endif
                                                     @if(isset($mergedCollectionItem->activityCategory))
                                                         <li>
-                                                            <a href="{{route('admin.dashboard.category.destroy-actgrp', $mergedCollectionItem->id)}}" 
-                                                                class="dropdown-item text-danger"
-                                                                onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
-                                                                حذف
-                                                            </a>
+                                                            <form action="{{route('admin.dashboard.category.destroy-actgrp', $mergedCollectionItem->id)}}" method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                
+                                                                <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
+                                                                    حذف
+                                                                </button>
+                                                            </form>
                                                         </li>
                                                     @else
                                                         <li>
-                                                            <a href="{{route('admin.dashboard.category.destroy-actcat', $mergedCollectionItem->id)}}" 
-                                                                class="dropdown-item text-danger"
-                                                                onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
-                                                                حذف
-                                                            </a>
+                                                            <form action="{{route('admin.dashboard.category.destroy-actcat', $mergedCollectionItem->id)}}" method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                
+                                                                <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
+                                                                    حذف
+                                                                </button>
+                                                            </form>
                                                         </li>
                                                     @endif
                                                 </ul>

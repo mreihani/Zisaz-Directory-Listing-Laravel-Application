@@ -62,7 +62,7 @@ class Index extends Component
             $this->businessType = '';
             $this->title = '';
 
-            $this->color = "#155bd5";
+            $this->color = "#155BD5";
 
             // slider images repeater form
             $this->slideImages = [null];
@@ -83,6 +83,30 @@ class Index extends Component
             $this->slideImages = $psite->hero->psiteHeroSliders->pluck('slider_image')->toArray();
             $this->slideInputs = $psite->hero->psiteHeroSliders->keys()->toArray();
             $this->slideIteration = $psite->hero->psiteHeroSliders->count();
+        }
+    }
+
+    private function getColor() {
+        $allowedColorsArray = [
+            '#155BD5',
+            '#424242',
+            '#830B0B', 
+            '#593803', 
+            '#2E4502',
+            '#044E08',
+            '#03474A',
+            '#042495',
+            '#5E08A9',
+            '#7B0968',
+            '#850A39',
+            '#730E13',
+            '#89060C'
+        ];
+
+        if(in_array($this->color, $allowedColorsArray)) {
+            return $this->color;
+        } else {
+            return "#155BD5";
         }
     }
 
@@ -161,7 +185,7 @@ class Index extends Component
             $psite = auth()->user()->privateSite()->create([
                 'business_type' => Purify::clean($this->businessType),
                 'slug' => strtolower(str_replace(' ', '-', Purify::clean(trim($this->slug)))),
-                'color' => Purify::clean($this->color),
+                'color' => $this->getColor(),
             ]);
 
         // in this case, the user has already submitted a private website, and is trying to edit that
@@ -177,7 +201,7 @@ class Index extends Component
             $psite->update([
                 'business_type' => Purify::clean($this->businessType),
                 'slug' => strtolower(str_replace(' ', '-', Purify::clean(trim($this->slug)))),
-                'color' => Purify::clean($this->color),
+                'color' => $this->getColor(),
             ]);
         }
        

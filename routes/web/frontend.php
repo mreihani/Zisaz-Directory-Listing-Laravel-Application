@@ -33,3 +33,8 @@ Route::controller(PersonalWebsitePagesContoller::class)->group(function () {
 Route::controller(ProjectPagesController::class)->group(function () {
     Route::get('/project-item/{slug}', 'project')->name('project');
 });
+
+// blog pages routes
+Route::controller(BlogPagesController::class)->group(function () {
+    Route::get('/blog-item/{slug}', 'blog')->name('blog');
+});

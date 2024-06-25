@@ -90,7 +90,7 @@
                     @endif
                 </div>
 
-                <div class="col-md-12 mb-4 jquery-palette-color-picker-master-body" x-init="
+                <div class="col-md-12 mb-4 jquery-palette-color-picker-master-body"  x-init="
                     $(document).ready(function(){
                         const submitBtn =  $(this).closest('form').find(':submit');
 
@@ -109,11 +109,10 @@
                     <label class="form-label fw-bold" for="sample-id-3b">
                         انتخاب رنگ اصلی وبسایت
                     </label>
-                    <div class="jquery-palette-color-picker-master-plugin" id="sample-id-3b">
-                        <input type="text" id="unique-id-3b" name="unique-name-3b" wire:model="color" data-palette='["#155bd5","#D50000","#69F0AE","#FFFF00"]' value="#155bd5">
+                    <div class="jquery-palette-color-picker-master-plugin" id="sample-id-3b" wire:ignore>
+                        <input type="text" id="unique-id-3b" name="unique-name-3b" wire:model="color" data-palette='["#155BD5","#424242","#830B0B","#593803","#2E4502","#044E08","#03474A","#042495","#5E08A9","#7B0968","#850A39","#730E13","#89060C"]' value="{{$color}}">
                     </div>
                 </div>
-              
             </div>
 
             <!-- Hero Title-->

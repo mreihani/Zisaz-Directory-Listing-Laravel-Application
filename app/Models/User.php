@@ -6,6 +6,7 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Frontend\UserModels\ActiveCode;
+use App\Models\Frontend\UserModels\Mag\MagPost;
 use App\Models\Frontend\UserModels\Project\Project;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
@@ -89,5 +90,9 @@ class User extends Authenticatable
 
     public function project() {
         return $this->hasMany(Project::class);
+    }
+
+    public function magazine() {
+        return $this->hasMany(MagPost::class);
     }
 }

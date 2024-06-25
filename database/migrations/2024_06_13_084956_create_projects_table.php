@@ -17,6 +17,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('project_type')->nullable();
             $table->string('slug')->unique();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->boolean('review_status')->default(1);
+            $table->boolean('verify_status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

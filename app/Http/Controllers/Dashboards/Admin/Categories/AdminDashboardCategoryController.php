@@ -89,7 +89,7 @@ class AdminDashboardCategoryController extends Controller
 
         $user = auth()->user();
 
-        $searchString = Purify::clean($request->q);
+        $searchString = Purify::clean(trim($request->q));
 
         $actCats = ActCat::where('title', 'like', '%' . $searchString . '%')->get();
         $actGrps = ActGrp::where('title', 'like', '%' . $searchString . '%')->get();
@@ -105,7 +105,7 @@ class AdminDashboardCategoryController extends Controller
             'pageName' => 'page',
         ]);
 
-        return view('dashboards.users.admin.pages.categories.index.index', compact('user', 'mergedCollection')); 
+        return view('dashboards.users.admin.pages.categories.search.index', compact('user', 'mergedCollection', 'searchString')); 
     }
 
     /**

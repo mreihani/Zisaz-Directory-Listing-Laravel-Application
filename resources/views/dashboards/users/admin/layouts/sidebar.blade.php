@@ -113,6 +113,8 @@
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.category.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.category.create' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.category.edit-actcat' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.category.edit-actgrp' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.category.search' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.category.show-subitem' ? 'active open' : ''}}
         " style="">
@@ -201,6 +203,129 @@
         </li>
         <!-- End of home page dynamic banners section -->
 
+        <!-- Beginnig of Magazine Section -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                مدیریت مجله زی ساز
+            </span>
+        </li>
+        <li class="menu-item
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.index' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.create' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.edit' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.search' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.index' ? 'active open' : ''}} 
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.create' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.edit' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.search' ? 'active open' : ''}}    
+        ">
+            <a class="menu-link menu-toggle" href="javascript:void(0);">
+                <i class="menu-icon tf-icons ti ti-book"></i>
+                <div>مدیریت مجله</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.category.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.category.create' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.category.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.category.search' ? 'active open' : ''}}
+                ">
+                    <a class="menu-link menu-toggle" href="javascript:void(0);">
+                        <div>مدیریت دسته بندی ها</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item
+                        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.create' ? 'active open' : ''}}
+                        ">
+                            <a class="menu-link" href="{{route('admin.dashboard.magazine.category.create')}}">
+                                <div>افزودن دسته بندی</div>
+                            </a>
+                        </li>
+                        <li class="menu-item
+                        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.index' ? 'active open' : ''}}    
+                        {{Route::currentRouteName() == 'admin.dashboard.magazine.category.search' ? 'active open' : ''}}
+                        ">
+                            <a class="menu-link" href="{{route('admin.dashboard.magazine.category.index')}}">
+                                <div>لیست دسته بندی ها</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="menu-sub">
+                <li class="menu-item
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.post.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.post.create' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.post.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.magazine.post.search' ? 'active open' : ''}}
+                ">
+                    <a class="menu-link menu-toggle" href="javascript:void(0);">
+                        <div>مدیریت مقالات</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item
+                        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.create' ? 'active open' : ''}}
+                        ">
+                            <a class="menu-link" href="{{route('admin.dashboard.magazine.post.create')}}">
+                                <div>افزودن مقاله</div>
+                            </a>
+                        </li>
+                        <li class="menu-item
+                        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.index' ? 'active open' : ''}} 
+                        {{Route::currentRouteName() == 'admin.dashboard.magazine.post.search' ? 'active open' : ''}}    
+                        ">
+                            <a class="menu-link" href="{{route('admin.dashboard.magazine.post.index')}}">
+                                <div>لیست مقالات</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <!-- End of Magazine Section -->
+
+        <!-- Beginnig of Categories Section -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                مدیریت رسانه
+            </span>
+        </li>
+        <li class="menu-item
+        {{Route::currentRouteName() == 'admin.dashboard.media.index' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.media.create' ? 'active open' : ''}}
+        {{Route::currentRouteName() == 'admin.dashboard.media.search' ? 'active open' : ''}}
+        " style="">
+            <a class="menu-link menu-toggle" href="javascript:void(0);">
+                <svg class="me-1" xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-movie"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 4l0 16" /><path d="M16 4l0 16" /><path d="M4 8l4 0" /><path d="M4 16l4 0" /><path d="M4 12l16 0" /><path d="M16 8l4 0" /><path d="M16 16l4 0" /></svg>
+                <div>
+                    رسانه  
+                </div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item 
+                {{Route::currentRouteName() == 'admin.dashboard.media.create' ? 'active open' : ''}}
+                " style="">
+                    <a class="menu-link" href="{{route('admin.dashboard.media.create')}}">
+                        <div>
+                            افزودن رسانه
+                        </div>
+                    </a>
+                </li>
+                <li class="menu-item
+                {{Route::currentRouteName() == 'admin.dashboard.media.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.media.search' ? 'active open' : ''}}
+                " style="">
+                    <a class="menu-link" href="{{route('admin.dashboard.media.index')}}">
+                        <div>
+                            مدیریت رسانه
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End of Categories Section -->
+
+        
     </ul>
   </aside>
 
