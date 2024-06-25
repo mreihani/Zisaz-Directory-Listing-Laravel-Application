@@ -21,6 +21,10 @@ class ValidPhonePasswordValidation implements ValidationRule
     {
         // Get user object by phone number
         $user = User::where('phone', $this->phone)->first();
+        
+        if(!$user || is_null($user->role)) {
+            $fail('مجددا سعی نمایید.');
+        }
 
         if(is_null($this->password) || $this->password == '') {
             $fail('کلمه عبور خود را وارد نمایید.');
