@@ -25,7 +25,7 @@ class PrivateSiteFooterLogoImageValidationRule implements ValidationRule
             if(!isset($this->logo) || $this->logo == null) {
                 $fail('لطفا تصویر را بارگذاری نمایید.');
             }
-            if(isset($this->logo) && !in_array($this->logo->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'bmp'])) {
+            if(isset($this->logo) && !in_array(strtolower($this->logo->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp'])) {
                 $fail('لطفا تصویر با فرمت مجاز را بارگذاری نمایید.');
             }
             if(isset($this->logo) && $this->logo->getSize() > 4194304) {

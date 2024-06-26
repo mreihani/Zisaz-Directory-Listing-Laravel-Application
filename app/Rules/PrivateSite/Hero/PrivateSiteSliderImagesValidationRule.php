@@ -19,7 +19,7 @@ class PrivateSiteSliderImagesValidationRule implements ValidationRule
             if(!isset($value)) {
                 $fail('لطفا تصویر را بارگذاری نمایید.');
             }
-            if(isset($value) && !in_array($value->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'bmp'])) {
+            if(isset($value) && !in_array(strtolower($value->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp'])) {
                 $fail('لطفا تصویر با فرمت مجاز را بارگذاری نمایید.');
             }
             if(isset($value) && $value->getSize() > 4194304) {

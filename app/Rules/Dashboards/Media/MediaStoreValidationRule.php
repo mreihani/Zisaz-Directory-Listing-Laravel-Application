@@ -27,20 +27,20 @@ class MediaStoreValidationRule implements ValidationRule
             return;
         }
 
-        if(!in_array($this->file->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'bmp', 'flv', 'mp4', 'mkv'])) {
+        if(!in_array(strtolower($this->file->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp', 'flv', 'mp4', 'mkv'])) {
             $fail('لطفا فایل با پسوند مجاز را بارگذاری نمایید.');
             return;
         }
       
         // first check if file is image then impelment file validation logic
-        if(in_array($this->file->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'bmp'])) {
+        if(in_array(strtolower($this->file->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp'])) {
             if(isset($this->file) && $this->file->getSize() > 4194304) {
                 $fail('حجم تصویر بیشتر از مقدار مجاز است.');
             }
         }
 
         // video is being uploaded for the first time
-        if(in_array($this->file->getClientOriginalExtension(), ['flv', 'mp4', 'mkv'])) {
+        if(in_array(strtolower($this->file->getClientOriginalExtension()), ['flv', 'mp4', 'mkv'])) {
             if(isset($this->file) && $this->file->getSize() > 104857600) {
                 $fail('حجم فایل ویدئویی بیشتر از مقدار مجاز است.');
             }

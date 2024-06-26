@@ -53,7 +53,7 @@ class AdminDashboardMediaController extends Controller
         $validated = $request->validated();
         
         // check if incomig file is image
-        if(in_array($request->file->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'bmp'])) {
+        if(in_array(strtolower($request->file->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp'])) {
             // call and create a new instance of the class, with image and path inputs
             $renderImageService = new ImageResizeService(
                 $request->file, 
@@ -72,7 +72,7 @@ class AdminDashboardMediaController extends Controller
                 'thumbnail_job_id' => 'done',
             ]);
         // here the user uploads a video file    
-        } elseif(in_array($request->file->getClientOriginalExtension(), ['flv', 'mp4', 'mkv'])) {
+        } elseif(in_array(strtolower($request->file->getClientOriginalExtension()), ['flv', 'mp4', 'mkv'])) {
 
             // insert into db and get media object for its id
             $media = Media::create([

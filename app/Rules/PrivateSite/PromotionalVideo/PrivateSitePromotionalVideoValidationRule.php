@@ -37,7 +37,7 @@ class PrivateSitePromotionalVideoValidationRule implements ValidationRule
             if(!isset($this->video) || $this->video == null) {
                 $fail('لطفا فایل ویدئویی را بارگذاری نمایید.');
             }
-            if(isset($this->video) && !in_array($this->video->getClientOriginalExtension(), ['flv', 'mp4', 'mkv'])) {
+            if(isset($this->video) && !in_array(strtolower($this->video->getClientOriginalExtension()), ['flv', 'mp4', 'mkv'])) {
                 $fail('لطفا فایل ویدئویی با فرمت مجاز را بارگذاری نمایید.');
             }
             if(isset($this->video) && $this->video->getSize() > 104857600) {

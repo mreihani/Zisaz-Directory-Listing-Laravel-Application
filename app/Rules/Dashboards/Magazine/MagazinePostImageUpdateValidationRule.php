@@ -31,7 +31,7 @@ class MagazinePostImageUpdateValidationRule implements ValidationRule
             $fail('لطفا تصویر را بارگذاری نمایید.');
         }
 
-        if(isset($this->image) && !in_array($this->image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'bmp'])) {
+        if(isset($this->image) && !in_array(strtolower($this->image->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp'])) {
             $fail('لطفا تصویر با فرمت مجاز را بارگذاری نمایید.');
         }
         

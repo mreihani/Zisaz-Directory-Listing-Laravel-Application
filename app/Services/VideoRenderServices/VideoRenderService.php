@@ -31,7 +31,7 @@ class VideoRenderService {
         $dir = 'upload/' . $this->dir . '/' . $filename . '.' . 'mp4';
         
         // store temporary video
-        $tempPath = 'upload/' . $this->dir . '/' . $filename . '_temp.' . $this->video->getClientOriginalExtension();
+        $tempPath = 'upload/' . $this->dir . '/' . $filename . '_temp.' . strtolower($this->video->getClientOriginalExtension());
         Storage::disk('public')->put($tempPath, file_get_contents($this->video));
 
         //dispatch a job to convert video by FFmpeg
