@@ -16,7 +16,7 @@ class IgnoreEmailRegistrationValidation implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $user = User::where($attribute, $value)->first();
-        if($user->role == 'construction' && !$user->phone_verified) {
+        if(!$user || ($user->role == 'construction' && !$user->phone_verified)) {
             return;
         }
 
