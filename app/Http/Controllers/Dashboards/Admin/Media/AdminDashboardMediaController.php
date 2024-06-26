@@ -85,7 +85,7 @@ class AdminDashboardMediaController extends Controller
             $media->update([
                 'file_path' => $renderedVideo['file_path'],
                 'temp_path' => $renderedVideo['temp_path'],
-                // 'thumbnail' => $videoRenderService->generateVideoThumbnail()
+                'thumbnail' => $videoRenderService->generateVideoThumbnail($renderedVideo['video_conversion_temp_path'])
             ]);
         }
 

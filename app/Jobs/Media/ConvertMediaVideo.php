@@ -40,15 +40,13 @@ class ConvertMediaVideo implements ShouldQueue
         // set job id into promitional video table
         $this->setJobIdIntoVideoSection($this->job->getJobId());
 
-        $tempraryVideoUrl = ($this->incoming['tempPath']);
+        $tempPath = ($this->incoming['tempPath']);
         
         $lowBitrate = (new X264)->setKiloBitrate(250);
         $highBitrate = (new X264)->setKiloBitrate(1000);
 
         FFMpeg::fromDisk('public')
-        //->openUrl($tempraryVideoUrl)
-        //->open(file_get_contents($tempraryVideoUrl))
-        ->open('upload/1.mp4')
+        ->open($tempPath)
         ->addWatermark(function(WatermarkFactory $watermark) {
         $watermark->fromDisk('public')
             ->open('upload/zsaz_watermark_sm.png')

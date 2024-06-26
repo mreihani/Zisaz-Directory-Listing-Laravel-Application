@@ -31,26 +31,12 @@ class VideoRenderService {
         $dir = 'upload/' . $this->dir . '/' . $filename . '.' . 'mp4';
         
         // store temporary video
-        $customTempFilePath = $this->video->storeAs('public/upload/' . $this->dir, $filename . '_temp.' . $this->video->getClientOriginalExtension());
-        //$tempPath = Storage::url($customTempFilePath);
-        $tempPath = 'upload/' . $this->dir . $filename . '_temp.' . $this->video->getClientOriginalExtension();
-
-        //$variableTempPath = 'public/' . $tempPath;
-        $variableTempPath = asset($dir);
-        //$variableTempPath = Storage::url($tempPath);
-        //$variableTempPath = asset(Storage::url($tempPath));
-        //$variableTempPath = public_path(Storage::url($tempPath));
-        //$variableTempPath = public_path($tempPath);
-        //$variableTempPath = 'storage/' . $tempPath;
-        //$variableTempPath = Storage::url($customTempFilePath);
-
-        // dd(
-        //     file_get_contents(asset($variableTempPath))
-        // );
-       
+        $this->video->storeAs('public/upload/' . $this->dir, $filename . '_temp.' . $this->video->getClientOriginalExtension());
+        $tempPath = 'upload/' . $this->dir . '/' . $filename . '_temp.' . $this->video->getClientOriginalExtension();
+        
         //dispatch a job to convert video by FFmpeg
         $videoJob = dispatch(new ConvertMediaVideo([
-            'tempPath' => asset($variableTempPath),
+            'tempPath' => $tempPath,
             'dir' => $dir,
             'mediaId' => $this->mediaId,
             'width' => $width,
@@ -59,11 +45,12 @@ class VideoRenderService {
         
         return [
             'file_path' => 'storage/upload/' . $this->dir . '/' . $filename . '.' . 'mp4',
-            'temp_path' => 'storage/upload/' . $this->dir . '/' . $filename . '_temp' . '.' . 'mp4'
+            'temp_path' => 'storage/upload/' . $this->dir . '/' . $filename . '_temp' . '.' . 'mp4',
+            'video_conversion_temp_path' => $tempPath
         ];
     }
 
-    public function generateVideoThumbnail() {
+    public function generateVideoThumbnail($tempPath) {
 
         if(is_null($this->video)) {
             return;
@@ -74,6 +61,7 @@ class VideoRenderService {
 
         //dispatch a job to convert video by FFmpeg
         dispatch(new CreateImageThumbnailMediaVideo([
+            'tempPath' => $tempPath,
             'dir' => $dir,
             'mediaId' => $this->mediaId,
         ]));
