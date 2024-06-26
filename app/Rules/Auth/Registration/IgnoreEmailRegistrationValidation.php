@@ -15,8 +15,11 @@ class IgnoreEmailRegistrationValidation implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(User::where($attribute, $value)->where('phone_verified', 1)->exists()) {
-            $fail('ایمیل مورد نظر قبلا در سامانه ثبت شده است. لطفا ایمیل دیگری وارد نمایید.');
+        $user = User::where($attribute, $value)->first();
+        if($user->role == 'construction' && !$user->phone_verified) {
+            return;
         }
+
+        $fail('ایمیل مورد نظر قبلا در سامانه ثبت شده است. لطفا ایمیل دیگری وارد نمایید.');
     }
 }
