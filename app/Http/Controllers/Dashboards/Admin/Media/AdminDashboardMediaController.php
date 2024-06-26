@@ -22,7 +22,13 @@ class AdminDashboardMediaController extends Controller
     {
         $user = auth()->user();
 
-        $mediaFiles = Media::where('user_id', auth()->user()->id)->paginate(10);
+        // $mediaFiles = Media::where('user_id', auth()->user()->id)->paginate(10);
+
+        $mediaFiles = Media::where('user_id', auth()->user()->id)
+        ->where(function ($query) {
+            $query->where('video_job_id', '!=', null)->where('thumbnail_job_id', '!=', null);
+        })
+        ->paginate(10);
        
         return view('dashboards.users.admin.pages.media.index.index', compact('user', 'mediaFiles'));  
     }
@@ -33,6 +39,8 @@ class AdminDashboardMediaController extends Controller
     public function create()
     {
         $user = auth()->user();
+
+        $firstMediaItem = Media::first();
 
         return view('dashboards.users.admin.pages.media.create.index', compact('user'));  
     }
@@ -59,7 +67,9 @@ class AdminDashboardMediaController extends Controller
                 'file_name' => $request->file->getClientOriginalName(),
                 'file_path' => $renderImageService->resizeImageConstrainedWidth(1200),
                 'thumbnail' => $renderImageService->resizeImage(50, 50),
-                'file_size' => $request->file->getSize()
+                'file_size' => $request->file->getSize(),
+                'video_job_id' => 'done',
+                'thumbnail_job_id' => 'done',
             ]);
         // here the user uploads a video file    
         } elseif(in_array($request->file->getClientOriginalExtension(), ['flv', 'mp4', 'mkv'])) {
@@ -130,7 +140,10 @@ class AdminDashboardMediaController extends Controller
         $user = auth()->user();
 
         $searchString = trim($request->q);
-        $mediaFiles = Media::where('file_name', 'like', '%' . $searchString . '%')->paginate(10);
+        $mediaFiles = Media::where('file_name', 'like', '%' . $searchString . '%')
+        ->where(function ($query) {
+            $query->where('video_job_id', '!=', null)->where('thumbnail_job_id', '!=', null);
+        })->paginate(10);
 
         return view('dashboards.users.admin.pages.media.search.index', compact('user', 'mediaFiles', 'searchString')); 
     }

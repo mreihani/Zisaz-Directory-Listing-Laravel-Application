@@ -94,7 +94,7 @@
                                             </bdi>
                                         </td>
                                         <td>
-                                            <a href="{{route('blog', $magPostItem->slug)}}">
+                                            <a href="{{route('mag', $magPostItem->slug)}}">
                                                 {{$magPostItem->title}}
                                             </a>
                                         </td>

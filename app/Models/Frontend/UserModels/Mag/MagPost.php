@@ -20,6 +20,6 @@ class MagPost extends Model
     }
 
     public function magazineCategory() {
-        return $this->belongsTo(MagCategory::class);
+        return $this->belongsTo(MagCategory::class, 'mag_category_id');
     }
 }

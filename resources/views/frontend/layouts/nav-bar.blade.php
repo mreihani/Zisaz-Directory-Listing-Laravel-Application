@@ -161,8 +161,8 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                             @else    
                                 <!-- Menu items-->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link {{Route::currentRouteName() == 'blog-all' ? 'active' : ''}}" href="{{route('blog-all')}}">
-                                        مقالات
+                                    <a class="nav-link {{Route::currentRouteName() == 'get-mags' ? 'active' : ''}}" href="{{route('get-mags')}}">
+                                        مجله زی ساز
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\SinglePage;
+namespace App\Http\Controllers\Frontend\FrontEndPages;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\URL;

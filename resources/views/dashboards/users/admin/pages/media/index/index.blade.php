@@ -90,6 +90,9 @@
                                     <th>
                                         حجم فایل
                                     </th>
+                                    <th>
+                                        رونوشت آدرس رسانه
+                                    </th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
@@ -133,6 +136,12 @@
                                             (مگابایت)
                                         </td>
                                         <td>
+                                            
+                                            <button class="btn btn-primary btn-sm" onclick="copyToClipboard(this, '{{asset($mediaFileItem->file_path)}}')">
+                                                رونوشت لینک
+                                            </button>
+                                        </td>
+                                        <td>
                                             <form action="{{route('admin.dashboard.media.destroy', $mediaFileItem->id)}}" method="POST">
                                                 @method('delete')
                                                 @csrf
@@ -162,3 +171,22 @@
     </div>
 
 @endsection
+
+
+@push('page-scripts')
+    <script>
+        function copyToClipboard(button, text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            button.textContent = 'کپی شد!';
+            
+            setTimeout(function() {
+                button.textContent = 'رونوشت لینک';
+            }, 2000); // Change back to 'Copy Link' after 2 seconds
+        }
+    </script>
+@endpush

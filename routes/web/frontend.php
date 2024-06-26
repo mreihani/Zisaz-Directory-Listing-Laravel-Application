@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Frontend\IndexController;
-use App\Http\Controllers\Frontend\SinglePage\ProjectPagesController;
-use App\Http\Controllers\Frontend\SinglePage\ActivityPagesController;
-use App\Http\Controllers\Frontend\SinglePage\PersonalWebsitePagesContoller;
+use App\Http\Controllers\Frontend\FrontEndPages\MagPagesController;
+use App\Http\Controllers\Frontend\FrontEndPages\ProjectPagesController;
+use App\Http\Controllers\Frontend\FrontEndPages\ActivityPagesController;
+use App\Http\Controllers\Frontend\FrontEndPages\PersonalWebsitePagesContoller;
 
 // general frontend pages routes
 Route::controller(IndexController::class)->group(function () {
@@ -34,7 +35,8 @@ Route::controller(ProjectPagesController::class)->group(function () {
     Route::get('/project-item/{slug}', 'project')->name('project');
 });
 
-// blog pages routes
-Route::controller(BlogPagesController::class)->group(function () {
-    Route::get('/blog-item/{slug}', 'blog')->name('blog');
+// mag pages routes
+Route::controller(MagPagesController::class)->group(function () {
+    Route::get('/mag-item/{slug}', 'mag')->name('mag');
+    Route::get('/mag', 'getMags')->name('get-mags');
 });
