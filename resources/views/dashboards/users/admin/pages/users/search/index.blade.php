@@ -46,7 +46,7 @@
         <div class="card">
 
             <h5 class="card-header">
-                جستجوی رسانه ها
+                جستجوی کاربران
             </h5>
 
             <div class="card-header flex-column flex-md-row">
@@ -54,7 +54,7 @@
                 
                 <div class="row">
                     <div class="col-md-5 d-flex justify-content-start">
-                        <form method="GET" action="{{route('admin.dashboard.media.search')}}">
+                        <form method="GET" action="{{route('admin.dashboard.users.search')}}">
                             <div class="input-group">
                                 <button class="btn btn-outline-primary waves-effect" id="button-addon1" type="submit">
                                     <i class="ti ti-search h-mirror me-1"></i>
@@ -65,9 +65,9 @@
                         </form>
                     </div>
                     <div class="col-md-7 d-flex justify-content-md-end">
-                        <a href="{{route('admin.dashboard.media.index')}}" class="text-white btn btn-primary waves-effect waves-light">
+                        <a href="{{route('admin.dashboard.users.index')}}" class="text-white btn btn-primary waves-effect waves-light">
                             <i class="ti ti-arrow-back me-sm-1"></i> 
-                            بازگشت به لیست رسانه ها
+                            بازگشت به لیست کاربران
                         </a>
                     </div>
                 </div>
@@ -82,59 +82,46 @@
                                 <tr>
                                     <th>ردیف</th>
                                     <th>
-                                        پیش نمایش
+                                        نام و نام خانوادگی
                                     </th>
                                     <th>
-                                        نوع فایل
+                                        شماره تماس
                                     </th>
-                                    <th>نام فایل</th>
                                     <th>
-                                        حجم فایل
+                                        نوع کاربر
                                     </th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($mediaFiles as $mediaFileKey => $mediaFileItem)
+                                @foreach ($users as $userKey => $userItem)
                                     <tr>
                                         <td>
                                             <bdi>
-                                                {{ ($mediaFiles->currentPage() - 1) * $mediaFiles->perPage() + $mediaFileKey + 1 }}
+                                                {{ ($users->currentPage() - 1) * $users->perPage() + $userKey + 1 }}
                                             </bdi>
                                         </td>
                                         <td>
-                                            @if($mediaFileItem->file_type == 'image')
-                                                <a href="{{asset($mediaFileItem->file_path)}}">
-                                                    <img src="{{asset($mediaFileItem->thumbnail)}}" alt="image">
-                                                </a>
-                                            @elseif($mediaFileItem->file_type == 'video')
-                                                <a href="{{asset($mediaFileItem->file_path)}}">
-                                                    <img width="50" height="50" src="{{asset($mediaFileItem->thumbnail)}}" alt="image">
-                                                </a>
-                                            @endif
+                                            {{$userItem->firstname}} {{$userItem->lastname}}
                                         </td>
                                         <td>
-                                            @if($mediaFileItem->file_type == 'image')
-                                                <span class="badge rounded-pill bg-label-info">
-                                                    تصویر
-                                                </span>
-                                            @elseif($mediaFileItem->file_type == 'video')
-                                                <span class="badge rounded-pill bg-label-success">
-                                                    ویدئو
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{asset($mediaFileItem->file_path)}}" dir="ltr">
-                                                {{$mediaFileItem->file_name}}
+                                            <a href="tel: {{$userItem->phone}}">
+                                                {{$userItem->phone}}
                                             </a>
                                         </td>
                                         <td>
-                                            {{ number_format($mediaFileItem->file_size / 1024 / 1024, 2) }}
-                                            (مگابایت)
+                                            @if($userItem->role == 'admin')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    مدیر
+                                                </span>
+                                            @elseif($userItem->role == 'construction')
+                                                <span class="badge rounded-pill bg-label-secondary">
+                                                    کاربر عادی
+                                                </span>
+                                            @endif
                                         </td>
-                                        <td>
-                                            <form action="{{route('admin.dashboard.media.destroy', $mediaFileItem->id)}}" method="POST">
+                                        <td class="d-flex align-items-center">
+                                            <form action="{{route('admin.dashboard.user.destroy', $userItem->id)}}" method="POST">
                                                 @method('delete')
                                                 @csrf
 
@@ -142,6 +129,9 @@
                                                     <i class="text-primary ti ti-trash"></i>
                                                 </button>
                                             </form>
+                                            <a href="{{route('admin.dashboard.user.edit', $userItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                <i class="text-primary ti ti-pencil"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach        
@@ -153,7 +143,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                            {{$mediaFiles->links('vendor.pagination.dashboards-datatables')}}
+                            {{$users->links('vendor.pagination.dashboards-datatables')}}
                         </div>
                     </div>
                 </div>

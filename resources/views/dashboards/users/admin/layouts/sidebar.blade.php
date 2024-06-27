@@ -284,7 +284,7 @@
         </li>
         <!-- End of Magazine Section -->
 
-        <!-- Beginnig of Categories Section -->
+        <!-- Beginnig of Media Section -->
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت رسانه
@@ -323,8 +323,50 @@
                 </li>
             </ul>
         </li>
-        <!-- End of Categories Section -->
+        <!-- End of Media Section -->
 
+        <!-- Beginnig of Users Section -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                مدیریت کاربران
+            </span>
+        </li>
+        <li class="menu-item
+            {{Route::currentRouteName() == 'admin.dashboard.users.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.user.create' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.user.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users.search' ? 'active open' : ''}}
+        " style="">
+            <a class="menu-link menu-toggle" href="javascript:void(0);">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>
+                    کاربران  
+                </div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item 
+                    {{Route::currentRouteName() == 'admin.dashboard.user.create' ? 'active open' : ''}}
+                " style="">
+                    <a class="menu-link" href="{{route('admin.dashboard.user.create')}}">
+                        <div>
+                            افزودن کاربر
+                        </div>
+                    </a>
+                </li>
+                <li class="menu-item
+                    {{Route::currentRouteName() == 'admin.dashboard.users.index' ? 'active open' : ''}}
+                    {{Route::currentRouteName() == 'admin.dashboard.user.edit' ? 'active open' : ''}}
+                    {{Route::currentRouteName() == 'admin.dashboard.users.search' ? 'active open' : ''}}
+                " style="">
+                    <a class="menu-link" href="{{route('admin.dashboard.users.index')}}">
+                        <div>
+                            مدیریت کاربران
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End of Users Section -->
         
     </ul>
   </aside>

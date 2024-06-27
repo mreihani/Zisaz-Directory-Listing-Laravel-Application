@@ -40,6 +40,7 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="form-label" for="formFile">انتخاب رسانه</label>
+                                    <span class="text-danger">*</span>
                                     <input class="form-control" id="formFile" type="file" name="file">
                                 </div>
 

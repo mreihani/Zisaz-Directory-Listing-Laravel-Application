@@ -22,8 +22,6 @@ class AdminDashboardMediaController extends Controller
     {
         $user = auth()->user();
 
-        // $mediaFiles = Media::where('user_id', auth()->user()->id)->paginate(10);
-
         $mediaFiles = Media::where('user_id', auth()->user()->id)
         ->where(function ($query) {
             $query->where('video_job_id', '!=', null)->where('thumbnail_job_id', '!=', null);
@@ -39,8 +37,6 @@ class AdminDashboardMediaController extends Controller
     public function create()
     {
         $user = auth()->user();
-
-        $firstMediaItem = Media::first();
 
         return view('dashboards.users.admin.pages.media.create.index', compact('user'));  
     }
@@ -103,7 +99,7 @@ class AdminDashboardMediaController extends Controller
     }
 
     /**
-     * Remove the specified Actcat resource from storage.
+     * Remove the specified resource from storage.
      */
     public function destroy(Media $media)
     {
@@ -126,7 +122,7 @@ class AdminDashboardMediaController extends Controller
             }
         }
 
-        // delete category
+        // delete media
         $media->delete();
 
         return redirect(route('admin.dashboard.media.index'))->with('success', 'رسانه مورد نظر با موفقیت حذف گردید.');
