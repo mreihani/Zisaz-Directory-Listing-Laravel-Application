@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
-class ForceDeleteTrashedPrivateWebsites extends Command
+class forceDeleteTrashedPrivateWebsites extends Command
 {
     /**
      * The name and signature of the console command.
@@ -30,7 +30,7 @@ class ForceDeleteTrashedPrivateWebsites extends Command
         $trashedPrivateWebsites = Psite::onlyTrashed()->where('updated_at', '<', now()->subMonth(6))->get();
         if($trashedPrivateWebsites->count()) {
             $trashedPrivateWebsites->each(function($trashedPrivateWebsiteItem) {
-                $trashedPrivateWebsiteItem->forcedelete();
+                $trashedPrivateWebsiteItem->forceDelete();
                 Storage::deleteDirectory("public/upload/private-website-resources/$trashedPrivateWebsiteItem->id");
             });
         }

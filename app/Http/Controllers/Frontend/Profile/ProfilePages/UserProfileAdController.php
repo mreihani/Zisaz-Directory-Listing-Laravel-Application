@@ -16,12 +16,12 @@ class UserProfileAdController extends Controller
         if ($request->has('type')) {
             $type = $request->input('type');
         } 
-
+        
         // abort if user enters irrelevant query string
-        if(!is_null($type) && $type != 'trashed') {
+        if(!is_null($type) && (!in_array($type, ['trashed','pending','rejected']))) {
             abort(404);
         }
-
+        
         return view('frontend.pages.profile.profile-pages.saved-ads.index', compact('type'));
     }
 

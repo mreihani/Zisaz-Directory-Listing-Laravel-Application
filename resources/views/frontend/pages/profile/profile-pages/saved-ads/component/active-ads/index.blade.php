@@ -11,32 +11,7 @@
     </div>
     
     <!-- Nav tabs-->
-    <ul class="nav nav-tabs border-bottom mb-4" role="tablist">
-        <li class="nav-item mb-3">
-            <a class="nav-link active" href="{{route('user.dashboard.saved-ads.index')}}" role="tab" aria-selected="true">
-                <i class="fi-file fs-base me-2"></i>
-                منتشر شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-rotate-right fs-base me-2"></i>
-                در انتظار تأیید
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-x fs-base me-2"></i>
-                رد شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="{{route('user.dashboard.saved-ads.index', ['type=trashed'])}}" role="tab" aria-selected="false">
-                <i class="fi-trash fs-base me-2"></i>
-                حذف شده
-            </a>
-        </li>
-    </ul>
+    @include('frontend.pages.profile.profile-pages.saved-ads.component.layouts.nav')
 
     @if(count($userAds))
         @foreach ($userAds as $adItem)
@@ -58,7 +33,7 @@
                                 <a class="dropdown-item" href="{{route('user.activity.edit', $adItem->id)}}">
                                     <i class="fi-edit opacity-60 me-2"></i>
                                     ویرایش  
-                                </a>
+                                </a>    
                             </li>
                             <li>
                                 <button class="dropdown-item" type="button">
@@ -67,10 +42,15 @@
                                 </button>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{route('user.activity.destroy', $adItem->id)}}" onclick="if(confirm('آیا برای حذف این آیتم اطمینان دارید؟')){return true}">
-                                    <i class="fi-trash opacity-60 me-2"></i>
-                                    حذف
-                                </a>
+                                <form action="{{route('user.activity.destroy', $adItem->id)}}" method="POST" class="dropdown-item">
+                                    @method('delete')
+                                    @csrf
+
+                                    <button type="submit" class="border-none bg-transparent border-0" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                        <i class="fi-trash opacity-60 me-2"></i>
+                                        حذف
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>

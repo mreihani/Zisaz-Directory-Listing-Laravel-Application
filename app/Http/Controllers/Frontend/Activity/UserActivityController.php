@@ -21,21 +21,25 @@ class UserActivityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Activity $activity, Request $request)
+    public function edit(Request $request)
     {
+        $activity = Activity::queryWithAllVerificationStatuses()->findOrFail($request->activity);
+
         // check if user is authorized to edit activity item
         if(!auth()->check() || auth()->user()->id != $activity->user->id) {
-           abort(403);
+            abort(403);
         }
-        
+ 
         return view('frontend.pages.activity.activity-edit.index', compact('activity'));
     }
 
     /**
      * Undelete the soft deleted item
      */
-    public function restore(Activity $activity, Request $request)
+    public function restore(Request $request)
     {
+        $activity = Activity::queryWithAllVerificationStatuses()->withTrashed()->findOrFail($request->activity);
+
         // check if user is authorized to restore activity item
         if(!auth()->check() || auth()->user()->id != $activity->user->id) {
             abort(403);
@@ -43,14 +47,20 @@ class UserActivityController extends Controller
 
         $activity->restore();
 
+        $activity->update([
+            'verify_status' => 'pending'
+        ]);
+
         return redirect()->route('user.dashboard.saved-ads.index');
     }
 
     /**
      * Soft-delete the specified item.
      */
-    public function destroy(Activity $activity, Request $request)
+    public function destroy(Request $request)
     {
+        $activity = Activity::queryWithAllVerificationStatuses()->findOrFail($request->activity);
+
         // check if user is authorized to delete activity item
         if(!auth()->check() || auth()->user()->id != $activity->user->id) {
             abort(403);

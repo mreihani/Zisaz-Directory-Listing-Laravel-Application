@@ -23,7 +23,8 @@ return new class extends Migration
             $table->text('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
             $table->boolean('review_status')->default(1);
-            $table->boolean('verify_status')->default(0);
+            $table->enum('verify_status', ['verified', 'pending', 'rejected'])->default('pending');
+            $table->text('reject_description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

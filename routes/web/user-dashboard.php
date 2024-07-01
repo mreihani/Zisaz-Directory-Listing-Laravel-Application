@@ -30,9 +30,15 @@ Route::controller(UserProfileNotificationsController::class)->group(function () 
 Route::controller(UserActivityController::class)->group(function () {
     Route::get('/activity/create', 'create')->name('user.activity.create');
     Route::get('/activity/{activity}/edit', 'edit')->name('user.activity.edit');
-    Route::get('/activity/{activity}/restore', 'restore')->name('user.activity.restore')->withTrashed();
-    Route::get('/activity/{activity}/destroy', 'destroy')->name('user.activity.destroy');
+    Route::put('/activity/{activity}/restore', 'restore')->name('user.activity.restore');
+    Route::delete('/activity/{activity}/destroy', 'destroy')->name('user.activity.destroy');
 });
+
+
+
+// !!!!!!!!!!to do
+// rewrite UserPrivatePageController and UserProjectController delete and update routes with put and delete
+
 
 // personal website routes
 Route::controller(UserPrivatePageController::class)->group(function () {

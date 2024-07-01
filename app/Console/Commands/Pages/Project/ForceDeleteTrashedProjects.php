@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\Project\Project;
 
-class ForceDeleteTrashedProjects extends Command
+class forceDeleteTrashedProjects extends Command
 {
     /**
      * The name and signature of the console command.
@@ -30,7 +30,7 @@ class ForceDeleteTrashedProjects extends Command
         $trashedProjects = Project::onlyTrashed()->where('updated_at', '<', now()->subMonth(6))->get();
         if($trashedProjects->count()) {
             $trashedProjects->each(function($trashedProjectItem) {
-                $trashedProjectItem->forcedelete();
+                $trashedProjectItem->forceDelete();
                 Storage::deleteDirectory("public/upload/project-resources/$trashedProjectItem->id");
             });
         }

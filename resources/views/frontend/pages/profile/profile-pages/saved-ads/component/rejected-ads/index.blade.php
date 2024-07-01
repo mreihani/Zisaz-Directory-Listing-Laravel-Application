@@ -12,8 +12,8 @@
 
     <!-- Warning alert -->
     @if(count($userAds))
-        <div class="alert alert-dark alert-dismissible fade show" role="alert">
-            <span class="fw-bold">توجه:</span> آگهی های حذف شده تا مدت 6 ماه در سامانه به صورت غیر فعال باقی می مانند، شما می توانید تا قبل از این زمان مجددا آن ها را بازگردانی نمایید؛ اما پس از گذشت این زمان به صورت خودکار برای همیشه از سامانه حذف خواهند شد.
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="fw-bold">توجه: </span>آگهی شما به دلایلی توسط مدیر سامانه رد شده است. برای کسب اطلاع از علت رد شدن آن می توانید بر روی ویرایش آگهی کلیک کنید. پس از ورود به صفحه ویرایش در بالای صفحه علت رد شدن قابل مشاهده خواهد بود.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
@@ -27,8 +27,8 @@
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
                 <a class="card-img-top" href="#" style="background-image: url('{{$adItem->adsImagesUrl()}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
-                        <span class="d-table badge bg-dark">
-                            حذف شده
+                        <span class="d-table badge bg-danger">
+                            رد شده
                         </span>
                     </div>
                 </a>
@@ -38,17 +38,28 @@
                         <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
                         <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
                             <li>
-                                <form action="{{route('user.activity.restore', $adItem->id)}}" method="POST" class="dropdown-item">
-                                    @method('put')
+                                <a class="dropdown-item" href="{{route('user.activity.edit', $adItem->id)}}">
+                                    <i class="fi-edit opacity-60 me-2"></i>
+                                    ویرایش  
+                                </a>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button">
+                                    <i class="fi-star opacity-60 me-2"></i>
+                                    ارتقا
+                                </button>
+                            </li>
+                            <li>
+                                <form action="{{route('user.activity.destroy', $adItem->id)}}" method="POST" class="dropdown-item">
+                                    @method('delete')
                                     @csrf
 
-                                    <button type="submit" class="border-none bg-transparent border-0" onclick ="return confirm('آیا برای بازگردانی این آیتم اطمینان دارید؟')">
-                                        <i class="fi-upload-file opacity-60 me-2"></i>
-                                        بازگردانی
+                                    <button type="submit" class="border-none bg-transparent border-0" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                        <i class="fi-trash opacity-60 me-2"></i>
+                                        حذف
                                     </button>
                                 </form>
                             </li>
-                            
                         </ul>
                     </div>
 

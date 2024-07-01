@@ -11,7 +11,12 @@ class ActivityPagesController extends Controller
 {
      // activity single page
      public function activity($slug) {
-        $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
+
+        if(auth()->check() && auth()->user()->role === 'admin') {
+            $activity = Activity::queryWithAllVerificationStatuses()->where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
+        } else {
+            $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
+        }
         
         // get similar items for carousel element
         $similarItemsCount = $activity->subactivity->where('type', $activity->subactivity->type)->count();

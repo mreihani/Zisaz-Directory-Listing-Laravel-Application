@@ -30,6 +30,10 @@
             @livewire('frontend.pages.profile.profile-pages.saved-ads.active-ads.index')
         @elseif($type == 'trashed')
             @livewire('frontend.pages.profile.profile-pages.saved-ads.trashed-ads.index', ['type' => $type])
+        @elseif($type == 'rejected')
+            @livewire('frontend.pages.profile.profile-pages.saved-ads.rejected-ads.index', ['type' => $type])
+        @elseif($type == 'pending')
+            @livewire('frontend.pages.profile.profile-pages.saved-ads.pending-ads.index', ['type' => $type])
         @endif
         
     </div>

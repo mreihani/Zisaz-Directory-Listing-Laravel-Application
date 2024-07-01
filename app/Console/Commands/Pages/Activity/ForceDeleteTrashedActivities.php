@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\ActiveCode;
 use App\Models\Frontend\UserModels\Activity\Activity;
 
-class ForceDeleteTrashedActivities extends Command
+class forceDeleteTrashedActivities extends Command
 {
     /**
      * The name and signature of the console command.
@@ -31,7 +31,7 @@ class ForceDeleteTrashedActivities extends Command
         $trashedActivities = Activity::onlyTrashed()->where('updated_at', '<', now()->subMonth(6))->get();
         if($trashedActivities->count()) {
             $trashedActivities->each(function($trashedActivityItem) {
-                $trashedActivityItem->forcedelete();
+                $trashedActivityItem->forceDelete();
                 Storage::deleteDirectory("public/upload/ads-images/$trashedActivityItem->id");
                 Storage::deleteDirectory("private/activity/$trashedActivityItem->id");
             });
