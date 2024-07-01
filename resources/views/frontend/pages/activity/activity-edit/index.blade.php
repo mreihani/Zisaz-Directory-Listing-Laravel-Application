@@ -33,7 +33,7 @@
 
     <!-- Warning alert -->
     @if($activity->verify_status && $activity->verify_status === 'rejected' && !empty($activity->reject_description))
-        <div class="alert alert-accent" role="alert">
+        <div class="alert alert-danger" role="alert">
             <h4 class="pt-2 alert-heading">علت رد شدن آگهی:</h4>
             <ul>
                 <li>
