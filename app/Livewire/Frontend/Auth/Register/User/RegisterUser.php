@@ -48,19 +48,31 @@ class RegisterUser extends Component
         // Show SMS verification input section after user clicks on submit
         $this->dispatch('smsVerificationSectionVisible', smsVerificationSectionVisible: true );
 
-        $existingUser = User::where('phone', $this->phone)->where('phone_verified', 0)->first();
-        if($existingUser) {
-            $existingUser->delete();
-        }
+        // $existingUser = User::where('phone', $this->phone)->where('phone_verified', 0)->first();
+        // if($existingUser) {
+        //     $existingUser->delete();
+        // }
 
         // Create user after successful validation
-        $user = User::create([
-            'firstname' => Purify::clean($this->firstname),
-            'lastname' => Purify::clean($this->lastname),
-            'phone' => Purify::clean($this->phone),
-            'email' => Purify::clean($this->email) ?: NULL,
-            'role' => 'construction',
-        ]);
+        // $user = User::create([
+        //     'firstname' => Purify::clean($this->firstname),
+        //     'lastname' => Purify::clean($this->lastname),
+        //     'phone' => Purify::clean($this->phone),
+        //     'email' => Purify::clean($this->email) ?: NULL,
+        //     'role' => 'construction',
+        // ]);
+
+        $user = User::updateOrCreate(
+            ['phone' => $this->phone],
+            [
+                'firstname' => Purify::clean($this->firstname),
+                'lastname' => Purify::clean($this->lastname),
+                'phone' => Purify::clean($this->phone),
+                'email' => Purify::clean($this->email) ?: NULL,
+                'role' => 'construction',
+            ]
+        );
+        
 
         // Generate code and send via SMS
         $code = ActiveCode::generateCode($user);
