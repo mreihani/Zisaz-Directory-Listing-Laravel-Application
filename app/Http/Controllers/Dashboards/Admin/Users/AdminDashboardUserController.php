@@ -22,7 +22,7 @@ class AdminDashboardUserController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $users = User::paginate(10);
+        $users = User::where('phone_verified', 1)->paginate(10);
 
         return view('dashboards.users.admin.pages.users.index.index', compact('user', 'users'));  
     }
@@ -45,15 +45,18 @@ class AdminDashboardUserController extends Controller
         $validated = $request->validated();
         
         // Create user after successful validation
-        $user = User::create([
-            'firstname' => Purify::clean($validated['firstname']),
-            'lastname' => Purify::clean($validated['lastname']),
-            'phone' => Purify::clean($validated['phone']),
-            'email' => !empty($validated['email']) ? Purify::clean($validated['email']) : null,
-            'role' => $validated['account_type'] == 'admin' ? 'admin' : 'construction',
-            'password' => $validated['account_type'] == 'admin' ? Hash::make($validated['password']) : null,
-            'phone_verified' => $validated['account_type'] == 'admin' ? 0 : 1,
-        ]);
+        $user = User::updateOrCreate(
+            ['phone' => Purify::clean($validated['phone'])],
+            [
+                'firstname' => Purify::clean($validated['firstname']),
+                'lastname' => Purify::clean($validated['lastname']),
+                'phone' => Purify::clean($validated['phone']),
+                'email' => !empty($validated['email']) ? Purify::clean($validated['email']) : null,
+                'role' => $validated['account_type'] == 'admin' ? 'admin' : 'construction',
+                'password' => $validated['account_type'] == 'admin' ? Hash::make($validated['password']) : null,
+                'phone_verified' => 1,
+            ]
+        );
         
         return redirect(route('admin.dashboard.users.index'))->with('success', 'کاربر مورد نظر با موفقیت ایجاد گردید.');
     }
@@ -85,7 +88,7 @@ class AdminDashboardUserController extends Controller
             'email' => !empty($validated['email']) ? Purify::clean($validated['email']) : null,
             'role' => $validated['account_type'] == 'admin' ? 'admin' : 'construction',
             'password' => $validated['account_type'] == 'admin' ? Hash::make($validated['password']) : null,
-            'phone_verified' => $validated['account_type'] == 'admin' ? 0 : 1,
+            'phone_verified' => 1,
         ]);
 
         return redirect(route('admin.dashboard.users.index'))->with('success', 'کاربر مورد نظر با موفقیت بروز رسانی گردید.');
@@ -111,7 +114,8 @@ class AdminDashboardUserController extends Controller
         $searchString = trim($request->q);
         
         $users = User::
-        whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%'])
+        where('phone_verified', 1)
+        ->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%'])
         ->orWhere('phone', 'like', '%' . $searchString . '%')
         ->orWhere('email', 'like', '%' . $searchString . '%')
         ->paginate(10);

@@ -26,13 +26,8 @@ class IgnoreEmailRegistrationUserStoreValidation implements ValidationRule
             return;
         }
 
-        // ignore construction users whom have not verified their phone number yet
-        $user = User::where($attribute, $value)->first();
-        if(!$user || ($user->role == 'construction' && !$user->phone_verified)) {
-            return;
+        if(User::where($attribute, $value)->first()) {
+            $fail('ایمیل مورد نظر قبلا در سامانه ثبت شده است. لطفا ایمیل دیگری وارد نمایید.');
         }
-        
-        $fail('ایمیل مورد نظر قبلا در سامانه ثبت شده است. لطفا ایمیل دیگری وارد نمایید.');
-        return;
     }
 }

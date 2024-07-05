@@ -108,7 +108,7 @@ class JabanUsersSeeder extends Seeder
             'phone' => '09922966614',
             'password' => Hash::make(12345678),
             'role' => 'admin',
-            'phone_verified' => 0,
+            'phone_verified' => 1,
         ]);
         User::create(
         [
@@ -118,7 +118,7 @@ class JabanUsersSeeder extends Seeder
             'phone' => '09173119853',
             'password' => Hash::make(12345678),
             'role' => 'admin',
-            'phone_verified' => 0,
+            'phone_verified' => 1,
         ]);
 
         // اضافه کردن کاربر معمولی
