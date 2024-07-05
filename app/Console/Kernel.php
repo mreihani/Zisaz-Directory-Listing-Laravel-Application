@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // Remove users which have not verified their phone number and the token has been expired
-        $schedule->command('app:remove-not-validated-users')->daily();
+        //$schedule->command('app:remove-not-validated-users')->daily();
 
         // Remove expired sms tokens
         $schedule->command('app:clear-expired-sms-tokes')->daily();
