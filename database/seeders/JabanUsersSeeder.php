@@ -110,7 +110,6 @@ class JabanUsersSeeder extends Seeder
             'role' => 'admin',
             'phone_verified' => 0,
         ]);
-
         User::create(
         [
             'firstname' => 'سید خلیل',
@@ -123,11 +122,20 @@ class JabanUsersSeeder extends Seeder
         ]);
 
         // اضافه کردن کاربر معمولی
-        $user = User::create([
+        User::create([
             'firstname' => 'امین',
             'lastname' => 'ریحانی',
             'email' => 'reihani.eng@gmail.com',
             'phone' => '09152024192',
+            'password' => null,
+            'role' => 'construction',
+            'phone_verified' => 1,
+        ]);
+        User::create([
+            'firstname' => 'سید خلیل',
+            'lastname' => 'حسینی',
+            'email' => 'seyedkhalilhosseini2@gmail.com',
+            'phone' => '09900910073',
             'password' => null,
             'role' => 'construction',
             'phone_verified' => 1,

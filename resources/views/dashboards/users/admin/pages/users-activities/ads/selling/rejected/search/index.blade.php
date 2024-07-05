@@ -104,7 +104,6 @@
                                             </a>
                                         </td>
                                         <td>
-                                            
                                             {{$activityItem->user->firstname}}
                                             {{$activityItem->user->lastname}}
                                         </td>

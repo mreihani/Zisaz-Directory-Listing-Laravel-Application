@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\ServiceProvider;
+use App\Models\Frontend\UserModels\Activity\Activity;
+use App\Observers\Frontend\UserModels\Activity\ActivityObserver;
+use App\Models\Frontend\UserModels\Activity\AdsRegistration\Selling;
+use App\Observers\Frontend\UserModels\Activity\AdsRegistration\SellingObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 
+        //
     }
 }

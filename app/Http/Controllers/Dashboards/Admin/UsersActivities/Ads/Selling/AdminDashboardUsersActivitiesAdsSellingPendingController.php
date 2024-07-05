@@ -24,7 +24,9 @@ class AdminDashboardUsersActivitiesAdsSellingPendingController extends Controlle
     public function index()
     {
         $user = auth()->user();
-        $activities = Activity::queryWithVerifyStatusPending()->with(['selling','user'])->paginate(10);
+        $activities = Activity::queryWithVerifyStatusPending()->withWhereHas('selling', function($query) {
+            $query->where('type', 'selling');
+        })->paginate(10);
 
         return view('dashboards.users.admin.pages.users-activities.ads.selling.pending.index.index', compact('user', 'activities'));  
     }

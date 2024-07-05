@@ -139,6 +139,11 @@ class Index extends Component
     }
 
     private function saveAdsRegistrationHandler() {
+
+        $this->activity->update([
+            'verify_status' => 'pending'
+        ]);
+        
         // ثبت آگهی
         // آگهی سرمایه گذاری
         // سرمایه گذار

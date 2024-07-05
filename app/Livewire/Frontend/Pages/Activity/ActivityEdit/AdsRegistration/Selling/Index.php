@@ -74,7 +74,7 @@ class Index extends Component
 
     public function mount() {
         $this->selling = $this->activity->subactivity;
-
+       
         $this->getInitialValues();
     }
 
@@ -111,14 +111,16 @@ class Index extends Component
         $this->priceByAgreement = $this->activity->subactivity->price_by_agreement ? true : false;
      
         // set checkbox items related to ads status
+        $this->adsStatus = [];
         $this->adsStatusArray = AdsStat::all();
         foreach ($this->adsStatusArray->pluck('id')->toArray() as $checkedItemValue) {
             if(in_array($checkedItemValue, $this->activity->adsStats->pluck('id')->toArray())) {
                 $this->adsStatus[$checkedItemValue] = true;
             }
         }
-
+       
         // set checkbox items related to payment method
+        $this->paymentMethod = [];
         $this->paymentMethodArray = PaymntMtd::all();
         foreach ($this->paymentMethodArray->pluck('id')->toArray() as $checkedItemValue) {
             if(in_array($checkedItemValue, $this->activity->paymentMethod->pluck('id')->toArray())) {
@@ -236,7 +238,12 @@ class Index extends Component
     }
 
     private function saveAdsRegistrationHandler() {
-        $ads = $this->activity->selling()->update([
+
+        $this->activity->update([
+            'verify_status' => 'pending'
+        ]);
+
+        $this->activity->selling()->update([
             'item_title' => Purify::clean($this->adsTitle),
             'item_description' => Purify::clean($this->adsDescription),
             'manufacturer' => Purify::clean($this->sellingAdsManufacturereType),

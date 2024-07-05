@@ -101,6 +101,8 @@ class Index extends Component
     }
 
     private function getInitialValues() {
+        $this->actGrpsId = [];
+
         // auction groups
         $this->actGrpsAuctionAdsArray = ActCat::find(20)->activityGroup->chunk($this->calculateChunkNumber(20))->toArray();
         foreach (ActCat::find(20)->activityGroup->pluck('id')->toArray() as $checkedItemValue) {
@@ -316,6 +318,11 @@ class Index extends Component
     }
 
     private function saveAdsRegistrationHandler() {
+
+        $this->activity->update([
+            'verify_status' => 'pending'
+        ]);
+        
         // ثبت آگهی
         // آگهی مزایده و مناقصه
         // آگهی مزایده

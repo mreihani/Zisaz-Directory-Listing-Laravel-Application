@@ -88,6 +88,8 @@ class Index extends Component
     }
 
     private function getInitialValues() {
+        $this->actGrpsId = [];
+
         // set checkbox items related to technical ads
         $this->actGrpsTechnicalAdsArray = ActCat::find(14)->activityGroup->chunk($this->calculateChunkNumber(14))->toArray();
         foreach (ActCat::find(14)->activityGroup->pluck('id')->toArray() as $checkedItemValue) {
@@ -120,6 +122,7 @@ class Index extends Component
         $this->adsImage = $this->activity->adsImages->pluck('image')->first();
 
         // contract types
+        $this->contractType = [];
         $this->provinces = Province::all();
         $this->contractTypeArray = ContractType::all();
         foreach ($this->contractTypeArray->pluck('id')->toArray() as $checkedItemValue) {
@@ -129,6 +132,7 @@ class Index extends Component
         }
 
         // academic info section
+        $this->academicLevel = [];
         $this->academicArray = Academic::all();
         foreach ($this->academicArray->pluck('id')->toArray() as $checkedItemValue) {
             if(in_array($checkedItemValue, $this->activity->academic->pluck('id')->toArray())) {
@@ -137,6 +141,7 @@ class Index extends Component
         }
 
         // gender form section
+        $this->employerGender = [];
         $this->genderArray = Gender::all();
         foreach ($this->academicArray->pluck('id')->toArray() as $checkedItemValue) {
             if(in_array($checkedItemValue, $this->activity->gender->pluck('id')->toArray())) {
@@ -148,6 +153,7 @@ class Index extends Component
         $this->workExp = $this->employment->work_exp;
 
         // province to work section
+        $this->provinceToWork = [];
         $this->actGrpsManagerAdsArray = ActCat::find(16)->activityGroup->chunk($this->calculateChunkNumber(16))->toArray();
         foreach ($this->provinces->pluck('id')->toArray() as $checkedItemValue) {
             if(in_array($checkedItemValue, $this->activity->province->pluck('id')->toArray())) {
@@ -277,6 +283,11 @@ class Index extends Component
     }
     
     private function saveAdsRegistrationHandler() {
+
+        $this->activity->update([
+            'verify_status' => 'pending'
+        ]);
+        
         // ثبت آگهی
         // آگهی استخدام
         // کارفرما

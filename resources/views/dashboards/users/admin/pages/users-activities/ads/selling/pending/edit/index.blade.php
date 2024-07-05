@@ -29,6 +29,18 @@
                         <button class="btn btn-primary" type="submit">ذخیره</button>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Item iframe -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <iframe src="{{route('activity', $activity->slug)}}" width="100%" height="400"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12">
                         <!-- Change status -->

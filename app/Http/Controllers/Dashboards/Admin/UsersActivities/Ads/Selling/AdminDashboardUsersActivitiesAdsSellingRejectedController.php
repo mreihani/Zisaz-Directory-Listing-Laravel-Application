@@ -22,7 +22,9 @@ class AdminDashboardUsersActivitiesAdsSellingRejectedController extends Controll
     public function index()
     {
         $user = auth()->user();
-        $activities = Activity::queryWithVerifyStatusRejected()->with(['selling','user'])->paginate(10);
+        $activities = Activity::queryWithVerifyStatusRejected()->withWhereHas('selling', function($query) {
+            $query->where('type', 'selling');
+        })->paginate(10);
 
         return view('dashboards.users.admin.pages.users-activities.ads.selling.rejected.index.index', compact('user', 'activities'));  
     }

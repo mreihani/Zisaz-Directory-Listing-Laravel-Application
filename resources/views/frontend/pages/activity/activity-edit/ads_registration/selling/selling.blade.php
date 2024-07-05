@@ -93,7 +93,7 @@
                 <input class="form-control form-control-md" type="text" id="pr-ads-title" placeholder="برند کالا را وارد کنید" wire:model="productBrand">
             </div>
         </div>
-        
+       
         <!-- Ads Status-->
         <div class="row">
             <div class="col mb-4">

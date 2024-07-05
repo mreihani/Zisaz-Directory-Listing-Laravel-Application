@@ -118,7 +118,7 @@
                                                 </button>
                                             </form>
                                             <a href="{{route('admin.dashboard.users-activities.ads.selling.pending.edit', $activityItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                <i class="text-primary ti ti-pencil"></i>
+                                                <i class="text-primary ti ti-zoom-check"></i>
                                             </a>
                                         </td>
                                     </tr>

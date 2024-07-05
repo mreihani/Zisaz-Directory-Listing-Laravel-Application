@@ -23,7 +23,9 @@ class AdminDashboardUsersActivitiesAdsSellingVerifiedController extends Controll
     public function index()
     {
         $user = auth()->user();
-        $activities = Activity::with(['selling','user'])->paginate(10);
+        $activities = Activity::withWhereHas('selling', function($query) {
+            $query->where('type', 'selling');
+        })->paginate(10);
 
         return view('dashboards.users.admin.pages.users-activities.ads.selling.verified.index.index', compact('user', 'activities'));  
     }

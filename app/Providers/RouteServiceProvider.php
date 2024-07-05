@@ -92,6 +92,31 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('admin')
             ->group(base_path('routes/web/dashboards/admin/users-activities/ads/selling/index.php'));
 
+            // admin dashboard users-activities ads employment
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/users-activities/ads/employment/index.php'));
+
+            // admin dashboard users-activities ads investment
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/users-activities/ads/investment/index.php'));
+
+            // admin dashboard users-activities ads bid
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/users-activities/ads/bid/index.php'));
+
+            // admin dashboard users-activities ads inquiry
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/users-activities/ads/inquiry/index.php'));
+
+            // admin dashboard users-activities ads contractor
+            Route::middleware(['web','auth', 'role:admin'])
+            ->prefix('admin')
+            ->group(base_path('routes/web/dashboards/admin/users-activities/ads/contractor/index.php'));
+
             Route::middleware(['web', 'auth'])
                 ->group(base_path('routes/web/assets.php'));
         });

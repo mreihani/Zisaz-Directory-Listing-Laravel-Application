@@ -384,6 +384,51 @@
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.rejected.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.rejected.edit' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.search' ? 'active open' : ''}}
         " style="">
             <a class="menu-link menu-toggle" href="javascript:void(0);">
                 <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chart-infographic"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M7 3v4h4" /><path d="M9 17l0 4" /><path d="M17 14l0 7" /><path d="M13 13l0 8" /><path d="M21 12l0 9" /></svg>
@@ -402,6 +447,51 @@
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.rejected.index' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.rejected.edit' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.search' ? 'active open' : ''}}
                 ">
                     <a class="menu-link menu-toggle" href="javascript:void(0);">
                         <div>آگهی ها</div>
@@ -454,30 +544,44 @@
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.search' ? 'active open' : ''}}
                         ">
                             <a class="menu-link menu-toggle" href="javascript:void(0);">
                                 <div>استخدام</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.verified.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.employment.verified.index')}}">
                                         <div>تأیید شده</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.pending.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.employment.pending.index')}}">
                                         <div>در حال بررسی</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.employment.rejected.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.employment.rejected.index')}}">
                                         <div>رد شده</div>
                                     </a>
                                 </li>
@@ -486,30 +590,44 @@
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.search' ? 'active open' : ''}}
                         ">
                             <a class="menu-link menu-toggle" href="javascript:void(0);">
                                 <div>شراکت و سرمایه گذاری</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.verified.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.investment.verified.index')}}">
                                         <div>تأیید شده</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.pending.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.investment.pending.index')}}">
                                         <div>در حال بررسی</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.investment.rejected.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.investment.rejected.index')}}">
                                         <div>رد شده</div>
                                     </a>
                                 </li>
@@ -518,30 +636,44 @@
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.search' ? 'active open' : ''}}
                         ">
                             <a class="menu-link menu-toggle" href="javascript:void(0);">
                                 <div>مزایده و مناقصه</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.verified.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.bid.verified.index')}}">
                                         <div>تأیید شده</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.pending.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.bid.pending.index')}}">
                                         <div>در حال بررسی</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.bid.rejected.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.bid.rejected.index')}}">
                                         <div>رد شده</div>
                                     </a>
                                 </li>
@@ -550,30 +682,44 @@
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.search' ? 'active open' : ''}}
                         ">
                             <a class="menu-link menu-toggle" href="javascript:void(0);">
                                 <div>استعلام قیمت</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.verified.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.inquiry.verified.index')}}">
                                         <div>تأیید شده</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.pending.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.inquiry.pending.index')}}">
                                         <div>در حال بررسی</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.inquiry.rejected.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.inquiry.rejected.index')}}">
                                         <div>رد شده</div>
                                     </a>
                                 </li>
@@ -582,30 +728,44 @@
                     </ul>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.search' ? 'active open' : ''}}
                         ">
                             <a class="menu-link menu-toggle" href="javascript:void(0);">
                                 <div>پیمانکاری</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.verified.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.contractor.verified.index')}}">
                                         <div>تأیید شده</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.pending.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.contractor.pending.index')}}">
                                         <div>در حال بررسی</div>
                                     </a>
                                 </li>
                                 <li class="menu-item
-                                
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.edit' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.search' ? 'active open' : ''}}
                                 ">
-                                    <a class="menu-link" href="">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.contractor.rejected.index')}}">
                                         <div>رد شده</div>
                                     </a>
                                 </li>
