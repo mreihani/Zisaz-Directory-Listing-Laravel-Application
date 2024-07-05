@@ -48,6 +48,11 @@ class RegisterUser extends Component
         // Show SMS verification input section after user clicks on submit
         $this->dispatch('smsVerificationSectionVisible', smsVerificationSectionVisible: true );
 
+        $existingUser = User::where('phone', $this->phone)->where('phone_verified', 0)->first();
+        if($existingUser) {
+            $existingUser->delete();
+        }
+
         // Create user after successful validation
         $user = User::create([
             'firstname' => Purify::clean($this->firstname),
