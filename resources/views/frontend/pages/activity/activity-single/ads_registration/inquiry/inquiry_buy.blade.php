@@ -188,7 +188,6 @@
     </div>
 </section>
 
-
 <!-- Recently viewed-->
 @if($similarItemsCount > 4)
     <section class="container mb-5 pb-2 pb-lg-4">

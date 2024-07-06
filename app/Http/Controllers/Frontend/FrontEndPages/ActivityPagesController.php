@@ -9,8 +9,8 @@ use App\Models\Frontend\UserModels\Activity\Activity;
 
 class ActivityPagesController extends Controller
 {
-     // activity single page
-     public function activity($slug) {
+    // activity single page
+    public function activity($slug) {
 
         if(auth()->check() && auth()->user()->role === 'admin') {
             $activity = Activity::queryWithAllVerificationStatuses()->where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);

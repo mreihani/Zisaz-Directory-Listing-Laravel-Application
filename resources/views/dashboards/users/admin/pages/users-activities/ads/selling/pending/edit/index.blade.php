@@ -13,8 +13,7 @@
                 @method('PUT')
                 @csrf
 
-                <!-- Add Blog Category -->
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-5 pb-5">
                     <div class="d-flex flex-column justify-content-center">
                         <p class="text-muted">
                             می توانید آگهی مورد نظر را تأیید یا رد نمایید. در صورت رد کردن حتما بایستی توضیحات وارد شود.
@@ -30,16 +29,8 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Item iframe -->
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <iframe src="{{route('activity', $activity->slug)}}" width="100%" height="400"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Page content-->
+                @include('dashboards.users.admin.pages.users-activities.ads.selling.pending.edit.layouts.selling')
 
                 <div class="row">
                     <div class="col-12">
@@ -52,6 +43,9 @@
                                     </label>
                                     <span class="text-danger">*</span>
                                     <select class="form-select" id="defaultSelect" name="verify_status">
+                                        <option value="" selected disabled>
+                                            وضعیت آگهی را انتخاب نمایید
+                                        </option>
                                         <option value="verified" {{old('verify_status') == 'verified' ? 'selected' : ''}}>
                                             تأیید
                                         </option>
@@ -96,6 +90,20 @@
 
 @endsection
 
+@push('page-styles-early')
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.css')}}"/>
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/tiny-slider/dist/tiny-slider.css')}}"/>
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.css')}}"/>
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css')}}"/>  
+    <link rel="stylesheet" href="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.css')}}"/>  
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/css/theme.min.css')}}">
+@endpush
+
+@push('page-scripts-top')
+    <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.js')}}"></script>
+@endpush
+
 @push('page-scripts')
     <script>
         document.getElementById('defaultSelect').addEventListener('change', function() {
@@ -119,4 +127,16 @@
             descriptionForm.classList.add('d-none');
         }
     </script>
+    
+    <script src="{{asset('assets/frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/parallax-js/dist/parallax.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/tiny-slider/dist/min/tiny-slider.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/js/theme.min.js')}}"></script>
 @endpush
+
+
+

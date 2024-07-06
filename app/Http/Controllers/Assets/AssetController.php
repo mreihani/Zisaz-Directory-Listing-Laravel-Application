@@ -20,7 +20,7 @@ class AssetController extends Controller
     {
         abort_if(auth()->guest(), Response::HTTP_FORBIDDEN);
 
-        $user_id = Activity::findOrFail($activity_id)->user->id;
+        $user_id = Activity::queryWithAllVerificationStatuses()->where('id', $activity_id)->first()->user->id;
         
         if (auth()->user()->id !== $user_id && auth()->user()->role !== 'admin') {
             abort(Response::HTTP_FORBIDDEN);
@@ -37,7 +37,7 @@ class AssetController extends Controller
     public function getLicenseItemsZip($activity_id) {
         abort_if(auth()->guest(), Response::HTTP_FORBIDDEN);
 
-        $activityObject = Activity::findOrFail($activity_id);
+        $activityObject = Activity::queryWithAllVerificationStatuses()->where('id', $activity_id)->first();
         $user_id = $activityObject->user->id;
 
         if (auth()->user()->id !== $user_id && auth()->user()->role !== 'admin') {

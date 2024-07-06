@@ -17,6 +17,10 @@
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap" rel="stylesheet"/>
+
+  <!-- Page CSS early -->
+  @stack('page-styles-early')
+
   <link href="{{asset('assets/dashboards/assets/vendor/fonts/tabler-icons.css')}}" rel="stylesheet"/>
   <link rel="stylesheet" href="{{asset('assets/dashboards/assets/vendor/fonts/fontawesome.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/dashboards/assets/vendor/fonts/flag-icons.css')}}" />

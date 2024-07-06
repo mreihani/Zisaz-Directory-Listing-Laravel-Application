@@ -22,13 +22,13 @@
                     <span class="text-danger">{{ $errors->first('phone') }}</span>
                 @endif   
             </div>
-            <div class="col-sm-6 mb-4">
+            {{-- <div class="col-sm-6 mb-4">
                 <label class="form-label" for="user-registration-email">پست الکترونیکی (اختیاری)</label>
                 <input class="form-control" name="email" type="email" id="user-registration-email" placeholder="example@gmail.com" wire:model="email" dir="ltr">
                 @if($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif  
-            </div>
+            </div> --}}
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="user-registration-agree-to-terms" required name="terms_and_conditions" wire:model="terms_and_conditions">

@@ -54,7 +54,7 @@ class RegisterUser extends Component
                 'firstname' => Purify::clean($this->firstname),
                 'lastname' => Purify::clean($this->lastname),
                 'phone' => Purify::clean($this->phone),
-                'email' => Purify::clean($this->email) ?: NULL,
+                // 'email' => Purify::clean($this->email) ?: NULL,
                 'role' => 'construction',
             ]
         );
