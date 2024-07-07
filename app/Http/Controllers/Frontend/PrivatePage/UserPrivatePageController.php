@@ -22,7 +22,7 @@ class UserPrivatePageController extends Controller
      */
     public function edit(string $id)
     {
-        $psite = Psite::findOrFail($id);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($id);
 
         // check if user is authorized to edit psite item
         if(!auth()->check() || auth()->user()->id != $psite->user->id) {
@@ -35,8 +35,10 @@ class UserPrivatePageController extends Controller
     /**
      * Undelete the soft deleted item
      */
-    public function restore(Psite $psite, Request $request)
+    public function restore(string $id)
     {
+        $psite = Psite::queryWithAllVerificationStatuses()->withTrashed()->findOrFail($id);
+      
         // check if user is authorized to restore website item
         if(!auth()->check() || auth()->user()->id != $psite->user->id) {
             abort(403);
@@ -44,14 +46,20 @@ class UserPrivatePageController extends Controller
 
         $psite->restore();
 
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
+
         return redirect()->route('user.dashboard.saved-personal-websites.index');
     }
 
     /**
      * Soft-delete the specified item.
      */
-    public function destroy(Psite $psite, Request $request)
+    public function destroy(string $id)
     {
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($id);
+
         // check if user is authorized to delete website item
         if(!auth()->check() || auth()->user()->id != $psite->user->id) {
             abort(403);

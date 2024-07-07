@@ -4,6 +4,7 @@ namespace App\Models\Frontend\UserModels\PrivateSite;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAds;
@@ -26,6 +27,28 @@ class Psite extends Model
     use SoftDeletes;
     
     protected $guarded = [];
+
+    // Define a global scope in the model
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('verify_status', function (Builder $builder) {
+            $builder->where('verify_status', 'verified');
+        });
+    }
+
+    public static function scopeQueryWithAllVerificationStatuses($query) {
+        return $query->withoutGlobalScope('verify_status');
+    }
+
+    public static function scopeQueryWithVerifyStatusPending($query) {
+        return $query->withoutGlobalScope('verify_status')->where('verify_status', 'pending');
+    }
+
+    public static function scopeQueryWithVerifyStatusRejected($query) {
+        return $query->withoutGlobalScope('verify_status')->where('verify_status', 'rejected');
+    }
 
     public function user() {
         return $this->belongsTo(User::class);

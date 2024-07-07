@@ -30,9 +30,12 @@
             @livewire('frontend.pages.profile.profile-pages.saved-private-pages.active-private-pages.index')
         @elseif($type == 'trashed')
             @livewire('frontend.pages.profile.profile-pages.saved-private-pages.trashed-private-pages.index', ['type' => $type])
+        @elseif($type == 'rejected')
+            @livewire('frontend.pages.profile.profile-pages.saved-private-pages.rejected-private-pages.index', ['type' => $type])
+        @elseif($type == 'pending')
+            @livewire('frontend.pages.profile.profile-pages.saved-private-pages.pending-private-pages.index', ['type' => $type])
         @endif
     </div>
 </div>
-
 
 @endsection

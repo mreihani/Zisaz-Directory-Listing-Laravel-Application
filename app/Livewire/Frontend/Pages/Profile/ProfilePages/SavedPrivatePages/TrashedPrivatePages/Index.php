@@ -9,7 +9,7 @@ class Index extends Component
     public $psites;
 
     public function mount() {
-        $this->psites = auth()->user()->privateSite()->onlyTrashed()->with([
+        $this->psites = auth()->user()->privateSite()->onlyTrashed()->queryWithAllVerificationStatuses()->with([
             'footer',
             'hero',
             'hero.psiteHeroSliders',

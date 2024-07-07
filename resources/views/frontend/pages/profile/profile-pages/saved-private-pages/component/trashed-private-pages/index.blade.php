@@ -12,39 +12,14 @@
 
     <!-- Warning alert -->
     @if(count($psites))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
             <span class="fw-bold">توجه:</span> کسب و کار های حذف شده تا مدت 6 ماه در سامانه به صورت غیر فعال باقی می مانند، شما می توانید تا قبل از این زمان مجددا آن ها را بازگردانی نمایید؛ اما پس از گذشت این زمان به صورت خودکار برای همیشه از سامانه حذف خواهند شد.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     
     <!-- Nav tabs-->
-    <ul class="nav nav-tabs border-bottom mb-4" role="tablist">
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="{{route('user.dashboard.saved-personal-websites.index')}}" role="tab" aria-selected="true">
-                <i class="fi-file fs-base me-2"></i>
-                منتشر شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-rotate-right fs-base me-2"></i>
-                در انتظار تأیید
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-x fs-base me-2"></i>
-                رد شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link active" href="{{route('user.dashboard.saved-personal-websites.index', ['type=trashed'])}}" role="tab" aria-selected="false">
-                <i class="fi-trash fs-base me-2"></i>
-                حذف شده
-            </a>
-        </li>
-    </ul>
+    @include('frontend.pages.profile.profile-pages.saved-private-pages.component.layouts.nav')
 
     @if(count($psites))
         @foreach ($psites as $psiteItem)
@@ -52,7 +27,7 @@
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
                 <a class="card-img-top" href="#" style="background-image: url('{{asset($psiteItem->hero->psiteHeroSliders->first()->slider_image)}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
-                        <span class="d-table badge bg-danger">
+                        <span class="d-table badge bg-dark">
                             حذف شده
                         </span>
                     </div>
@@ -62,10 +37,17 @@
                     <div class="dropdown position-absolute zindex-5 top-0 end-0 mt-3 me-3">
                         <button class="btn btn-icon btn-light btn-xs rounded-circle shadow-sm" type="button" id="contextMenu1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi-dots-vertical"></i></button>
                         <ul class="dropdown-menu my-1" aria-labelledby="contextMenu1">
-                            <a class="dropdown-item" href="{{route('user.personal-website.restore', $psiteItem->id)}}" onclick="if(confirm('آیا برای بازگردانی این آیتم اطمینان دارید؟')){return true}">
-                                <i class="fi-upload-file opacity-60 me-2"></i>
-                                بازگردانی
-                            </a>
+                            <li>
+                                <form action="{{route('user.personal-website.restore', $psiteItem->id)}}" method="POST" class="dropdown-item">
+                                    @method('put')
+                                    @csrf
+
+                                    <button type="submit" class="border-none bg-transparent border-0" onclick ="return confirm('آیا برای بازگردانی این آیتم اطمینان دارید؟')">
+                                        <i class="fi-upload-file opacity-60 me-2"></i>
+                                        بازگردانی
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
 

@@ -34,19 +34,16 @@ Route::controller(UserActivityController::class)->group(function () {
     Route::delete('/activity/{activity}/destroy', 'destroy')->name('user.activity.destroy');
 });
 
-
-
-// !!!!!!!!!!to do
-// rewrite UserPrivatePageController and UserProjectController delete and update routes with put and delete
-
-
 // personal website routes
 Route::controller(UserPrivatePageController::class)->group(function () {
     Route::get('/personal-website/create', 'create')->name('user.personal-website.create');
     Route::get('/personal-website/{id}/edit', 'edit')->name('user.personal-website.edit');
-    Route::get('/personal-website/{psite}/restore', 'restore')->name('user.personal-website.restore')->withTrashed();
-    Route::get('/personal-website/{psite}/destroy', 'destroy')->name('user.personal-website.destroy');
+    Route::put('/personal-website/{psite}/restore', 'restore')->name('user.personal-website.restore');
+    Route::delete('/personal-website/{psite}/destroy', 'destroy')->name('user.personal-website.destroy');
 });
+
+// !!!!!!!!!!to do
+// rewrite UserProjectController delete and update routes with put and delete
 
 //projects routes
 Route::controller(UserProjectController::class)->group(function () {

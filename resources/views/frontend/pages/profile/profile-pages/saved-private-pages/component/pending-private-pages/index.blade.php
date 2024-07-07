@@ -10,6 +10,14 @@
         </a>
     </div>
     
+    <!-- Warning alert -->
+    @if(count($psites))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span class="fw-bold">توجه: </span>کسب و کار شما در حال بررسی توسط مدیر سامانه است. در صورت تأیید مدیریت خود به خود به قسمت منتشر شده ها منتقل خواهد شد.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <!-- Nav tabs-->
     @include('frontend.pages.profile.profile-pages.saved-private-pages.component.layouts.nav')
 
@@ -17,10 +25,10 @@
         @foreach ($psites as $psiteItem)
             <!-- Item-->
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
-                <a class="card-img-top" href="{{route('site', $psiteItem->slug)}}" style="background-image: url('{{asset($psiteItem->hero->psiteHeroSliders->first()->slider_image)}}');">
+                <a class="card-img-top" href="" style="background-image: url('{{asset($psiteItem->hero->psiteHeroSliders->first()->slider_image)}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
-                        <span class="d-table badge bg-info">
-                            تأیید شده
+                        <span class="d-table badge bg-warning">
+                            در حال بررسی
                         </span>
                     </div>
                 </a>
@@ -90,7 +98,7 @@
                     @endif
 
                     <h3 class="h6 mb-2 fs-base">
-                        <a class="nav-link" href="{{route('site', $psiteItem->slug)}}">
+                        <a class="nav-link" href="">
                             {{$psiteItem->hero->title}}
                         </a>
                     </h3>
