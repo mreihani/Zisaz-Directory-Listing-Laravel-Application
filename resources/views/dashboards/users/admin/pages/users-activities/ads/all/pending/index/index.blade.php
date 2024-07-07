@@ -46,7 +46,7 @@
         <div class="card">
 
             <h5 class="card-header">
-                لیست آگهی های تأیید شده
+                لیست آگهی های در حال بررسی
             </h5>
 
             <div class="card-header flex-column flex-md-row">
@@ -54,7 +54,7 @@
                 
                 <div class="row">
                     <div class="col-md-5 d-flex justify-content-start">
-                        <form method="GET" action="{{route('admin.dashboard.users-activities.ads.contractor.verified.search')}}">
+                        <form method="GET" action="{{route('admin.dashboard.users-activities.ads.all.pending.search')}}">
                             <div class="input-group">
                                 <button class="btn btn-outline-primary waves-effect" id="button-addon1" type="submit">
                                     <i class="ti ti-search h-mirror me-1"></i>
@@ -64,7 +64,6 @@
                             </div>
                         </form>
                     </div>
-                    
                 </div>
             </div>
 
@@ -82,6 +81,9 @@
                                     <th>
                                         نام و نام خانوادگی آگهی دهنده
                                     </th>
+                                    <th>
+                                        نوع آگهی
+                                    </th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
@@ -95,16 +97,62 @@
                                         </td>
                                         <td>
                                             <a href="{{route('activity', $activityItem->slug)}}">
-                                                {{$activityItem->contractor->item_title}}
+                                                {{$activityItem->subactivity->item_title}}
                                             </a>
                                         </td>
                                         <td>
-                                            
                                             {{$activityItem->user->firstname}}
                                             {{$activityItem->user->lastname}}
                                         </td>
+                                        <td>
+                                            @if($activityItem->subactivity->type == 'selling')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    فروش کالا
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'employee')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    استخدام کارجو
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'employer')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    استخدام کارفرما
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'invested')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    سرمایه پذیر
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'investor')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    سرمایه گذار
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'auction')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    مزایده
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'tender_buy')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    مناقصه خرید
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'tender_project')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    مناقصه اجرای پروژه
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'inquiry_buy')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    استعلام قیمت خرید
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'inquiry_project')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    استعلام قیمت اجرای پروژه
+                                                </span>
+                                            @elseif($activityItem->subactivity->type == 'contractor')
+                                                <span class="badge rounded-pill bg-label-primary">
+                                                    پیمانکاری
+                                                </span>
+                                            @endif
+                                        </td>
                                         <td class="d-flex align-items-center">
-                                            <form action="{{route('admin.dashboard.users-activities.ads.contractor.verified.destroy', $activityItem->id)}}" method="POST">
+                                            <form action="{{route('admin.dashboard.users-activities.ads.all.pending.destroy', $activityItem->id)}}" method="POST">
                                                 @method('delete')
                                                 @csrf
 
@@ -112,6 +160,9 @@
                                                     <i class="text-primary ti ti-trash"></i>
                                                 </button>
                                             </form>
+                                            <a href="{{route('admin.dashboard.users-activities.ads.all.pending.edit', $activityItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                <i class="text-primary ti ti-zoom-check"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach        

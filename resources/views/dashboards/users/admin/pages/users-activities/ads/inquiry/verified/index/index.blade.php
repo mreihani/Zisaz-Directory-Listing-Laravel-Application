@@ -46,7 +46,7 @@
         <div class="card">
 
             <h5 class="card-header">
-                لیست آگهی های در حال بررسی
+                لیست آگهی های تأیید شده
             </h5>
 
             <div class="card-header flex-column flex-md-row">

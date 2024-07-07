@@ -46,7 +46,7 @@
         <div class="card">
 
             <h5 class="card-header">
-                جستجوی آگهی های در حال تأیید
+                جستجوی آگهی های تأیید شده
             </h5>
 
             <div class="card-header flex-column flex-md-row">
