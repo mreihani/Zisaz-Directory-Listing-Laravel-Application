@@ -19,13 +19,13 @@ class ActivityPagesController extends Controller
         }
         
         // get similar items for carousel element
-        $similarItemsCount = $activity->subactivity->where('type', $activity->subactivity->type)->count();
-        $similarItems = $activity->subactivity
-        ->latest()
-        ->where('id', '!=', $activity->subactivity->id)
-        ->where('type', $activity->subactivity->type)
-        ->get()
-        ->take(10);
+        $similarItemsCount = $activity->withWhereHas('subactivity', function($query) use($activity) {
+            $query->where('type', $activity->subactivity->type);
+        })->count();
+
+        $similarItems = $activity->withWhereHas('subactivity', function($query) use($activity) {
+            $query->where('id', '!=', $activity->subactivity->id)->where('type', $activity->subactivity->type);
+        })->get()->take(10);
 
         return view('frontend.pages.activity.activity-single.index', compact('activity', 'similarItems', 'similarItemsCount'));
     }

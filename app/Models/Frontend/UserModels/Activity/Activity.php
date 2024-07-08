@@ -49,6 +49,10 @@ class Activity extends Model
         return $query->withoutGlobalScope('verify_status')->where('verify_status', 'pending');
     }
 
+    // public static function scopeQueryWithVerifyStatusVerified($query) {
+    //     return $query->withoutGlobalScope('verify_status')->where('verify_status', 'verified');
+    // }
+
     public static function scopeQueryWithVerifyStatusRejected($query) {
         return $query->withoutGlobalScope('verify_status')->where('verify_status', 'rejected');
     }
