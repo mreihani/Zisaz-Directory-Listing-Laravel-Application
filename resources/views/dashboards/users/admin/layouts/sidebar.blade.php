@@ -17,11 +17,11 @@
     <ul class="menu-inner py-1">
         
         <!-- Beginnig of Dashboard -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 پیشخوان
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.index' ? 'active open' : ''}}
         ">
@@ -35,11 +35,11 @@
         <!-- End of Dashboard -->
 
         <!-- Beginnig of User profile -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت صفحات حساب کاربری
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.profile.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.account-settings.account.index' ? 'active open' : ''}}
@@ -105,11 +105,11 @@
         <!-- End of User profile -->
 
         <!-- Beginnig of Categories Section -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت دسته بندی ها
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.category.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.category.create' ? 'active open' : ''}}
@@ -150,11 +150,11 @@
         <!-- End of Categories Section -->
 
         <!-- Beginnig of home page dynamic banners section -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت بنر
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.dynamic-banners.home-top-banner.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.dynamic-banners.home-middle-one-banner.index' ? 'active open' : ''}}
@@ -204,11 +204,11 @@
         <!-- End of home page dynamic banners section -->
 
         <!-- Beginnig of Magazine Section -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت مجله زی ساز
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.magazine.category.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.magazine.category.create' ? 'active open' : ''}}
@@ -285,11 +285,11 @@
         <!-- End of Magazine Section -->
 
         <!-- Beginnig of Media Section -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت رسانه
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
         {{Route::currentRouteName() == 'admin.dashboard.media.index' ? 'active open' : ''}}
         {{Route::currentRouteName() == 'admin.dashboard.media.create' ? 'active open' : ''}}
@@ -326,11 +326,11 @@
         <!-- End of Media Section -->
 
         <!-- Beginnig of Users Section -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 مدیریت کاربران
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
             {{Route::currentRouteName() == 'admin.dashboard.users.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.user.create' ? 'active open' : ''}}
@@ -369,11 +369,11 @@
         <!-- End of Users Section -->
 
         <!-- Beginnig of Users Statistics -->
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 لیست فعالیت ها
             </span>
-        </li>
+        </li> --}}
         <li class="menu-item
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.verified.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.verified.edit' ? 'active open' : ''}}
