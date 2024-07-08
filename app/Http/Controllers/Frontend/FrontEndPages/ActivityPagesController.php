@@ -25,8 +25,8 @@ class ActivityPagesController extends Controller
 
         $similarItems = $activity->withWhereHas('subactivity', function($query) use($activity) {
             $query->where('id', '!=', $activity->subactivity->id)->where('type', $activity->subactivity->type);
-        })->get()->take(10);
-
+        })->get()->take(10)->pluck('subactivity');
+    
         return view('frontend.pages.activity.activity-single.index', compact('activity', 'similarItems', 'similarItemsCount'));
     }
 

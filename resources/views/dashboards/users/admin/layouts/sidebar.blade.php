@@ -860,7 +860,7 @@
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.search' ? 'active open' : ''}}
                 ">
                     <a class="menu-link menu-toggle" href="javascript:void(0);">
-                        <div>صفحات اختصاصی</div>
+                        <div>کسب و کار ها</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item
