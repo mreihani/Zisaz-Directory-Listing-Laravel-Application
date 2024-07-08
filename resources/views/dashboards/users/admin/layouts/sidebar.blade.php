@@ -438,6 +438,15 @@
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.edit' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.contractor.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.search' ? 'active open' : ''}}
         " style="">
             <a class="menu-link menu-toggle" href="javascript:void(0);">
                 <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chart-infographic"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M7 3v4h4" /><path d="M9 17l0 4" /><path d="M17 14l0 7" /><path d="M13 13l0 8" /><path d="M21 12l0 9" /></svg>
@@ -840,30 +849,44 @@
             </ul>
             <ul class="menu-sub">
                 <li class="menu-item
-                
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.search' ? 'active open' : ''}}
                 ">
                     <a class="menu-link menu-toggle" href="javascript:void(0);">
                         <div>صفحات اختصاصی</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.verified.search' ? 'active open' : ''}}
                         ">
-                            <a class="menu-link" href="">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.private-website.verified.index')}}">
                                 <div>تأیید شده</div>
                             </a>
                         </li>
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.pending.search' ? 'active open' : ''}}
                         ">
-                            <a class="menu-link" href="">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.private-website.pending.index')}}">
                                 <div>در حال بررسی</div>
                             </a>
                         </li>
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.search' ? 'active open' : ''}}
                         ">
-                            <a class="menu-link" href="">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.private-website.rejected.index')}}">
                                 <div>رد شده</div>
                             </a>
                         </li>

@@ -34,7 +34,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);

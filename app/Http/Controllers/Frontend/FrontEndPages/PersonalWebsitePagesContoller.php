@@ -12,36 +12,70 @@ class PersonalWebsitePagesContoller extends Controller
 {
     // load users private websites
     public function site($slug) {
-        $psite = Psite::where('slug', $slug)
-        ->with([
-            'licenses',
-            'licenses.psiteLicenseItem',
-            'aboutUs',
-            'blog',
-            'contactUs',
-            'contactUs.psiteContactUsAddressItems',
-            'contactUs.psiteContactUsOfficePhoneItems',
-            'contactUs.psiteContactUsMobilePhoneItems',
-            'contactUs.psiteContactUsEmailItems',
-            'contactUs.psiteContactUsSocialMediaItems',
-            'contactUs.psiteContactUsPostalCodeItems',
-            'contactUs.psiteContactUsWorkingHourItems',
-            'footer',
-            'hero',
-            'hero.psiteHeroSliders',
-            'members',
-            'members.psiteMemberItem',
-            'middleBanner',
-            'promotionalVideo',
-            'services',
-            'services.psiteServiceItem',
-            'testimonials',
-            'testimonials.psiteTestimonialItem',
-            'trustedCustomer.psiteTrustedCustomerItem',
-            'projects',
-            'ads'
-            ])
-        ->first();
+
+        if(auth()->check() && auth()->user()->role === 'admin') {
+            $psite = Psite::queryWithAllVerificationStatuses()->where('slug', $slug)
+            ->with([
+                'licenses',
+                'licenses.psiteLicenseItem',
+                'aboutUs',
+                'blog',
+                'contactUs',
+                'contactUs.psiteContactUsAddressItems',
+                'contactUs.psiteContactUsOfficePhoneItems',
+                'contactUs.psiteContactUsMobilePhoneItems',
+                'contactUs.psiteContactUsEmailItems',
+                'contactUs.psiteContactUsSocialMediaItems',
+                'contactUs.psiteContactUsPostalCodeItems',
+                'contactUs.psiteContactUsWorkingHourItems',
+                'footer',
+                'hero',
+                'hero.psiteHeroSliders',
+                'members',
+                'members.psiteMemberItem',
+                'middleBanner',
+                'promotionalVideo',
+                'services',
+                'services.psiteServiceItem',
+                'testimonials',
+                'testimonials.psiteTestimonialItem',
+                'trustedCustomer.psiteTrustedCustomerItem',
+                'projects',
+                'ads'
+                ])
+            ->first();
+        } else {
+            $psite = Psite::where('slug', $slug)
+            ->with([
+                'licenses',
+                'licenses.psiteLicenseItem',
+                'aboutUs',
+                'blog',
+                'contactUs',
+                'contactUs.psiteContactUsAddressItems',
+                'contactUs.psiteContactUsOfficePhoneItems',
+                'contactUs.psiteContactUsMobilePhoneItems',
+                'contactUs.psiteContactUsEmailItems',
+                'contactUs.psiteContactUsSocialMediaItems',
+                'contactUs.psiteContactUsPostalCodeItems',
+                'contactUs.psiteContactUsWorkingHourItems',
+                'footer',
+                'hero',
+                'hero.psiteHeroSliders',
+                'members',
+                'members.psiteMemberItem',
+                'middleBanner',
+                'promotionalVideo',
+                'services',
+                'services.psiteServiceItem',
+                'testimonials',
+                'testimonials.psiteTestimonialItem',
+                'trustedCustomer.psiteTrustedCustomerItem',
+                'projects',
+                'ads'
+                ])
+            ->first();
+        }
 
         // check if footer has been saved and logo has been uploaded
         if(!$psite || !$psite->footer || !$psite->footer->logo) {

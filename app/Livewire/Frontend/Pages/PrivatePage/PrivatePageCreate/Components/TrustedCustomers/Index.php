@@ -42,7 +42,7 @@ class Index extends Component
         if(is_null($this->privateSiteId)) {
             $this->isHidden = false;
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
             $this->isHidden = (!is_null($psite->trustedCustomer) && $psite->trustedCustomer->is_hidden == 1) ? true : false;
             $this->headerDescription = is_null($psite->trustedCustomer) ? "" : $psite->trustedCustomer->header_description; 
 
@@ -103,7 +103,7 @@ class Index extends Component
                 ]);
             } else {
                 // this is for items already stored in the database and server
-                $psite = Psite::findOrFail($this->privateSiteId);
+                $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
                 $items = $psite->trustedCustomer->psiteTrustedCustomerItem;
                
                 // delete items from DB and server
@@ -136,7 +136,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
@@ -154,6 +154,10 @@ class Index extends Component
         $this->validate();
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
+
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
         
         if($this->isHidden) {
             $trustedCustomers = $psite->trustedCustomer()->updateOrCreate([

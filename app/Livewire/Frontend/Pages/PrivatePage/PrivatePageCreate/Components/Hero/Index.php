@@ -69,7 +69,7 @@ class Index extends Component
             $this->slideInputs = [0];
             $this->slideIteration = 1;
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
             $this->businessType = $psite->business_type;
             $this->color = $psite->color;
@@ -146,7 +146,7 @@ class Index extends Component
             } else {
                 
                 // this is for items already stored in the database and server
-                $psite = Psite::findOrFail($this->privateSiteId);
+                $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
                 $slides = $psite->hero->psiteHeroSliders;
                
                 // delete items from DB and server
@@ -189,7 +189,7 @@ class Index extends Component
 
         // in this case, the user has already submitted a private website, and is trying to edit that
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
             // the user is trying to edit a private website that does not belong to himself/herself
             if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
@@ -213,6 +213,10 @@ class Index extends Component
         $this->validate();
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
+
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
         
         $hero = $psite->hero()->updateOrCreate([
             'psite_id' => $psite->id

@@ -27,7 +27,8 @@ class PrivateSitePromotionalVideoValidationRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // video has already been uploaded
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
+        
         if(!is_null($psite->promotionalVideo) && !is_null($psite->promotionalVideo->video)) {
             return;
         }

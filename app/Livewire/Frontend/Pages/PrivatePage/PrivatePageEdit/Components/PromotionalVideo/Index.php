@@ -51,7 +51,7 @@ class Index extends Component
             $this->isHidden = false;
             $this->isUploadAllowed = false;
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
             
             $this->headerDescription = is_null($psite->promotionalVideo) ? "" : $psite->promotionalVideo->header_description; 
             $this->isHidden = (!is_null($psite->promotionalVideo) && $psite->promotionalVideo->is_hidden == 1) ? true : false;
@@ -129,7 +129,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
@@ -148,6 +148,10 @@ class Index extends Component
         
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
+        
         // here the user wants to skip the promotional video section
         if($this->isHidden) {
             $promotionalVideo = $psite->promotionalVideo()->updateOrCreate([

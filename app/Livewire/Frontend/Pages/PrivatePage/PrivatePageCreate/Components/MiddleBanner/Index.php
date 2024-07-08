@@ -43,7 +43,7 @@ class Index extends Component
             $this->isHidden = false;
             $this->image = null; 
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
             $this->isHidden = (!is_null($psite->middleBanner) && $psite->middleBanner->is_hidden == 1) ? true : false;
             $this->image = is_null($psite->middleBanner) ? null : $psite->middleBanner->image; 
             $this->headerTitle = is_null($psite->middleBanner) ? "" : $psite->middleBanner->header_title; 
@@ -83,7 +83,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
@@ -101,6 +101,10 @@ class Index extends Component
         $this->validate();
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
+
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
 
         if($this->isHidden) {
             $middleBanner = $psite->middleBanner()->updateOrCreate([

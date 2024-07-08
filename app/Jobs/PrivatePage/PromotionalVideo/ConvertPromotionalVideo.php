@@ -79,7 +79,7 @@ class ConvertPromotionalVideo implements ShouldQueue
 
     private function setJobIdIntoPromotionalVideoSection($jobId) {
         $privateSiteId = $this->incoming['privateSiteId'];
-        $promotionalVideo = Psite::findOrFail($privateSiteId)->promotionalVideo;
+        $promotionalVideo = Psite::queryWithAllVerificationStatuses()->findOrFail($privateSiteId)->promotionalVideo;
 
         $promotionalVideo->update([
             'video_job_id' => $jobId

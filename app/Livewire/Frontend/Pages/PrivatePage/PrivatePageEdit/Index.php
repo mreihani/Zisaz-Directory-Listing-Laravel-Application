@@ -29,8 +29,8 @@ class Index extends Component
     private function isUserAuthorized() {
 
         if(!is_null($this->privateSiteId)) {
-            $psite = Psite::findOrFail($this->privateSiteId);
-
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
+           
             if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
                 abort(403);
             }

@@ -32,7 +32,7 @@ class Index extends Component
         if(is_null($this->privateSiteId)) {
             $this->logo = null; 
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
             $this->logo = is_null($psite->footer) ? null : $psite->footer->logo; 
         }
     }
@@ -69,7 +69,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
@@ -84,6 +84,10 @@ class Index extends Component
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
+        
         $footer = $psite->footer()->updateOrCreate([
             'psite_id' => $psite->id
         ],[

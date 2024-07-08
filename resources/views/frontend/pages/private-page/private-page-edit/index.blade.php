@@ -31,6 +31,19 @@
 @endpush
 
 <div class="container mt-5 mb-md-4 py-5">
+
+    <!-- Warning alert -->
+    @if($psite->verify_status && $psite->verify_status === 'rejected' && !empty($psite->reject_description))
+        <div class="alert alert-danger" role="alert">
+            <h4 class="pt-2 alert-heading">علت رد شدن آگهی:</h4>
+            <ul>
+                <li>
+                    {{$psite->reject_description}}
+                </li>
+            </ul>
+        </div>
+    @endif
+
     <!-- Breadcrumb-->
     <nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
         <ol class="breadcrumb">

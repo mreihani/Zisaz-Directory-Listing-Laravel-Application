@@ -48,7 +48,7 @@ class Index extends Component
         if(is_null($this->privateSiteId)) {
             $this->isHidden = false;
         } else {
-            $psite = Psite::findOrFail($this->privateSiteId);
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
             $this->isHidden = (!is_null($psite->projects) && $psite->projects->is_hidden == 1) ? true : false;
             $this->headerDescription = is_null($psite->projects) ? "" : $psite->projects->header_description; 
             $this->isProjectType1 = (!is_null($psite->projects) && $psite->projects->is_project_type_1 == 1) ? true : false;
@@ -88,7 +88,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
-        $psite = Psite::findOrFail($this->privateSiteId);
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
 
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
@@ -107,6 +107,10 @@ class Index extends Component
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
+        $psite->update([
+            'verify_status' => 'pending'
+        ]);
+        
         if($this->isHidden) {
             $promotionalVideo = $psite->projects()->updateOrCreate([
                 'psite_id' => $psite->id

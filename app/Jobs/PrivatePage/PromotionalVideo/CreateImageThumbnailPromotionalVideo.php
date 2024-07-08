@@ -68,8 +68,8 @@ class CreateImageThumbnailPromotionalVideo implements ShouldQueue
 
     private function setJobIdIntoPromotionalVideoSection($jobId) {
         $privateSiteId = $this->incoming['privateSiteId'];
-        $promotionalVideo = Psite::findOrFail($privateSiteId)->promotionalVideo;
-
+        $promotionalVideo = Psite::queryWithAllVerificationStatuses()->findOrFail($privateSiteId)->promotionalVideo;
+        
         $promotionalVideo->update([
             'thumbnail_job_id' => $jobId
         ]);

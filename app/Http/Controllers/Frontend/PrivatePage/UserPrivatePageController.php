@@ -23,13 +23,13 @@ class UserPrivatePageController extends Controller
     public function edit(string $id)
     {
         $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($id);
-
+       
         // check if user is authorized to edit psite item
         if(!auth()->check() || auth()->user()->id != $psite->user->id) {
            abort(403);
         }
         
-        return view('frontend.pages.private-page.private-page-edit.index', compact('id'));
+        return view('frontend.pages.private-page.private-page-edit.index', compact('id', 'psite'));
     }
 
     /**
