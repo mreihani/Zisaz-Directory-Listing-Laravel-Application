@@ -469,6 +469,4 @@
 </section>
 <!-- ./Project Adress and video section -->
 
-
-
 @endsection

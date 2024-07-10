@@ -80,7 +80,7 @@ class ConvertProjectVideo implements ShouldQueue
 
     private function setJobIdIntoVideoSection($jobId) {
         $projectId = $this->incoming['projectId'];
-        $projectVideo = Project::findOrFail($projectId)->projectVideo;
+        $projectVideo = Project::queryWithAllVerificationStatuses()->findOrFail($projectId)->projectVideo;
 
         $projectVideo->update([
             'video_job_id' => $jobId

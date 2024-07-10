@@ -35,7 +35,7 @@
     <!-- Warning alert -->
     @if($psite->verify_status && $psite->verify_status === 'rejected' && !empty($psite->reject_description))
         <div class="alert alert-danger" role="alert">
-            <h4 class="pt-2 alert-heading">علت رد شدن آگهی:</h4>
+            <h4 class="pt-2 alert-heading">علت رد شدن کسب و کار:</h4>
             <ul>
                 <li>
                     {{$psite->reject_description}}

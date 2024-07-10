@@ -69,7 +69,7 @@ class CreateImageThumbnailProjectVideo implements ShouldQueue
 
     private function setJobIdIntoVideoSection($jobId) {
         $projectId = $this->incoming['projectId'];
-        $projectVideo = Project::findOrFail($projectId)->projectVideo;
+        $projectVideo = Project::queryWithAllVerificationStatuses()->findOrFail($projectId)->projectVideo;
 
         $projectVideo->update([
             'thumbnail_job_id' => $jobId

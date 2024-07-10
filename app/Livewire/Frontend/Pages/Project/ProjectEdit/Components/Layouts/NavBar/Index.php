@@ -40,7 +40,7 @@ class Index extends Component
 
     // check if private site id is related to the owner
     private function isProjectOwner($projectId) {
-        $project = Project::findOrFail($this->projectId);
+        $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
 
         if(!auth()->check() || $project->user->id !== auth()->user()->id) {
             abort(403);

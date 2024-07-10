@@ -9,42 +9,17 @@
             افزودن پروژه جدید
         </a>
     </div>
-    
+
     <!-- Warning alert -->
     @if(count($projects))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
             <span class="fw-bold">توجه:</span> پروژه های حذف شده تا مدت 6 ماه در سامانه به صورت غیر فعال باقی می مانند، شما می توانید تا قبل از این زمان مجددا آن ها را بازگردانی نمایید؛ اما پس از گذشت این زمان به صورت خودکار برای همیشه از سامانه حذف خواهند شد.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     <!-- Nav tabs-->
-    <ul class="nav nav-tabs border-bottom mb-4" role="tablist">
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="{{route('user.dashboard.saved-projects.index')}}" role="tab" aria-selected="true">
-                <i class="fi-file fs-base me-2"></i>
-                منتشر شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-rotate-right fs-base me-2"></i>
-                در انتظار تأیید
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link" href="#" role="tab" aria-selected="false">
-                <i class="fi-x fs-base me-2"></i>
-                رد شده
-            </a>
-        </li>
-        <li class="nav-item mb-3">
-            <a class="nav-link active" href="{{route('user.dashboard.saved-projects.index', ['type=trashed'])}}" role="tab" aria-selected="false">
-                <i class="fi-trash fs-base me-2"></i>
-                حذف شده
-            </a>
-        </li>
-    </ul>
+    @include('frontend.pages.profile.profile-pages.saved-projects.component.layouts.nav')
 
     @if(count($projects))
         @foreach ($projects as $projectItem)
@@ -52,7 +27,7 @@
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
                 <a class="card-img-top" href="#" style="background-image: url('{{asset($projectItem->projectImages->first()->image_sm)}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
-                        <span class="d-table badge bg-danger">
+                        <span class="d-table badge bg-dark">
                             حذف شده
                         </span>
                     </div>

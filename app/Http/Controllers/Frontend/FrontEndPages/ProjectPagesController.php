@@ -11,16 +11,30 @@ class ProjectPagesController extends Controller
 {
     // load project single page
     public function project($slug) {
-        $project = Project::where('slug', $slug)
-        ->with([
-            'projectImages',
-            'projectInfo',
-            'projectFacility',
-            'projectContact',
-            'projectVideo',
-            'welfareFacility',
-            ])
-        ->first();
+
+        if(auth()->check() && auth()->user()->role === 'admin') {
+            $project = Project::queryWithAllVerificationStatuses()->where('slug', $slug)
+            ->with([
+                'projectImages',
+                'projectInfo',
+                'projectFacility',
+                'projectContact',
+                'projectVideo',
+                'welfareFacility',
+                ])
+            ->first();
+        } else {
+            $project = Project::where('slug', $slug)
+            ->with([
+                'projectImages',
+                'projectInfo',
+                'projectFacility',
+                'projectContact',
+                'projectVideo',
+                'welfareFacility',
+                ])
+            ->first();
+        }
 
         // check if all four project page/sections has been filled and saved by the user
         if(!$project || !$project->projectInfo || !$project->projectFacility || !$project->projectContact) {

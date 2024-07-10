@@ -18,7 +18,7 @@ class UserProfileProjectController extends Controller
         } 
 
         // abort if user enters irrelevant query string
-        if(!is_null($type) && $type != 'trashed') {
+        if(!is_null($type) && (!in_array($type, ['trashed','pending','rejected']))) {
             abort(404);
         }
 

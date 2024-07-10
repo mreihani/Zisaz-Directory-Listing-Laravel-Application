@@ -3,6 +3,7 @@
 namespace App\Models\Frontend\UserModels\Project;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,28 @@ class Project extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    // Define a global scope in the model
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('verify_status', function (Builder $builder) {
+            $builder->where('verify_status', 'verified');
+        });
+    }
+
+    public static function scopeQueryWithAllVerificationStatuses($query) {
+        return $query->withoutGlobalScope('verify_status');
+    }
+
+    public static function scopeQueryWithVerifyStatusPending($query) {
+        return $query->withoutGlobalScope('verify_status')->where('verify_status', 'pending');
+    }
+
+    public static function scopeQueryWithVerifyStatusRejected($query) {
+        return $query->withoutGlobalScope('verify_status')->where('verify_status', 'rejected');
+    }
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -53,6 +76,6 @@ class Project extends Model
 
     // This is for slug, it gets the last ID to create a unique random string
     public static function getLatestId() {
-        return self::latest()->first() ? self::latest()->first()->id : 0;
+        return self::queryWithAllVerificationStatuses()->latest()->first() ? self::queryWithAllVerificationStatuses()->latest()->first()->id : 0;
     }
 }

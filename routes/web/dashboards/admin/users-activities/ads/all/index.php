@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboards\Admin\UsersActivities\Ads\All\AdminDashboardUsersActivitiesAdsAllDeletedController;
 use App\Http\Controllers\Dashboards\Admin\UsersActivities\Ads\All\AdminDashboardUsersActivitiesAdsAllPendingController;
 use App\Http\Controllers\Dashboards\Admin\UsersActivities\Ads\All\AdminDashboardUsersActivitiesAdsAllRejectedController;
 use App\Http\Controllers\Dashboards\Admin\UsersActivities\Ads\All\AdminDashboardUsersActivitiesAdsAllVerifiedController;
@@ -25,6 +26,13 @@ Route::controller(AdminDashboardUsersActivitiesAdsAllRejectedController::class)-
     Route::get('/dashboard/users-activities/ads/all/rejected', 'index')->name('admin.dashboard.users-activities.ads.all.rejected.index');
     Route::delete('/dashboard/users-activities/ads/all/rejected/{activity}', 'destroy')->name('admin.dashboard.users-activities.ads.all.rejected.destroy');
     Route::get('/dashboard/users-activities/ads/all/rejected/search', 'search')->name('admin.dashboard.users-activities.ads.all.rejected.search');
+});
+
+// routes for deleted items
+Route::controller(AdminDashboardUsersActivitiesAdsAllDeletedController::class)->group(function () {
+    Route::get('/dashboard/users-activities/ads/all/deleted', 'index')->name('admin.dashboard.users-activities.ads.all.deleted.index');
+    Route::put('/dashboard/users-activities/ads/all/deleted/{activity}', 'restore')->name('admin.dashboard.users-activities.ads.all.deleted.restore');
+    Route::get('/dashboard/users-activities/ads/all/deleted/search', 'search')->name('admin.dashboard.users-activities.ads.all.deleted.search');
 });
 
 

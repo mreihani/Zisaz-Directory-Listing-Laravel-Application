@@ -40,7 +40,7 @@ class Index extends Component
        
 
         } else {
-            $project = Project::findOrFail($this->projectId);
+            $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
             $this->isUploadAllowed = $this->isUploadAllowedHandler($project);
             $this->projectVideo = $project->projectVideo;
         }
@@ -116,7 +116,7 @@ class Index extends Component
     // check if project id is related to the owner
     private function isProjectOwner($projectId) {
       
-        $project = Project::findOrFail($this->projectId);
+        $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
 
         // the user is trying to edit a project that does not belong to himself/herself
         if(!auth()->check() || $project->user->id !== auth()->user()->id) {
@@ -131,6 +131,11 @@ class Index extends Component
         $this->validate();
 
         $project = $this->isProjectOwner($this->projectId);
+
+        $project->update([
+            'verify_status' => 'pending',
+            'reject_description' => NULL
+        ]);
 
         // here the user wants to skip the promotional video section
         if(!is_null($this->video)) {

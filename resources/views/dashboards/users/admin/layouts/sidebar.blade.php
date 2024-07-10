@@ -384,6 +384,9 @@
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.edit' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.restore' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.search' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.verified.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.verified.edit' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.verified.search' ? 'active open' : ''}}
@@ -447,6 +450,21 @@
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.index' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.edit' ? 'active open' : ''}}
             {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.edit' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.search' ? 'active open' : ''}}
         " style="">
             <a class="menu-link menu-toggle" href="javascript:void(0);">
                 <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chart-infographic"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M7 3v4h4" /><path d="M9 17l0 4" /><path d="M17 14l0 7" /><path d="M13 13l0 8" /><path d="M21 12l0 9" /></svg>
@@ -465,6 +483,9 @@
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.index' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.edit' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.restore' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.search' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.verified.index' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.verified.edit' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.selling.verified.search' ? 'active open' : ''}}
@@ -534,6 +555,9 @@
                         {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.index' ? 'active open' : ''}}
                         {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.edit' ? 'active open' : ''}}
                         {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.rejected.search' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.restore' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.search' ? 'active open' : ''}}
                         ">
                             <a class="menu-link menu-toggle" href="javascript:void(0);">
                                 <div>تمام آگهی ها</div>
@@ -564,6 +588,15 @@
                                 ">
                                     <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.all.rejected.index')}}">
                                         <div>رد شده</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item
+                               {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.index' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.restore' ? 'active open' : ''}}
+                                {{Route::currentRouteName() == 'admin.dashboard.users-activities.ads.all.deleted.search' ? 'active open' : ''}}
+                                ">
+                                    <a class="menu-link" href="{{route('admin.dashboard.users-activities.ads.all.deleted.index')}}">
+                                        <div>حذف شده</div>
                                     </a>
                                 </li>
                             </ul>
@@ -858,6 +891,9 @@
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.index' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.edit' ? 'active open' : ''}}
                 {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.search' ? 'active open' : ''}}
                 ">
                     <a class="menu-link menu-toggle" href="javascript:void(0);">
                         <div>کسب و کار ها</div>
@@ -890,36 +926,71 @@
                                 <div>رد شده</div>
                             </a>
                         </li>
+                        <li class="menu-item
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.private-website.deleted.search' ? 'active open' : ''}}
+                        ">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.private-website.deleted.index')}}">
+                                <div>حذف شده</div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
             <ul class="menu-sub">
                 <li class="menu-item
-                
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.search' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.index' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.edit' ? 'active open' : ''}}
+                {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.search' ? 'active open' : ''}}
                 ">
                     <a class="menu-link menu-toggle" href="javascript:void(0);">
                         <div>پروژه ها</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.verified.search' ? 'active open' : ''}}
                         ">
-                            <a class="menu-link" href="">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.project.verified.index')}}">
                                 <div>تأیید شده</div>
                             </a>
                         </li>
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.pending.search' ? 'active open' : ''}}
                         ">
-                            <a class="menu-link" href="">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.project.pending.index')}}">
                                 <div>در حال بررسی</div>
                             </a>
                         </li>
                         <li class="menu-item
-                        
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.rejected.search' ? 'active open' : ''}}
                         ">
-                            <a class="menu-link" href="">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.project.rejected.index')}}">
                                 <div>رد شده</div>
+                            </a>
+                        </li>
+                        <li class="menu-item
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.index' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.edit' ? 'active open' : ''}}
+                        {{Route::currentRouteName() == 'admin.dashboard.users-activities.project.deleted.search' ? 'active open' : ''}}
+                        ">
+                            <a class="menu-link" href="{{route('admin.dashboard.users-activities.project.deleted.index')}}">
+                                <div>حذف شده</div>
                             </a>
                         </li>
                     </ul>

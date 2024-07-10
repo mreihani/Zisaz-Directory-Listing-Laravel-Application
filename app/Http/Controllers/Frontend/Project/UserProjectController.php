@@ -22,21 +22,23 @@ class UserProjectController extends Controller
      */
     public function edit(string $id)
     {
-        $project = Project::findOrFail($id);
+        $project = Project::queryWithAllVerificationStatuses()->findOrFail($id);
 
         // check if user is authorized to edit project item
         if(!auth()->check() || auth()->user()->id != $project->user->id) {
            abort(403);
         }
         
-        return view('frontend.pages.project.project-edit.index', compact('id'));
+        return view('frontend.pages.project.project-edit.index', compact('id', 'project'));
     }
 
     /**
      * Undelete the soft deleted item
      */
-    public function restore(Project $project, Request $request)
+    public function restore(Request $request)
     {
+        $project = Project::queryWithAllVerificationStatuses()->withTrashed()->findOrFail($request->project);
+
         // check if user is authorized to restore project item
         if(!auth()->check() || auth()->user()->id != $project->user->id) {
             abort(403);
@@ -44,14 +46,21 @@ class UserProjectController extends Controller
 
         $project->restore();
 
+        $project->update([
+            'verify_status' => 'pending'
+        ]);
+
+
         return redirect()->route('user.dashboard.saved-projects.index');
     }
 
     /**
      * Soft-delete the specified item.
      */
-    public function destroy(Project $project, Request $request)
+    public function destroy(Request $request)
     {
+        $project = Project::queryWithAllVerificationStatuses()->findOrFail($request->project);
+
         // check if user is authorized to delete project item
         if(!auth()->check() || auth()->user()->id != $project->user->id) {
             abort(403);

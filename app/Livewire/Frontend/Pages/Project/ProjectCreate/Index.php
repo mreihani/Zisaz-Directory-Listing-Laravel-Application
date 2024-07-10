@@ -28,7 +28,7 @@ class Index extends Component
     private function isUserAuthorized() {
 
         if(!is_null($this->projectId)) {
-            $project = Project::findOrFail($this->projectId);
+            $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
 
             if(!auth()->check() || $project->user->id !== auth()->user()->id) {
                 abort(403);

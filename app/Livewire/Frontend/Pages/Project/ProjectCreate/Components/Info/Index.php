@@ -63,7 +63,7 @@ class Index extends Component
             $this->projectInputs = [0];
             $this->projectIteration = 1;
         } else {
-            $project = Project::findOrFail($this->projectId);
+            $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
             
             $this->projectType = $project->project_type;
             $this->title = !is_null($project->projectInfo) && !is_null($project->projectInfo->title) ? $project->projectInfo->title : "";
@@ -139,7 +139,7 @@ class Index extends Component
             } else {
                 
                 // this is for items already stored in the database and server
-                $project = Project::findOrFail($this->projectId);
+                $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
                 $projectImages = $project->projectImages;
                
                 // delete items from DB and server
@@ -168,7 +168,7 @@ class Index extends Component
 
         // in this case, the user has already submitted a project, and is trying to edit that
         } else {
-            $project = Project::findOrFail($this->projectId);
+            $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
 
             // the user is trying to edit a project that does not belong to himself/herself
             if(!auth()->check() || $project->user->id !== auth()->user()->id) {
@@ -189,6 +189,11 @@ class Index extends Component
         $this->validate();
 
         $project = $this->isProjectOwner($this->projectId);
+
+        $project->update([
+            'verify_status' => 'pending',
+            'reject_description' => NULL
+        ]);
         
         $project->projectInfo()->updateOrCreate([
             'project_id' => $project->id

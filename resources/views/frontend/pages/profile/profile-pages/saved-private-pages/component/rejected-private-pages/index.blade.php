@@ -13,7 +13,7 @@
     <!-- Warning alert -->
     @if(count($psites))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <span class="fw-bold">توجه: </span>کسب و کار شما به دلایلی توسط مدیر سامانه رد شده است. برای کسب اطلاع از علت رد شدن آن می توانید بر روی ویرایش آگهی کلیک کنید. پس از ورود به صفحه ویرایش در بالای صفحه علت رد شدن قابل مشاهده خواهد بود.
+            <span class="fw-bold">توجه: </span>کسب و کار شما به دلایلی توسط مدیر سامانه رد شده است. برای کسب اطلاع از علت رد شدن آن می توانید بر روی ویرایش کسب و کار کلیک کنید. پس از ورود به صفحه ویرایش در بالای صفحه علت رد شدن قابل مشاهده خواهد بود.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif

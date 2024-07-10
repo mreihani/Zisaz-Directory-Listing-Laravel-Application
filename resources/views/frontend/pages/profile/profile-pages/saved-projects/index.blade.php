@@ -30,6 +30,10 @@
             @livewire('frontend.pages.profile.profile-pages.saved-projects.active-projects.index')
         @elseif($type == 'trashed')
             @livewire('frontend.pages.profile.profile-pages.saved-projects.trashed-projects', ['type' => $type])
+        @elseif($type == 'rejected')
+            @livewire('frontend.pages.profile.profile-pages.saved-projects.rejected-projects', ['type' => $type])
+        @elseif($type == 'pending')
+            @livewire('frontend.pages.profile.profile-pages.saved-projects.pending-projects', ['type' => $type])
         @endif
     </div>
 </div>

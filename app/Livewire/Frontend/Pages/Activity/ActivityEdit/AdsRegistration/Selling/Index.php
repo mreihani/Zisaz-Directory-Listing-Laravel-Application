@@ -240,7 +240,8 @@ class Index extends Component
     private function saveAdsRegistrationHandler() {
 
         $this->activity->update([
-            'verify_status' => 'pending'
+            'verify_status' => 'pending',
+            'reject_description' => NULL
         ]);
 
         $this->activity->selling()->update([

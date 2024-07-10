@@ -47,7 +47,7 @@ class Index extends Component
             $this->projectInputs = [0];
             $this->projectIteration = 1;
         } else {
-            $project = Project::findOrFail($this->projectId);
+            $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
 
             $this->projectDescription = !is_null($project->projectFacility) && !is_null($project->projectFacility->project_description) ? $project->projectFacility->project_description : "";
             
@@ -127,7 +127,7 @@ class Index extends Component
             } else {
                 
                 // this is for items already stored in the database and server
-                $project = Project::findOrFail($this->projectId);
+                $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
                 $projectPlanImages = $project->projectFacility->projectPlanImages;
                
                 // delete items from DB and server
@@ -162,7 +162,7 @@ class Index extends Component
     // check if project id is related to the owner
     private function isProjectOwner($projectId) {
       
-        $project = Project::findOrFail($this->projectId);
+        $project = Project::queryWithAllVerificationStatuses()->findOrFail($this->projectId);
 
         // the user is trying to edit a project that does not belong to himself/herself
         if(!auth()->check() || $project->user->id !== auth()->user()->id) {
@@ -181,6 +181,11 @@ class Index extends Component
     public function save() {  
        
         $project = $this->isProjectOwner($this->projectId);
+
+        $project->update([
+            'verify_status' => 'pending',
+            'reject_description' => NULL
+        ]);
         
         $welfareFacility = $project->projectFacility()->updateOrCreate([
             'project_id' => $project->id

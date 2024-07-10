@@ -20,6 +20,19 @@
 @endpush
 
 <div class="container mt-5 mb-md-4 py-5">
+
+    <!-- Warning alert -->
+    @if($project->verify_status && $project->verify_status === 'rejected' && !empty($project->reject_description))
+        <div class="alert alert-danger" role="alert">
+            <h4 class="pt-2 alert-heading">علت رد شدن پروژه:</h4>
+            <ul>
+                <li>
+                    {{$project->reject_description}}
+                </li>
+            </ul>
+        </div>
+    @endif
+
     <!-- Breadcrumb-->
     <nav class="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
         <ol class="breadcrumb">

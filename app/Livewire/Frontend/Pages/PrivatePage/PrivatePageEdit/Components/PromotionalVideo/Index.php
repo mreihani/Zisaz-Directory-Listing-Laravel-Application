@@ -149,7 +149,8 @@ class Index extends Component
         $psite = $this->isPsiteOwner($this->privateSiteId);
 
         $psite->update([
-            'verify_status' => 'pending'
+            'verify_status' => 'pending',
+            'reject_description' => NULL
         ]);
         
         // here the user wants to skip the promotional video section

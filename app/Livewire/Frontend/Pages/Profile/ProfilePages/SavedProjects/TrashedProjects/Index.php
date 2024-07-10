@@ -9,7 +9,7 @@ class Index extends Component
     public $projects;
 
     public function mount() {
-        $this->projects = auth()->user()->project()->onlyTrashed()->with([
+        $this->projects = auth()->user()->project()->onlyTrashed()->queryWithAllVerificationStatuses()->with([
             'projectImages',
             'projectInfo',
             'projectFacility',

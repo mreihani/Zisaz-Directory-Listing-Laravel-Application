@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboards\Admin\UsersActivities\PrivateWebsites\AdminDashboardUsersActivitiesPrivateWebsiteDeletedController;
 use App\Http\Controllers\Dashboards\Admin\UsersActivities\PrivateWebsites\AdminDashboardUsersActivitiesPrivateWebsitePendingController;
 use App\Http\Controllers\Dashboards\Admin\UsersActivities\PrivateWebsites\AdminDashboardUsersActivitiesPrivateWebsiteRejectedController;
 use App\Http\Controllers\Dashboards\Admin\UsersActivities\PrivateWebsites\AdminDashboardUsersActivitiesPrivateWebsiteVerifiedController;
@@ -25,6 +26,13 @@ Route::controller(AdminDashboardUsersActivitiesPrivateWebsiteRejectedController:
     Route::get('/dashboard/users-activities/private-website/rejected', 'index')->name('admin.dashboard.users-activities.private-website.rejected.index');
     Route::delete('/dashboard/users-activities/private-website/rejected/{psite}', 'destroy')->name('admin.dashboard.users-activities.private-website.rejected.destroy');
     Route::get('/dashboard/users-activities/private-website/rejected/search', 'search')->name('admin.dashboard.users-activities.private-website.rejected.search');
+});
+
+// routes for deleted items
+Route::controller(AdminDashboardUsersActivitiesPrivateWebsiteDeletedController::class)->group(function () {
+    Route::get('/dashboard/users-activities/private-website/deleted', 'index')->name('admin.dashboard.users-activities.private-website.deleted.index');
+    Route::put('/dashboard/users-activities/private-website/deleted/{psite}', 'restore')->name('admin.dashboard.users-activities.private-website.deleted.restore');
+    Route::get('/dashboard/users-activities/private-website/deleted/search', 'search')->name('admin.dashboard.users-activities.private-website.deleted.search');
 });
 
 
