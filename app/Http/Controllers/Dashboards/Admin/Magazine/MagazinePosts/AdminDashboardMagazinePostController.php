@@ -23,7 +23,7 @@ class AdminDashboardMagazinePostController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $magPosts = MagPost::paginate(10);
+        $magPosts = MagPost::queryWithAllReviewStatuses()->paginate(10);
 
         return view('dashboards.users.admin.pages.magazine.magazine-post.index.index', compact('user', 'magPosts'));  
     }
@@ -76,8 +76,9 @@ class AdminDashboardMagazinePostController extends Controller
     /**
      * Show the form for editing the resource.
      */
-    public function edit(Request $request, MagPost $magPost)
+    public function edit(Request $request)
     {
+        $magPost = MagPost::queryWithAllReviewStatuses()->findOrFail($request->magPost);
         $user = auth()->user();
         $zisazYinyMceConfig = config('zisaz-tiny-mce');
         $magCategories = MagCategory::all();
@@ -88,9 +89,11 @@ class AdminDashboardMagazinePostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MagazinePostUpdateRequest $request, MagPost $magPost)
+    public function update(MagazinePostUpdateRequest $request)
     {
         $validated = $request->validated();
+
+        $magPost = MagPost::queryWithAllReviewStatuses()->findOrFail($request->magPost);
         
         $magPost->update([
             'mag_category_id' => Purify::clean(trim($validated['mag_category_id'])),
@@ -127,8 +130,10 @@ class AdminDashboardMagazinePostController extends Controller
     /**
      * Remove the specified Actcat resource from storage.
      */
-    public function destroy(MagPost $magPost)
+    public function destroy(Request $request)
     {
+        $magPost = MagPost::queryWithAllReviewStatuses()->findOrFail($request->magPost);
+
         // force delete magazine post since it has soft delete field in the database
         $magPost->forceDelete();
         Storage::deleteDirectory("public/upload/mag-images/$magPost->id");
@@ -144,7 +149,7 @@ class AdminDashboardMagazinePostController extends Controller
         $user = auth()->user();
 
         $searchString = trim($request->q);
-        $magPosts = MagPost::where('title', 'like', '%' . $searchString . '%')->paginate(10);
+        $magPosts = MagPost::queryWithAllReviewStatuses()->where('title', 'like', '%' . $searchString . '%')->paginate(10);
 
         return view('dashboards.users.admin.pages.magazine.magazine-post.search.index', compact('user', 'magPosts', 'searchString')); 
     }

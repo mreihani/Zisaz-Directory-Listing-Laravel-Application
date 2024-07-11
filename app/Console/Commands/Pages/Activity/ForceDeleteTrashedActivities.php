@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\ActiveCode;
 use App\Models\Frontend\UserModels\Activity\Activity;
 
-class forceDeleteTrashedActivities extends Command
+class ForceDeleteTrashedActivities extends Command
 {
     /**
      * The name and signature of the console command.

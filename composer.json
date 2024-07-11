@@ -8,6 +8,7 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
@@ -15,6 +16,7 @@
         "morilog/jalali": "3.*",
         "pbmedia/laravel-ffmpeg": "^8.5",
         "simplesoftwareio/simple-qrcode": "^4.2",
+        "stevebauman/location": "^7.3",
         "stevebauman/purify": "^6.1"
     },
     "require-dev": {

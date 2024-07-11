@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\Project\Project;
 
-class forceDeleteTrashedProjects extends Command
+class ForceDeleteTrashedProjects extends Command
 {
     /**
      * The name and signature of the console command.

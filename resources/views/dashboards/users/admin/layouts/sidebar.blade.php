@@ -996,40 +996,41 @@
                     </ul>
                 </li>
             </ul>
+        </li>
+        <!-- End of Users Statistics -->
+
+        <!-- Beginnig of Users Visits Section -->
+        {{-- <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                آمار بازدید کاربران
+            </span>
+        </li> --}}
+        <li class="menu-item
+            {{Route::currentRouteName() == 'admin.dashboard.visits.index' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.visits.search' ? 'active open' : ''}}
+            {{Route::currentRouteName() == 'admin.dashboard.visits.history.index' ? 'active open' : ''}}
+        " style="">
+            <a class="menu-link menu-toggle" href="javascript:void(0);">
+                <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12 18c-.328 0 -.652 -.017 -.97 -.05c-3.172 -.332 -5.85 -2.315 -8.03 -5.95c2.4 -4 5.4 -6 9 -6c3.465 0 6.374 1.853 8.727 5.558" /><path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M20.2 20.2l1.8 1.8" /></svg>
+                <div>
+                    بازدیدها
+                </div>
+            </a>
             <ul class="menu-sub">
-                <li class="menu-item
-                
-                ">
-                    <a class="menu-link menu-toggle" href="javascript:void(0);">
-                        <div>مقالات</div>
+                <li class="menu-item 
+                    {{Route::currentRouteName() == 'admin.dashboard.visits.index' ? 'active open' : ''}}
+                    {{Route::currentRouteName() == 'admin.dashboard.visits.search' ? 'active open' : ''}}
+                    {{Route::currentRouteName() == 'admin.dashboard.visits.history.index' ? 'active open' : ''}}
+                " style="">
+                    <a class="menu-link" href="{{route('admin.dashboard.visits.index')}}">
+                        <div>
+                            لیست بازدیدها
+                        </div>
                     </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item
-                        
-                        ">
-                            <a class="menu-link" href="">
-                                <div>تأیید شده</div>
-                            </a>
-                        </li>
-                        <li class="menu-item
-                        
-                        ">
-                            <a class="menu-link" href="">
-                                <div>در حال بررسی</div>
-                            </a>
-                        </li>
-                        <li class="menu-item
-                        
-                        ">
-                            <a class="menu-link" href="">
-                                <div>رد شده</div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </li>
-        <!-- End of Users Statistics -->
+        <!-- End of Users Visits Section -->
         
     </ul>
   </aside>

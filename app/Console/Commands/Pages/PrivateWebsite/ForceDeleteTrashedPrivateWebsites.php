@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
-class forceDeleteTrashedPrivateWebsites extends Command
+class ForceDeleteTrashedPrivateWebsites extends Command
 {
     /**
      * The name and signature of the console command.

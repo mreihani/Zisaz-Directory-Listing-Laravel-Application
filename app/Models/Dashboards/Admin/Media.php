@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Media extends Model
 {
-    protected $guarded = [];
-    
     use HasFactory;
+
+    protected $guarded = [];
 
     // check if job related to video conversion is done or not
     public function isVideoJobFinished() {

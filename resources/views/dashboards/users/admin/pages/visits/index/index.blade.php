@@ -46,7 +46,7 @@
         <div class="card">
 
             <h5 class="card-header">
-                لیست رسانه ها
+                لیست بازدیدها
             </h5>
 
             <div class="card-header flex-column flex-md-row">
@@ -54,7 +54,7 @@
                 
                 <div class="row">
                     <div class="col-md-5 d-flex justify-content-start">
-                        <form method="GET" action="{{route('admin.dashboard.media.search')}}">
+                        <form method="GET" action="{{route('admin.dashboard.visits.search')}}">
                             <div class="input-group">
                                 <button class="btn btn-outline-primary waves-effect" id="button-addon1" type="submit">
                                     <i class="ti ti-search h-mirror me-1"></i>
@@ -63,11 +63,6 @@
                                 <input aria-describedby="button-addon1" class="form-control" placeholder="" type="search" name="q">
                             </div>
                         </form>
-                    </div>
-                    <div class="col-md-7 d-flex justify-content-md-end">
-                        <a href="{{route('admin.dashboard.media.create')}}" class="text-white btn btn-primary waves-effect waves-light">
-                            افزودن رسانه
-                        </a>
                     </div>
                 </div>
             </div>
@@ -81,74 +76,91 @@
                                 <tr>
                                     <th>ردیف</th>
                                     <th>
-                                        پیش نمایش
+                                        نام و نام خانوادگی
                                     </th>
                                     <th>
-                                        نوع فایل
-                                    </th>
-                                    <th>نام فایل</th>
-                                    <th>
-                                        حجم فایل
+                                        آدرس بازدید
                                     </th>
                                     <th>
-                                        رونوشت آدرس رسانه
+                                        دستگاه
                                     </th>
-                                    <th>عملیات</th>
+                                    <th>
+                                        پلتفرم
+                                    </th>
+                                    <th>
+                                        مرورگر
+                                    </th>
+                                    <th>
+                                        آی پی
+                                    </th>
+                                    <th>
+                                        کشور
+                                    </th>
+                                    <th>
+                                        استان
+                                    </th>
+                                    <th>
+                                        شهر
+                                    </th>
+                                    <th>
+                                        زمان بازدید
+                                    </th>
+                                    <th>
+                                        تاریخچه فعالیت کاربر
+                                    </th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                @foreach ($mediaFiles as $mediaFileKey => $mediaFileItem)
+                                @foreach ($visits as $visitKey => $visitItem)
                                     <tr>
                                         <td>
                                             <bdi>
-                                                {{ ($mediaFiles->currentPage() - 1) * $mediaFiles->perPage() + $mediaFileKey + 1 }}
+                                                {{ ($visits->currentPage() - 1) * $visits->perPage() + $visitKey + 1 }}
                                             </bdi>
                                         </td>
                                         <td>
-                                            @if($mediaFileItem->file_type == 'image')
-                                                <a href="{{asset($mediaFileItem->file_path)}}">
-                                                    <img src="{{asset($mediaFileItem->thumbnail)}}" alt="image">
-                                                </a>
-                                            @elseif($mediaFileItem->file_type == 'video')
-                                                <a href="{{asset($mediaFileItem->file_path)}}">
-                                                    <img width="50" height="50" src="{{asset($mediaFileItem->thumbnail)}}" alt="image">
-                                                </a>
+                                            @if(!is_null($visitItem->user))
+                                                {{$visitItem->user->firstname}} {{$visitItem->user->lastname}}
+                                            @else
+                                                کاربر میهمان
                                             @endif
                                         </td>
                                         <td>
-                                            @if($mediaFileItem->file_type == 'image')
-                                                <span class="badge rounded-pill bg-label-info">
-                                                    تصویر
-                                                </span>
-                                            @elseif($mediaFileItem->file_type == 'video')
-                                                <span class="badge rounded-pill bg-label-success">
-                                                    ویدئو
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{asset($mediaFileItem->file_path)}}" dir="ltr">
-                                                {{$mediaFileItem->file_name}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{ number_format($mediaFileItem->file_size / 1024 / 1024, 2) }}
-                                            (مگابایت)
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm" onclick="copyToClipboard(this, '{{asset($mediaFileItem->file_path)}}')">
-                                                رونوشت لینک
+                                            <button title="{{$visitItem->url}}" class="btn btn-primary btn-sm" onclick="copyToClipboard(this, '{{$visitItem->url}}')">
+                                                رونوشت
                                             </button>
                                         </td>
                                         <td>
-                                            <form action="{{route('admin.dashboard.media.destroy', $mediaFileItem->id)}}" method="POST">
-                                                @method('delete')
-                                                @csrf
-
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-trash"></i>
-                                                </button>
-                                            </form>
+                                            {{$visitItem->device}}
+                                        </td>
+                                        <td>
+                                            {{$visitItem->platform}}
+                                        </td>
+                                        <td>
+                                            {{$visitItem->browser}}
+                                        </td>
+                                        <td>
+                                            {{$visitItem->ip}}
+                                        </td>
+                                        <td>
+                                            {{!is_null($visitItem->country) ? $visitItem->country : 'نامشخص'}}
+                                        </td>
+                                        <td>
+                                            {{!is_null($visitItem->province) ? $visitItem->province : 'نامشخص'}}
+                                        </td>
+                                        <td>
+                                            {{!is_null($visitItem->city) ? $visitItem->city : 'نامشخص'}}
+                                        </td>
+                                        <td>
+                                            {{jdate($visitItem->created_at)}}
+                                        </td>
+                                        <td>
+                                            @if(!is_null($visitItem->user))
+                                                <a href="{{route('admin.dashboard.visits.history.index', ['userId' => $visitItem->user->id])}}" class="btn btn-sm btn-icon item-edit">
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-history"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 8l0 4l2 2" /><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach        
@@ -160,17 +172,15 @@
                 <div class="row mt-3">
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                            {{$mediaFiles->links('vendor.pagination.dashboards-datatables')}}
+                            {{$visits->links('vendor.pagination.dashboards-datatables')}}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 
 @endsection
-
 
 @push('page-scripts')
     <script>
@@ -184,7 +194,7 @@
             button.textContent = 'کپی شد!';
             
             setTimeout(function() {
-                button.textContent = 'رونوشت لینک';
+                button.textContent = 'رونوشت';
             }, 2000); // Change back to 'Copy Link' after 2 seconds
         }
     </script>

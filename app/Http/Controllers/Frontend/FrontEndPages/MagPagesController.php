@@ -12,7 +12,7 @@ class MagPagesController extends Controller
 {
     // mag single page
     public function mag($slug) {
-        $mag = MagPost::where('slug', $slug)->where('review_status', 1)->with('magazineCategory')->get()->first() ?: abort(404);
+        $mag = MagPost::where('slug', $slug)->with('magazineCategory')->get()->first() ?: abort(404);
 
         // reading time estimation
         $textWithoutSpaces = str_replace(' ', '', $mag->body);
@@ -27,14 +27,12 @@ class MagPagesController extends Controller
         ->magazineCategory
         ->magazinePosts
         ->where('id', '!==', $mag->id)
-        ->where('review_status', 1)
         ->count();
 
         $similarItems = $mag
         ->magazineCategory
         ->magazinePosts
         ->where('id', '!==', $mag->id)
-        ->where('review_status', 1)
         ->take(10);    
 
         return view('frontend.pages.magazine.mag-single.index', compact('mag', 'readingTime', 'magCategories', 'similarItemsCount', 'similarItems'));
@@ -43,7 +41,7 @@ class MagPagesController extends Controller
     // get all ads with type
     public function getMags(Request $request) {
 
-        $mags = MagPost::where('review_status', 1)->with('magazineCategory')->paginate(10);
+        $mags = MagPost::with('magazineCategory')->paginate(10);
         
         // get all mag categories
         $magCategories = MagCategory::withCount('magazinePosts')->get();

@@ -5,6 +5,7 @@ namespace App\Http\Requests\Dashboards\Admin\Magazine\MagazinePost;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Frontend\UserModels\Mag\MagPost;
 use App\Rules\Dashboards\Magazine\MagazinePostImageUpdateValidationRule;
 
 class MagazinePostUpdateRequest extends FormRequest
@@ -24,17 +25,19 @@ class MagazinePostUpdateRequest extends FormRequest
      */
     public function rules(Request $request): array
     {
-       
+
+        $magPost = MagPost::queryWithAllReviewStatuses()->findOrFail($request->magPost);
+        
         return [
            'title' => 'required',
-           'slug' => ['required', Rule::unique('mag_posts')->ignore($request->magPost->id, 'id')],
+           'slug' => ['required', Rule::unique('mag_posts')->ignore($magPost->id, 'id')],
            'body' => 'required',
            'meta_title' => 'required',
            'meta_description' => 'required',
            'meta_keywords' => 'required',
            'review_status' => 'required',
            'mag_category_id' => 'required',
-           'imageValidation' => new MagazinePostImageUpdateValidationRule($request->image, $request->magPost->image),
+           'imageValidation' => new MagazinePostImageUpdateValidationRule($request->image, $magPost->image),
         ];
     }
     
