@@ -104,44 +104,50 @@
                 </a>
             </div>
             <div class="col-md-2 mb-4">
-                <h3 class="h6 mb-2 pb-1 fs-base text-dark">سایت زیساز</h3>
+                <h3 class="h6 mb-2 pb-1 fs-base text-dark">زی ساز</h3>
                 <ul class="list-unstyled fs-sm">
                     <li>
-                        <a class="nav-link" href="#">درباره ما</a>
+                        <a class="nav-link" href="#">درباره زی ساز</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">اخبار</a>
+                        <a class="nav-link" href="#">قوانین زی ساز</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">تماس با ما</a>
+                        <a class="nav-link" href="#">سوالات متداول</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">پشتیبانی</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-2 mb-4">
-                <h3 class="h6 mb-2 pb-1 fs-base text-dark">کارفرمایان</h3>
+                <h3 class="h6 mb-2 pb-1 fs-base text-dark">خدمات زی ساز</h3>
                 <ul class="list-unstyled fs-sm">
                     <li>
-                        <a class="nav-link" href="#">جستجو شغل</a>
+                        <a class="nav-link" href="#">ثبت آگهی</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">رزومه ساز</a>
+                        <a class="nav-link" href="#">ثبت پروژه</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">ثبت فرصت شغلی</a>
+                        <a class="nav-link" href="#">ثبت کسب و کار</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">عضویت در زی ساز</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">همکاری در زی ساز</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-2 mb-4">
-                <h3 class="h6 mb-2 pb-1 fs-base text-dark">کارجویان</h3>
+                <h3 class="h6 mb-2 pb-1 fs-base text-dark">مجله زی ساز</h3>
                 <ul class="list-unstyled fs-sm">
                     <li>
-                        <a class="nav-link" href="#">آپلود رزرمه</a>
+                        <a class="nav-link" href="#">مقالات زی ساز</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">ارسال درخواست</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#">ارسال ایمیل</a>
+                        <a class="nav-link" href="#">دریافت مقالات</a>
                     </li>
                 </ul>
             </div>
