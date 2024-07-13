@@ -39,12 +39,6 @@
   <link href="{{asset('assets/dashboards/assets/vendor/fonts/flag-icons.css')}}" rel="stylesheet"/>
   <!-- Core CSS -->
   <link href="{{asset('assets/dashboards/assets/css/demo.css')}}" rel="stylesheet"/>
-  <!-- Form Validation -->
-  <link href="{{asset('assets/dashboards/assets/vendor/libs/@form-validation/form-validation.css')}}" rel="stylesheet"/>
-  <link href="{{asset('assets/dashboards/assets/vendor/libs/node-waves/node-waves.css')}}" rel="stylesheet"/>
-  <link href="{{asset('assets/dashboards/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet"/>
-  <link href="{{asset('assets/dashboards/assets/vendor/libs/typeahead-js/typeahead.css')}}" rel="stylesheet"/>
-  <link href="{{asset('assets/dashboards/assets/vendor/libs/flatpickr/flatpickr.css')}}" rel="stylesheet"/>
 
   <!-- Jaban.ir Custom Styles -->
   @vite('resources/css/dashboards/master/jaban-custom-styles.css')
@@ -59,9 +53,7 @@
   <script src="{{asset('assets/dashboards/assets/vendor/libs/hammer/hammer.js')}}"></script>
   <script src="{{asset('assets/dashboards/assets/vendor/libs/typeahead-js/typeahead.js')}}"></script>
   <script src="{{asset('assets/dashboards/assets/vendor/js/menu.js')}}"></script>
-  <!-- Flat Picker -->
-  <script src="{{asset('assets/dashboards/assets/vendor/libs/moment/moment.js')}}"></script>
-  <script src="{{asset('assets/dashboards/assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
+
   <!-- Form Validation -->
   <script src="{{asset('assets/dashboards/assets/vendor/libs/@form-validation/popular.js')}}"></script>
   <script src="{{asset('assets/dashboards/assets/vendor/libs/@form-validation/bootstrap5.js')}}"></script>

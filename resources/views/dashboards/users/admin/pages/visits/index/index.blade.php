@@ -53,17 +53,119 @@
                 <div class="head-label text-center"></div>
                 
                 <div class="row">
-                    <div class="col-md-5 d-flex justify-content-start">
-                        <form method="GET" action="{{route('admin.dashboard.visits.search')}}">
-                            <div class="input-group">
-                                <button class="btn btn-outline-primary waves-effect" id="button-addon1" type="submit">
-                                    <i class="ti ti-search h-mirror me-1"></i>
-                                    جستجو
-                                </button>
-                                <input aria-describedby="button-addon1" class="form-control" placeholder="" type="search" name="q">
+                    <form method="GET" action="{{route('admin.dashboard.visits.search')}}">
+                        <div class="row">                           
+                            <div class="col-md-12 d-flex justify-content-start">
+                                <a aria-controls="visitFilters" aria-expanded="true" class="btn btn-outline-primary me-1 waves-effect waves-light" data-bs-toggle="collapse" href="#visitFilters" role="button">
+                                    نمایش فیلتر ها
+                                </a>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+        
+                        <!-- Filters -->
+                        <div class="collapse mt-3" id="visitFilters" style="">
+                            <div class="d-grid p-3 border">
+                                <div class="row g-0">
+                                    <div class="col-md-12 p-2 d-flex justify-content-end">
+                                        <button class="btn btn-primary waves-effect" id="button-addon1" type="submit">
+                                            <svg class="me-1" xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-filter"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" /></svg>
+                                            اعمال فیلتر
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row g-0">
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="q">
+                                                نام و نام خانوادگی کاربر
+                                            </label>
+                                            <input aria-describedby="button-addon1" class="form-control" placeholder="نام و نام خانوادگی" type="search" name="q">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="ip">
+                                                آی پی
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="ip" placeholder="192.168.1.1" type="text" name="ip">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-0">
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="device">
+                                                دستگاه
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="device" placeholder="WebKit" type="text" name="device">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="platform">
+                                                پلتفرم
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="platform" placeholder="Windows" type="text" name="platform">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="browser">
+                                                مرورگر
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="browser" placeholder="Chrome" type="text" name="browser">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-0">
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="country">
+                                                کشور
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="country" placeholder="Iran" type="text" name="country">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="province">
+                                                استان
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="province" placeholder="Fars" type="text" name="province">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="city">
+                                                شهر
+                                            </label>
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="city" placeholder="Shiraz" type="text" name="city">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-0">
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="filter-start-date">
+                                                تاریخ شروع
+                                            </label>
+                                            <input class="form-control bdi flatpickr-input" id="filter-start-date" placeholder="1403-01-01" type="text" readonly="readonly" name="startDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-2">
+                                        <div>
+                                            <label class="form-label" for="filter-end-date">
+                                                تاریخ پایان
+                                            </label>
+                                            <input class="form-control bdi flatpickr-input active" id="filter-end-date" placeholder="1403-02-01" type="text" readonly="readonly" name="endDate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./Filters -->
+                    </form>
                 </div>
             </div>
 
@@ -182,6 +284,11 @@
 
 @endsection
 
+@push('page-styles')
+    <link href="{{asset('assets/dashboards/assets/vendor/libs/flatpickr/flatpickr.css')}}" rel="stylesheet"/>
+    <link href="{{asset('assets/dashboards/assets/vendor/libs/pickr/pickr-themes.css')}}" rel="stylesheet"/>
+@endpush
+
 @push('page-scripts')
     <script>
         function copyToClipboard(button, text) {
@@ -198,4 +305,31 @@
             }, 2000); // Change back to 'Copy Link' after 2 seconds
         }
     </script>
+
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/moment/moment.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/jdate/jdate.min.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/flatpickr/flatpickr-jdate.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/flatpickr-jalali/dist/l10n/fa.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/pickr/pickr.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/js/forms-pickers-jalali.js')}}"></script>
+
+    <script>
+        const filterStartDate = document.querySelector('#filter-start-date');
+        if (filterStartDate) {
+            filterStartDate.flatpickr({
+                monthSelectorType: 'static',
+                locale: 'fa',
+                altFormat: 'Y/m/d',
+            });
+        }
+        const filterEndDate = document.querySelector('#filter-end-date');
+        if (filterEndDate) {
+            filterEndDate.flatpickr({
+                monthSelectorType: 'static',
+                locale: 'fa',
+                altFormat: 'Y/m/d',
+            });
+        }
+    </script>
+
 @endpush

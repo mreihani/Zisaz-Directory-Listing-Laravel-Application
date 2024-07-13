@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboards\Admin\Visits;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Morilog\Jalali\Jalalian;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Hash;
@@ -45,11 +46,51 @@ class AdminDashboardVisitController extends Controller
         $user = auth()->user();
 
         $searchString = trim($request->q);
-
-        $visits = Visit::
-        withWhereHas('user', function($query) use($searchString) {
-            $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%']);
-        })->paginate(10)->appends(['q' => $searchString]);
+        $ip = trim($request->ip);
+        $device = trim($request->device);
+        $platform = trim($request->platform);
+        $browser = trim($request->browser);
+        $country = trim($request->country);
+        $province = trim($request->province);
+        $city = trim($request->city);
+        $startDate = !empty($request->startDate) ? Jalalian::fromFormat('Y-m-d', trim($request->startDate))->toCarbon() : ''; 
+        $endDate = !empty($request->endDate) ? Jalalian::fromFormat('Y-m-d', trim($request->endDate))->toCarbon() : ''; 
+        
+        $visits = Visit::query()
+        ->when($ip, function ($query) use ($ip) {
+            $query->where('ip', $ip);
+        })
+        ->when($device, function ($query) use ($device) {
+            $query->where('device', $device);
+        })
+        ->when($platform, function ($query) use ($platform) {
+            $query->where('platform', $platform);
+        })
+        ->when($browser, function ($query) use ($browser) {
+            $query->where('browser', $browser);
+        })
+        ->when($country, function ($query) use ($country) {
+            $query->where('country', $country);
+        })
+        ->when($province, function ($query) use ($province) {
+            $query->where('province', $province);
+        })
+        ->when($city, function ($query) use ($city) {
+            $query->where('city', $city);
+        })
+        ->when($startDate, function ($query) use ($startDate) {
+            $query->whereRaw("DATE(created_at) >= ?", [$startDate->format('Y-m-d')]);
+        })
+        ->when($endDate, function ($query) use ($endDate) {
+            $query->whereRaw("DATE(created_at) <= ?", [$endDate->format('Y-m-d')]);
+        })
+        ->when($searchString, function ($query) use ($searchString) {
+            $query->whereHas('user', function ($query) use ($searchString) {
+                $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%']);
+            });
+        })
+        ->paginate(10)
+        ->appends($request->except('page'));
 
         return view('dashboards.users.admin.pages.visits.search.index', compact('user',  'visits', 'searchString')); 
     }
