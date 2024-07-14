@@ -18,27 +18,6 @@
     <script src="{{asset('assets/dashboards/assets/js/tables-datatables-basic.js')}}"></script>
 @endpush
 
-
-<div class="container-xxl">
-    @if(session()->has('success'))
-        <div class="alert alert-icon alert-success alert-bg alert-inline show-code-action mt-3 mb-0">
-            <i style="color:#50cd89" class="fas fa-check"></i> {{session('success')}}
-        </div>
-    @endif
-
-    @if(session()->has('error'))
-        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action mt-3 mb-0">
-            <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
-        </div>
-    @endif
-
-    @foreach($errors->all() as $error)
-        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action mt-3 mb-0">
-            <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
-        </div>
-    @endforeach
-</div>
-
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -55,21 +34,21 @@
                 
                 <div class="row">
                     <div class="col-md-5 d-flex justify-content-start">
-                        <form method="GET" action="{{route('admin.dashboard.visits.search')}}">
-                            <div class="input-group">
-                                <button class="btn btn-outline-primary waves-effect" id="button-addon1" type="submit">
-                                    <i class="ti ti-search h-mirror me-1"></i>
-                                    جستجو
-                                </button>
-                                <input aria-describedby="button-addon1" class="form-control" placeholder="" type="search" name="q">
-                            </div>
-                        </form>
+                       
                     </div>
-                    <div class="col-md-7 d-flex justify-content-md-end">
-                        <a href="{{route('admin.dashboard.visits.index')}}" class="text-white btn btn-primary waves-effect waves-light">
-                            <i class="ti ti-arrow-back me-sm-1"></i> 
-                            بازگشت به لیست بازدید ها
-                        </a>
+                    <div class="col-md-12 d-flex justify-content-md-end">
+                        <div class="col-md-6 p-2 d-flex justify-content-start">
+                            <a href="{{route('admin.dashboard.visits.export-excel', request()->except('page'))}}" class="btn btn-outline-secondary me-1 waves-effect waves-light" role="button">
+                                دریافت اکسل
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M8 11h8v7h-8z" /><path d="M8 15h8" /><path d="M11 11v7" /></svg>
+                            </a>
+                        </div>
+                        <div class="col-md-6 p-2 d-flex justify-content-end">
+                            <a href="{{route('admin.dashboard.visits.index')}}" class="text-white btn btn-primary waves-effect waves-light">
+                                <i class="ti ti-arrow-back me-sm-1"></i> 
+                                بازگشت به لیست بازدید ها
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,6 +158,11 @@
 
 @endsection
 
+@push('page-styles')
+    <link href="{{asset('assets/dashboards/assets/vendor/libs/flatpickr/flatpickr.css')}}" rel="stylesheet"/>
+    <link href="{{asset('assets/dashboards/assets/vendor/libs/pickr/pickr-themes.css')}}" rel="stylesheet"/>
+@endpush
+
 @push('page-scripts')
     <script>
         function copyToClipboard(button, text) {
@@ -193,6 +177,32 @@
             setTimeout(function() {
                 button.textContent = 'رونوشت';
             }, 2000); // Change back to 'Copy Link' after 2 seconds
+        }
+    </script>
+
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/moment/moment.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/jdate/jdate.min.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/flatpickr/flatpickr-jdate.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/flatpickr-jalali/dist/l10n/fa.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/vendor/libs/pickr/pickr.js')}}"></script>
+    <script src="{{asset('assets/dashboards/assets/js/forms-pickers-jalali.js')}}"></script>
+
+    <script>
+        const filterStartDate = document.querySelector('#filter-start-date');
+        if (filterStartDate) {
+            filterStartDate.flatpickr({
+                monthSelectorType: 'static',
+                locale: 'fa',
+                altFormat: 'Y/m/d',
+            });
+        }
+        const filterEndDate = document.querySelector('#filter-end-date');
+        if (filterEndDate) {
+            filterEndDate.flatpickr({
+                monthSelectorType: 'static',
+                locale: 'fa',
+                altFormat: 'Y/m/d',
+            });
         }
     </script>
 @endpush

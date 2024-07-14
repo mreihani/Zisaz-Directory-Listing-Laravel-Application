@@ -10,7 +10,10 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Dashboards\Admin\Visit;
 use Stevebauman\Purify\Facades\Purify;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Requests\Dashboards\Admin\Visits\VisitSearchRequest;
 
 
 class AdminDashboardVisitController extends Controller
@@ -42,7 +45,9 @@ class AdminDashboardVisitController extends Controller
     /**
      * Search Items
      */
-    public function search(Request $request) {
+    public function search(VisitSearchRequest $request) {
+        $validated = $request->validated();
+
         $user = auth()->user();
 
         $searchString = trim($request->q);
@@ -94,4 +99,126 @@ class AdminDashboardVisitController extends Controller
 
         return view('dashboards.users.admin.pages.visits.search.index', compact('user',  'visits', 'searchString')); 
     }
+
+    public function exportExcel(Request $request) {
+        if(empty($request->except('page'))) {
+            // Retrieve all Visit records
+            $visits = Visit::all();
+        } elseif(!empty($request->except('page')) && !$request->has('userId')) {
+
+            // Retrieve filtered Visit records
+            $searchString = trim($request->q);
+            $ip = trim($request->ip);
+            $device = trim($request->device);
+            $platform = trim($request->platform);
+            $browser = trim($request->browser);
+            $country = trim($request->country);
+            $province = trim($request->province);
+            $city = trim($request->city);
+            $startDate = !empty($request->startDate) ? Jalalian::fromFormat('Y-m-d', trim($request->startDate))->toCarbon() : ''; 
+            $endDate = !empty($request->endDate) ? Jalalian::fromFormat('Y-m-d', trim($request->endDate))->toCarbon() : ''; 
+
+            $visits = Visit::query()
+            ->when($ip, function ($query) use ($ip) {
+                $query->where('ip', $ip);
+            })
+            ->when($device, function ($query) use ($device) {
+                $query->where('device', $device);
+            })
+            ->when($platform, function ($query) use ($platform) {
+                $query->where('platform', $platform);
+            })
+            ->when($browser, function ($query) use ($browser) {
+                $query->where('browser', $browser);
+            })
+            ->when($country, function ($query) use ($country) {
+                $query->where('country', $country);
+            })
+            ->when($province, function ($query) use ($province) {
+                $query->where('province', $province);
+            })
+            ->when($city, function ($query) use ($city) {
+                $query->where('city', $city);
+            })
+            ->when($startDate, function ($query) use ($startDate) {
+                $query->whereRaw("DATE(created_at) >= ?", [$startDate->format('Y-m-d')]);
+            })
+            ->when($endDate, function ($query) use ($endDate) {
+                $query->whereRaw("DATE(created_at) <= ?", [$endDate->format('Y-m-d')]);
+            })
+            ->when($searchString, function ($query) use ($searchString) {
+                $query->whereHas('user', function ($query) use ($searchString) {
+                    $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%']);
+                });
+            })->get();
+        } elseif(!empty($request->except('page')) && $request->has('userId')) {
+            $visitorUser = User::findOrFail($request->userId);
+
+            $user = auth()->user();
+            $visits = Visit::where('user_id', $visitorUser->id)->get();
+        }
+        
+        // Create a new Spreadsheet
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        // Set the default column width for all columns
+        $sheet->getDefaultColumnDimension()->setWidth(20);
+
+        // Set the sheet direction to right-to-left
+        $sheet->setRightToLeft(true);
+
+        // Set headers for the Excel file
+        $headers = [
+            'ردیف',
+            'شماره کاربر در دیتابیس',
+            'نام و نام خانوادگی',
+            'آدرس بازدید',
+            'دستگاه',
+            'پلتفرم',
+            'مرورگر',
+            'آی پی',
+            'کشور',
+            'استان',
+            'شهر',
+            'زمان بازدید'
+        ];
+
+        // Set the headers in the first row of the Excel file
+        $sheet->fromArray([$headers], NULL, 'A1');
+
+        // Populate the Excel file with Visit data
+        $rowData = [];
+        foreach ($visits as $key => $visit) {
+            $rowData[] = [
+                $key + 1,
+                !is_null($visit->user) ? ($visit->user->id) : '',
+                !is_null($visit->user) ? ($visit->user->firstname . ' ' . $visit->user->lastname) : 'کاربر میهمان',
+                $visit->url,
+                $visit->device,
+                $visit->platform,
+                $visit->browser,
+                $visit->ip,
+                $visit->country,
+                $visit->province,
+                $visit->city,
+                jdate($visit->created_at)
+            ];
+        }
+
+        // Add data to the Excel file starting from the second row
+        $sheet->fromArray($rowData, NULL, 'A2');
+
+        // Save the Excel file
+        $writer = new Xlsx($spreadsheet);
+        $fileName = hexdec(uniqid()) . '.xlsx';
+        $filePath = public_path('assets/frontend/downloads/' . $fileName);
+        $writer->save($filePath);
+
+        // Download the Excel file
+        return response()->download($filePath)->deleteFileAfterSend(true);
+    }
 }
+
+
+

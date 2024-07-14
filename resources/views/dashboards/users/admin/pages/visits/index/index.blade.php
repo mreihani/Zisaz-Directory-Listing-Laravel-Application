@@ -18,27 +18,6 @@
     <script src="{{asset('assets/dashboards/assets/js/tables-datatables-basic.js')}}"></script>
 @endpush
 
-
-<div class="container-xxl">
-    @if(session()->has('success'))
-        <div class="alert alert-icon alert-success alert-bg alert-inline show-code-action mt-3 mb-0">
-            <i style="color:#50cd89" class="fas fa-check"></i> {{session('success')}}
-        </div>
-    @endif
-
-    @if(session()->has('error'))
-        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action mt-3 mb-0">
-            <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
-        </div>
-    @endif
-
-    @foreach($errors->all() as $error)
-        <div class="alert alert-icon alert-warning alert-bg alert-inline show-code-action mt-3 mb-0">
-            <i class="fa-solid fa-xmark-circle"></i> {{session('error')}}
-        </div>
-    @endforeach
-</div>
-
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -55,15 +34,21 @@
                 <div class="row">
                     <form method="GET" action="{{route('admin.dashboard.visits.search')}}">
                         <div class="row">                           
-                            <div class="col-md-12 d-flex justify-content-start">
+                            <div class="col-md-6 d-flex justify-content-start">
                                 <a aria-controls="visitFilters" aria-expanded="true" class="btn btn-outline-primary me-1 waves-effect waves-light" data-bs-toggle="collapse" href="#visitFilters" role="button">
                                     نمایش فیلتر ها
+                                </a>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <a href="{{route('admin.dashboard.visits.export-excel')}}" class="btn btn-outline-secondary me-1 waves-effect waves-light" role="button">
+                                    دریافت اکسل
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-spreadsheet"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M8 11h8v7h-8z" /><path d="M8 15h8" /><path d="M11 11v7" /></svg>
                                 </a>
                             </div>
                         </div>
         
                         <!-- Filters -->
-                        <div class="collapse mt-3" id="visitFilters" style="">
+                        <div class="collapse mt-3 {{ $errors->any() ? 'show' : '' }}" id="visitFilters" style="">
                             <div class="d-grid p-3 border">
                                 <div class="row g-0">
                                     <div class="col-md-12 p-2 d-flex justify-content-end">
@@ -88,8 +73,13 @@
                                             <label class="form-label" for="ip">
                                                 آی پی
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="ip" placeholder="192.168.1.1" type="text" name="ip">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="ip" placeholder="192.168.1.1" type="text" name="ip" value="{{old('ip')}}">
                                         </div>
+                                        @error("ip")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row g-0">
@@ -98,24 +88,39 @@
                                             <label class="form-label" for="device">
                                                 دستگاه
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="device" placeholder="WebKit" type="text" name="device">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="device" placeholder="WebKit" type="text" name="device" value="{{old('device')}}">
                                         </div>
+                                        @error("device")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4 p-2">
                                         <div>
                                             <label class="form-label" for="platform">
                                                 پلتفرم
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="platform" placeholder="Windows" type="text" name="platform">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="platform" placeholder="Windows" type="text" name="platform" value="{{old('platform')}}">
                                         </div>
+                                        @error("platform")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4 p-2">
                                         <div>
                                             <label class="form-label" for="browser">
                                                 مرورگر
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="browser" placeholder="Chrome" type="text" name="browser">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="browser" placeholder="Chrome" type="text" name="browser" value="{{old('browser')}}">
                                         </div>
+                                        @error("browser")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row g-0">
@@ -124,24 +129,39 @@
                                             <label class="form-label" for="country">
                                                 کشور
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="country" placeholder="Iran" type="text" name="country">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="country" placeholder="Iran" type="text" name="country" value="{{old('country')}}">
                                         </div>
+                                        @error("country")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4 p-2">
                                         <div>
                                             <label class="form-label" for="province">
                                                 استان
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="province" placeholder="Fars" type="text" name="province">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="province" placeholder="Fars" type="text" name="province" value="{{old('province')}}">
                                         </div>
+                                        @error("province")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4 p-2">
                                         <div>
                                             <label class="form-label" for="city">
                                                 شهر
                                             </label>
-                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="city" placeholder="Shiraz" type="text" name="city">
+                                            <input aria-describedby="defaultFormControlHelp" class="form-control" id="city" placeholder="Shiraz" type="text" name="city" value="{{old('city')}}">
                                         </div>
+                                        @error("city")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row g-0">
@@ -150,15 +170,22 @@
                                             <label class="form-label" for="filter-start-date">
                                                 تاریخ شروع
                                             </label>
-                                            <input class="form-control bdi flatpickr-input" id="filter-start-date" placeholder="1403-01-01" type="text" readonly="readonly" name="startDate">
+                                            <input class="form-control bdi flatpickr-input" id="filter-start-date" placeholder="1403-01-01" type="text" readonly="readonly" name="startDate" value="{{old('startDate')}}">
                                         </div>
+
+                                        <input type="hidden" name="dateValidation">
+                                        @error("dateValidation")
+                                            <span class="text-danger">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4 p-2">
                                         <div>
                                             <label class="form-label" for="filter-end-date">
                                                 تاریخ پایان
                                             </label>
-                                            <input class="form-control bdi flatpickr-input active" id="filter-end-date" placeholder="1403-02-01" type="text" readonly="readonly" name="endDate">
+                                            <input class="form-control bdi flatpickr-input active" id="filter-end-date" placeholder="1403-02-01" type="text" readonly="readonly" name="endDate" value="{{old('endDate')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -331,5 +358,4 @@
             });
         }
     </script>
-
 @endpush

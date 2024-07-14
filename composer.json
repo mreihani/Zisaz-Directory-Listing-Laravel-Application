@@ -15,6 +15,7 @@
         "livewire/livewire": "^3.4",
         "morilog/jalali": "3.*",
         "pbmedia/laravel-ffmpeg": "^8.5",
+        "phpoffice/phpspreadsheet": "^2.1",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "stevebauman/location": "^7.3",
         "stevebauman/purify": "^6.1"
