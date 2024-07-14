@@ -33,16 +33,16 @@ class VisitorLogging implements ShouldQueue
         $location = \Location::get($ip) ?: null;
 
         $data = [
-            'url' => $this->incoming['url'] ?? null,
-            'device' => $this->incoming['device'] ?? null,
-            'platform' => $this->incoming['platform'] ?? null,
-            'browser' => $this->incoming['browser'] ?? null,
-            'ip' => $ip ?? null,
-            'user_id' => $this->incoming['user_id'] ?? null,
-            'country' => (!is_null($location) && $location->countryName) ? $location->countryName : null,
-            'city' => (!is_null($location) && $location->cityName) ? $location->cityName : null,
-            'province' => (!is_null($location) && $location->regionName) ? $location->regionName : null,
-            'country_code' => (!is_null($location) && $location->countryCode) ? $location->countryCode : null,
+            'url' => !empty($this->incoming['url']) ?: null,
+            'device' => !empty($this->incoming['device']) ?: null,
+            'platform' => !empty($this->incoming['platform']) ?: null,
+            'browser' => !empty($this->incoming['browser']) ?: null,
+            'ip' => !empty($ip) ?: null,
+            'user_id' => !empty($this->incoming['user_id']) ?: null,
+            'country' => (!empty($location) && !empty($location->countryName)) ? $location->countryName : null,
+            'city' => (!empty($location) && !empty($location->cityName)) ? $location->cityName : null,
+            'province' => (!empty($location) && !empty($location->regionName)) ? $location->regionName : null,
+            'country_code' => (!empty($location) && !empty($location->countryCode)) ? $location->countryCode : null,
         ];
 
         Visit::create($data);

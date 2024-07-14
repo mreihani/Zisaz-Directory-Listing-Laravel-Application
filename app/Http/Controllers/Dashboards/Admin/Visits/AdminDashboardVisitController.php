@@ -198,10 +198,10 @@ class AdminDashboardVisitController extends Controller
         foreach ($visits as $key => $visit) {
             $rowData[] = [
                 $key + 1,
-                !is_null($visit->user) ? ($visit->user->id) : '',
-                !is_null($visit->user) ? ($visit->user->firstname . ' ' . $visit->user->lastname) : 'کاربر میهمان',
-                !is_null($visit->user) ? ($visit->user->phone) : '',
-                (!is_null($visit->user) && !is_null($visit->user->email)) ? ($visit->user->email) : '',
+                !empty($visit->user) ? ($visit->user->id) : '',
+                !empty($visit->user) ? ($visit->user->firstname . ' ' . $visit->user->lastname) : 'کاربر میهمان',
+                !empty($visit->user) ? ($visit->user->phone) : '',
+                (!empty($visit->user) && !empty($visit->user->email)) ? ($visit->user->email) : '',
                 $visit->url,
                 $visit->device,
                 $visit->platform,
