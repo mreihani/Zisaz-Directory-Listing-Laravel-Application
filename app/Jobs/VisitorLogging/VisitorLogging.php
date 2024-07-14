@@ -33,12 +33,12 @@ class VisitorLogging implements ShouldQueue
         $location = \Location::get($ip) ?: null;
 
         $data = [
-            'url' => $this->incoming['url'],
-            'device' => $this->incoming['device'],
-            'platform' => $this->incoming['platform'],
-            'browser' => $this->incoming['browser'],
-            'ip' => $ip,
-            'user_id' => $this->incoming['user_id'],
+            'url' => $this->incoming['url'] ?? null,
+            'device' => $this->incoming['device'] ?? null,
+            'platform' => $this->incoming['platform'] ?? null,
+            'browser' => $this->incoming['browser'] ?? null,
+            'ip' => $ip ?? null,
+            'user_id' => $this->incoming['user_id'] ?? null,
             'country' => (!is_null($location) && $location->countryName) ? $location->countryName : null,
             'city' => (!is_null($location) && $location->cityName) ? $location->cityName : null,
             'province' => (!is_null($location) && $location->regionName) ? $location->regionName : null,

@@ -30,9 +30,6 @@ class VisitSearchRequest extends FormRequest
            'device' => $request->device ? 'regex:/^[a-zA-Z\s]*$/' : '',
            'platform' => $request->platform ? 'regex:/^[a-zA-Z\s]*$/' : '',
            'browser' => $request->browser ? 'regex:/^[a-zA-Z\s]*$/' : '',
-           'country' => $request->country ? 'regex:/^[a-zA-Z\s]*$/' : '',
-           'province' => $request->province ? 'regex:/^[a-zA-Z\s]*$/' : '',
-           'city' => $request->city ? 'regex:/^[a-zA-Z\s]*$/' : '',
            'dateValidation' => new VisitsDateSpanValidationRule($request->startDate, $request->endDate)
         ];
     }
@@ -44,9 +41,6 @@ class VisitSearchRequest extends FormRequest
             'device.regex' => 'لطفا نام دستگاه را به درستی وارد نمایید.',
             'platform.regex' => 'لطفا نام پلتفرم را به درستی وارد نمایید.',
             'browser.regex' => 'لطفا نام مرورگر را به درستی وارد نمایید.',
-            'country.regex' => 'لطفا کشور را به درستی وارد نمایید.',
-            'province.regex' => 'لطفا استان را به درستی وارد نمایید.',
-            'city.regex' => 'لطفا شهر را به درستی وارد نمایید.',
         ];
     }
 }

@@ -24,7 +24,7 @@ class AdminDashboardVisitController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $visits = Visit::paginate(10);
+        $visits = Visit::orderBy('created_at', 'desc')->paginate(10);
 
         return view('dashboards.users.admin.pages.visits.index.index', compact('user', 'visits'));  
     }
@@ -37,7 +37,7 @@ class AdminDashboardVisitController extends Controller
         $visitorUser = User::findOrFail($request->userId);
 
         $user = auth()->user();
-        $visits = Visit::where('user_id', $visitorUser->id)->paginate(10)->appends(['userId' => $visitorUser->id]);
+        $visits = Visit::where('user_id', $visitorUser->id)->orderBy('created_at', 'desc')->paginate(10)->appends(['userId' => $visitorUser->id]);
 
         return view('dashboards.users.admin.pages.visits.history.index', compact('user', 'visits', 'visitorUser'));  
     }
@@ -94,6 +94,7 @@ class AdminDashboardVisitController extends Controller
                 $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%']);
             });
         })
+        ->orderBy('created_at', 'desc')
         ->paginate(10)
         ->appends($request->except('page'));
 
@@ -103,7 +104,7 @@ class AdminDashboardVisitController extends Controller
     public function exportExcel(Request $request) {
         if(empty($request->except('page'))) {
             // Retrieve all Visit records
-            $visits = Visit::all();
+            $visits = Visit::orderBy('created_at', 'desc')->get();
         } elseif(!empty($request->except('page')) && !$request->has('userId')) {
 
             // Retrieve filtered Visit records
@@ -150,29 +151,34 @@ class AdminDashboardVisitController extends Controller
                 $query->whereHas('user', function ($query) use ($searchString) {
                     $query->whereRaw("CONCAT(firstname, ' ', lastname) like ?", ['%' . $searchString . '%']);
                 });
-            })->get();
+            })->orderBy('created_at', 'desc')->get();
         } elseif(!empty($request->except('page')) && $request->has('userId')) {
             $visitorUser = User::findOrFail($request->userId);
 
             $user = auth()->user();
-            $visits = Visit::where('user_id', $visitorUser->id)->get();
+            $visits = Visit::where('user_id', $visitorUser->id)->orderBy('created_at', 'desc')->get();
         }
         
         // Create a new Spreadsheet
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
+        $sheet = $spreadsheet->getActiveSheet()->setTitle('جدول بازدید زی ساز');
         
         // Set the default column width for all columns
-        $sheet->getDefaultColumnDimension()->setWidth(20);
+        $sheet->getDefaultColumnDimension()->setWidth(25);
 
         // Set the sheet direction to right-to-left
         $sheet->setRightToLeft(true);
+
+        // Set a wider width for the 'آدرس بازدید' column
+        $sheet->getColumnDimension('F')->setWidth(50); // Adjust the width as needed
 
         // Set headers for the Excel file
         $headers = [
             'ردیف',
             'شماره کاربر در دیتابیس',
             'نام و نام خانوادگی',
+            'شماره تلفن',
+            'ایمیل',
             'آدرس بازدید',
             'دستگاه',
             'پلتفرم',
@@ -194,6 +200,8 @@ class AdminDashboardVisitController extends Controller
                 $key + 1,
                 !is_null($visit->user) ? ($visit->user->id) : '',
                 !is_null($visit->user) ? ($visit->user->firstname . ' ' . $visit->user->lastname) : 'کاربر میهمان',
+                !is_null($visit->user) ? ($visit->user->phone) : '',
+                (!is_null($visit->user) && !is_null($visit->user->email)) ? ($visit->user->email) : '',
                 $visit->url,
                 $visit->device,
                 $visit->platform,
