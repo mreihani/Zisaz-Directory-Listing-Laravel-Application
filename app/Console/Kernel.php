@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
 
         // Delete soft-deleted projects and their folders after 6 month
         $schedule->command('app:force-delete-trashed-projects')->daily();
+
+        // update visitors charts daily
+        $schedule->command('app:update-visitor-charts')->daily();
     }
 
     /**

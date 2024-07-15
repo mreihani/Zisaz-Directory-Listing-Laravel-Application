@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('province')->nullable();
             $table->string('city')->nullable();
+            $table->string('j_date')->nullable();
             $table->timestamps();
         });
     }

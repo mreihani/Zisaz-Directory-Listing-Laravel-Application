@@ -120,6 +120,8 @@
 <!-- Main JS -->
 <script src="{{asset('assets/dashboards/assets/js/main.js')}}"></script>
 
+@stack('page-scripts-after-main')
+
 @vite('resources/js/frontend/master/toast-timer-hide.js')
 
 </body>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboards\Admin\Visits;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Morilog\Jalali\Jalalian;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,7 @@ use App\Models\Dashboards\Admin\Visit;
 use Stevebauman\Purify\Facades\Purify;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use App\Models\Dashboards\Admin\VisitChart;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\Dashboards\Admin\Visits\VisitSearchRequest;
 
@@ -25,7 +27,7 @@ class AdminDashboardVisitController extends Controller
     {
         $user = auth()->user();
         $visits = Visit::orderBy('created_at', 'desc')->paginate(10);
-
+    
         return view('dashboards.users.admin.pages.visits.index.index', compact('user', 'visits'));  
     }
 
@@ -225,6 +227,29 @@ class AdminDashboardVisitController extends Controller
 
         // Download the Excel file
         return response()->download($filePath)->deleteFileAfterSend(true);
+    }
+
+    /**
+     * Display visits charts
+     */
+    public function show() {
+        $user = auth()->user();
+
+        $dateSpan = VisitChart::all()->pluck('visits_date');
+
+        $globalVisitors = VisitChart::all()->pluck('global_visits_count');
+        $globalUniqueVisitors = VisitChart::all()->pluck('global_unique_visits_count');
+        $iranVisitors = VisitChart::all()->pluck('iran_visits_count');
+        $iranUniqueVisitors = VisitChart::all()->pluck('iran_unique_visits_count');
+
+        return view('dashboards.users.admin.pages.visits.show.index', compact(
+            'user',
+            'dateSpan',
+            'globalVisitors',
+            'globalUniqueVisitors',
+            'iranVisitors',
+            'iranUniqueVisitors'
+        )); 
     }
 }
 
