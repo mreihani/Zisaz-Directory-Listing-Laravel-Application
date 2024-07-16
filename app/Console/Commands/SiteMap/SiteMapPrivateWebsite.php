@@ -29,7 +29,7 @@ class SiteMapPrivateWebsite extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create();
+        $sitemap = Sitemap::create('https://zisaz.ir/');
 
         Psite::all()->each(function (Psite $psiteItem) use ($sitemap) {
             $sitemap->add(Url::create("/portal/{$psiteItem->slug}"));

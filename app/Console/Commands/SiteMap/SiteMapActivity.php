@@ -30,7 +30,7 @@ class SiteMapActivity extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create();
+        $sitemap = Sitemap::create('https://zisaz.ir/');
 
         Activity::all()->each(function (Activity $activityItem) use ($sitemap) {
             $sitemap->add(Url::create("/activity-item/{$activityItem->slug}"));

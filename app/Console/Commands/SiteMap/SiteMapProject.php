@@ -29,7 +29,7 @@ class SiteMapProject extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create();
+        $sitemap = Sitemap::create('https://zisaz.ir/');
 
         Project::all()->each(function (Project $projectItem) use ($sitemap) {
             $sitemap->add(Url::create("/project-item/{$projectItem->slug}"));
