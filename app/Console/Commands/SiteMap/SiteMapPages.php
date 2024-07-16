@@ -30,7 +30,7 @@ class SiteMapPages extends Command
     public function handle()
     {
         $sitemap = Sitemap::create()
-        ->add(Url::create(''))
+        ->add(Url::create('https://zisaz.ir/'))
         ->add(Url::create('https://zisaz.ir/faq'))
         ->add(Url::create('https://zisaz.ir/support'))
         ->add(Url::create('https://zisaz.ir/about-us'))
