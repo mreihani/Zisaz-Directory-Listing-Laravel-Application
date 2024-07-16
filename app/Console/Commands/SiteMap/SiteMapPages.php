@@ -29,12 +29,12 @@ class SiteMapPages extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create('https://zisaz.ir/')
-        ->add(Url::create('/'))
-        ->add(Url::create('/faq'))
-        ->add(Url::create('/support'))
-        ->add(Url::create('/about-us'))
-        ->add(Url::create('/contact-us'));
+        $sitemap = Sitemap::create()
+        ->add(Url::create(''))
+        ->add(Url::create('https://zisaz.ir/faq'))
+        ->add(Url::create('https://zisaz.ir/support'))
+        ->add(Url::create('https://zisaz.ir/about-us'))
+        ->add(Url::create('https://zisaz.ir/contact-us'));
 
         $sitemap->writeToFile(public_path('/sitemap/sitemap_pages.xml'));
     }

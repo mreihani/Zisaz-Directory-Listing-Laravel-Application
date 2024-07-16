@@ -29,10 +29,10 @@ class SiteMapMagPost extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create('https://zisaz.ir/');
+        $sitemap = Sitemap::create();
 
         MagPost::all()->each(function (MagPost $postItem) use ($sitemap) {
-            $sitemap->add(Url::create("/mag-item/{$postItem->slug}"));
+            $sitemap->add(Url::create("https://zisaz.ir/mag-item/{$postItem->slug}"));
         });
 
         $sitemap->writeToFile(public_path('/sitemap/sitemap_magposts.xml'));

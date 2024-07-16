@@ -29,10 +29,10 @@ class SiteMapPrivateWebsite extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create('https://zisaz.ir/');
+        $sitemap = Sitemap::create();
 
         Psite::all()->each(function (Psite $psiteItem) use ($sitemap) {
-            $sitemap->add(Url::create("/portal/{$psiteItem->slug}"));
+            $sitemap->add(Url::create("https://zisaz.ir/portal/{$psiteItem->slug}"));
         });
 
         $sitemap->writeToFile(public_path('/sitemap/sitemap_psites.xml'));

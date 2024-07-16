@@ -30,10 +30,10 @@ class SiteMapActivity extends Command
      */
     public function handle()
     {
-        $sitemap = Sitemap::create('https://zisaz.ir/');
+        $sitemap = Sitemap::create();
 
         Activity::all()->each(function (Activity $activityItem) use ($sitemap) {
-            $sitemap->add(Url::create("/activity-item/{$activityItem->slug}"));
+            $sitemap->add(Url::create("https://zisaz.ir/activity-item/{$activityItem->slug}"));
         });
 
         $sitemap->writeToFile(public_path('/sitemap/sitemap_activities.xml'));
