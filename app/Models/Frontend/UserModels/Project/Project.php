@@ -3,8 +3,9 @@
 namespace App\Models\Frontend\UserModels\Project;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\Project\Sections\ProjectInfo;
@@ -77,5 +78,26 @@ class Project extends Model
     // This is for slug, it gets the last ID to create a unique random string
     public static function getLatestId() {
         return self::queryWithAllVerificationStatuses()->latest()->first() ? self::queryWithAllVerificationStatuses()->latest()->first()->id : 0;
+    }
+
+    public function setSeoMeta() {
+        if(!empty($this->meta_title)) {
+            SEOMeta::setTitle($this->meta_title);
+        } else {
+            SEOMeta::setTitle($this->projectInfo->title);
+        }
+
+        if(!empty($this->meta_description)) {
+            SEOMeta::setDescription($this->meta_description);
+        } else {
+            SEOMeta::setDescription($this->projectFacility->project_description);
+        }
+
+        if(!empty($this->meta_keywords)) {
+            $meta_keywords = explode('،', $this->meta_keywords);
+            SEOMeta::setKeywords($meta_keywords);
+        } else {
+            SEOMeta::setKeywords($this->welfareFacility->pluck('title')->toArray());
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Frontend\UserModels\PrivateSite;
 
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -108,5 +109,24 @@ class Psite extends Model
 
     public function ads() {
         return $this->hasOne(PsiteAds::class);
+    }
+
+    public function setSeoMeta() {
+        if(!empty($this->meta_title)) {
+            SEOMeta::setTitle($this->meta_title);
+        } else {
+            SEOMeta::setTitle($this->hero->title);
+        }
+
+        if(!empty($this->meta_description)) {
+            SEOMeta::setDescription($this->meta_description);
+        } else {
+            SEOMeta::setDescription($this->hero->description);
+        }
+
+        if(!empty($this->meta_keywords)) {
+            $meta_keywords = explode('،', $this->meta_keywords);
+            SEOMeta::setKeywords($meta_keywords);
+        } 
     }
 }

@@ -29,6 +29,13 @@ class Kernel extends ConsoleKernel
 
         // update visitors charts daily
         $schedule->command('app:update-visitor-charts')->daily();
+
+        // generate site maps
+        $schedule->command('app:site-map-pages')->daily();
+        $schedule->command('app:site-map-mag-post')->daily();
+        $schedule->command('app:site-map-activity')->daily();
+        $schedule->command('app:site-map-private-website')->daily();
+        $schedule->command('app:site-map-project')->daily();
     }
 
     /**

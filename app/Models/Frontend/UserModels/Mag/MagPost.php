@@ -3,6 +3,7 @@
 namespace App\Models\Frontend\UserModels\Mag;
 
 use App\Models\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -40,5 +41,19 @@ class MagPost extends Model
 
     public function magazineCategory() {
         return $this->belongsTo(MagCategory::class, 'mag_category_id');
+    }
+
+    public function setSeoMeta() {
+        if(!empty($this->meta_title)) {
+            SEOMeta::setTitle($this->meta_title);
+        } 
+
+        if(!empty($this->meta_description)) {
+            SEOMeta::setDescription($this->meta_description);
+        } 
+        if(!empty($this->meta_keywords)) {
+            $meta_keywords = explode('،', $this->meta_keywords);
+            SEOMeta::setKeywords($meta_keywords);
+        }
     }
 }

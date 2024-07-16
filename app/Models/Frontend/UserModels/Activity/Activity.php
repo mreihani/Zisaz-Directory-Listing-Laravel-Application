@@ -4,6 +4,7 @@ namespace App\Models\Frontend\UserModels\Activity;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -128,5 +129,26 @@ class Activity extends Model
 
     public function contractor() {
         return $this->hasOne(Contractor::class);
+    }
+
+    public function setSeoMeta() {
+        if(!empty($this->meta_title)) {
+            SEOMeta::setTitle($this->meta_title);
+        } else {
+            SEOMeta::setTitle($this->subactivity->item_title);
+        }
+
+        if(!empty($this->meta_description)) {
+            SEOMeta::setDescription($this->meta_description);
+        } else {
+            SEOMeta::setDescription($this->subactivity->item_description);
+        }
+
+        if(!empty($this->meta_keywords)) {
+            $meta_keywords = explode('،', $this->meta_keywords);
+            SEOMeta::setKeywords($meta_keywords);
+        } else {
+            SEOMeta::setKeywords($this->activityGroups->pluck('title')->toArray());
+        }
     }
 }

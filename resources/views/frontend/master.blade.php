@@ -6,13 +6,9 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
-    <title>
-      سامانه زی ساز
-    </title>
-    <!-- SEO Meta Tags-->
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
+    
+    {!! SEO::generate() !!}
+    
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->

@@ -14,6 +14,8 @@ class MagPagesController extends Controller
     public function mag($slug) {
         $mag = MagPost::where('slug', $slug)->with('magazineCategory')->get()->first() ?: abort(404);
 
+        $mag->setSeoMeta();
+
         // reading time estimation
         $textWithoutSpaces = str_replace(' ', '', $mag->body);
         $characterCount = strlen($textWithoutSpaces);

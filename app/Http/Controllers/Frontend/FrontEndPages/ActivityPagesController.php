@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Frontend\FrontEndPages;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use App\Models\Frontend\UserModels\Activity\Activity;
 
 class ActivityPagesController extends Controller
@@ -17,7 +17,9 @@ class ActivityPagesController extends Controller
         } else {
             $activity = Activity::where('slug', $slug)->with('subactivity')->get()->first() ?: abort(404);
         }
-        
+
+        $activity->setSeoMeta();
+
         // get similar items for carousel element
         $similarItemsCount = $activity->withWhereHas('subactivity', function($query) use($activity) {
             $query->where('type', $activity->subactivity->type);

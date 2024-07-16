@@ -82,6 +82,8 @@ class PersonalWebsitePagesContoller extends Controller
             abort(404);
         }
 
+        $psite->setSeoMeta();
+
         $qrCode = QrCode::size(150)->generate(URL::to('/site') . '/' . $psite->slug);
 
         // load five types of ads items related to the user

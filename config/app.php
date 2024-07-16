@@ -171,7 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
-        
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -190,6 +190,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
     ])->toArray(),
 
 ];

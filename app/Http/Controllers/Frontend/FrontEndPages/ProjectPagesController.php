@@ -41,6 +41,8 @@ class ProjectPagesController extends Controller
             abort(404);
         }
 
+        $project->setSeoMeta();
+
         return view('frontend.pages.project.project-index.index', compact(
             'project', 
         ));
