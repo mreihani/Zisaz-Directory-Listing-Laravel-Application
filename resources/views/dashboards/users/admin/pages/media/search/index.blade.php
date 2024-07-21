@@ -134,14 +134,16 @@
                                             (مگابایت)
                                         </td>
                                         <td>
-                                            <form action="{{route('admin.dashboard.media.destroy', $mediaFileItem->id)}}" method="POST">
-                                                @method('delete')
-                                                @csrf
+                                            @can('media_destroy')
+                                                <form action="{{route('admin.dashboard.media.destroy', $mediaFileItem->id)}}" method="POST">
+                                                    @method('delete')
+                                                    @csrf
 
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-trash"></i>
-                                                </button>
-                                            </form>
+                                                    <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                                        <i class="text-primary ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach        

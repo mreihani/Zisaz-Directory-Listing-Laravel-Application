@@ -15,6 +15,11 @@ use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class AdminDashboardUsersActivitiesPrivateWebsiteDeletedController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:psite_index,user')->only(['index','search']);
+        $this->middleware('can:psite_restore,user')->only(['restore']);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -15,6 +15,12 @@ use App\Http\Requests\Dashboards\Admin\Media\MediaStoreRequest;
 
 class AdminDashboardMediaController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:media_create,user')->only(['create','store']);
+        $this->middleware('can:media_index,user')->only(['index','search']);
+        $this->middleware('can:media_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

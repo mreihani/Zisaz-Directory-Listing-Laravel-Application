@@ -116,17 +116,21 @@
                                             @endif
                                         </td>
                                         <td class="d-flex align-items-center">
-                                            <form action="{{route('admin.dashboard.users-activities.ads.inquiry.pending.destroy', $activityItem->id)}}" method="POST">
-                                                @method('delete')
-                                                @csrf
+                                            @can('ads_destroy')
+                                                <form action="{{route('admin.dashboard.users-activities.ads.inquiry.pending.destroy', $activityItem->id)}}" method="POST">
+                                                    @method('delete')
+                                                    @csrf
 
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-trash"></i>
-                                                </button>
-                                            </form>
-                                            <a href="{{route('admin.dashboard.users-activities.ads.inquiry.pending.edit', $activityItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                <i class="text-primary ti ti-zoom-check"></i>
-                                            </a>
+                                                    <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                                        <i class="text-primary ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+                                            @can('ads_edit')
+                                                <a href="{{route('admin.dashboard.users-activities.ads.inquiry.pending.edit', $activityItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                    <i class="text-primary ti ti-zoom-check"></i>
+                                                </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach        

@@ -95,4 +95,18 @@ class User extends Authenticatable
     public function magazine() {
         return $this->hasMany(MagPost::class);
     }
+
+    public function hasPermission($permission) {
+        $userRole = auth()->user()->role;
+
+        if($userRole === 'admin') {
+            return true;
+        }
+
+        if($permission->roles->pluck('title')->contains($userRole)) {
+            return true;
+        }
+
+        return false;
+    }
 }

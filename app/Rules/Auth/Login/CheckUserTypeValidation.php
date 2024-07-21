@@ -17,7 +17,7 @@ class CheckUserTypeValidation implements ValidationRule
     {
         $user = User::where($attribute, $value)->first();
 
-        if($user->role == 'user') {
+        if(in_array($user->role, collect(config('jaban.user_roles'))->pluck('title')->toArray())) {
             $fail("کاربر مورد نظر دسترسی لازم را ندارد.");
         }
     }

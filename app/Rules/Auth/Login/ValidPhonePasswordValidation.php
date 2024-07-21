@@ -20,18 +20,19 @@ class ValidPhonePasswordValidation implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // Get user object by phone number
-        $user = User::where('phone', $this->phone)->first();
+        $user = User::where('phone', trim($this->phone))->first();
         
         if(!$user || is_null($user->role)) {
             $fail('مجددا سعی نمایید.');
         }
-
+       
         if(is_null($this->password) || $this->password == '') {
             $fail('کلمه عبور خود را وارد نمایید.');
-        } elseif($user->role != 'admin') {
+        } elseif(!in_array($user->role, collect(config('jaban.admin_roles'))->pluck('title')->toArray())) {
             $fail('فقط مدیر اجازه دسترسی به این بخش را دارد.');
         } elseif (is_null($user) || !Hash::check($this->password, $user->password)) {
             $fail('شماره تلفن یا کلمه عبور نادرست است.');
         }
     }
 }
+

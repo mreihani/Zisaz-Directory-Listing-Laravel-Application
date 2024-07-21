@@ -21,13 +21,16 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if(Auth::check() && Auth::user()->role == 'user') {
+
+                if(auth()->check() && in_array(auth()->user()->role, collect(config('jaban.user_roles'))->pluck('title')->toArray())) {
                     return redirect(route('user.dashboard.index'));
-                } elseif(Auth::check() && Auth::user()->role == 'admin') {
-                    return redirect(route('admin.dashboard.index'));
-                } else {
-                    return redirect('/');
                 }
+
+                if(auth()->check() && in_array(auth()->user()->role, collect(config('jaban.admin_roles'))->pluck('title')->toArray())) {
+                    return redirect(route('admin.dashboard.index'));
+                }
+               
+                return redirect('/');
             }
         }
 

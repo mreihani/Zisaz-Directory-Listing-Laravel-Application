@@ -16,6 +16,11 @@ use App\Models\Frontend\UserModels\Project\Project;
 
 class AdminDashboardUsersActivitiesProjectDeletedController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:project_index,user')->only(['index','search']);
+        $this->middleware('can:project_restore,user')->only(['restore']);
+    }
+
     /**
      * Display a listing of the resource.
      */

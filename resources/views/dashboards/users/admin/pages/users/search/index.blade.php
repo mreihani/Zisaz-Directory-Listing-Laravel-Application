@@ -112,7 +112,31 @@
                                         <td>
                                             @if($userItem->role == 'admin')
                                                 <span class="badge rounded-pill bg-label-primary">
-                                                    مدیر
+                                                    مدیر کل
+                                                </span>
+                                            @elseif($userItem->role == 'senior_support')
+                                                <span class="badge rounded-pill bg-label-success">
+                                                    پشتیبان ارشد
+                                                </span>
+                                            @elseif($userItem->role == 'support_level_one')
+                                                <span class="badge rounded-pill bg-label-success">
+                                                    پشتیبان سطح یک
+                                                </span>
+                                            @elseif($userItem->role == 'marketer')
+                                                <span class="badge rounded-pill bg-label-success">
+                                                    بازاریاب
+                                                </span>
+                                            @elseif($userItem->role == 'editor')
+                                                <span class="badge rounded-pill bg-label-success">
+                                                    نویسنده
+                                                </span>
+                                            @elseif($userItem->role == 'real_estate_manager')
+                                                <span class="badge rounded-pill bg-label-success">
+                                                    مدیر املاک
+                                                </span>
+                                            @elseif($userItem->role == 'real_estate_agent')
+                                                <span class="badge rounded-pill bg-label-success">
+                                                    مشاور املاک
                                                 </span>
                                             @elseif($userItem->role == 'construction')
                                                 <span class="badge rounded-pill bg-label-secondary">
@@ -121,17 +145,21 @@
                                             @endif
                                         </td>
                                         <td class="d-flex align-items-center">
-                                            <form action="{{route('admin.dashboard.user.destroy', $userItem->id)}}" method="POST">
-                                                @method('delete')
-                                                @csrf
+                                            @can('user_destroy')
+                                                <form action="{{route('admin.dashboard.user.destroy', $userItem->id)}}" method="POST">
+                                                    @method('delete')
+                                                    @csrf
 
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-trash"></i>
-                                                </button>
-                                            </form>
-                                            <a href="{{route('admin.dashboard.user.edit', $userItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                <i class="text-primary ti ti-pencil"></i>
-                                            </a>
+                                                    <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                                        <i class="text-primary ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
+                                            @can('user_edit')
+                                                <a href="{{route('admin.dashboard.user.edit', $userItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                    <i class="text-primary ti ti-pencil"></i>
+                                                </a>
+                                            @endcan    
                                         </td>
                                     </tr>
                                 @endforeach        

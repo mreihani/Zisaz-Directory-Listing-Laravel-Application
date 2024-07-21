@@ -27,8 +27,8 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-
-        if ($request->user()->role == 'admin') {
+        
+        if (in_array($request->user()->role, collect(config('jaban.admin_roles'))->pluck('title')->toArray())) {
             return redirect(route('admin.dashboard.index'));
         }
      

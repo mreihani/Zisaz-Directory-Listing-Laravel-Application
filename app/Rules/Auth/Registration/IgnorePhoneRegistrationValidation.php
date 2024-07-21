@@ -20,7 +20,7 @@ class IgnorePhoneRegistrationValidation implements ValidationRule
         }
 
         // این برای کاربر مدیر چک میشه که شماره مدیر رو نتونه وارد کنه
-        if(User::where($attribute, $value)->where('role','admin')->exists()) {
+        if(User::where($attribute, $value)->whereIn('role', collect(config('jaban.admin_roles'))->pluck('title')->toArray())->exists()) {
             $fail('شماره تلفن مورد نظر قبلا در سامانه ثبت شده است. لطفا شماره دیگری وارد نمایید.');
         }
     }

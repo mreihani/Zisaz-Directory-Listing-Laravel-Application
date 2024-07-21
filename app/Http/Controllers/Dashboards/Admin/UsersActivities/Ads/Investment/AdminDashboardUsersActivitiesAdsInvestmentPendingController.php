@@ -18,6 +18,12 @@ use App\Http\Requests\Dashboards\Admin\UsersActivities\Ads\Investment\Pending\Us
 
 class AdminDashboardUsersActivitiesAdsInvestmentPendingController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:ads_index,user')->only(['index','search']);
+        $this->middleware('can:ads_edit,user')->only(['edit','update']);
+        $this->middleware('can:ads_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

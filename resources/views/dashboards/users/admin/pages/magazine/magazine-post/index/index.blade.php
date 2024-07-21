@@ -64,11 +64,13 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-7 d-flex justify-content-md-end">
-                        <a href="{{route('admin.dashboard.magazine.post.create')}}" class="text-white btn btn-primary waves-effect waves-light">
-                            افزودن مقاله
-                        </a>
-                    </div>
+                    @can('magazine_post_create')
+                        <div class="col-md-7 d-flex justify-content-md-end">
+                            <a href="{{route('admin.dashboard.magazine.post.create')}}" class="text-white btn btn-primary waves-effect waves-light">
+                                افزودن مقاله
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
 
@@ -110,17 +112,21 @@
                                             @endif
                                         </td>
                                         <td class="d-flex align-items-center">
-                                            <form action="{{route('admin.dashboard.magazine.post.destroy', $magPostItem->id)}}" method="POST">
-                                                @method('delete')
-                                                @csrf
+                                            @can('magazine_post_destroy')
+                                                <form action="{{route('admin.dashboard.magazine.post.destroy', $magPostItem->id)}}" method="POST">
+                                                    @method('delete')
+                                                    @csrf
 
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-trash"></i>
-                                                </button>
-                                            </form>
-                                            <a href="{{route('admin.dashboard.magazine.post.edit', $magPostItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                <i class="text-primary ti ti-pencil"></i>
-                                            </a>
+                                                    <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                                        <i class="text-primary ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan    
+                                            @can('magazine_post_edit')
+                                                <a href="{{route('admin.dashboard.magazine.post.edit', $magPostItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                    <i class="text-primary ti ti-pencil"></i>
+                                                </a>
+                                            @endcan    
                                         </td>
                                     </tr>
                                 @endforeach        

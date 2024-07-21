@@ -20,6 +20,10 @@ use App\Http\Requests\Dashboards\Admin\Visits\VisitSearchRequest;
 
 class AdminDashboardVisitController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:visits_index,user')->only(['index','history','search','exportExcel','showIran','showGlobal']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -232,7 +236,7 @@ class AdminDashboardVisitController extends Controller
     /**
      * Display visits charts
      */
-    public function show() {
+    public function showIran() {
         $user = auth()->user();
 
         $dateSpan = VisitChart::all()->pluck('visits_date');
@@ -242,7 +246,27 @@ class AdminDashboardVisitController extends Controller
         $iranVisitors = VisitChart::all()->pluck('iran_visits_count');
         $iranUniqueVisitors = VisitChart::all()->pluck('iran_unique_visits_count');
 
-        return view('dashboards.users.admin.pages.visits.show.index', compact(
+        return view('dashboards.users.admin.pages.visits.show.iran', compact(
+            'user',
+            'dateSpan',
+            'globalVisitors',
+            'globalUniqueVisitors',
+            'iranVisitors',
+            'iranUniqueVisitors'
+        )); 
+    }
+
+    public function showGlobal() {
+        $user = auth()->user();
+
+        $dateSpan = VisitChart::all()->pluck('visits_date');
+
+        $globalVisitors = VisitChart::all()->pluck('global_visits_count');
+        $globalUniqueVisitors = VisitChart::all()->pluck('global_unique_visits_count');
+        $iranVisitors = VisitChart::all()->pluck('iran_visits_count');
+        $iranUniqueVisitors = VisitChart::all()->pluck('iran_unique_visits_count');
+
+        return view('dashboards.users.admin.pages.visits.show.global', compact(
             'user',
             'dateSpan',
             'globalVisitors',

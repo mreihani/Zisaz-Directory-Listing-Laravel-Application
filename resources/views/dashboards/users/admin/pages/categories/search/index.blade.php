@@ -121,40 +121,44 @@
                                                             </a>
                                                         </li>
                                                     @endif
-                                                    @if(isset($mergedCollectionItem->activityCategory))
-                                                        <li>
-                                                            <form action="{{route('admin.dashboard.category.destroy-actgrp', $mergedCollectionItem->id)}}" method="POST">
-                                                                @method('delete')
-                                                                @csrf
-                
-                                                                <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
-                                                                    حذف
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    @else
-                                                        <li>
-                                                            <form action="{{route('admin.dashboard.category.destroy-actcat', $mergedCollectionItem->id)}}" method="POST">
-                                                                @method('delete')
-                                                                @csrf
-                
-                                                                <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
-                                                                    حذف
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    @endif
+                                                    @can('category_destroy')
+                                                        @if(isset($mergedCollectionItem->activityCategory))
+                                                            <li>
+                                                                <form action="{{route('admin.dashboard.category.destroy-actgrp', $mergedCollectionItem->id)}}" method="POST">
+                                                                    @method('delete')
+                                                                    @csrf
+                    
+                                                                    <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
+                                                                        حذف
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        @else
+                                                            <li>
+                                                                <form action="{{route('admin.dashboard.category.destroy-actcat', $mergedCollectionItem->id)}}" method="POST">
+                                                                    @method('delete')
+                                                                    @csrf
+                    
+                                                                    <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
+                                                                        حذف
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        @endif
+                                                    @endcan    
                                                 </ul>
                                             </div>
-                                            @if(isset($mergedCollectionItem->activityCategory))
-                                                <a href="{{route('admin.dashboard.category.edit-actgrp', $mergedCollectionItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                    <i class="text-primary ti ti-pencil"></i>
-                                                </a>
-                                            @else
-                                                <a href="{{route('admin.dashboard.category.edit-actcat', $mergedCollectionItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                    <i class="text-primary ti ti-pencil"></i>
-                                                </a>
-                                            @endif
+                                            @can('category_edit')
+                                                @if(isset($mergedCollectionItem->activityCategory))
+                                                    <a href="{{route('admin.dashboard.category.edit-actgrp', $mergedCollectionItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                        <i class="text-primary ti ti-pencil"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{route('admin.dashboard.category.edit-actcat', $mergedCollectionItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                        <i class="text-primary ti ti-pencil"></i>
+                                                    </a>
+                                                @endif
+                                            @endcan    
                                         </td>
                                     </tr>
                                 @endforeach        

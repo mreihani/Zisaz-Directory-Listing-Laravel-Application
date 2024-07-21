@@ -16,6 +16,13 @@ use App\Http\Requests\Dashboards\Admin\User\UserUpdateRequest;
 
 class AdminDashboardUserController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:user_create,user')->only(['create','store']);
+        $this->middleware('can:user_edit,user')->only(['edit','update']);
+        $this->middleware('can:user_index,user')->only(['index','search']);
+        $this->middleware('can:user_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -52,8 +59,8 @@ class AdminDashboardUserController extends Controller
                 'lastname' => Purify::clean($validated['lastname']),
                 'phone' => Purify::clean($validated['phone']),
                 'email' => !empty($validated['email']) ? Purify::clean($validated['email']) : null,
-                'role' => $validated['account_type'] == 'admin' ? 'admin' : 'construction',
-                'password' => $validated['account_type'] == 'admin' ? Hash::make($validated['password']) : null,
+                'role' => $validated['account_type'],
+                'password' => in_array($validated['account_type'], collect(config('jaban.admin_roles'))->pluck('title')->toArray()) ? Hash::make($validated['password']) : null,
                 'phone_verified' => 1,
             ]
         );
@@ -86,8 +93,8 @@ class AdminDashboardUserController extends Controller
             'lastname' => Purify::clean($validated['lastname']),
             'phone' => Purify::clean($validated['phone']),
             'email' => !empty($validated['email']) ? Purify::clean($validated['email']) : null,
-            'role' => $validated['account_type'] == 'admin' ? 'admin' : 'construction',
-            'password' => $validated['account_type'] == 'admin' ? Hash::make($validated['password']) : null,
+            'role' => $validated['account_type'],
+            'password' => in_array($validated['account_type'], collect(config('jaban.admin_roles'))->pluck('title')->toArray()) ? Hash::make($validated['password']) : null,
             'phone_verified' => 1,
         ]);
 

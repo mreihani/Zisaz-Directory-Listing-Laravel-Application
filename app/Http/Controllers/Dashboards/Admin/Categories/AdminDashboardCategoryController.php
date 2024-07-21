@@ -14,6 +14,13 @@ use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 
 class AdminDashboardCategoryController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:category_create,user')->only(['create','store']);
+        $this->middleware('can:category_edit,user')->only(['editActcat','editActgrp','updateActcat','updateActgrp']);
+        $this->middleware('can:category_index,user')->only(['index','showSubItem','search']);
+        $this->middleware('can:category_destroy,user')->only(['destroyActcat','destroyActgrp']);
+    }
+
     /**
      * Display a listing of the resource.
      */

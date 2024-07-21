@@ -17,6 +17,13 @@ use App\Http\Requests\Dashboards\Admin\Magazine\MagazinePost\MagazinePostUpdateR
 
 class AdminDashboardMagazinePostController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:magazine_post_create,user')->only(['create','store']);
+        $this->middleware('can:magazine_post_edit,user')->only(['edit','update']);
+        $this->middleware('can:magazine_post_index,user')->only(['index','search']);
+        $this->middleware('can:magazine_post_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

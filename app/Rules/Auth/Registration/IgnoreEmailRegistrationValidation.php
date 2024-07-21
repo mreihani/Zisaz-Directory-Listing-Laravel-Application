@@ -28,7 +28,7 @@ class IgnoreEmailRegistrationValidation implements ValidationRule
 
         // ignore construction users whom have not verified their phone number yet
         $user = User::where($attribute, $value)->first();
-        if(!$user || ($user->role == 'construction' && !$user->phone_verified)) {
+        if(!$user || (in_array($user->role, collect(config('jaban.user_roles'))->pluck('title')->toArray()) && !$user->phone_verified)) {
             return;
         }
         

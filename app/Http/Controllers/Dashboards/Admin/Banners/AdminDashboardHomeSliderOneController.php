@@ -17,6 +17,11 @@ use App\Rules\Dashboards\Banners\HomeBanners\BannerImageHomeSliderOneImageOneVal
 
 class AdminDashboardHomeSliderOneController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:banners_index,user')->only(['index']);
+        $this->middleware('can:banners_store,user')->only(['store']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

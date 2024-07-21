@@ -20,6 +20,12 @@ use App\Http\Requests\Dashboards\Admin\UsersActivities\Projects\Pending\UsersAct
 
 class AdminDashboardUsersActivitiesProjectPendingController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:project_index,user')->only(['index','search']);
+        $this->middleware('can:project_edit,user')->only(['edit','update']);
+        $this->middleware('can:project_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

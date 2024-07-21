@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Frontend\ReferenceData\Gender\Gender;
 use App\Models\Frontend\ReferenceData\Academic\Academic;
 use App\Models\Frontend\ReferenceData\AdsStatus\AdsStat;
+use App\Models\Frontend\UserModels\Permission\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Frontend\ReferenceData\AdminRole\AdminRole;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
 use App\Models\Frontend\ReferenceData\PaymentMethod\PaymntMtd;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\Province;
@@ -97,6 +99,22 @@ class JabanUsersSeeder extends Seeder
         foreach ($welfareFacilityArr as $welfareFacilityItem) {
             $welfareFacilityObj = WelfareFacility::create([
                 'title' => $welfareFacilityItem['title']
+            ]);
+        }
+
+        // admin roles for permissions
+        $adminRolesArr = config('jaban.admin_roles');
+        foreach ($adminRolesArr as $adminRoleItem) {
+            $adminRoleObj = AdminRole::create([
+                'title' => $adminRoleItem['title']
+            ]);
+        }
+
+        // admin roles for permissions
+        $permissionsArr = config('jaban.permissions');
+        foreach ($permissionsArr as $permission) {
+            $permissionObj = Permission::create([
+                'title' => $permission['title']
             ]);
         }
 

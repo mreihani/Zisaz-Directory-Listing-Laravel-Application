@@ -13,9 +13,11 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->role !== $role) {
+        $adminRoles = collect(config('jaban.admin_roles'))->pluck('title')->toArray();
+
+        if(!in_array($request->user()->role, $adminRoles)) {
             return redirect(route('home-page'));
         } 
 

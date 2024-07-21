@@ -64,7 +64,6 @@
                             </div>
                         </form>
                     </div>
-                    
                 </div>
             </div>
 
@@ -151,14 +150,16 @@
                                             @endif
                                         </td>
                                         <td class="d-flex align-items-center">
-                                            <form action="{{route('admin.dashboard.users-activities.ads.all.deleted.restore', $activityItem->id)}}" method="POST">
-                                                @method('put')
-                                                @csrf
+                                            @can('ads_restore')
+                                                <form action="{{route('admin.dashboard.users-activities.ads.all.deleted.restore', $activityItem->id)}}" method="POST">
+                                                    @method('put')
+                                                    @csrf
 
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-upload"></i>
-                                                </button>
-                                            </form>
+                                                    <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                                        <i class="text-primary ti ti-upload"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach        

@@ -72,8 +72,6 @@
             area: {
                 series1: '#29dac7',
                 series2: '#60f2ca',
-                series3: '#a5f8cd',
-                series4: '#27bbab',
             }
         };
 
@@ -113,16 +111,8 @@
                 }
                 }
             },
-            colors: [chartColors.area.series3, chartColors.area.series2, chartColors.area.series1, chartColors.area.series4],
+            colors: [chartColors.area.series2, chartColors.area.series1],
             series: [
-                {
-                    name: 'بازدید های جهانی',
-                    data: @json($globalVisitors)
-                },
-                {
-                    name: 'بازدید کنندگاه یکتای جهانی',
-                    data: @json($globalUniqueVisitors)
-                },
                 {
                     name: 'بازدیدهای ایران',
                     data: @json($iranVisitors)

@@ -30,11 +30,11 @@ class UserStoreRequest extends FormRequest
             'lastname' => 'required',
             'phone' => ['required', new IgnorePhoneRegistrationUserStoreValidation(), config('phone-regex.ir.regex')],
             'email' => [new IgnoreEmailRegistrationUserStoreValidation()],
-            'password' =>  $request->account_type == 'admin' ? 'required|min:8' : '',
+            'password' =>  in_array($request->account_type, collect(config('jaban.admin_roles'))->pluck('title')->toArray()) ? 'required|min:8' : '',
             'account_type' => 'required'
         ];
     }
-
+    
     public function messages(): array
     {
         return [

@@ -16,6 +16,11 @@ use App\Models\Frontend\UserModels\Project\Project;
 
 class AdminDashboardUsersActivitiesProjectVerifiedController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:project_index,user')->only(['index','search']);
+        $this->middleware('can:project_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

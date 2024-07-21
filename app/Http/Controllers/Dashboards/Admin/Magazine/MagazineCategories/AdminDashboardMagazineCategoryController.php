@@ -13,6 +13,13 @@ use App\Http\Requests\Dashboards\Admin\Magazine\MagazineCategory\MagazineCategor
 
 class AdminDashboardMagazineCategoryController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:magazine_category_create,user')->only(['create','store']);
+        $this->middleware('can:magazine_category_edit,user')->only(['edit','update']);
+        $this->middleware('can:magazine_category_index,user')->only(['index','search']);
+        $this->middleware('can:magazine_category_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -3727,5 +3727,187 @@ return [
             'id' => 13,
             'title' => 'پارکینگ موتور',
         ],
+    ],
+    'admin_roles' => [
+        [
+            'id' => 1,
+            'title' => 'admin',
+        ],
+        [
+            'id' => 2,
+            'title' => 'senior_support',
+        ],
+        [
+            'id' => 3,
+            'title' => 'support_level_one',
+        ],
+        [
+            'id' => 4,
+            'title' => 'marketer',
+        ],
+        [
+            'id' => 5,
+            'title' => 'editor',
+        ],
+    ],
+    'user_roles' => [
+        [
+            'id' => 1,
+            'title' => 'real_estate_manager',
+        ],
+        [
+            'id' => 2,
+            'title' => 'real_estate_agent',
+        ],
+        [
+            'id' => 3,
+            'title' => 'construction',
+        ]
+    ],
+    'permissions' => [
+        [
+            'id' => 1,
+            'title' => 'category_create',
+        ],
+        [
+            'id' => 2,
+            'title' => 'category_edit',
+        ],
+        [
+            'id' => 3,
+            'title' => 'category_index',
+        ],
+        [
+            'id' => 4,
+            'title' => 'category_destroy',
+        ],
+        [
+            'id' => 5,
+            'title' => 'banners_index',
+        ],
+        [
+            'id' => 6,
+            'title' => 'banners_store',
+        ],
+        [
+            'id' => 7,
+            'title' => 'magazine_category_create',
+        ],
+        [
+            'id' => 8,
+            'title' => 'magazine_category_edit',
+        ],
+        [
+            'id' => 9,
+            'title' => 'magazine_category_index',
+        ],
+        [
+            'id' => 10,
+            'title' => 'magazine_category_destroy',
+        ],
+        [
+            'id' => 11,
+            'title' => 'magazine_post_create',
+        ],
+        [
+            'id' => 12,
+            'title' => 'magazine_post_edit',
+        ],
+        [
+            'id' => 13,
+            'title' => 'magazine_post_index',
+        ],
+        [
+            'id' => 14,
+            'title' => 'magazine_post_destroy',
+        ],
+        [
+            'id' => 15,
+            'title' => 'media_create',
+        ],
+        [
+            'id' => 16,
+            'title' => 'media_index',
+        ],
+        [
+            'id' => 17,
+            'title' => 'media_destroy',
+        ],
+        [
+            'id' => 18,
+            'title' => 'user_create',
+        ],
+        [
+            'id' => 19,
+            'title' => 'user_edit',
+        ],
+        [
+            'id' => 20,
+            'title' => 'user_index',
+        ],
+        [
+            'id' => 21,
+            'title' => 'user_destroy',
+        ],
+        [
+            'id' => 22,
+            'title' => 'ads_index',
+        ],
+        [
+            'id' => 23,
+            'title' => 'ads_edit',
+        ],
+        [
+            'id' => 24,
+            'title' => 'ads_restore',
+        ],
+        [
+            'id' => 25,
+            'title' => 'ads_destroy',
+        ],
+        [
+            'id' => 26,
+            'title' => 'psite_index',
+        ],
+        [
+            'id' => 27,
+            'title' => 'psite_edit',
+        ],
+        [
+            'id' => 28,
+            'title' => 'psite_restore',
+        ],
+        [
+            'id' => 29,
+            'title' => 'psite_destroy',
+        ],
+        [
+            'id' => 30,
+            'title' => 'project_index',
+        ],
+        [
+            'id' => 31,
+            'title' => 'project_edit',
+        ],
+        [
+            'id' => 32,
+            'title' => 'project_restore',
+        ],
+        [
+            'id' => 33,
+            'title' => 'project_destroy',
+        ],
+        [
+            'id' => 34,
+            'title' => 'visits_index',
+        ],
+        [
+            'id' => 35,
+            'title' => 'permissions_index',
+        ],
+        [
+            'id' => 36,
+            'title' => 'permissions_store',
+        ],
     ]
 ];    

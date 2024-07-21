@@ -29,7 +29,7 @@
                             </a>
                         </div>
                         <button class="btn btn-primary" type="submit">
-                            ویرایش کاربر
+                            بروزرسانی کاربر
                         </button>
                     </div>
                 </div>
@@ -92,7 +92,25 @@
                                 <select class="select2 form-select" id="account-type" name="account_type">
                                     <option disabled selected value="">سطح دسترسی حساب کاربری را انتخاب نمایید</option>
                                     <option value="admin" {{old('account_type', $selectedUser->role) == 'admin' ? 'selected' : ''}}>
-                                        مدیر
+                                        مدیر کل
+                                    </option>
+                                    <option value="senior_support" {{old('account_type', $selectedUser->role) == 'senior_support' ? 'selected' : ''}}>
+                                        پشتیبان ارشد
+                                    </option>
+                                    <option value="support_level_one" {{old('account_type', $selectedUser->role) == 'support_level_one' ? 'selected' : ''}}>
+                                        پشتیبان سطح یک
+                                    </option>
+                                    <option value="marketer" {{old('account_type', $selectedUser->role) == 'marketer' ? 'selected' : ''}}>
+                                        بازاریاب
+                                    </option>
+                                    <option value="editor" {{old('account_type', $selectedUser->role) == 'editor' ? 'selected' : ''}}>
+                                        نویسنده
+                                    </option>
+                                    <option value="real_estate_manager" {{old('account_type', $selectedUser->role) == 'real_estate_manager' ? 'selected' : ''}}>
+                                        مدیر املاک
+                                    </option>
+                                    <option value="real_estate_agent" {{old('account_type', $selectedUser->role) == 'real_estate_agent' ? 'selected' : ''}}>
+                                        مشاور املاک
                                     </option>
                                     <option value="construction" {{old('account_type', $selectedUser->role) == 'construction' ? 'selected' : ''}}>
                                         کاربر عادی
@@ -139,10 +157,11 @@
     <script src="{{asset('assets/dashboards/assets/js/app-ecommerce-product-add.js')}}"></script>
     <script>
         document.getElementById('account-type').addEventListener('change', function() {
+            
             var selectedValue = this.value;
             var passwordField = document.getElementById('password');
         
-            if (selectedValue === 'admin') {
+            if (['admin','senior_support','support_level_one','marketer','editor'].includes(selectedValue)) {
                 passwordField.parentNode.classList.remove('d-none');
             } else {
                 passwordField.parentNode.classList.add('d-none');
@@ -150,10 +169,10 @@
         });
     </script>
     <script>
-        let accountType = {!! json_encode(old('account_type')) !!};
+        let accountType = {!! json_encode(old('account_type', $selectedUser->role)) !!};
         var passwordField = document.getElementById('password');
-    
-        if (accountType == 'admin') {
+     
+        if (['admin','senior_support','support_level_one','marketer','editor'].includes(accountType)) {
             passwordField.parentNode.classList.remove('d-none');
         } else {
             passwordField.parentNode.classList.add('d-none');

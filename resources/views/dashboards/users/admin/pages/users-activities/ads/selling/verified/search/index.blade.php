@@ -109,14 +109,16 @@
                                             {{$activityItem->user->lastname}}
                                         </td>
                                         <td class="d-flex align-items-center">
-                                            <form action="{{route('admin.dashboard.users-activities.ads.selling.verified.destroy', $activityItem->id)}}" method="POST">
-                                                @method('delete')
-                                                @csrf
+                                            @can('ads_destroy')
+                                                <form action="{{route('admin.dashboard.users-activities.ads.selling.verified.destroy', $activityItem->id)}}" method="POST">
+                                                    @method('delete')
+                                                    @csrf
 
-                                                <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
-                                                    <i class="text-primary ti ti-trash"></i>
-                                                </button>
-                                            </form>
+                                                    <button type="submit" class="border-none bg-transparent" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟')">
+                                                        <i class="text-primary ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach        

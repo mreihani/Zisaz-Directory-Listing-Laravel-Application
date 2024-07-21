@@ -92,7 +92,25 @@
                                 <select class="select2 form-select" id="account-type" name="account_type">
                                     <option disabled selected value="">سطح دسترسی حساب کاربری را انتخاب نمایید</option>
                                     <option value="admin" {{old('account_type') == 'admin' ? 'selected' : ''}}>
-                                        مدیر
+                                        مدیر کل
+                                    </option>
+                                    <option value="senior_support" {{old('account_type') == 'senior_support' ? 'selected' : ''}}>
+                                        پشتیبان ارشد
+                                    </option>
+                                    <option value="support_level_one" {{old('account_type') == 'support_level_one' ? 'selected' : ''}}>
+                                        پشتیبان سطح یک
+                                    </option>
+                                    <option value="marketer" {{old('account_type') == 'marketer' ? 'selected' : ''}}>
+                                        بازاریاب
+                                    </option>
+                                    <option value="editor" {{old('account_type') == 'editor' ? 'selected' : ''}}>
+                                        نویسنده
+                                    </option>
+                                    <option value="real_estate_manager" {{old('account_type') == 'real_estate_manager' ? 'selected' : ''}}>
+                                        مدیر املاک
+                                    </option>
+                                    <option value="real_estate_agent" {{old('account_type') == 'real_estate_agent' ? 'selected' : ''}}>
+                                        مشاور املاک
                                     </option>
                                     <option value="construction" {{old('account_type') == 'construction' ? 'selected' : ''}}>
                                         کاربر عادی
@@ -141,8 +159,8 @@
         document.getElementById('account-type').addEventListener('change', function() {
             var selectedValue = this.value;
             var passwordField = document.getElementById('password');
-        
-            if (selectedValue === 'admin') {
+            
+            if (['admin','senior_support','support_level_one','marketer','editor'].includes(selectedValue)) {
                 passwordField.parentNode.classList.remove('d-none');
             } else {
                 passwordField.parentNode.classList.add('d-none');
@@ -153,7 +171,7 @@
         let accountType = {!! json_encode(old('account_type')) !!};
         var passwordField = document.getElementById('password');
     
-        if (accountType == 'admin') {
+        if (['admin','senior_support','support_level_one','marketer','editor'].includes(accountType)) {
             passwordField.parentNode.classList.remove('d-none');
         } else {
             passwordField.parentNode.classList.add('d-none');

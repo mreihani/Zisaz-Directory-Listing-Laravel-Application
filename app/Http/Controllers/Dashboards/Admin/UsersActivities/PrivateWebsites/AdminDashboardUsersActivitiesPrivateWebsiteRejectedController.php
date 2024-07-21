@@ -15,6 +15,11 @@ use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class AdminDashboardUsersActivitiesPrivateWebsiteRejectedController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:psite_index,user')->only(['index','search']);
+        $this->middleware('can:psite_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -15,6 +15,11 @@ use App\Models\Frontend\UserModels\Activity\Activity;
 
 class AdminDashboardUsersActivitiesAdsAllDeletedController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:ads_index,user')->only(['index','search']);
+        $this->middleware('can:ads_restore,user')->only(['restore']);
+    }
+
     /**
      * Display a listing of the resource.
      */

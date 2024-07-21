@@ -19,6 +19,12 @@ use App\Http\Requests\Dashboards\Admin\UsersActivities\PrivateWebsites\Pending\U
 
 class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:psite_index,user')->only(['index','search']);
+        $this->middleware('can:psite_edit,user')->only(['edit','update']);
+        $this->middleware('can:psite_destroy,user')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

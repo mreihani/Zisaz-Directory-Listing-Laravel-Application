@@ -23,7 +23,17 @@ return new class extends Migration
             $table->boolean('phone_verified')->default(false);
             $table->boolean('account_status')->default(true);
             $table->boolean('two_factor_auth')->default(false);
-            $table->enum('role', ['admin', 'construction'])->default('construction');
+            $table->enum('role', 
+            [
+                'admin',
+                'senior_support',
+                'support_level_one',
+                'marketer',
+                'editor',
+                'real_estate_manager',
+                'real_estate_agent',
+                'construction'
+            ])->default('construction');
             $table->rememberToken();
             $table->timestamps();
         });

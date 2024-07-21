@@ -17,6 +17,12 @@ use App\Http\Requests\Dashboards\Admin\UsersActivities\Ads\Employment\Pending\Us
 
 class AdminDashboardUsersActivitiesAdsEmploymentPendingController extends Controller
 {
+    public function __construct() {
+        $this->middleware('can:ads_index,user')->only(['index','search']);
+        $this->middleware('can:ads_edit,user')->only(['edit','update']);
+        $this->middleware('can:ads_destroy,user')->only(['destroy']);
+    }
+    
     /**
      * Display a listing of the resource.
      */

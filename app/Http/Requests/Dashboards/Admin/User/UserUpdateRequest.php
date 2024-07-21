@@ -31,7 +31,7 @@ class UserUpdateRequest extends FormRequest
             'lastname' => 'required',
             'phone' => ['required', new IgnorePhoneRegistrationUserUpdateValidation($request->user->phone), config('phone-regex.ir.regex')],
             'email' => [new IgnoreEmailRegistrationUserUpdateValidation($request->user->email)],
-            'password' =>  $request->account_type == 'admin' ? 'required|min:8' : '',
+            'password' =>  in_array($request->account_type, collect(config('jaban.admin_roles'))->pluck('title')->toArray()) ? 'required|min:8' : '',
             'account_type' => 'required'
         ];
     }
