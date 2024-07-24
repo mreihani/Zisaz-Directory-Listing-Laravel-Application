@@ -25,7 +25,7 @@
         <div class="card">
 
             <h5 class="card-header">
-                نمودار بازدیدها
+                نمودار بازدیدهای جهانی
             </h5>
 
             <!-- Line Area Chart -->
