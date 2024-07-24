@@ -32,7 +32,6 @@ class VisitorLoggingChartGlobalVisits implements ShouldQueue
             'visits_date' => $lastday_jdate
         ]
         ,[
-            'visits_date' => $lastday_jdate,
             'global_visits_count' => $all_visits_count
         ]);
     }

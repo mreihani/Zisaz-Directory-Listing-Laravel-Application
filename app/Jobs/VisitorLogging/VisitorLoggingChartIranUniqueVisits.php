@@ -34,7 +34,6 @@ class VisitorLoggingChartIranUniqueVisits implements ShouldQueue
             'visits_date' => $lastday_jdate
         ]
         ,[
-            'visits_date' => $lastday_jdate,
             'iran_unique_visits_count' => $all_visits_count
         ]);
     }

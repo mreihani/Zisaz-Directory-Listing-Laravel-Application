@@ -32,7 +32,6 @@ class VisitorLoggingChartIranVisits implements ShouldQueue
             'visits_date' => $lastday_jdate
         ]
         ,[
-            'visits_date' => $lastday_jdate,
             'iran_visits_count' => $all_visits_count
         ]);
     }

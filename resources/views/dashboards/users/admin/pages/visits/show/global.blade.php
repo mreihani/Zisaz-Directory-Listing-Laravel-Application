@@ -111,16 +111,16 @@
                 }
                 }
             },
-            colors: [chartColors.area.series3, chartColors.area.series2, chartColors.area.series1, chartColors.area.series4],
+            colors: [chartColors.area.series2, chartColors.area.series1],
             series: [
                 {
-                    name: 'بازدید های جهانی',
+                    name: 'بازدیدهای جهانی',
                     data: @json($globalVisitors)
                 },
                 {
-                    name: 'بازدید کنندگاه یکتای جهانی',
+                    name: 'بازدیدهای یکتای جهانی',
                     data: @json($globalUniqueVisitors)
-                },
+                }
             ],
             xaxis: {
                 categories: @json($dateSpan),

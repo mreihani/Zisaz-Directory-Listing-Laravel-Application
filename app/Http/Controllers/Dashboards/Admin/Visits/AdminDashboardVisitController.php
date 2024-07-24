@@ -241,16 +241,12 @@ class AdminDashboardVisitController extends Controller
 
         $dateSpan = VisitChart::all()->pluck('visits_date');
 
-        $globalVisitors = VisitChart::all()->pluck('global_visits_count');
-        $globalUniqueVisitors = VisitChart::all()->pluck('global_unique_visits_count');
         $iranVisitors = VisitChart::all()->pluck('iran_visits_count');
         $iranUniqueVisitors = VisitChart::all()->pluck('iran_unique_visits_count');
-
+;
         return view('dashboards.users.admin.pages.visits.show.iran', compact(
             'user',
             'dateSpan',
-            'globalVisitors',
-            'globalUniqueVisitors',
             'iranVisitors',
             'iranUniqueVisitors'
         )); 
@@ -263,16 +259,12 @@ class AdminDashboardVisitController extends Controller
 
         $globalVisitors = VisitChart::all()->pluck('global_visits_count');
         $globalUniqueVisitors = VisitChart::all()->pluck('global_unique_visits_count');
-        $iranVisitors = VisitChart::all()->pluck('iran_visits_count');
-        $iranUniqueVisitors = VisitChart::all()->pluck('iran_unique_visits_count');
 
         return view('dashboards.users.admin.pages.visits.show.global', compact(
             'user',
             'dateSpan',
             'globalVisitors',
             'globalUniqueVisitors',
-            'iranVisitors',
-            'iranUniqueVisitors'
         )); 
     }
 }
