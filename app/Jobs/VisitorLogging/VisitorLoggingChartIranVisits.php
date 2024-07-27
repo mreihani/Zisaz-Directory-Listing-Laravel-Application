@@ -27,12 +27,17 @@ class VisitorLoggingChartIranVisits implements ShouldQueue
         ->get()
         ->count();
 
-        VisitChart::updateOrCreate(
-        [
-            'visits_date' => $lastday_jdate
-        ]
-        ,[
-            'iran_visits_count' => $all_visits_count
-        ]);
+        $lastday_jdate_db_row = VisitChart::where('visits_date', $lastday_jdate)->first();
+
+        if($lastday_jdate_db_row) {
+            $lastday_jdate_db_row->update([
+                'iran_visits_count' => $all_visits_count
+            ]);
+        } else {
+            VisitChart::create([
+                'visits_date' => $lastday_jdate,
+                'iran_visits_count' => $all_visits_count
+            ]);
+        }
     }
 }
