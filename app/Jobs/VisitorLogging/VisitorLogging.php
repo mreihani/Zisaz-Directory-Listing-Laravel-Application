@@ -43,7 +43,7 @@ class VisitorLogging implements ShouldQueue
             'city' => (!empty($location) && !empty($location->cityName)) ? $location->cityName : null,
             'province' => (!empty($location) && !empty($location->regionName)) ? $location->regionName : null,
             'country_code' => (!empty($location) && !empty($location->countryCode)) ? $location->countryCode : null,
-            'j_date' => jdate()->format('Y-m-d')
+            'j_date' => trim(jdate()->format('Y-m-d'))
         ];
 
         Visit::create($data);

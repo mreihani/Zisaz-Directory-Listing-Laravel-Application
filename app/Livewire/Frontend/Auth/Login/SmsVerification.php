@@ -42,7 +42,7 @@ class SmsVerification extends Component
             // Find user
             $user = User::findOrFail($user_id);
 
-            if(!is_null($user) && $user) {
+            if(!empty($user)) {
                 // Delete code
                 $user->activeCode()->delete();
 

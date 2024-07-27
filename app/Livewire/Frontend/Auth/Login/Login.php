@@ -57,7 +57,7 @@ class Login extends Component
         // Get user object by phone number
         $user = User::where('phone', $this->phone)->where('phone_verified', 1)->first();
 
-        if(!$user) {
+        if(empty($user)) {
             return;
         }
 

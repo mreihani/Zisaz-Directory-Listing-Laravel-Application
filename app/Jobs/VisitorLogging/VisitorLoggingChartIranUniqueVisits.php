@@ -19,7 +19,7 @@ class VisitorLoggingChartIranUniqueVisits implements ShouldQueue
      */
     public function handle(): void
     {
-        $lastday_jdate = jdate()->subDays(1)->format('Y-m-d');
+        $lastday_jdate = trim(jdate()->subDays(1)->format('Y-m-d'));
         
         $all_visits_count = Visit::select('country', 'j_date', 'ip')
         ->where('j_date', $lastday_jdate)
