@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use App\Models\Dashboards\Admin\VisitChart;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Frontend\UserModels\Activity\Activity;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;

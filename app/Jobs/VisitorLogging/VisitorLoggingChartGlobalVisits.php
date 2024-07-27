@@ -29,7 +29,7 @@ class VisitorLoggingChartGlobalVisits implements ShouldQueue
 
         $lastday_jdate_db_row = VisitChart::where('visits_date', $lastday_jdate)->first();
 
-        if($lastday_jdate_db_row) {
+        if(!empty($lastday_jdate_db_row)) {
             $lastday_jdate_db_row->update([
                 'global_visits_count' => $all_visits_count
             ]);
