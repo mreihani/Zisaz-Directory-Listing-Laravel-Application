@@ -4,11 +4,9 @@ namespace App\Console\Commands\Pages\Visitor;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\VisitorLogging\VisitorLoggingChart;
 use App\Models\Frontend\UserModels\Project\Project;
-use App\Jobs\VisitorLogging\VisitorLoggingChartIranVisits;
-use App\Jobs\VisitorLogging\VisitorLoggingChartGlobalVisits;
-use App\Jobs\VisitorLogging\VisitorLoggingChartIranUniqueVisits;
-use App\Jobs\VisitorLogging\VisitorLoggingChartGlobalUniqueVisits;
+
 
 class UpdateVisitorCharts extends Command
 {
@@ -31,9 +29,6 @@ class UpdateVisitorCharts extends Command
      */
     public function handle()
     {
-        dispatch(new VisitorLoggingChartIranVisits());
-        dispatch(new VisitorLoggingChartIranUniqueVisits());
-        dispatch(new VisitorLoggingChartGlobalVisits());
-        dispatch(new VisitorLoggingChartGlobalUniqueVisits());
+        dispatch(new VisitorLoggingChart());
     }
 }
