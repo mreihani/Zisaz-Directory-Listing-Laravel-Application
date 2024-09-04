@@ -153,11 +153,6 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                                 <li class="nav-item dropdown d-none d-lg-block d-sm-none">
                                     @livewire('frontend.pages.activity.activity-all.components.hero')
                                 </li>
-                            @elseif(Route::currentRouteName() == 'home-page')
-                                <!-- Search bar-->
-                                <li class="nav-item dropdown d-none d-lg-block d-sm-none">
-                                    @livewire('frontend.pages.home.components.hero')
-                                </li>
                             @else    
                                 <!-- Menu items-->
                                 <li class="nav-item dropdown">
@@ -195,11 +190,6 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                             <!-- Search bar-->
                             <li>
                                 @livewire('frontend.pages.activity.activity-all.components.hero')
-                            </li>
-                        @elseif(Route::currentRouteName() == 'home-page')
-                            <!-- Search bar-->
-                            <li>
-                                @livewire('frontend.pages.home.components.hero')
                             </li>
                         @endif
                     </ul> 
