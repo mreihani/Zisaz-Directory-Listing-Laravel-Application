@@ -135,3 +135,7 @@
   scrollbar-width: thin;
   scrollbar-color: grey;
 }
+
+a {
+  text-decoration: none; 
+}

@@ -59,7 +59,7 @@
                     <div class="card border-0">
                         <div class="row" id="jaban-map-container">
                             <div class="col-12 mb-4 mt-3">
-                                <div class="rounded" id="map" style="width:360px; height: 220px;" x-init="
+                                <div class="rounded" id="map" style="height: 220px;" x-init="
                                     let marker; 
                                     const map = new L.Map('map', {
                                         key: 'web.e4b772dc75484285a83a98d6466a4c10',
@@ -90,8 +90,8 @@
                                 لینک فروشگاه
                             </span>
                             <span class="text-nowrap">
-                                <a class="text-info text-decoration-none" href="{{ Request::url() }}">
-                                    {{ Request::url() }}
+                                <a class="text-info text-decoration-none" href="{{Request::root()}}/portal/{{$psite->slug}}">
+                                    {{Request::root()}}/portal/{{$psite->slug}}
                                 </a>
                             </span>
                         </div>
@@ -318,7 +318,6 @@
                     </div>
         
                     <section class="container mb-5 pb-2 pb-lg-5 px-5">
-                        <h2 class="mb-4 text-center">برخی از مشتریان ما</h2>
                         <!-- Team carousel-->
                         <div class="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside tns-nav-outside-flush mx-n2">
                             <div class="tns-carousel-inner row gx-4 mx-0 pt-3 pb-4" data-carousel-options="{&quot;items&quot;: 4, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;992&quot;:{&quot;items&quot;:4}}}">
@@ -351,9 +350,16 @@
 <script>
     const copyUrlBtn = document.getElementById('copyUrlBtn');
 
-    copyUrlBtn.addEventListener('click', () => {
-        const urlToCopy = window.location.href;
+    // Get the parent element of the button (div with class 'row')
+    const parentElement = copyUrlBtn.closest('.row');
 
-        navigator.clipboard.writeText(urlToCopy);
+    // Find the anchor tag within the parent element
+    const anchorTag = parentElement.querySelector('a');
+
+    // Get the href attribute value of the anchor tag
+    const hrefLink = anchorTag.getAttribute('href');
+
+    copyUrlBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(hrefLink);
     });
 </script>
