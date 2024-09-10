@@ -94,7 +94,7 @@
                                         </td>
                                         <td>
                                             <a href="{{route('site', $psiteItem->slug)}}">
-                                                {{$psiteItem->hero->title}}
+                                                {{$psiteItem->info->title}}
                                             </a>
                                         </td>
                                         <td>

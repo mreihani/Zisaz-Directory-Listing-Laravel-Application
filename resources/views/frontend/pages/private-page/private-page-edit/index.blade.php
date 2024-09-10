@@ -51,7 +51,7 @@
                 <a href="{{route('home-page')}}">خانه</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                ویرایش صفحه اختصاصی
+                ویرایش کسب و کار
             </li>
         </ol>
     </nav>
@@ -63,10 +63,10 @@
             <!-- Page title-->
             <div class="text-center pb-4 mb-3">
                 <h1 class="h4 mb-4 font-vazir">
-                    ویرایش یک صفحه اختصاصی
+                    ویرایش کسب و کار
                 </h1>
                 <p class="mb-1">
-                    در این بخش می توانید صفحه اختصاصی خود را ویرایش نمایید
+                    در این بخش می توانید صفحه کسب و کار خود را ویرایش نمایید
                 </p>
             </div>
             

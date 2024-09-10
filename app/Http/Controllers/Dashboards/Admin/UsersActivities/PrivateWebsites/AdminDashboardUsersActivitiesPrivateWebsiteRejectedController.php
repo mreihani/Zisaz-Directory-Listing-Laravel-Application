@@ -50,7 +50,7 @@ class AdminDashboardUsersActivitiesPrivateWebsiteRejectedController extends Cont
 
         $searchString = trim($request->q);
         
-        $psites = Psite::queryWithVerifyStatusRejected()->withWhereHas('hero', function($query) use($searchString) {
+        $psites = Psite::queryWithVerifyStatusRejected()->withWhereHas('info', function($query) use($searchString) {
             $query->where('title', 'like', '%' . $searchString . '%'); 
         })->paginate(10);
         

@@ -54,7 +54,7 @@ class AdminDashboardUsersActivitiesPrivateWebsiteDeletedController extends Contr
 
         $searchString = trim($request->q);
         
-        $psites = Psite::onlyTrashed()->queryWithAllVerificationStatuses()->withWhereHas('hero', function($query) use($searchString) {
+        $psites = Psite::onlyTrashed()->queryWithAllVerificationStatuses()->withWhereHas('info', function($query) use($searchString) {
             $query->where('title', 'like', '%' . $searchString . '%'); 
         })->paginate(10);
         

@@ -127,3 +127,11 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+/* fix scroll for admin dashboard menu */
+.admin-dashboard.menu-inner {
+  overflow-y: scroll !important;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: grey;
+}

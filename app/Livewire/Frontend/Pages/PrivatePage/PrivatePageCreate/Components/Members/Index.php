@@ -18,10 +18,9 @@ class Index extends Component
 
     public $privateSiteId;
     public $privateSiteSectionNumber;
-    
-    public $isHidden;
-    public $headerDescription;
 
+    public $isHidden;
+    
     // team images repeater form
     public $itemImages;
     public $itemFullname;
@@ -31,7 +30,6 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'headerDescription' => 'required_if:isHidden,==,false',
             'itemFullname.*' => 'required_if:isHidden,==,false',
             'itemRole.*' => 'required_if:isHidden,==,false',
             'itemImages.*' => new PrivateSiteMemberImagesValidationRule($this->isHidden),
@@ -39,21 +37,28 @@ class Index extends Component
     }
 
     protected $messages = [
-        'headerDescription.required_if' => 'لطفا توضیحات اعضای تیم خود را وارد نمایید.',
         'itemFullname.*.required_if' => 'لطفا نام شخص را وارد نمایید.',
         'itemRole.*.required_if' => 'لطفا سمت شخص را وارد نمایید.',
     ];
     
     public function mount() {
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
+        
+        // members images repeater form
+        $this->getRepeaterInitialValues($psite);
+
+
         if(is_null($this->privateSiteId)) {
             $this->isHidden = false;
         } else {
             $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
-            $this->isHidden = (!is_null($psite->members) && $psite->members->is_hidden == 1) ? true : false;
-            $this->headerDescription = is_null($psite->members) ? "" : $psite->members->header_description; 
 
-            // members images repeater form
-            $this->getRepeaterInitialValues($psite);
+            $this->isHidden = (!is_null($psite->members) && $psite->members->is_hidden == 1) ? true : false;
+
+            $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
+        
+        // members images repeater form
+        $this->getRepeaterInitialValues($psite);
         }
     }
 
@@ -152,9 +157,13 @@ class Index extends Component
         }
     }
 
+    public function changeDisplayStatus() {
+        //
+    }
+
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 7, 
+            privateSiteSectionNumber: 4, 
         );
     }
 
@@ -169,10 +178,6 @@ class Index extends Component
         return $psite;
     }
 
-    public function changeDisplayStatus() {
-        //
-    }
-
     public function save() {  
        
         $this->validate();
@@ -185,7 +190,7 @@ class Index extends Component
         ]);
 
         if($this->isHidden) {
-            $members = $psite->members()->updateOrCreate([
+            $licenses = $psite->members()->updateOrCreate([
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
@@ -195,16 +200,22 @@ class Index extends Component
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
-                'header_description' => Purify::clean($this->headerDescription),
             ]);
-
+    
             //save members into DB
             $this->handleImageUpload($psite, $members);
         }
 
-        $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 9, 
+        // Show Toaster
+        $this->dispatch('showToaster', 
+            title: '', 
+            message: '
+                اطلاعات با موفقیت ذخیره شد.
+            ', 
+            type: 'bg-success'
         );
+
+        return redirect(route('user.dashboard.saved-personal-websites.index'));
     }
 
     public function render()

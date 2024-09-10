@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Frontend\UserModels\Project\Project;
-use App\Rules\PrivateSite\Hero\PrivateSiteSliderImagesValidationRule;
+use App\Rules\Project\Info\ProjectSliderImagesValidationRule;
 
 class Index extends Component
 {
@@ -39,7 +39,7 @@ class Index extends Component
             'projectType' => 'required',
             'totalArea' => 'required',
             'floorCount' => 'required',
-            'projectImages.*' => new PrivateSiteSliderImagesValidationRule(),
+            'projectImages.*' => new ProjectSliderImagesValidationRule(),
         ];
     }
 

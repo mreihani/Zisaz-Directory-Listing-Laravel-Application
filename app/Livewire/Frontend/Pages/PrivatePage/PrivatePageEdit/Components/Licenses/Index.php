@@ -20,26 +20,17 @@ class Index extends Component
     public $privateSiteSectionNumber;
     
     public $isHidden;
-    public $headerDescription;
 
     // license images repeater form
     public $itemImages;
-    public $itemTitle;
     public $itemInputs;
     public $itemIteration;
 
     protected function rules() {
         return [
-            'headerDescription' => 'required_if:isHidden,==,false',
-            'itemTitle.*' => 'required_if:isHidden,==,false',
             'itemImages.*' => new PrivateSitelicenseImagesValidationRule($this->isHidden),
         ];
     }
-
-    protected $messages = [
-        'headerDescription.required_if' => 'لطفا شرح مجوز ها و افتخارات را وارد نمایید.',
-        'itemTitle.*.required_if' => 'لطفا عنوان مجوز را وارد نمایید.',
-    ];
 
     public function mount() {
         $this->loadInitialValues();
@@ -62,12 +53,10 @@ class Index extends Component
     private function getRepeaterInitialValues($psite) {
         if(is_null($psite->licenses) || (!is_null($psite->licenses) && count($psite->licenses->psiteLicenseItem) === 0)) {
             $this->itemImages = [null];
-            $this->itemTitle = [null];
             $this->itemInputs = [0];
             $this->itemIteration = 1;
         } elseif(!is_null($psite->licenses) && count($psite->licenses->psiteLicenseItem) > 0) {
             $this->itemImages = $psite->licenses->psiteLicenseItem->pluck('item_image')->toArray();
-            $this->itemTitle = $psite->licenses->psiteLicenseItem->pluck('item_description')->toArray();
             $this->itemInputs = $psite->licenses->psiteLicenseItem->keys()->toArray();
             $this->itemIteration = $psite->licenses->psiteLicenseItem->count();
         }
@@ -104,7 +93,6 @@ class Index extends Component
 
                 $licenses->psiteLicenseItem()->create([
                     'item_image' => 'storage/upload/private-website-resources/' . $psite->id . '/licenses' . '/' . $filename,
-                    'item_description' => Purify::clean(trim($this->itemTitle[$key])),
                 ]);
             } else {
                 // this is for items already stored in the database and server
@@ -119,15 +107,7 @@ class Index extends Component
 
                         // here remove image from server disk
                         unlink($item->item_image);
-                    } else {
-                        // here it updates the description field without any image change
-                        // but first, itemKey needs to be checked of available since one element can be deleted by the user
-                        if(isset($this->itemTitle[$itemKey])) {
-                            $item->update([
-                                'item_description' => Purify::clean(trim($this->itemTitle[$itemKey])),
-                            ]);
-                        }
-                    }
+                    } 
                 }
             }
         }
@@ -135,7 +115,6 @@ class Index extends Component
     public function addItem($itemIteration) {
         if(count($this->itemInputs) < 6) { 
             $this->itemImages[$itemIteration] = null;
-            $this->itemTitle[$itemIteration] = null;
             $this->itemIteration = $itemIteration + 1;
             array_push($this->itemInputs, $itemIteration);
         }
@@ -143,14 +122,13 @@ class Index extends Component
     public function removeItem($itemKey) {
         if(count($this->itemInputs) > 1) {
             unset($this->itemInputs[$itemKey]);    
-            unset($this->itemTitle[$itemKey]);     
             unset($this->itemImages[$itemKey]);    
         }
     }
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 6, 
+            privateSiteSectionNumber: 3, 
         );
     }
 
@@ -179,7 +157,7 @@ class Index extends Component
             'verify_status' => 'pending',
             'reject_description' => NULL
         ]);
-        
+
         if($this->isHidden) {
             $licenses = $psite->licenses()->updateOrCreate([
                 'psite_id' => $psite->id
@@ -191,7 +169,6 @@ class Index extends Component
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
-                'header_description' => Purify::clean($this->headerDescription),
             ]);
 
             //save licenses into DB
@@ -199,7 +176,7 @@ class Index extends Component
         }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 8, 
+            privateSiteSectionNumber: 5, 
         );
     }
 

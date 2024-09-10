@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Rules\PrivateSite\Members;
+namespace App\Rules\Project\Info;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class PrivateSiteMemberImagesValidationRule implements ValidationRule
+class ProjectSliderImagesValidationRule implements ValidationRule
 {
     /**
      * Run the validation rule.
@@ -13,16 +13,10 @@ class PrivateSiteMemberImagesValidationRule implements ValidationRule
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
 
-    public $isHidden;
-
-    public function __construct($isHidden) {
-        $this->isHidden = $isHidden;
-    }
- 
-     public function validate(string $attribute, mixed $value, Closure $fail): void
-     {
-        if(!is_string($value) && !$this->isHidden) {
-            if(!isset($value) || $value == null) {
+    public function validate(string $attribute, mixed $value, Closure $fail): void
+    {
+        if(!is_string($value)) {
+            if(!isset($value)) {
                 $fail('لطفا تصویر را بارگذاری نمایید.');
             }
             if(isset($value) && !in_array(strtolower($value->getClientOriginalExtension()), ['jpg', 'jpeg', 'png', 'bmp'])) {
@@ -32,5 +26,5 @@ class PrivateSiteMemberImagesValidationRule implements ValidationRule
                 $fail('حجم تصویر بیشتر از مقدار مجاز است.');
             }
         } 
-     }
+    }
 }

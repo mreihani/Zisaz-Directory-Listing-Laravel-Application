@@ -33,26 +33,6 @@
                 </div>
             </div>
 
-            <!-- About information-->
-            <h2 class="h5 font-vazir mb-4 mt-3">
-                <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
-                اطلاعات خدمات ما
-            </h2>
-
-            <div class="row">
-                <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-header-description">
-                        توضیحات
-                    </label>
-                    <span class="text-danger">*</span>
-                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با ویدئوی تبلیغاتی خود را وارد نمایید" wire:model="headerDescription"></textarea>
-                    
-                    @if($errors->has('headerDescription'))
-                        <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
-                    @endif
-                </div>
-            </div>
-
             <div
                 x-data="{ uploading: false, progress: 0 }"
                 x-on:livewire-upload-start="uploading = true"

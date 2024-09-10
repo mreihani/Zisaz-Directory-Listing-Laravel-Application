@@ -25,7 +25,7 @@
         @foreach ($psites as $psiteItem)
             <!-- Item-->
             <div class="card card-hover card-horizontal border-0 shadow-sm mb-4" >
-                <a class="card-img-top" href="" style="background-image: url('{{asset($psiteItem->hero->psiteHeroSliders->first()->slider_image)}}');">
+                <a class="card-img-top" href="" style="background-image: url('{{asset($psiteItem->info->business_banner)}}');">
                     <div class="position-absolute start-0 top-0 pt-3 ps-3">
                         <span class="d-table badge bg-danger">
                             رد شده
@@ -63,43 +63,9 @@
                         </ul>
                     </div>
 
-                    @if($psiteItem->business_type == '1')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی فروشگاه
-                        </h4>
-                    @elseif($psiteItem->business_type == '2')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی شرکت ساختمانی
-                        </h4>
-                    @elseif($psiteItem->business_type == '3')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی دفتر طراحی و مهندسی
-                        </h4>
-                    @elseif($psiteItem->business_type == '4')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی پروژه های انبوه سازی شخصی
-                        </h4>
-                    @elseif($psiteItem->business_type == '5')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی و ارائه اطلاعات تماس و تجربیات شخصی
-                        </h4>
-                    @elseif($psiteItem->business_type == '6')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی آزمایشگاه مصالح ساختمانی
-                        </h4>
-                    @elseif($psiteItem->business_type == '7')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی کارخانه تولید نیازهای ساخت و ساز
-                        </h4>
-                    @elseif($psiteItem->business_type == '8')
-                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
-                            معرفی فعالیت در زمینه ماشین آلات ساختمانی
-                        </h4>
-                    @endif
-
                     <h3 class="h6 mb-2 fs-base">
-                        <a class="nav-link" href="">
-                            {{$psiteItem->hero->title}}
+                        <a class="nav-link" href="#">
+                            {{$psiteItem->info->title}}
                         </a>
                     </h3>
                     

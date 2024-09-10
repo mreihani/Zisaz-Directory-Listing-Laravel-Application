@@ -10,9 +10,11 @@ class Index extends Component
 
     public function mount() {
         $this->psites = auth()->user()->privateSite()->with([
-            'footer',
-            'hero',
-            'hero.psiteHeroSliders',
+            'info',
+            'contactUs',
+            'promotionalVideo',
+            'licenses',
+            'members',
         ])->get();
     }
 

@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Page content-->
-                <iframe src="{{route('site', $psite->slug)}}" onLoad="calcHeight(this);" frameborder="0" scrolling="no" id="the_iframe" width="100%"></iframe>
+                @include('frontend.pages.private-page.private-page-index.main-content')
 
                 <div class="row">
                     <div class="col-12">
@@ -90,6 +90,20 @@
 
 @endsection
 
+@push('page-styles')
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.css')}}"/>
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/tiny-slider/dist/tiny-slider.css')}}"/>
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.css')}}"/>
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css')}}"/>  
+    <link rel="stylesheet" href="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.css')}}"/>  
+    <link rel="stylesheet" media="screen" href="{{asset('assets/frontend/css/theme.min.css')}}">
+@endpush
+
+@push('page-scripts-top')
+    <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/jaban-create-activity-map/leaflet.js')}}"></script>
+@endpush
+
 @push('page-scripts')
     <script>
         document.getElementById('defaultSelect').addEventListener('change', function() {
@@ -113,12 +127,15 @@
             descriptionForm.classList.add('d-none');
         }
     </script>
-    <script type="text/javascript">
-        function calcHeight(iframeElement){
-            var the_height=  iframeElement.contentWindow.document.body.scrollHeight;
-            iframeElement.height=  the_height;
-        }
-    </script>
+
+    <script src="{{asset('assets/frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/simplebar/dist/simplebar.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/parallax-js/dist/parallax.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/nouislider/dist/nouislider.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/tiny-slider/dist/min/tiny-slider.js')}}"></script>
+    <script src="{{asset('assets/frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/js/theme.min.js')}}"></script>
 @endpush
 
 

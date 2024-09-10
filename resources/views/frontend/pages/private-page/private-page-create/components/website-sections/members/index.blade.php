@@ -33,30 +33,14 @@
                 </div>
             </div>
 
-           <!-- About information-->
-           <h2 class="h5 font-vazir mb-4 mt-3">
+            <!-- About information-->
+            <h2 class="h5 font-vazir mb-4 mt-3">
                 <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
                 اطلاعات اعضای تیم
             </h2>
 
             <div class="row">
                 <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-header-description">
-                        توضیحات
-                    </label>
-                    <span class="text-danger">*</span>
-                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با اعضای تیم خود را وارد نمایید" wire:model="headerDescription"></textarea>
-
-                    @if($errors->has('headerDescription'))
-                        <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 mb-4">
-                    <hr class="mb-4 mt-2">
-
                     @foreach ($itemInputs as $itemKey => $itemValue)
                         @if(count($itemImages) && isset($itemImages[$itemValue]) && is_string($itemImages[$itemValue]))
                             <div class="row mt-3">
@@ -215,8 +199,13 @@
                 مرحله قبل
             </a>
             <button type="submit" class="btn btn-primary btn-lg rounded-pill ms-sm-auto">
-                مرحله بعد
-                <i class="fi-chevron-right fs-sm ms-2"></i>
+                ذخیره
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M14 4l0 4l-6 0l0 -4" />
+                </svg>
             </button>
         </div>
 

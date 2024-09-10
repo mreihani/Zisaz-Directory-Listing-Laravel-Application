@@ -28,7 +28,6 @@ class Index extends Component
     public $privateSiteSectionNumber;
     
     public $isHidden;
-    public $headerDescription;
     public $video;
     public $videoValidation;
     public $isUploadAllowed;
@@ -36,14 +35,9 @@ class Index extends Component
 
     protected function rules() {
         return [
-            'headerDescription' => 'required_if:isHidden,==,false',
             'videoValidation' => new PrivateSitePromotionalVideoValidationRule($this->video, $this->isHidden, $this->privateSiteId),
         ];
     }
-
-    protected $messages = [
-        'headerDescription.required_if' => 'لطفا شرح خدمات را وارد نمایید.',
-    ];
 
     public function mount() {
         if(is_null($this->privateSiteId)) {
@@ -53,7 +47,6 @@ class Index extends Component
         } else {
             $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
             
-            $this->headerDescription = is_null($psite->promotionalVideo) ? "" : $psite->promotionalVideo->header_description; 
             $this->isHidden = (!is_null($psite->promotionalVideo) && $psite->promotionalVideo->is_hidden == 1) ? true : false;
             $this->isUploadAllowed = $this->isUploadAllowedHandler($psite);
             $this->promotionalVideo = $psite->promotionalVideo;
@@ -89,7 +82,7 @@ class Index extends Component
         $dir = 'upload/private-website-resources/' . $psite->id . '/promotional-video' . '/' . $filename;
 
         //dispatch a job to convert video by FFmpeg
-        $videoJob = dispatch(new ConvertPromotionalVideo([
+        dispatch(new ConvertPromotionalVideo([
             'path' => $this->video->getRealPath(),
             'dir' => $dir,
             'privateSiteId' => $this->privateSiteId
@@ -123,14 +116,14 @@ class Index extends Component
 
     public function back() {
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 3, 
+            privateSiteSectionNumber: 2, 
         );
     }
 
     // check if private site id is related to the owner
     private function isPsiteOwner($privateSiteId) {
         $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($this->privateSiteId);
-        
+
         if(!auth()->check() || $psite->user->id !== auth()->user()->id) {
             abort(403);
         }
@@ -143,7 +136,7 @@ class Index extends Component
     }
 
     public function save() {  
-       
+        
         $this->validate();
         
         $psite = $this->isPsiteOwner($this->privateSiteId);
@@ -166,7 +159,6 @@ class Index extends Component
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
-                'header_description' => Purify::clean($this->headerDescription),
                 'video_job_id' => NULL,
                 'video' => $this->handleVideoUpload($psite),
                 'thumbnail_job_id' => NULL,
@@ -178,12 +170,11 @@ class Index extends Component
                 'psite_id' => $psite->id
             ],[
                 'is_hidden' => $this->isHidden == true ? 1 : 0,
-                'header_description' => Purify::clean($this->headerDescription),
             ]);
         }
 
         $this->dispatch('privateSiteSectionNumber', 
-            privateSiteSectionNumber: 5, 
+            privateSiteSectionNumber: 4, 
         );
     }
 

@@ -8,19 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAds;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteBlog;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteHero;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTest;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteFooter;
+use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteInfo;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMember;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteAboutUs;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteLicense;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteProject;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteService;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteContactUs;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteMiddleBanner;
-use App\Models\Frontend\UserModels\PrivateSite\Sections\PsiteTrustedCustomer;
 use App\Models\Frontend\UserModels\PrivateSite\Sections\PsitePromotionalVideo;
 
 class Psite extends Model
@@ -55,73 +46,42 @@ class Psite extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function info() {
+        return $this->hasOne(PsiteInfo::class);
+    }
+
     public function licenses() {
         return $this->hasOne(PsiteLicense::class);
-    }
-
-    public function aboutUs() {
-        return $this->hasOne(PsiteAboutUs::class);
-    }
-
-    public function blog() {
-        return $this->hasOne(PsiteBlog::class);
     }
 
     public function contactUs() {
         return $this->hasOne(PsiteContactUs::class);
     }
 
-    public function footer() {
-        return $this->hasOne(PsiteFooter::class);
-    }
-
-    public function hero() {
-        return $this->hasOne(PsiteHero::class);
-    }
-
     public function members() {
         return $this->hasOne(PsiteMember::class);
-    }
-
-    public function middleBanner() {
-        return $this->hasOne(PsiteMiddleBanner::class);
     }
 
     public function promotionalVideo() {
         return $this->hasOne(PsitePromotionalVideo::class);
     }
 
-    public function services() {
-        return $this->hasOne(PsiteService::class);
-    }
-
-    public function testimonials() {
-        return $this->hasOne(PsiteTest::class);
-    }
-
-    public function trustedCustomer() {
-        return $this->hasOne(PsiteTrustedCustomer::class);
-    }
-
-    public function projects() {
-        return $this->hasOne(PsiteProject::class);
-    }
-
-    public function ads() {
-        return $this->hasOne(PsiteAds::class);
+    // This is for slug, it gets the last ID to create a unique random string
+    public static function getLatestId() {
+        return self::latest()->first() ? self::latest()->first()->id : 0;
     }
 
     public function setSeoMeta() {
         if(!empty($this->meta_title)) {
             SEOMeta::setTitle($this->meta_title);
         } else {
-            SEOMeta::setTitle($this->hero->title);
+            SEOMeta::setTitle($this->info->title);
         }
 
         if(!empty($this->meta_description)) {
             SEOMeta::setDescription($this->meta_description);
         } else {
-            SEOMeta::setDescription($this->hero->description);
+            SEOMeta::setDescription($this->info->about_us);
         }
 
         if(!empty($this->meta_keywords)) {

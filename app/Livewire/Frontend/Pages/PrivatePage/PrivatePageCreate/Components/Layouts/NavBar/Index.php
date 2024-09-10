@@ -51,19 +51,19 @@ class Index extends Component
     }
 
     // check if the first section which is mandatory has beed saved by the user for the first time
-    private function getHeroSectionStatus() {
+    private function geInfoSectionStatus() {
         $psite = $this->isPsiteOwner($this->privateSiteId);
-
-        if(!is_null($psite->hero) && $psite->hero->psiteHeroSliders->count()) {
+       
+        if(!is_null($psite->info)) {
             return true;
         }
 
         return false;
     }
-    
+
     // navigate through each section by click
     public function navigate($id) {
-        if(!is_null($this->privateSiteId) && $this->getHeroSectionStatus()) {
+        if(!is_null($this->privateSiteId) && $this->geInfoSectionStatus()) {
             $this->privateSiteSectionNumber = $id;
 
             $this->dispatch('privateSiteSectionNumber', 

@@ -2,7 +2,7 @@
     <div class="app-brand demo">
       <a class="app-brand-link" href="{{URL::to('/')}}">
         <span class="app-brand-logo">
-          <img width="50" src="{{asset('assets/frontend/img/logo/zsaz.png')}}" alt="zeesaz">
+          <img width="50" src="{{asset('assets/frontend/img/logo/zsaz.png')}}" alt="zisaz">
         </span>
         <span class="app-brand-text menu-text fw-bold">
             @if($user->role == 'admin')
@@ -24,7 +24,7 @@
       </a>
     </div>
     <div class="menu-inner-shadow"></div>
-    <ul class="menu-inner py-1">
+    <ul class="admin-dashboard menu-inner py-1">
         
         <!-- Beginnig of Dashboard -->
         {{-- <li class="menu-header small text-uppercase">
@@ -1143,7 +1143,7 @@
             <!-- End of Permissions Section -->
         @endcan
     </ul>
-  </aside>
+</aside>
 
 
 

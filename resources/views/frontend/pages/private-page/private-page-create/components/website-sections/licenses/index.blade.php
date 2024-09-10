@@ -33,36 +33,14 @@
                 </div>
             </div>
 
-            <!-- About information-->
-            <h2 class="h5 font-vazir mb-4 mt-3">
-                <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
-                اطلاعات مجوز ها
-            </h2>
-
-            <div class="row">
-                <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-header-description">
-                        توضیحات
-                    </label>
-                    <span class="text-danger">*</span>
-                    <textarea {{ $isHidden == true ? 'disabled' : '' }} class="form-control form-control-md" type="text" id="pr-business-header-description" placeholder="توضیحات مرتبط با مجوزهای خود را وارد نمایید" wire:model="headerDescription"></textarea>
-                    
-                    @if($errors->has('headerDescription'))
-                        <span class="text-danger">{{ $errors->first('headerDescription') }}</span>
-                    @endif
-                </div>
-            </div>
-
             <!-- License repeater-->
-            <h2 class="h5 font-vazir mb-4 mt-3">
+            <h2 class="h5 font-vazir mt-3">
                 <i class="fi-award text-primary fs-5 mt-n1 me-2"></i>
                 بارگذاری مجوز ها
             </h2>
 
             <div class="row">
                 <div class="col-md-12 mb-4">
-                    <hr class="mb-4 mt-2">
-
                     @foreach ($itemInputs as $itemKey => $itemValue)
                         @if(count($itemImages) && isset($itemImages[$itemValue]) && is_string($itemImages[$itemValue]))
                             <div class="row mt-3">
@@ -70,20 +48,6 @@
                                     <div class="row">
                                         <div class="col-md-9">
                                             <div class="row">
-                                                <!-- License title -->
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label fw-bold" for="pr-description">
-                                                            عنوان مجوز
-                                                            <span class="text-danger">*</span>
-                                                        </label>
-                                                        <div>
-                                                            <input disabled class="form-control" type="text" wire:model="itemTitle.{{$itemValue}}" placeholder="عنوان مجوز را وارد نمایید">
-                                                        </div>
-                                                        @error('itemTitle.'.$itemValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
-                                                    </div>
-                                                </div>
-        
                                                 <!-- File uploader -->
                                                 <div class="col-md-12">
                                                     <label class="form-label fw-bold" for="pr-image-upload">
@@ -124,20 +88,6 @@
                                     <div class="row">
                                         <div class="col-md-9">
                                             <div class="row">
-                                                <!-- License title -->
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label fw-bold" for="pr-description">
-                                                            عنوان مجوز
-                                                            <span class="text-danger">*</span>
-                                                        </label>
-                                                        <div>
-                                                            <input {{ $isHidden == true ? 'disabled' : '' }} class="form-control" type="text" wire:model="itemTitle.{{$itemValue}}" placeholder="عنوان مجوز را وارد نمایید">
-                                                        </div>
-                                                        @error('itemTitle.'.$itemValue) <div class="text-danger error mb-2">{{ $message }}</div> @enderror
-                                                    </div>
-                                                </div>
-        
                                                 <!-- File uploader -->
                                                 <div class="col-md-12">
                                                     <label class="form-label fw-bold" for="pr-image-upload">

@@ -38,7 +38,7 @@
                 <a href="{{route('home-page')}}">خانه</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                ایجاد صفحه اختصاصی
+                ایجاد کسب و کار
             </li>
         </ol>
     </nav>
@@ -50,10 +50,10 @@
             <!-- Page title-->
             <div class="text-center pb-4 mb-3">
                 <h1 class="h4 mb-4 font-vazir">
-                    ایجاد یک صفحه اختصاصی
+                    ایجاد کسب و کار
                 </h1>
                 <p class="mb-1">
-                    با توجه به نیاز خود می توانید یک وب سایت یا صفحه اختصاصی در زمینه های مختلف ایجاد نمایید.
+                    با توجه به نیاز خود می توانید صفحه کسب و کار خود را ایجاد نمایید.
                 </p>
             </div>
 

@@ -42,12 +42,31 @@ class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Contr
      */
     public function edit($id)
     {
-        $psite = Psite::queryWithVerifyStatusPending()->findOrFail($id);
-        $user = auth()->user();
+        $psite = Psite::queryWithVerifyStatusPending()->findOrFail($id)
+        ->with([
+            'info',
+            'contactUs',
+            'promotionalVideo',
+            'licenses',
+            'licenses.psiteLicenseItem',
+            'members',
+            'members.psiteMemberItem',
+            ])
+        ->first();
+
+        $user = $psite->user;
+       
+        // load dynamic ads section
+        $ads = !is_null($user->activity) ? $user->activity()->with('subactivity')->get()->pluck('subactivity')->filter()->take(12) : collect([]);
+
+        // load project section
+        $projects = $user->project->take(12);
 
         return view('dashboards.users.admin.pages.users-activities.private-websites.pending.edit.index', compact(
             'user',
             'psite',
+            'ads', 
+            'projects', 
         ));  
     }
 
@@ -88,7 +107,7 @@ class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Contr
 
         $searchString = trim($request->q);
         
-        $psites = Psite::queryWithVerifyStatusPending()->withWhereHas('hero', function($query) use($searchString) {
+        $psites = Psite::queryWithVerifyStatusPending()->withWhereHas('info', function($query) use($searchString) {
             $query->where('title', 'like', '%' . $searchString . '%'); 
         })->paginate(10);
         

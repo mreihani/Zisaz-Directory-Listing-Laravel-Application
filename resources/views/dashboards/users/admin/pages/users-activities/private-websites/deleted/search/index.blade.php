@@ -99,7 +99,7 @@
                                             </bdi>
                                         </td>
                                         <td>
-                                            {{$psiteItem->hero->title}}
+                                            {{$psiteItem->info->title}}
                                         </td>
                                         <td>
                                             {{$psiteItem->user->firstname}}
