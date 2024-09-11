@@ -54,6 +54,8 @@ class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Contr
             ])
         ->first();
 
+        dd($psite);
+
         $user = $psite->user;
        
         // load dynamic ads section
