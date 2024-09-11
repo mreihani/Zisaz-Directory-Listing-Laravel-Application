@@ -42,21 +42,7 @@ class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Contr
      */
     public function edit($id)
     {
-        // $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($id)
-        // ->with([
-        //     'info',
-        //     'contactUs',
-        //     'promotionalVideo',
-        //     'licenses',
-        //     'licenses.psiteLicenseItem',
-        //     'members',
-        //     'members.psiteMemberItem',
-        //     ])
-        // ->first();
-
         $psite = Psite::queryWithVerifyStatusPending()->findOrFail($id);
-
-        
 
         $user = $psite->user;
        

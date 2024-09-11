@@ -44,18 +44,20 @@
                     <img class="rounded" src="{{asset($psite->info->business_banner)}}" width="360" height="200" alt="">
                 </div>
                 
-                <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
-                    <div class="tns-carousel-inner" data-carousel-options="{&quot;loop&quot;: true, &quot;gutter&quot;: 16}">
-                        @foreach ($psite->licenses->psiteLicenseItem as $item)
-                            <div>
-                                <img class="rounded-3" src="{{asset($item->item_image)}}" alt="Carousel image">
-                            </div>
-                        @endforeach
+                @if(!empty($psite->licenses) && count($psite->licenses->psiteLicenseItem) && !$psite->licenses->is_hidden) 
+                    <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
+                        <div class="tns-carousel-inner" data-carousel-options="{&quot;loop&quot;: true, &quot;gutter&quot;: 16}">
+                            @foreach ($psite->licenses->psiteLicenseItem as $item)
+                                <div>
+                                    <img class="rounded-3" src="{{asset($item->item_image)}}" alt="Carousel image">
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
                
                 <!-- Map-->
-                @if($psite->contactUs->lt && $psite->contactUs->ln)
+                @if(!empty($psite->contactUs) && $psite->contactUs->lt && $psite->contactUs->ln)
                     <div class="card border-0">
                         <div class="row" id="jaban-map-container">
                             <div class="col-12 mb-4 mt-3">
@@ -77,11 +79,13 @@
                     </div>
                 @endif
 
-                <div>
-                    <i class="fi-map-pin"></i>
-                    نشانی:
-                    {{$psite->contactUs->address}}
-                </div>
+                @if(!empty($psite->contactUs))
+                    <div>
+                        <i class="fi-map-pin"></i>
+                        نشانی:
+                        {{$psite->contactUs->address}}
+                    </div>
+                @endif
 
                 <div class="row mt-4">
                     <div class="alert alert-info d-flex" role="alert">
@@ -132,7 +136,7 @@
             <!-- About us nav-->
             <div class="card card-body border-0 shadow-sm pb-5 me-lg-1 mt-3">
                 
-                <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
+                {{-- <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
                     <div class="tns-carousel-inner" data-carousel-options="{&quot;loop&quot;: true, &quot;gutter&quot;: 16}">
                         @foreach ($psite->licenses->psiteLicenseItem as $item)
                             <div>
@@ -140,7 +144,7 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="mt-1">
                     <div class="fw-bolder text-dark">
