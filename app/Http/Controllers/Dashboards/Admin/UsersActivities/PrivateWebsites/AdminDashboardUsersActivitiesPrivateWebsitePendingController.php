@@ -42,7 +42,7 @@ class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Contr
      */
     public function edit($id)
     {
-        $psite = Psite::queryWithVerifyStatusPending()->findOrFail($id)
+        $psite = Psite::queryWithAllVerificationStatuses()->findOrFail($id)
         ->with([
             'info',
             'contactUs',
