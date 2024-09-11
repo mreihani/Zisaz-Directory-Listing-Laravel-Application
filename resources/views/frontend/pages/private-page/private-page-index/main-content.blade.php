@@ -167,37 +167,37 @@
                         </div>
 
                         @if(!empty($psite->contactUs->instagram))
-                            <a class="btn btn-icon btn-light " href="{{$psite->contactUs->instagram}}">
+                            <a class="btn btn-icon btn-light my-1" href="{{$psite->contactUs->instagram}}">
                                 <i class="fi-instagram text-body"></i>
                             </a>
                         @endif
 
                         @if(!empty($psite->contactUs->telegram))
-                            <a class="btn btn-icon btn-light " href="{{$psite->contactUs->telegram}}">
+                            <a class="btn btn-icon btn-light my-1" href="{{$psite->contactUs->telegram}}">
                                 <i class="fi-telegram text-body"></i>
                             </a>
                         @endif
 
                         @if(!empty($psite->contactUs->whatsapp))
-                            <a class="btn btn-icon btn-light " href="{{$psite->contactUs->whatsapp}}">
+                            <a class="btn btn-icon btn-light my-1" href="{{$psite->contactUs->whatsapp}}">
                                 <img width="16" src="{{asset('assets/frontend/img/jaban/x-icon/X_icon.svg.png')}}" alt="">
                             </a>
                         @endif
 
                         @if(!empty($psite->contactUs->x))
-                            <a class="btn btn-icon btn-light " href="{{$psite->contactUs->x}}">
+                            <a class="btn btn-icon btn-light my-1" href="{{$psite->contactUs->x}}">
                                 <i class="fi-whatsapp text-body"></i>
                             </a>
                         @endif
 
                         @if(!empty($psite->contactUs->linkedin))
-                            <a class="btn btn-icon btn-light " href="{{$psite->contactUs->linkedin}}">
+                            <a class="btn btn-icon btn-light my-1" href="{{$psite->contactUs->linkedin}}">
                                 <i class="fi-linkedin text-body"></i>
                             </a>
                         @endif
 
                         @if(!empty($psite->contactUs->eitaa))
-                            <a class="btn btn-icon btn-light " href="{{$psite->contactUs->eitaa}}">
+                            <a class="btn btn-icon btn-light my-1" href="{{$psite->contactUs->eitaa}}">
                                 <img width="15" src="{{asset('assets/frontend/img/jaban/eitaa-icon/eitaa-icon-black.svg')}}" alt="">
                             </a>
                         @endif
