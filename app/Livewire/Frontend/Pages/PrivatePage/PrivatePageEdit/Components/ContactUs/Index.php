@@ -38,7 +38,7 @@ class Index extends Component
     protected function rules() {
         return [
             'address' => 'required',
-            'phone' => 'required|integer',
+            'phone' => 'required|regex:/^\d+$/',
             'email' => $this->email ? 'email' : ''
         ];
     }
@@ -46,7 +46,7 @@ class Index extends Component
     protected $messages = [
         'address.required' => 'لطفا آدرس کسب و کار را وارد نمایید',
         'phone.required' => 'لطفا شماره تلفن را وارد نمایید',
-        'phone.integer' => 'لطفا شماره تلفن صحیح وارد نمایید',
+        'phone.regex' => 'لطفا شماره تلفن صحیح وارد نمایید',
         'email.email' => 'لطفا ایمیل صحیح وارد نمایید',
     ];
 
