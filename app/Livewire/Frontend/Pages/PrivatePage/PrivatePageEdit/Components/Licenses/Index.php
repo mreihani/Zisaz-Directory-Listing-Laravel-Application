@@ -85,14 +85,32 @@ class Index extends Component
 
             // check if new image is being sent, images from database have type of string
             if(!is_string($value)) {
+
+                // large image
                 $unique_image_name = hexdec(uniqid());
                 $filename = $unique_image_name . '.' . 'jpg';
-                $img = Image::make($value)->fit(416, 416)->encode('jpg');
+
+                $img = Image::make($value)->resize(null, 850, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode('jpg');
+
                 $image_path = $dir . '/' . $filename;
                 Storage::disk('public')->put($image_path, $img);
 
+                // small image
+                $unique_image_name_sm = hexdec(uniqid());
+                $filename_sm = $unique_image_name_sm . '.' . 'jpg';
+
+                $img_sm = Image::make($value)->resize(null, 118, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode('jpg');
+
+                $image_path_sm = $dir . '/' . $filename_sm;
+                Storage::disk('public')->put($image_path_sm, $img_sm);
+
                 $licenses->psiteLicenseItem()->create([
                     'item_image' => 'storage/upload/private-website-resources/' . $psite->id . '/licenses' . '/' . $filename,
+                    'item_image_sm' => 'storage/upload/private-website-resources/' . $psite->id . '/licenses' . '/' . $filename_sm,
                 ]);
             } else {
                 // this is for items already stored in the database and server
@@ -107,6 +125,7 @@ class Index extends Component
 
                         // here remove image from server disk
                         unlink($item->item_image);
+                        unlink($item->item_image_sm);
                     } 
                 }
             }

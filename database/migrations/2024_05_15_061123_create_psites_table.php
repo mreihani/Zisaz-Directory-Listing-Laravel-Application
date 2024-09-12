@@ -80,6 +80,7 @@ return new class extends Migration
             $table->unsignedBigInteger('psite_license_id');
             $table->foreign('psite_license_id')->references('id')->on('psite_licenses')->onDelete('cascade');
             $table->string('item_image')->nullable();
+            $table->string('item_image_sm')->nullable();
             $table->timestamps();
         });
 

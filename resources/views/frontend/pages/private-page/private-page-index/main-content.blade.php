@@ -46,16 +46,20 @@
                 
                 @if(!empty($psite->licenses) && count($psite->licenses->psiteLicenseItem) && !$psite->licenses->is_hidden) 
                     <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
-                        <div class="tns-carousel-inner" data-carousel-options="{&quot;loop&quot;: true, &quot;gutter&quot;: 16}">
-                            @foreach ($psite->licenses->psiteLicenseItem as $item)
-                                <div>
-                                    <img class="rounded-3" src="{{asset($item->item_image)}}" alt="Carousel image">
-                                </div>
-                            @endforeach
+                        <div class="row g-2 g-md-3 gallery" data-thumbnails="true" >
+                            <div class="tns-carousel-inner text-center" data-carousel-options="{&quot;loop&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 2000, &quot;gutter&quot;: 16}">
+                                @foreach ($psite->licenses->psiteLicenseItem as $item)
+                                    <div class="d-flex justify-content-center">
+                                        <a class="gallery-item rounded rounded-md-3" href="{{asset($item->item_image)}}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;مجوز&lt;/h6&gt;">
+                                            <img style="height: 118px; width:auto;" class="rounded-3" src="{{asset($item->item_image_sm)}}" alt="Gallery thumbnail">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 @endif
-               
+
                 <!-- Map-->
                 @if(!empty($psite->contactUs) && $psite->contactUs->lt && $psite->contactUs->ln)
                     <div class="card border-0">
@@ -136,15 +140,53 @@
             <!-- About us nav-->
             <div class="card card-body border-0 shadow-sm pb-5 me-lg-1 mt-3">
                 
-                {{-- <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
-                    <div class="tns-carousel-inner" data-carousel-options="{&quot;loop&quot;: true, &quot;gutter&quot;: 16}">
-                        @foreach ($psite->licenses->psiteLicenseItem as $item)
-                            <div>
-                                <img class="rounded-3" src="{{asset($item->item_image)}}" alt="Carousel image">
-                            </div>
-                        @endforeach
+                @if(!empty($psiteFirstSliderSlideOne) && $psiteFirstSliderSlideOne->display_banner)
+                    <div class="tns-carousel-wrapper tns-controls-static tns-nav-outside mt-4">
+                        <div class="tns-carousel-inner text-center" data-carousel-options="{&quot;loop&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 2000, &quot;gutter&quot;: 16}">
+
+                            @if(!empty($psiteFirstSliderSlideOne))
+                                <div>
+                                    <a href="{{asset($psiteFirstSliderSlideOne->url)}}">
+                                        <img class="rounded-3" src="{{asset($psiteFirstSliderSlideOne->image)}}" alt="Carousel image">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if(!empty($psiteFirstSliderSlideTwo))
+                                <div>
+                                    <a href="{{asset($psiteFirstSliderSlideTwo->url)}}">
+                                        <img class="rounded-3" src="{{asset($psiteFirstSliderSlideTwo->image)}}" alt="Carousel image">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if(!empty($psiteFirstSliderSlideThree))
+                                <div>
+                                    <a href="{{asset($psiteFirstSliderSlideThree->url)}}">
+                                        <img class="rounded-3" src="{{asset($psiteFirstSliderSlideThree->image)}}" alt="Carousel image">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if(!empty($psiteFirstSliderSlideFour))
+                                <div>
+                                    <a href="{{asset($psiteFirstSliderSlideFour->url)}}">
+                                        <img class="rounded-3" src="{{asset($psiteFirstSliderSlideFour->image)}}" alt="Carousel image">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if(!empty($psiteFirstSliderSlideFive))
+                                <div>
+                                    <a href="{{asset($psiteFirstSliderSlideFive->url)}}">
+                                        <img class="rounded-3" src="{{asset($psiteFirstSliderSlideFive->image)}}" alt="Carousel image">
+                                    </a>
+                                </div>
+                            @endif
+
+                        </div>
                     </div>
-                </div> --}}
+                @endif
 
                 <div class="mt-1">
                     <div class="fw-bolder text-dark">
@@ -225,29 +267,72 @@
                     </div>
         
                     <!-- Item-->
-                    <div class="row row-cols-xl-3 row-cols-sm-2 row-cols-1 gy-4 gx-3 gx-xxl-4 py-4">
+                    <div class="py-4 responsive-two-column-grid">
                         @foreach ($ads as $adsItem)
             
                             <!-- Item-->
-                            <div class="col pb-sm-2">
-                                <div class="position-relative">
-                                    <div class="position-relative mb-3">
-                                        <button class="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="نشان کردن" data-bs-original-title="نشان کردن">
-                                            <i class="fi-bookmark"></i>
-                                        </button>
-                                        <img class="rounded-3" src="{{$adsItem->activity->adsImagesUrl()}}" alt="Article img">
-                                    </div>
-                                    <h3 class="mb-2 fs-lg">
-                                        <a class="nav-link stretched-link" href="{{route('activity', $adsItem->activity->slug)}}">
+                            <div class="card card-hover card-horizontal border-0 shadow-sm mb-4 mx-2">
+                                <a class="card-img-top" href="{{route('activity', $adsItem->activity->slug)}}" style="background-image: url('{{$adsItem->activity->adsImagesUrl()}}');"></a>
+                                <div class="card-body position-relative pb-3 d-flex flex-column justify-content-between">
+
+                                    @if($adsItem->type == 'selling')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی فروش کالا
+                                        </h4>
+                                    @elseif($adsItem->type == 'employee')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی استخدام (کارجو)
+                                        </h4>
+                                    @elseif($adsItem->type == 'employer')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی استخدام (کارفرما)
+                                        </h4>
+                                    @elseif($adsItem->type == 'investor')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی شراکت و سرمایه گذاری (سرمایه گذار)
+                                        </h4>
+                                    @elseif($adsItem->type == 'invested')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی شراکت و سرمایه گذاری (سرمایه پذیر)
+                                        </h4>
+                                    @elseif($adsItem->type == 'auction')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی مزایده
+                                        </h4>
+                                    @elseif($adsItem->type == 'tender_buy')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی مناقصه (خرید)
+                                        </h4>
+                                    @elseif($adsItem->type == 'tender_project')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی مناقصه (اجرای پروژه)
+                                        </h4>
+                                    @elseif($adsItem->type == 'inquiry_buy')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی استعلام قیمت (خرید)
+                                        </h4>
+                                    @elseif($adsItem->type == 'inquiry_project')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی استعلام قیمت (اجرای پروژه)
+                                        </h4>
+                                    @elseif($adsItem->type == 'contractor')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            آگهی پیمانکاری
+                                        </h4>
+                                    @endif
+
+                                    <h3 class="h6 mb-2 fs-base">
+                                        <a class="nav-link" href="{{route('activity', $adsItem->activity->slug)}}">
                                             {{$adsItem->item_title}}
                                         </a>
                                     </h3>
-                                    <ul class="list-inline mb-0 fs-sm">
-                                        <li class="list-inline-item pe-1">
+                                    
+                                    <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
+                                        <span class="d-inline-block me-4 fs-sm me-3 pe-3">
                                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
-                                            {{jdate($adsItem->activity->updated_at)->ago()}}
-                                        </li>
-                                    </ul>
+                                            {{jdate($adsItem->updated_at)->ago()}}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
             
@@ -272,29 +357,64 @@
                     </div>
         
                     <!-- Item-->
-                    <div class="row row-cols-xl-3 row-cols-sm-2 row-cols-1 gy-4 gx-3 gx-xxl-4 py-4">
+                    <div class="py-4 responsive-two-column-grid">
                         @foreach ($projects as $projectItem)
             
                             <!-- Item-->
-                            <div class="col pb-sm-2">
-                                <div class="position-relative">
-                                    <div class="position-relative mb-3">
-                                        <button class="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="نشان کردن" data-bs-original-title="نشان کردن">
-                                            <i class="fi-bookmark"></i>
-                                        </button>
-                                        <img class="rounded-3" src="{{$projectItem->projectImagesUrl()}}" alt="Article img">
-                                    </div>
-                                    <h3 class="mb-2 fs-lg">
-                                        <a class="nav-link stretched-link" href="{{route('project', $projectItem->slug)}}">
+                            <div class="card card-hover card-horizontal border-0 shadow-sm mb-4 mx-2" >
+                                <a class="card-img-top" href="{{route('project', $projectItem->slug)}}" style="background-image: url('{{asset($projectItem->projectImages->first()->image_sm)}}');"></a>
+                                <div class="card-body position-relative pb-3 d-flex flex-column justify-content-between">
+                
+                                    @if($projectItem->project_type == '1')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه مسکونی
+                                        </h4>
+                                    @elseif($projectItem->project_type == '2')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه تجاری
+                                        </h4>
+                                    @elseif($projectItem->project_type == '3')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه تجاری مسکونی
+                                        </h4>
+                                    @elseif($projectItem->project_type == '4')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه تجاری اداری
+                                        </h4>
+                                    @elseif($projectItem->project_type == '5')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه تفریحی و ورزشی
+                                        </h4>
+                                    @elseif($projectItem->project_type == '6')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه پزشکی درمانی
+                                        </h4>
+                                    @elseif($projectItem->project_type == '7')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه آموزشی
+                                        </h4>
+                                    @elseif($projectItem->project_type == '8')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            پروژه کشاورزی و صنعتی
+                                        </h4>
+                                    @elseif($projectItem->project_type == '9')
+                                        <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                            سایر پروژه ها
+                                        </h4>
+                                    @endif
+                                      
+                                    <h3 class="h6 mb-2 fs-base">
+                                        <a class="nav-link" href="{{route('project', $projectItem->slug)}}">
                                             {{$projectItem->projectInfo->title}}
                                         </a>
                                     </h3>
-                                    <ul class="list-inline mb-0 fs-sm">
-                                        <li class="list-inline-item pe-1">
+                                    
+                                    <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
+                                        <span class="d-inline-block me-4 fs-sm me-3 pe-3">
                                             <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
                                             {{jdate($projectItem->updated_at)->ago()}}
-                                        </li>
-                                    </ul>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
             
@@ -347,6 +467,54 @@
                 </div>
             @endif
 
+            @if($mags->count())
+                <!-- Mag Content-->
+                <section class="container mb-5 pb-lg-5">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 pb-2">
+                        <h2 class="h3 mb-sm-0 ">
+                            مجله زی ساز
+                        </h2>
+                        <a class="btn btn-link fw-normal me-sm-3 p-0" href="{{route('get-mags')}}">
+                            مشاهده همه
+                            <i class="fi-arrow-long-left ms-2"></i>
+                        </a>
+                    </div>
+                    <!-- Carousel-->
+                    <div class="tns-carousel-wrapper tns-nav-outside">
+                        <div class="tns-carousel-inner d-block" data-carousel-options="{&quot;controls&quot;: false, &quot;gutter&quot;: 24, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1,&quot;nav&quot;:true},&quot;500&quot;:{&quot;items&quot;:2},&quot;850&quot;:{&quot;items&quot;:3},&quot;1200&quot;:{&quot;items&quot;:3}}}">
+
+                            @foreach($mags as $mag)
+                                <!-- Item-->
+                                <article>
+                                    <a class="d-block mb-3" href="{{route('mag', $mag->slug)}}">
+                                        <img class="rounded-3" src="{{asset($mag->image_sm)}}" alt="Post image">
+                                    </a>
+                                    <a class="fs-sm text-uppercase text-decoration-none" href="{{route('mag', $mag->slug)}}">
+                                        {{$mag->title}}
+                                    </a>
+                                    <h3 class="fs-base pt-1">
+                                        <a class="nav-link" href="{{route('mag', $mag->slug)}}">
+                                            {!! \Illuminate\Support\Str::limit($mag->body, 100, '...') !!}
+                                        </a>
+                                    </h3>
+                                    <a class="d-flex align-items-center text-decoration-none" href="{{route('mag', $mag->slug)}}">
+                                        <div class="ps-2">
+                                            <div class="d-flex text-body fs-xs">
+                                                <span class="me-2 pe-1">
+                                                    <i class="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle"></i>
+                                                    {{jdate($mag->updated_at)->format('%A, %d %B %y')}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            @endforeach
+                            
+                        </div>
+                    </div>
+                </section>
+
+            @endif
         </div>
     </div>
 </div>

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use App\Models\Frontend\UserModels\Mag\MagPost;
+use App\Models\Frontend\Banners\BannerPsitePage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 
 class PersonalWebsitePagesContoller extends Controller
@@ -48,15 +50,31 @@ class PersonalWebsitePagesContoller extends Controller
         $user = $psite->user;
 
         // load dynamic ads section
-        $ads = !is_null($user->activity) ? $user->activity()->with('subactivity')->get()->pluck('subactivity')->filter()->take(12) : collect([]);
+        $ads = !is_null($user->activity) ? $user->activity()->with('subactivity')->get()->pluck('subactivity')->filter()->take(6) : collect([]);
 
         // load project section
-        $projects = $user->project->take(12);
+        $projects = $user->project->take(6);
+
+        // load mag
+        $mags = MagPost::with('magazineCategory')->latest()->get()->take(3);
+
+        // banner on the sidebar
+        $psiteFirstSliderSlideOne = BannerPsitePage::where('position', 'psite_first_slider_slide_one')->first();
+        $psiteFirstSliderSlideTwo = BannerPsitePage::where('position', 'psite_first_slider_slide_two')->first();
+        $psiteFirstSliderSlideThree = BannerPsitePage::where('position', 'psite_first_slider_slide_three')->first();
+        $psiteFirstSliderSlideFour = BannerPsitePage::where('position', 'psite_first_slider_slide_four')->first();
+        $psiteFirstSliderSlideFive = BannerPsitePage::where('position', 'psite_first_slider_slide_five')->first();
 
         return view('frontend.pages.private-page.private-page-index.index', compact(
             'psite', 
             'ads', 
             'projects', 
+            'mags', 
+            'psiteFirstSliderSlideOne',
+            'psiteFirstSliderSlideTwo', 
+            'psiteFirstSliderSlideThree',
+            'psiteFirstSliderSlideFour',
+            'psiteFirstSliderSlideFive',
         ));
     }
 }
