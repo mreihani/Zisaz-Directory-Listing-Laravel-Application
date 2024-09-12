@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Dashboards\Admin\Media;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Frontend\UserModels\Mag\MagPost;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Frontend\Banners\BannerPsitePage;
 use App\Models\Frontend\UserModels\PrivateSite\Psite;
 use App\Services\CustomPaginationServices\PaginationService;
 use App\Http\Requests\Dashboards\Admin\UsersActivities\PrivateWebsites\Pending\UsersActivitiesPrivateWebsitePendingUpdateRequest;
@@ -52,11 +54,27 @@ class AdminDashboardUsersActivitiesPrivateWebsitePendingController extends Contr
         // load project section
         $projects = $user->project->take(12);
 
+        // load mag
+        $mags = MagPost::with('magazineCategory')->latest()->get()->take(3);
+
+        // banner on the sidebar
+        $psiteFirstSliderSlideOne = BannerPsitePage::where('position', 'psite_first_slider_slide_one')->first();
+        $psiteFirstSliderSlideTwo = BannerPsitePage::where('position', 'psite_first_slider_slide_two')->first();
+        $psiteFirstSliderSlideThree = BannerPsitePage::where('position', 'psite_first_slider_slide_three')->first();
+        $psiteFirstSliderSlideFour = BannerPsitePage::where('position', 'psite_first_slider_slide_four')->first();
+        $psiteFirstSliderSlideFive = BannerPsitePage::where('position', 'psite_first_slider_slide_five')->first();
+
         return view('dashboards.users.admin.pages.users-activities.private-websites.pending.edit.index', compact(
             'user',
             'psite',
             'ads', 
             'projects', 
+            'mags',
+            'psiteFirstSliderSlideOne',
+            'psiteFirstSliderSlideTwo',
+            'psiteFirstSliderSlideThree',
+            'psiteFirstSliderSlideFour',
+            'psiteFirstSliderSlideFive',
         ));  
     }
 
