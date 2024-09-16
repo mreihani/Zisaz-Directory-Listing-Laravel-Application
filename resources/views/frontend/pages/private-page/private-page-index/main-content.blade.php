@@ -97,7 +97,7 @@
                             <span class="fw-bolder text-dark">
                                 لینک فروشگاه
                             </span>
-                            <span class="text-nowrap">
+                            <span class="text-wrap">
                                 <a class="text-info text-decoration-none" href="{{Request::root()}}/portal/{{$psite->slug}}">
                                     {{Request::root()}}/portal/{{$psite->slug}}
                                 </a>

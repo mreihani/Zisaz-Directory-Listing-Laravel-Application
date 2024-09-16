@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Frontend\FrontEndPages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use App\Models\Frontend\UserModels\Mag\MagPost;
+use App\Models\Frontend\Banners\BannerProjectPage;
 use App\Models\Frontend\UserModels\Project\Project;
-
 
 class ProjectPagesController extends Controller
 {
@@ -43,8 +44,28 @@ class ProjectPagesController extends Controller
 
         $project->setSeoMeta();
 
+        // load mag
+        $mags = MagPost::with('magazineCategory')->latest()->get()->take(3);
+
+        // banner on the sidebar
+        $projectFirstSliderSlideOne = BannerProjectPage::where('position', 'project_first_slider_slide_one')->first();
+        $projectFirstSliderSlideTwo = BannerProjectPage::where('position', 'project_first_slider_slide_two')->first();
+        $projectFirstSliderSlideThree = BannerProjectPage::where('position', 'project_first_slider_slide_three')->first();
+        $projectFirstSliderSlideFour = BannerProjectPage::where('position', 'project_first_slider_slide_four')->first();
+        $projectFirstSliderSlideFive = BannerProjectPage::where('position', 'project_first_slider_slide_five')->first();
+
+        // constructor similar projects
+        $similarProjects = $project->user->project->where('id', '!=', $project->id)->take(6);
+
         return view('frontend.pages.project.project-index.index', compact(
             'project', 
+            'mags', 
+            'projectFirstSliderSlideOne',
+            'projectFirstSliderSlideTwo', 
+            'projectFirstSliderSlideThree',
+            'projectFirstSliderSlideFour',
+            'projectFirstSliderSlideFive',
+            'similarProjects'
         ));
     }
 }

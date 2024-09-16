@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Dashboards\Admin\Media;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Frontend\UserModels\Mag\MagPost;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Frontend\Banners\BannerProjectPage;
 use App\Models\Frontend\UserModels\Project\Project;
 use App\Services\CustomPaginationServices\PaginationService;
 use App\Http\Requests\Dashboards\Admin\UsersActivities\Projects\Pending\UsersActivitiesProjectPendingUpdateRequest;
@@ -46,9 +48,29 @@ class AdminDashboardUsersActivitiesProjectPendingController extends Controller
         $project = Project::queryWithVerifyStatusPending()->findOrFail($id);
         $user = auth()->user();
 
+        // load mag
+        $mags = MagPost::with('magazineCategory')->latest()->get()->take(3);
+
+        // banner on the sidebar
+        $projectFirstSliderSlideOne = BannerProjectPage::where('position', 'project_first_slider_slide_one')->first();
+        $projectFirstSliderSlideTwo = BannerProjectPage::where('position', 'project_first_slider_slide_two')->first();
+        $projectFirstSliderSlideThree = BannerProjectPage::where('position', 'project_first_slider_slide_three')->first();
+        $projectFirstSliderSlideFour = BannerProjectPage::where('position', 'project_first_slider_slide_four')->first();
+        $projectFirstSliderSlideFive = BannerProjectPage::where('position', 'project_first_slider_slide_five')->first();
+
+        // constructor similar projects
+        $similarProjects = $project->user->project->where('id', '!=', $project->id)->take(6);
+
         return view('dashboards.users.admin.pages.users-activities.projects.pending.edit.index', compact(
             'user',
             'project',
+            'mags', 
+            'projectFirstSliderSlideOne',
+            'projectFirstSliderSlideTwo', 
+            'projectFirstSliderSlideThree',
+            'projectFirstSliderSlideFour',
+            'projectFirstSliderSlideFive',
+            'similarProjects'
         ));  
     }
 

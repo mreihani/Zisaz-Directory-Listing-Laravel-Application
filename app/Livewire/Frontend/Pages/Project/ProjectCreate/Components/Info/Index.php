@@ -24,9 +24,8 @@ class Index extends Component
     public $projectType;
     public $totalArea;
     public $floorCount;
-    public $residentialUnitCount;
-    public $commercialUnitCount;
-    public $officeUnitCount;
+    public $floorArea;
+    public $constructorBio;
 
     // project images repeater form
     public $projectInputs;
@@ -39,6 +38,7 @@ class Index extends Component
             'projectType' => 'required',
             'totalArea' => 'required',
             'floorCount' => 'required',
+            'floorArea' => 'required',
             'projectImages.*' => new ProjectSliderImagesValidationRule(),
         ];
     }
@@ -48,6 +48,7 @@ class Index extends Component
         'projectType.required' => 'نوع پروژه را مشخص نمایید.',
         'totalArea.required' => 'مساحت کل زمین را وارد نمایید.',
         'floorCount.required' => 'تعداد طبقات را وارد نمایید.',
+        'floorArea.required' => 'مساحت کل زیر بنا را وارد نمایید.',
     ];
 
     public function mount() {
@@ -69,10 +70,9 @@ class Index extends Component
             $this->title = !is_null($project->projectInfo) && !is_null($project->projectInfo->title) ? $project->projectInfo->title : "";
             $this->totalArea = !is_null($project->projectInfo) && !is_null($project->projectInfo->total_area) ? $project->projectInfo->total_area : "";
             $this->floorCount = !is_null($project->projectInfo) && !is_null($project->projectInfo->floor_count) ? $project->projectInfo->floor_count : "";
-            $this->residentialUnitCount = !is_null($project->projectInfo) && !is_null($project->projectInfo->residential_unit_count) ? $project->projectInfo->residential_unit_count : "";
-            $this->commercialUnitCount = !is_null($project->projectInfo) && !is_null($project->projectInfo->commercial_unit_count) ? $project->projectInfo->commercial_unit_count : "";
-            $this->officeUnitCount = !is_null($project->projectInfo) && !is_null($project->projectInfo->office_unit_count) ? $project->projectInfo->office_unit_count : "";
-
+            $this->floorArea = !is_null($project->projectInfo) && !is_null($project->projectInfo->floor_area) ? $project->projectInfo->floor_area : "";
+            $this->constructorBio = !is_null($project->projectInfo) && !is_null($project->projectInfo->constructor_bio) ? $project->projectInfo->constructor_bio : "";
+            
             // project image repeater form
             $this->projectImages = $project->projectImages->pluck('image_sm')->toArray();
             $this->projectInputs = $project->projectImages->keys()->toArray();
@@ -201,9 +201,8 @@ class Index extends Component
             'title' => Purify::clean($this->title),
             'total_area' => Purify::clean($this->totalArea),
             'floor_count' => Purify::clean($this->floorCount),
-            'residential_unit_count' => Purify::clean($this->residentialUnitCount),
-            'commercial_unit_count' => Purify::clean($this->commercialUnitCount),
-            'office_unit_count' => Purify::clean($this->officeUnitCount),
+            'floor_area' => Purify::clean($this->floorArea),
+            'constructor_bio' => Purify::clean($this->constructorBio),
         ]);
 
         //save project images into DB

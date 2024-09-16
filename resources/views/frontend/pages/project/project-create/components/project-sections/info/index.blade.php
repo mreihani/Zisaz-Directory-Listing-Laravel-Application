@@ -46,8 +46,34 @@
                     <input disabled class="form-control form-control-md" type="text" id="pr-sn" value="{{auth()->user()->phone}}" placeholder="">
                 </div>
             </div>
+
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <div class="border rounded-3 p-3" id="auth-info">
+                        <!-- Bio-->
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="ps-2">
+                                    <label class="form-label fw-bold">
+                                        توضیح مختصر درباره خود بنویسید
+                                    </label>
+                                    <span class="">
+                                        (اختیاری)
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <textarea class="form-control" id="account-bio" rows="6" wire:model="constructorBio" placeholder="بیوگرافی خود را اینجا بنویسید"></textarea>
+                            </div>
+                            @if($errors->has('constructorBio'))
+                                <span class="text-danger">{{ $errors->first('constructorBio') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
           
-           <h2 class="h5 font-vazir mb-4 mt-3">
+           <h2 class="h5 font-vazir mb-4 mt-5">
                 <i class="fi-info-circle text-primary fs-5 mt-n1 me-2"></i>
                 اطلاعات پروژه
             </h2>
@@ -134,42 +160,16 @@
                     @endif
                 </div>
 
-                <!-- Residential Unit Count -->
+                <!-- Total Floor Area -->
                 <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-residentian-unit-count">
-                        تعداد واحد های مسکونی
+                    <label class="form-label fw-bold" for="pr-floor-area">
+                        مساحت کل زیر بنا
                     </label>
-                    <span class="fw-bold">(اختیاری)</span>
-                    <input class="form-control form-control-md" type="number" id="pr-business-residentian-unit-count" placeholder="تعداد واحد های مسکونی را وارد نمایید" wire:model="residentialUnitCount">
+                    <span class="text-danger">*</span>
+                    <input class="form-control form-control-md" type="number" id="pr-floor-area" placeholder="مساحت کل زیر بنا را وارد نمایید" wire:model="floorArea">
 
-                    @if($errors->has('residentialUnitCount'))
-                        <span class="text-danger">{{ $errors->first('residentialUnitCount') }}</span>
-                    @endif
-                </div>
-
-                <!-- Commercial Unit Count -->
-                <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-commercial-unit-count">
-                        تعداد واحد های تجاری
-                    </label>
-                    <span class="fw-bold">(اختیاری)</span>
-                    <input class="form-control form-control-md" type="number" id="pr-business-commercial-unit-count" placeholder="تعداد واحد های تجاری را وارد نمایید" wire:model="commercialUnitCount">
-
-                    @if($errors->has('commercialUnitCount'))
-                        <span class="text-danger">{{ $errors->first('commercialUnitCount') }}</span>
-                    @endif
-                </div>
-
-                <!-- Office Unit Count -->
-                <div class="col-md-12 mb-4">
-                    <label class="form-label fw-bold" for="pr-business-office-unit-count">
-                        تعداد واحد های اداری
-                    </label>
-                    <span class="fw-bold">(اختیاری)</span>
-                    <input class="form-control form-control-md" type="number" id="pr-business-office-unit-count" placeholder="تعداد واحد های اداری را وارد نمایید" wire:model="officeUnitCount">
-
-                    @if($errors->has('officeUnitCount'))
-                        <span class="text-danger">{{ $errors->first('officeUnitCount') }}</span>
+                    @if($errors->has('floorArea'))
+                        <span class="text-danger">{{ $errors->first('floorArea') }}</span>
                     @endif
                 </div>
             </div>

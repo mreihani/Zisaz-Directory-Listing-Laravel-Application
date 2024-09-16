@@ -42,10 +42,9 @@ return new class extends Migration
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('total_area')->nullable();
+            $table->string('floor_area')->nullable();
             $table->string('floor_count')->nullable();
-            $table->string('residential_unit_count')->nullable();
-            $table->string('commercial_unit_count')->nullable();
-            $table->string('office_unit_count')->nullable();
+            $table->text('constructor_bio')->nullable();
             $table->timestamps();
         });
 
@@ -89,23 +88,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('project_contact_oadds', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('project_contact_id');
-            $table->foreign('project_contact_id')->references('id')->on('project_contacts')->onDelete('cascade');
-            $table->string('address')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('project_contact_ophones', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('project_contact_id');
-            $table->foreign('project_contact_id')->references('id')->on('project_contacts')->onDelete('cascade');
-            $table->string('phone')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('project_contact_mphones', function (Blueprint $table) {
+        Schema::create('project_contact_phones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_contact_id');
             $table->foreign('project_contact_id')->references('id')->on('project_contacts')->onDelete('cascade');
@@ -117,6 +100,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->boolean('is_hidden')->default(0);
             $table->string('thumbnail')->nullable();
             $table->string('thumbnail_job_id')->nullable();
             $table->string('video')->nullable();
@@ -131,9 +115,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('project_videos');
-        Schema::dropIfExists('project_contact_mphones');
-        Schema::dropIfExists('project_contact_ophones');
-        Schema::dropIfExists('project_contact_oadds');
+        Schema::dropIfExists('project_contact_phones');
         Schema::dropIfExists('project_contacts');
         Schema::dropIfExists('welfare_facility_project');
         Schema::dropIfExists('project_plan_images');

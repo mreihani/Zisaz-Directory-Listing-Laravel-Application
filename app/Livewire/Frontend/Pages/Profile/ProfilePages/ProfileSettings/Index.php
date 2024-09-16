@@ -19,14 +19,6 @@ class Index extends Component
     public $username;
     public $bio;
 
-    // social media
-    public $instagram;
-    public $telegram;
-    public $whatsapp;
-    public $x;
-    public $linkedin;
-    public $eitaa;
-
     protected function rules() {
         return [
             'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
@@ -59,42 +51,6 @@ class Index extends Component
         && auth()->user()->userProfile->bio
         ) ? auth()->user()->userProfile->bio :
         null;
-
-        // retrieve instagram from db
-        $this->instagram = (auth()->user()->userProfile
-        && auth()->user()->userProfile->instagram
-        ) ? auth()->user()->userProfile->instagram :
-        null;
-
-        // retrieve telegram from db
-        $this->telegram = (auth()->user()->userProfile
-        && auth()->user()->userProfile->telegram
-        ) ? auth()->user()->userProfile->telegram :
-        null;
-
-        // retrieve whatsapp from db
-        $this->whatsapp = (auth()->user()->userProfile
-        && auth()->user()->userProfile->whatsapp
-        ) ? auth()->user()->userProfile->whatsapp :
-        null;
-
-        // retrieve x from db
-        $this->x = (auth()->user()->userProfile
-        && auth()->user()->userProfile->x
-        ) ? auth()->user()->userProfile->x :
-        null;
-        
-        // retrieve linkedin from db
-        $this->linkedin = (auth()->user()->userProfile
-        && auth()->user()->userProfile->linkedin
-        ) ? auth()->user()->userProfile->linkedin :
-        null;
-         
-        // retrieve eitaa from db
-        $this->eitaa = (auth()->user()->userProfile
-        && auth()->user()->userProfile->eitaa
-        ) ? auth()->user()->userProfile->eitaa :
-        null;
     }
 
     public function saveProfile() {    
@@ -117,12 +73,6 @@ class Index extends Component
             'user_id' => auth()->user()->id,
             'profile_image' => $profileImageAddress,
             'bio' => Purify::clean(trim($this->bio)),
-            'instagram' => Purify::clean(strtolower(trim($this->instagram))),
-            'telegram' => Purify::clean(strtolower(trim($this->telegram))),
-            'whatsapp' => Purify::clean(strtolower(trim($this->whatsapp))),
-            'x' => Purify::clean(strtolower(trim($this->x))),
-            'linkedin' => Purify::clean(strtolower(trim($this->linkedin))),
-            'eitaa' => Purify::clean(strtolower(trim($this->eitaa))),
         ]);
 
         // Show Toaster

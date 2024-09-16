@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\UserModels\Project\Sections\ProjectContact;
 
-class ProjectContactOphone extends Model
+class ProjectContactPhone extends Model
 {
     protected $guarded = [];
 

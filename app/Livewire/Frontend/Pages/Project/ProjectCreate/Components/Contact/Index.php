@@ -33,21 +33,11 @@ class Index extends Component
     // addresses
     public $projectAddress;
 
-    // address repeater form
-    public $officeAddress;
-    public $officeAddressInputs;
-    public $officeAddressIteration;
-
     // office phone repeater form
-    public $officePhone;
-    public $officePhoneInputs;
-    public $officePhoneIteration;
+    public $phone;
+    public $phoneInputs;
+    public $phoneIteration;
 
-    // mobile phone repeater form
-    public $mobilePhone;
-    public $mobilePhoneInputs;
-    public $mobilePhoneIteration;
-    
     // social media links
     public $instagram;
     public $telegram;
@@ -95,90 +85,34 @@ class Index extends Component
             $this->linkedin = !is_null($project->projectContact) && !is_null($project->projectContact->linkedin) ? $project->projectContact->linkedin : "";  
             $this->eitaa = !is_null($project->projectContact) && !is_null($project->projectContact->eitaa) ? $project->projectContact->eitaa : "";  
             
-            $this->getOfficeAddressesRepeaterFormInitialValues($project);
-            $this->getOfficePhoneRepeaterFormInitialValues($project);
-            $this->getMobilePhoneRepeaterFormInitialValues($project);
+            $this->getPhoneRepeaterFormInitialValues($project);
         }
     }
 
-    private function getOfficeAddressesRepeaterFormInitialValues($project) {
-        if(is_null($project->projectContact) || (!is_null($project->projectContact) && count($project->projectContact->projectContactOfficeAddressItems) === 0)) {
-            $this->officeAddress = [];
-            $this->officeAddressInputs = [0];
-            $this->officeAddressIteration = 1;
-        } elseif(!is_null($project->projectContact) && count($project->projectContact->projectContactOfficeAddressItems) > 0) {
-            $this->officeAddress = $project->projectContact->projectContactOfficeAddressItems->pluck('address')->toArray();
-            $this->officeAddressInputs = $project->projectContact->projectContactOfficeAddressItems->keys()->toArray();
-            $this->officeAddressIteration = $project->projectContact->projectContactOfficeAddressItems->count();
+    private function getPhoneRepeaterFormInitialValues($project) {
+        if(is_null($project->projectContact) || (!is_null($project->projectContact) && count($project->projectContact->projectContactPhoneItems) === 0)) {
+            $this->phone = [];
+            $this->phoneInputs = [0];
+            $this->phoneIteration = 1;
+        } elseif(!is_null($project->projectContact) && count($project->projectContact->projectContactPhoneItems) > 0) {
+            $this->phone = $project->projectContact->projectContactPhoneItems->pluck('phone')->toArray();
+            $this->phoneInputs = $project->projectContact->projectContactPhoneItems->keys()->toArray();
+            $this->phoneIteration = $project->projectContact->projectContactPhoneItems->count();
         }
     }
 
-    private function getOfficePhoneRepeaterFormInitialValues($project) {
-        if(is_null($project->projectContact) || (!is_null($project->projectContact) && count($project->projectContact->projectContactOfficePhoneItems) === 0)) {
-            $this->officePhone = [];
-            $this->officePhoneInputs = [0];
-            $this->officePhoneIteration = 1;
-        } elseif(!is_null($project->projectContact) && count($project->projectContact->projectContactOfficePhoneItems) > 0) {
-            $this->officePhone = $project->projectContact->projectContactOfficePhoneItems->pluck('phone')->toArray();
-            $this->officePhoneInputs = $project->projectContact->projectContactOfficePhoneItems->keys()->toArray();
-            $this->officePhoneIteration = $project->projectContact->projectContactOfficePhoneItems->count();
-        }
-    }
-
-    private function getMobilePhoneRepeaterFormInitialValues($project) {
-        if(is_null($project->projectContact) || (!is_null($project->projectContact) && count($project->projectContact->projectContactMobilePhoneItems) === 0)) {
-            $this->mobilePhone = [];
-            $this->mobilePhoneInputs = [0];
-            $this->mobilePhoneIteration = 1;
-        } elseif(!is_null($project->projectContact) && count($project->projectContact->projectContactMobilePhoneItems) > 0) {
-            $this->mobilePhone = $project->projectContact->projectContactMobilePhoneItems->pluck('phone')->toArray();
-            $this->mobilePhoneInputs = $project->projectContact->projectContactMobilePhoneItems->keys()->toArray();
-            $this->mobilePhoneIteration = $project->projectContact->projectContactMobilePhoneItems->count();
-        }
-    } 
-
-    // office address repeater form
-    public function addOfficeAddress($officeAddressIteration) {
-        if(count($this->officeAddressInputs) < 4) {
-            $this->officeAddress[$officeAddressIteration] = null;
-            $this->officeAddressIteration = $officeAddressIteration + 1;
-            array_push($this->officeAddressInputs, $officeAddressIteration);
+    // phone repeater form
+    public function addPhone($phoneIteration) {
+        if(count($this->phoneInputs) < 4) {
+            $this->phone[$phoneIteration] = null;
+            $this->phoneIteration = $phoneIteration + 1;
+            array_push($this->phoneInputs, $phoneIteration);
         } 
     }
-    public function removeOfficeAddress($addressKey) {
-        if(count($this->officeAddressInputs) > 1) {
-            unset($this->officeAddressInputs[$addressKey]);    
-            unset($this->officeAddress[$addressKey]);    
-        }
-    }
-
-    // office phone repeater form
-    public function addOfficePhone($officePhoneIteration) {
-        if(count($this->officePhoneInputs) < 4) {
-            $this->officePhone[$officePhoneIteration] = null;
-            $this->officePhoneIteration = $officePhoneIteration + 1;
-            array_push($this->officePhoneInputs, $officePhoneIteration);
-        } 
-    }
-    public function removeOfficePhone($officePhoneKey) {
-        if(count($this->officePhoneInputs) > 1) {
-            unset($this->officePhoneInputs[$officePhoneKey]);    
-            unset($this->officePhone[$officePhoneKey]); 
-        }
-    }
-
-    // mobile phone repeater form
-    public function addMobilePhone($mobilePhoneIteration) {
-        if(count($this->mobilePhoneInputs) < 4) {
-            $this->mobilePhone[$mobilePhoneIteration] = null;
-            $this->mobilePhoneIteration = $mobilePhoneIteration + 1;
-            array_push($this->mobilePhoneInputs, $mobilePhoneIteration);
-        }
-    }
-    public function removeMobilePhone($mobilePhoneKey) {
-        if(count($this->mobilePhoneInputs) > 1) {
-            unset($this->mobilePhoneInputs[$mobilePhoneKey]);    
-            unset($this->mobilePhone[$mobilePhoneKey]); 
+    public function removePhone($phoneKey) {
+        if(count($this->phoneInputs) > 1) {
+            unset($this->phoneInputs[$phoneKey]);    
+            unset($this->phone[$phoneKey]); 
         }
     }
 
@@ -189,64 +123,22 @@ class Index extends Component
         $this->selectedCityId = $this->cities->first()->id;
     }
 
-    // save office addresses into DB
-    private function saveOfficeAddressesHandler($project, $contact) {
+    // save phones into DB
+    private function savePhoneHandler($project, $contact) {
 
-        if(count($this->officeAddress) == 0) {
+        if(count($this->phone) == 0) {
             return;
         }
         
-        $contact->projectContactOfficeAddressItems()->delete();
+        $contact->projectContactPhoneItems()->delete();
 
-        foreach ($this->officeAddress as $key => $value) {
+        foreach ($this->phone as $key => $value) {
 
             if($value == "") {
                 continue;
             }
 
-            $contact->projectContactOfficeAddressItems()->create([
-                'address' => Purify::clean(trim($value)),
-            ]);
-        }
-    }
-
-    // save office phones into DB
-    private function saveOfficePhoneHandler($project, $contact) {
-
-        if(count($this->officePhone) == 0) {
-            return;
-        }
-        
-        $contact->projectContactOfficePhoneItems()->delete();
-
-        foreach ($this->officePhone as $key => $value) {
-
-            if($value == "") {
-                continue;
-            }
-
-            $contact->projectContactOfficePhoneItems()->create([
-                'phone' => Purify::clean(trim($value)),
-            ]);
-        }
-    }
-
-    // save mobile phones into DB
-    private function saveMobilePhoneHandler($project, $contact) {
-
-        if(count($this->mobilePhone) == 0) {
-            return;
-        }
-        
-        $contact->projectContactMobilePhoneItems()->delete();
-
-        foreach ($this->mobilePhone as $key => $value) {
-
-            if($value == "") {
-                continue;
-            }
-
-            $contact->projectContactMobilePhoneItems()->create([
+            $contact->projectContactPhoneItems()->create([
                 'phone' => Purify::clean(trim($value)),
             ]);
         }
@@ -295,14 +187,8 @@ class Index extends Component
             'eitaa' => Purify::clean($this->eitaa),
         ]);
 
-        // save office addresses into DB
-        $this->saveOfficeAddressesHandler($project, $contact);
-
         // save office phones into DB
-        $this->saveOfficePhoneHandler($project, $contact);
-
-        // save mobile phones into DB
-        $this->saveMobilePhoneHandler($project, $contact);
+        $this->savePhoneHandler($project, $contact);
 
         $this->dispatch('projectSectionNumber', 
             projectSectionNumber: 4, 

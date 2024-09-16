@@ -83,22 +83,22 @@
             </div>
             
             <hr class="mb-4 mt-2">
-            
-            <!-- Office Address-->
-            @foreach ($officeAddressInputs as $addressKey => $addressValue)
+
+            <!-- Phone number-->
+            @foreach ($phoneInputs as $phoneKey => $phoneValue)
                 <div class="row">
                     <div class="col-sm-10">
                         <label class="form-label fw-bold" for="pr-title">
-                            آدرس دفتر را وارد نمایید
+                            شماره تلفن را وارد نمایید
                         </label>
                         <span class="fw-bold">(اختیاری)</span>
                         
                         <div class="mb-4">
-                            <input class="form-control" type="text" placeholder="لطفا آدرس دفتر را وارد نمایید" wire:model="officeAddress.{{$addressValue}}">
+                            <input class="form-control" type="text" placeholder="لطفا شماره تلفن را وارد نمایید" wire:model="phone.{{$phoneValue}}">
                         </div>
                     </div>
                     <div class="col-sm-2 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removeOfficeAddress({{$addressKey}})">
+                        <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removePhone({{$phoneKey}})">
                             <i class="fi-trash fs-sm me-2"></i>
                             حذف
                         </button>
@@ -106,69 +106,11 @@
                 </div>
             @endforeach
 
-            <button class="btn btn-link btn-lg text-primary px-0 mb-md-n2" type="button" wire:click="addOfficeAddress({{$officeAddressIteration}})">
-                <i class="fi-map fs-sm me-2"></i>
-                افزودن آدرس دیگر
-            </button>
-
-            <hr class="mb-4 mt-2">
-
-            <!-- Office Phone number-->
-            @foreach ($officePhoneInputs as $officePhoneKey => $officePhoneValue)
-                <div class="row">
-                    <div class="col-sm-10">
-                        <label class="form-label fw-bold" for="pr-title">
-                            شماره تلفن ثابت را وارد نمایید
-                        </label>
-                        <span class="fw-bold">(اختیاری)</span>
-                        
-                        <div class="mb-4">
-                            <input class="form-control" type="text" placeholder="لطفا شماره تلفن ثابت را وارد نمایید" wire:model="officePhone.{{$officePhoneValue}}">
-                        </div>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removeOfficePhone({{$officePhoneKey}})">
-                            <i class="fi-trash fs-sm me-2"></i>
-                            حذف
-                        </button>
-                    </div>
-                </div>
-            @endforeach
-
-            <button class="btn btn-link btn-lg text-primary px-0 mb-md-n2" type="button" wire:click="addOfficePhone({{$officePhoneIteration}})">
+            <button class="btn btn-link btn-lg text-primary px-0 mb-md-n2" type="button" wire:click="addPhone({{$phoneIteration}})">
                 <i class="fi-phone fs-sm me-2"></i>
-                افزودن شماره تلفن ثابت دیگر
+                افزودن شماره تلفن دیگر
             </button>
             
-            <hr class="mb-4 mt-2">
-
-            <!-- Office Phone number-->
-            @foreach ($mobilePhoneInputs as $mobilePhoneKey => $mobilePhoneValue)
-                <div class="row">
-                    <div class="col-sm-10">
-                        <label class="form-label fw-bold" for="pr-title">
-                            شماره تلفن همراه را وارد نمایید
-                        </label>
-                        <span class="fw-bold">(اختیاری)</span>
-                        
-                        <div class="mb-4">
-                            <input class="form-control" type="text" placeholder="لطفا شماره تلفن همراه را وارد نمایید" wire:model="mobilePhone.{{$mobilePhoneValue}}">
-                        </div>
-                    </div>
-                    <div class="col-sm-2 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-sm btn-outline-danger" type="button" wire:click="removeMobilePhone({{$mobilePhoneKey}})">
-                            <i class="fi-trash fs-sm me-2"></i>
-                            حذف
-                        </button>
-                    </div>
-                </div>
-            @endforeach
-
-            <button class="btn btn-link btn-lg text-primary px-0 mb-md-n2" type="button" wire:click="addMobilePhone({{$mobilePhoneIteration}})">
-                <i class="fi-device-mobile fs-sm me-2"></i>
-                افزودن شماره تلفن همراه دیگر
-            </button>
-
             <hr class="mb-4 mt-2">
 
             <div class="row mt-3">

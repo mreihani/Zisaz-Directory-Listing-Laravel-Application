@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Frontend\UserModels\Project\Project;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Frontend\ReferenceData\ProvinceAndCity\City;
-use App\Models\Frontend\UserModels\Project\Sections\ProjectContact\ProjectContactOadd;
-use App\Models\Frontend\UserModels\Project\Sections\ProjectContact\ProjectContactMphone;
-use App\Models\Frontend\UserModels\Project\Sections\ProjectContact\ProjectContactOphone;
+use App\Models\Frontend\UserModels\Project\Sections\ProjectContact\ProjectContactPhone;
 
 
 class ProjectContact extends Model
@@ -19,16 +17,8 @@ class ProjectContact extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function projectContactOfficeAddressItems() {
-        return $this->hasMany(ProjectContactOadd::class);
-    }
-
-    public function projectContactOfficePhoneItems() {
-        return $this->hasMany(ProjectContactOphone::class);
-    }
-
-    public function projectContactMobilePhoneItems() {
-        return $this->hasMany(ProjectContactMphone::class);
+    public function projectContactPhoneItems() {
+        return $this->hasMany(ProjectContactPhone::class);
     }
 
     public function city() {

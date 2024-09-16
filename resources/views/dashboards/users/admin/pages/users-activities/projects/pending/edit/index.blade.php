@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- Page content-->
-                @include('dashboards.users.admin.pages.users-activities.projects.pending.edit.layouts.project', ['project' => $project])
+                @include('frontend.pages.project.project-index.main-content')
 
                 <div class="row">
                     <div class="col-12">

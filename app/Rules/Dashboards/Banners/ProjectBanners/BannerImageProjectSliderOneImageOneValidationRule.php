@@ -3,7 +3,7 @@
 namespace App\Rules\Dashboards\Banners\ProjectBanners;
 
 use Closure;
-use App\Models\Frontend\Banners\BannerPsitePage;
+use App\Models\Frontend\Banners\BannerProjectPage;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class BannerImageProjectSliderOneImageOneValidationRule implements ValidationRule
@@ -23,8 +23,8 @@ class BannerImageProjectSliderOneImageOneValidationRule implements ValidationRul
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // right side banner validation rule
-        $psiteFirstSliderSlideOne = BannerPsitePage::where('position', 'psite_first_slider_slide_one')->first();
-        if(!$psiteFirstSliderSlideOne && is_null($this->request->slider_image_one)) {
+        $projectFirstSliderSlideOne = BannerProjectPage::where('position', 'project_first_slider_slide_one')->first();
+        if(!$projectFirstSliderSlideOne && is_null($this->request->slider_image_one)) {
             $fail('لطفا تصویر اسلاید اول را بارگذاری نمایید.');
         } 
     }
