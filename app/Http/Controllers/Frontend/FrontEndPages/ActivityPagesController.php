@@ -34,31 +34,9 @@ class ActivityPagesController extends Controller
 
     // get all ads with type
     public function getActivties(Request $request) {
-
-        $activityType = $request->activity_type;
-        $type = $request->type;
-        $relationName = $request->r_name;
        
-        // load all activities e.g. /activities
-        if(empty($request->all())) {
-            $activities = Activity::with('subactivity')->latest()->get()->pluck('subactivity');
-            return view('frontend.pages.activity.activity-all.index', compact('activities'));
-        }
-
-        // load all activities with only activity_type parameter e.g. /activities?activity_type=ads_registration
-        if(is_null($type) && is_null($relationName)) {
-            $activities = Activity::where('activity_type', $activityType)->latest()->get()->pluck('subactivity');
-            return view('frontend.pages.activity.activity-all.index', compact('activities'));
-        }
-
-        // load all activities with activity_type & relation name parameter e.g. /activities?activity_type=ads_registration&r_name=selling
-        if(is_null($type) && !is_null($relationName)) {
-            $activities = Activity::where('activity_type', $activityType)->with($relationName)->latest()->get()->pluck($relationName)->filter();
-            return view('frontend.pages.activity.activity-all.index', compact('activities'));
-        }
-
-        // load all activities with activity_type & type parameter e.g. /activities?activity_type=ads_registration&type=investor
-        $activities = Activity::where('activity_type', $activityType)->with('subactivity')->latest()->get()->pluck('subactivity')->where('type', $type);
+        $activities = Activity::with('subactivity')->latest()->get()->pluck('subactivity');
+        
         return view('frontend.pages.activity.activity-all.index', compact('activities'));
     }
 }

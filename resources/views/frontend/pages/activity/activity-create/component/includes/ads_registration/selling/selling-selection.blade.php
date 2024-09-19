@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-sm-6 mb-4">
             <label class="form-label fw-bold" for="pr-fn">نام </label>
+            <span class="text-danger">*</span>
             <input {{empty(auth()->user()->firstname) ? '' : 'disabled'}} class="form-control form-control-md" type="text" id="pr-fn" wire:model="firstname" placeholder="نام خود را وارد نمایید">
 
             @if($errors->has('firstname'))
@@ -11,6 +12,7 @@
         </div>
         <div class="col-sm-6 mb-4">
             <label class="form-label fw-bold" for="pr-sn">نام خانوادگی </label>
+            <span class="text-danger">*</span>
             <input {{empty(auth()->user()->lastname) ? '' : 'disabled'}} class="form-control form-control-md" type="text" id="pr-sn" wire:model="lastname" placeholder="نام خانوادگی خود را وارد نمایید">
 
             @if($errors->has('lastname'))

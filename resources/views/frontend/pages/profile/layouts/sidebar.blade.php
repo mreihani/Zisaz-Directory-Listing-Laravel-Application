@@ -33,7 +33,7 @@
         </div>
        <div class="d-flex justify-content-center">
             <div class="me-1">
-                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.activity.create', ['type' => 'ads'])}}">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.activity.create')}}">
                     ثبت آگهی
                 </a>
             </div>
@@ -43,7 +43,7 @@
                 </a>
             </div>
             <div class="me-1">
-                <a class="btn btn-primary btn-sm w-100 mb-3" href="">
+                <a class="btn btn-primary btn-sm w-100 mb-3" href="{{route('user.project.create')}}">
                     ثبت پروژه
                 </a>
             </div>

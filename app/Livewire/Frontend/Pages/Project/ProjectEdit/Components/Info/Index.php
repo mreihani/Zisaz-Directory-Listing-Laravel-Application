@@ -36,9 +36,9 @@ class Index extends Component
         return [
             'title' => 'required',
             'projectType' => 'required',
-            'totalArea' => 'required',
-            'floorCount' => 'required',
-            'floorArea' => 'required',
+            'totalArea' => 'required|numeric|min:0',
+            'floorCount' => 'required|integer|min:0',
+            'floorArea' => 'required|numeric|min:0',
             'projectImages.*' => new ProjectSliderImagesValidationRule(),
         ];
     }
@@ -47,8 +47,14 @@ class Index extends Component
         'title.required' => 'نام پروژه را مشخص نمایید.',
         'projectType.required' => 'نوع پروژه را مشخص نمایید.',
         'totalArea.required' => 'مساحت کل زمین را وارد نمایید.',
+        'totalArea.numeric' => 'مساحت کل زمین را به درستی وارد نمایید.',
+        'totalArea.min' => 'مساحت کل زمین را به درستی وارد نمایید.',
         'floorCount.required' => 'تعداد طبقات را وارد نمایید.',
+        'floorCount.integer' => 'تعداد طبقات را به درستی وارد نمایید.',
+        'floorCount.min' => 'تعداد طبقات را به درستی وارد نمایید.',
         'floorArea.required' => 'مساحت کل زیر بنا را وارد نمایید.',
+        'floorArea.numeric' => 'مساحت کل زیر بنا را به درستی وارد نمایید.',
+        'floorArea.min' => 'مساحت کل زیر بنا را به درستی وارد نمایید.',
     ];
 
     public function mount() {

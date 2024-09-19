@@ -35,10 +35,12 @@
             <div class="row">
                 <div class="col-sm-6 mb-4">
                     <label class="form-label fw-bold" for="pr-fn">نام </label>
+                    <span class="text-danger">*</span>
                     <input disabled class="form-control form-control-md" type="text" id="pr-fn" value="{{auth()->user()->firstname}}" placeholder="">
                 </div>
                 <div class="col-sm-6 mb-4">
                     <label class="form-label fw-bold" for="pr-sn">نام خانوادگی </label>
+                    <span class="text-danger">*</span>
                     <input disabled class="form-control form-control-md" type="text" id="pr-sn" value="{{auth()->user()->lastname}}" placeholder="">
                 </div>
                 <div class="col-sm-6 mb-4">

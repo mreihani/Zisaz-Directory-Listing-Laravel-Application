@@ -29,76 +29,76 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-light">
                                     <li class="dropdown">
-                                        <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration'])}}">
+                                        <a class="dropdown-item dropdown-toggle" href="{{route('get-activities')}}">
                                             آگهی ها
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-light">
                                             <li>
-                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'selling', 'type' => 'selling'])}}">
+                                                <a class="dropdown-item" href="#">
                                                     مصالح و تجهیزات ساختمانی
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'contractor'])}}">
+                                                <a class="dropdown-item" href="#">
                                                     خدمات مهندسی و پیمانکاری
                                                 </a>
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment'])}}">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
                                                     کار و استخدام
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-light">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'type' => 'employee'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             کارجو
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'employment', 'type' => 'employer'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             کارفرما
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment'])}}">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
                                                     شراکت و سرمایه گذاری
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-light">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'type' => 'invested'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             سرمایه پذیر
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'investment', 'type' => 'investor'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             سرمایه گذار
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid'])}}">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
                                                     مزایده و مناقصه
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-light">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid', 'type' => 'auction'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             مزایده
                                                         </a>
                                                     </li>
                                                     <li class="dropdown">
-                                                        <a class="dropdown-item dropdown-toggle" href="">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
                                                             مناقصه
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-light">
                                                             <li>
-                                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid', 'type' => 'tender_buy'])}}">
+                                                                <a class="dropdown-item" href="#">
                                                                     مناقصه خرید
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'bid', 'type' => 'tender_project'])}}">
+                                                                <a class="dropdown-item" href="#">
                                                                     مناقصه اجرای پروژه
                                                                 </a>
                                                             </li>
@@ -107,17 +107,17 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                                                 </ul>
                                             </li>
                                             <li class="dropdown">
-                                                <a class="dropdown-item dropdown-toggle" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry'])}}">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
                                                     استعلام قیمت
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-light">
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry', 'type' => 'inquiry_buy'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             خرید
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{route('get-activities', ['activity_type' => 'ads_registration', 'r_name' => 'inquiry', 'type' => 'inquiry_project'])}}">
+                                                        <a class="dropdown-item" href="#">
                                                             اجرای پروژه
                                                         </a>
                                                     </li>
