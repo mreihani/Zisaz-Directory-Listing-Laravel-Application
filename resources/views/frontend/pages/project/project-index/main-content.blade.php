@@ -368,17 +368,6 @@
                 
             <hr class="mb-4 mt-4">
 
-            <!-- Other projects Content-->
-            {{-- @if(!empty($project->welfareFacility) && count($project->welfareFacility))
-                <section class="container pb-2 pb-lg-4">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <h2 class="h3 mb-0">سایر پروژه های سازنده</h2>
-                    </div>
-
-                   
-                </section>
-            @endif  --}}
-
             @if($similarProjects->count())
                 <div class="mt-5">
                     <div class="d-flex align-items-center justify-content-between mb-4 pb-2">

@@ -4,28 +4,71 @@
    
     @if(count($activities))
         <div class="row row-cols-xl-3 row-cols-sm-2 row-cols-1 gy-4 gx-3 gx-xxl-4 py-4">
-            @foreach ($activities as $activityItem)
+            @foreach ($activities as $adsItem)
 
                 <!-- Item-->
-                <div class="col pb-sm-2">
-                    <div class="position-relative">
-                        <div class="position-relative mb-3">
-                            <button class="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="نشان کردن" data-bs-original-title="نشان کردن">
-                                <i class="fi-bookmark"></i>
-                            </button>
-                            <img class="rounded-3" src="{{$activityItem->activity->adsImagesUrl()}}" alt="Article img">
-                        </div>
-                        <h3 class="mb-2 fs-lg">
-                            <a class="nav-link stretched-link" href="{{route('activity', $activityItem->activity->slug)}}">
-                                {{$activityItem->item_title}}
+                <div class="card card-hover card-horizontal border-0 shadow-sm mb-4 mx-2">
+                    <a class="card-img-top" href="{{route('activity', $adsItem->activity->slug)}}" style="background-image: url('{{$adsItem->activity->adsImagesUrl()}}');"></a>
+                    <div class="card-body position-relative pb-3 d-flex flex-column justify-content-between">
+
+                        @if($adsItem->type == 'selling')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی فروش کالا
+                            </h4>
+                        @elseif($adsItem->type == 'employee')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی استخدام (کارجو)
+                            </h4>
+                        @elseif($adsItem->type == 'employer')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی استخدام (کارفرما)
+                            </h4>
+                        @elseif($adsItem->type == 'investor')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی شراکت و سرمایه گذاری (سرمایه گذار)
+                            </h4>
+                        @elseif($adsItem->type == 'invested')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی شراکت و سرمایه گذاری (سرمایه پذیر)
+                            </h4>
+                        @elseif($adsItem->type == 'auction')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی مزایده
+                            </h4>
+                        @elseif($adsItem->type == 'tender_buy')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی مناقصه (خرید)
+                            </h4>
+                        @elseif($adsItem->type == 'tender_project')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی مناقصه (اجرای پروژه)
+                            </h4>
+                        @elseif($adsItem->type == 'inquiry_buy')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی استعلام قیمت (خرید)
+                            </h4>
+                        @elseif($adsItem->type == 'inquiry_project')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی استعلام قیمت (اجرای پروژه)
+                            </h4>
+                        @elseif($adsItem->type == 'contractor')
+                            <h4 class="mb-1 fs-sm fw-normal text-uppercase text-primary">
+                                آگهی پیمانکاری
+                            </h4>
+                        @endif
+
+                        <h3 class="h6 mb-2 fs-base">
+                            <a class="nav-link" href="{{route('activity', $adsItem->activity->slug)}}">
+                                {{$adsItem->item_title}}
                             </a>
                         </h3>
-                        <ul class="list-inline mb-0 fs-sm">
-                            <li class="list-inline-item pe-1">
+                        
+                        <div class="d-flex align-items-center justify-content-center text-center border-top pt-3 pb-2 mt-3">
+                            <span class="d-inline-block me-4 fs-sm me-3 pe-3">
                                 <i class="fi-clock mt-n1 me-1 fs-base text-muted align-middle"></i>
-                                {{jdate($activityItem->activity->updated_at)->ago()}}
-                            </li>
-                        </ul>
+                                {{jdate($adsItem->updated_at)->ago()}}
+                            </span>
+                        </div>
                     </div>
                 </div>
 
