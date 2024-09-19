@@ -44,6 +44,9 @@ class Index extends Component
 {
     use WithFileUploads;
 
+    public $firstname;
+    public $lastname;
+
     public $section;
     public $activityType;
     public $selectedProvinceIdValidation;
@@ -198,6 +201,8 @@ class Index extends Component
             'auctionNumber' => 'required_if:auctioneer,==,private_company|required_if:auctioneer,==,public_company',
             'inquirerValidation' => new InquirerValidationRule($this->inquirer, $this->adsType),
             'inquiryNumber' => 'required_if:inquirer,==,private_company|required_if:inquirer,==,public_company',
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
     }
 
@@ -206,9 +211,14 @@ class Index extends Component
         'licenseImage.*.required_if' => 'لطفا تصویر مجوز را بارگذاری نمایید.',
         'auctionNumber.required_if' => 'لطفا شماره مزایده را وارد نمایید.',
         'inquiryNumber.required_if' => 'لطفا شماره استعلام را وارد نمایید.',
+        'firstname.required' => 'لطفا نام خود را وارد نمایید',
+        'lastname.required' => 'لطفا نام خانوادگی خود را وارد نمایید',
     ];
 
     public function mount() {
+
+        $this->firstname = auth()->user()->firstname ?? '';
+        $this->lastname = auth()->user()->lastname ?? '';
        
         $this->activityType = 'ads_registration';
         $this->section = 'ads_registration';
@@ -908,6 +918,11 @@ class Index extends Component
     public function save() {    
       
         $this->validate();
+
+        auth()->user()->update([
+            'firstname' => auth()->user()->firstname ?? Purify::clean(trim($this->firstname)),
+            'lastname' => auth()->user()->lastname ?? Purify::clean(trim($this->lastname)),
+        ]);
 
         // ثبت آگهی
         if($this->section == "ads_registration") {

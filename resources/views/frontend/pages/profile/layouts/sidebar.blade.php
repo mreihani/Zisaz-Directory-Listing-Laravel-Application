@@ -4,9 +4,11 @@
         <div class="d-flex d-md-block d-lg-flex align-items-start pt-lg-2 mb-4">
             <img class="rounded-circle" src="{{auth()->user()->avatar()}}" width="48" alt="">
             <div class="pt-md-2 pt-lg-0 ps-3 ps-md-0 ps-lg-3">
-                <h2 class="fs-lg mb-0">
-                    {{auth()->user()->firstname}} {{auth()->user()->lastname}} 
-                </h2>
+                @if(!empty(auth()->user()->firstname) && !empty(auth()->user()->lastname))
+                    <h2 class="fs-lg mb-0">
+                        {{auth()->user()->firstname}} {{auth()->user()->lastname}} 
+                    </h2>
+                @endif
                 <span class="star-rating">
                     <i class="star-rating-icon fi-star-filled active"></i>
                     <i class="star-rating-icon fi-star-filled active"></i>

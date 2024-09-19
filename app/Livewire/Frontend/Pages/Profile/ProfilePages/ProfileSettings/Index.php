@@ -18,11 +18,15 @@ class Index extends Component
     public $email;
     public $username;
     public $bio;
+    public $firstname;
+    public $lastname;
 
     protected function rules() {
         return [
             'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
             'username' => ['required', 'string', 'regex:/^[A-z0-9\- ]+$/', Rule::unique('users')->ignore(auth()->user()->id, 'id')],
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
     }
 
@@ -34,6 +38,8 @@ class Index extends Component
         'username.string' => 'لطفا نام کاربری صحیح وارد نمایید.',
         'username.regex' => 'لطفا نام کاربری را به انگلیسی با حروف لاتین وارد نمایید.',
         'username.unique' => 'نام کاربری مورد نظر قبلا در سامانه ثبت شده است. لطفا عبارت دیگری انتخاب نمایید.',
+        'firstname.required' => 'لطفا نام خود را وارد نمایید',
+        'lastname.required' => 'لطفا نام خانوادگی خود را وارد نمایید',
     ];
 
     public function mount() {
@@ -51,6 +57,9 @@ class Index extends Component
         && auth()->user()->userProfile->bio
         ) ? auth()->user()->userProfile->bio :
         null;
+
+        $this->firstname = auth()->user()->firstname ?? '';
+        $this->lastname = auth()->user()->lastname ?? '';
     }
 
     public function saveProfile() {    
@@ -63,6 +72,8 @@ class Index extends Component
         auth()->user()->update([
             'email' => Purify::clean(strtolower(trim($this->email))),
             'username' => Purify::clean(strtolower(trim($this->username))),
+            'firstname' => auth()->user()->firstname ?? Purify::clean(trim($this->firstname)),
+            'lastname' => auth()->user()->lastname ?? Purify::clean(trim($this->lastname)),
         ]);
 
         // Save user profile

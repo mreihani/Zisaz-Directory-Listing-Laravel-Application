@@ -40,19 +40,20 @@ class SmsVerification extends Component
             session()->forget('user_id_for_login_verification');
 
             // Find user
-            $user = User::findOrFail($user_id);
+            $user = User::where('id', $user_id)->first();
 
-            if(!empty($user)) {
-                // Delete code
-                $user->activeCode()->delete();
+            // Get remember me boolean
+            $remember = false;
+            if(session()->has('remember_me')) {
+                $remember = session()->get('remember_me');
+                session()->forget('remember_me');
+            } 
 
-                // Get remember me boolean
-                $remember = false;
-                if(session()->has('remember_me')) {
-                    $remember = session()->get('remember_me');
-                    session()->forget('remember_me');
-                } 
-                
+            // Delete code
+            $user->activeCode()->delete();
+
+            if($user->phone_verified) {
+
                 // Login User
                 auth()->login($user, $remember);
 
@@ -77,9 +78,30 @@ class SmsVerification extends Component
                     message: $toasterWelcomeMessage, 
                     type: 'bg-success'
                 );
+                
+            } else {
 
-                return redirect(route('user.dashboard.profile-settings.index'));
+                // Set user phone as verified
+                $user->update(['phone_verified' => 1]);
+        
+                // Login User
+                auth()->login($user, $remember);
+
+                // Hide model after registration
+                $this->dispatch('hideModelAfterRegistration');
+
+                // Show my account header for authenticated users
+                $this->dispatch('showMyAccountHeaderAuth');
+
+                // Show Toaster
+                $this->dispatch('showToaster', 
+                    title: 'خوش آمدید!', 
+                    message: 'ثبت نام با موفقیت انجام شد.', 
+                    type: 'bg-success'
+                );
             }
+
+            return redirect(route('user.dashboard.profile-settings.index'));
         }
     }
 

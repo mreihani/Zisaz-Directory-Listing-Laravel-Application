@@ -26,15 +26,26 @@
                 <div class="col-md-8 d-flex flex-column justify-content-center">
                     <!-- Full name-->
                     <div class="border-bottom pb-3 mb-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="ps-2">
-                                <label class="form-label fw-bold">نام و نام خانوادگی</label>
-                                <div id="fn-value">
-                                    {{auth()->user()->firstname}} {{auth()->user()->lastname}}
-                                </div>
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label fw-bold" for="pr-fn">نام </label>
+                                <input {{empty(auth()->user()->firstname) ? '' : 'disabled'}} class="form-control form-control-md" type="text" id="pr-fn" wire:model="firstname" placeholder="نام خود را وارد نمایید">
+
+                                @if($errors->has('firstname'))
+                                    <span class="text-danger">{{ $errors->first('firstname') }}</span>
+                                @endif  
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label fw-bold" for="pr-sn">نام خانوادگی </label>
+                                <input {{empty(auth()->user()->lastname) ? '' : 'disabled'}} class="form-control form-control-md" type="text" id="pr-sn" wire:model="lastname" placeholder="نام خانوادگی خود را وارد نمایید">
+
+                                @if($errors->has('lastname'))
+                                    <span class="text-danger">{{ $errors->first('lastname') }}</span>
+                                @endif  
                             </div>
                         </div>
                     </div>
+
                     <!-- Phone number-->
                     <div class="">
                         <div class="d-flex align-items-center justify-content-between ">

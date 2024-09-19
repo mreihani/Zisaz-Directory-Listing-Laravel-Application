@@ -33,6 +33,9 @@ class Index extends Component
     public $businessBanner;
     public $businessBannerValidation;
 
+    public $firstname;
+    public $lastname;
+
     protected function rules() {
         return [
             'slug' => !empty($this->slug) ? Rule::unique('psites')->ignore($this->privateSiteId, 'id') : '',
@@ -40,6 +43,8 @@ class Index extends Component
             'aboutUs' => 'required',
             'logoValidation' => new PrivateSiteInfoLogoImageValidationRule($this->logo),
             'businessBannerValidation' => new PrivateSiteInfoBusinessBannerValidationRule($this->businessBanner),
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
     }
     
@@ -50,11 +55,16 @@ class Index extends Component
         'slug.unique' => 'این عبارت قبلا در سامانه ثبت شده است. لطفا عبارت دیگری انتخاب نمایید.',
         'title.required' => 'لطفا نام کسب و کار را وارد نمایید',
         'aboutUs.required' => 'لطفا اطلاعات مربوط به درباره ما را وارد نمایید',
+        'firstname.required' => 'لطفا نام خود را وارد نمایید',
+        'lastname.required' => 'لطفا نام خانوادگی خود را وارد نمایید',
     ];
 
     public function mount() {
         // load form initial inputs based on create or update mode
         $this->loadInitialValues();
+
+        $this->firstname = auth()->user()->firstname ?? '';
+        $this->lastname = auth()->user()->lastname ?? '';
     }
 
     private function loadInitialValues() {
@@ -162,6 +172,11 @@ class Index extends Component
     public function save() {  
         
         $this->validate();
+
+        auth()->user()->update([
+            'firstname' => auth()->user()->firstname ?? Purify::clean(trim($this->firstname)),
+            'lastname' => auth()->user()->lastname ?? Purify::clean(trim($this->lastname)),
+        ]);
 
         $psite = $this->isPsiteOwner($this->privateSiteId);
         

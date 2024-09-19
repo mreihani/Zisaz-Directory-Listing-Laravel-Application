@@ -5,9 +5,10 @@ namespace App\Livewire\Frontend\Auth\Login;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Route;
+use Stevebauman\Purify\Facades\Purify;
 use App\Notifications\Auth\SmsVerification;
 use App\Models\Frontend\UserModels\ActiveCode;
-use App\Rules\Auth\Login\ValidPhoneLoginValidation;
+use App\Rules\Auth\Login\CheckIfUserIsNotAdminValidation;
 
 class Login extends Component
 {
@@ -20,7 +21,7 @@ class Login extends Component
     {
         return 
         [
-            'phone' => ['required', new ValidPhoneLoginValidation(), config('phone-regex.ir.regex')],
+            'phone' => ['required', new CheckIfUserIsNotAdminValidation(), config('phone-regex.ir.regex')],
         ];
 	}
     
@@ -55,11 +56,17 @@ class Login extends Component
         $this->smsVerificationSectionVisible = true;
 
         // Get user object by phone number
-        $user = User::where('phone', $this->phone)->where('phone_verified', 1)->first();
+        $user = User::where('phone', $this->phone)->first();
 
+        // the user requires registration
         if(empty($user)) {
-            return;
-        }
+            $user = User::create(
+                [
+                    'phone' => Purify::clean($this->phone),
+                    'role' => 'construction',
+                ]
+            );
+        } 
 
         // Save user_id in session
         session()->put('user_id_for_login_verification', $user->id);
@@ -70,6 +77,8 @@ class Login extends Component
         // Generate code and send via SMS
         $code = ActiveCode::generateCode($user);
         $user->notify(new SmsVerification($code, $user->phone));
+
+        return;
     }
 
     public function render()

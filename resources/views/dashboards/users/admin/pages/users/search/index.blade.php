@@ -102,7 +102,11 @@
                                             </bdi>
                                         </td>
                                         <td>
-                                            {{$userItem->firstname}} {{$userItem->lastname}}
+                                            @if(empty($userItem->firstname) || empty($userItem->lastname))
+                                                کاربر ناشناس
+                                            @else
+                                                {{$userItem->firstname}} {{$userItem->lastname}}
+                                            @endif
                                         </td>
                                         <td>
                                             <a href="tel: {{$userItem->phone}}">

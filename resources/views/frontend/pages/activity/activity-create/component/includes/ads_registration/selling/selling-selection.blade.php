@@ -3,11 +3,19 @@
     <div class="row">
         <div class="col-sm-6 mb-4">
             <label class="form-label fw-bold" for="pr-fn">نام </label>
-            <input disabled class="form-control form-control-md" type="text" id="pr-fn" value="{{auth()->user()->firstname}}" placeholder="">
+            <input {{empty(auth()->user()->firstname) ? '' : 'disabled'}} class="form-control form-control-md" type="text" id="pr-fn" wire:model="firstname" placeholder="نام خود را وارد نمایید">
+
+            @if($errors->has('firstname'))
+                <span class="text-danger">{{ $errors->first('firstname') }}</span>
+            @endif  
         </div>
         <div class="col-sm-6 mb-4">
             <label class="form-label fw-bold" for="pr-sn">نام خانوادگی </label>
-            <input disabled class="form-control form-control-md" type="text" id="pr-sn" value="{{auth()->user()->lastname}}" placeholder="">
+            <input {{empty(auth()->user()->lastname) ? '' : 'disabled'}} class="form-control form-control-md" type="text" id="pr-sn" wire:model="lastname" placeholder="نام خانوادگی خود را وارد نمایید">
+
+            @if($errors->has('lastname'))
+                <span class="text-danger">{{ $errors->first('lastname') }}</span>
+            @endif  
         </div>
         <div class="col-sm-6 mb-4">
             <label class="form-label fw-bold" for="pr-sn">شماره تماس </label>

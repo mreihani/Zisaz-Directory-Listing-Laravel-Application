@@ -151,7 +151,7 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                             @if(Route::currentRouteName() == 'get-activities')
                                 <!-- Search bar-->
                                 <li class="nav-item dropdown d-none d-lg-block d-sm-none">
-                                    @livewire('frontend.pages.activity.activity-all.components.hero')
+                                    @livewire('frontend.pages.activity.activity-all.components.info')
                                 </li>
                             @else    
                                 <!-- Menu items-->
@@ -189,7 +189,7 @@ style="{{$isDesktopBannerShown ? 'margin-bottom: 100px;' : ''}}">
                         @if(Route::currentRouteName() == 'get-activities')
                             <!-- Search bar-->
                             <li>
-                                @livewire('frontend.pages.activity.activity-all.components.hero')
+                                @livewire('frontend.pages.activity.activity-all.components.info')
                             </li>
                         @endif
                     </ul> 

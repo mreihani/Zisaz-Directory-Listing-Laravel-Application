@@ -32,6 +32,9 @@ class Index extends Component
     public $projectImages;
     public $projectIteration;
 
+    public $firstname;
+    public $lastname;
+
     protected function rules() {
         return [
             'title' => 'required',
@@ -40,6 +43,8 @@ class Index extends Component
             'floorCount' => 'required',
             'floorArea' => 'required',
             'projectImages.*' => new ProjectSliderImagesValidationRule(),
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
     }
 
@@ -49,10 +54,15 @@ class Index extends Component
         'totalArea.required' => 'مساحت کل زمین را وارد نمایید.',
         'floorCount.required' => 'تعداد طبقات را وارد نمایید.',
         'floorArea.required' => 'مساحت کل زیر بنا را وارد نمایید.',
+        'firstname.required' => 'لطفا نام خود را وارد نمایید',
+        'lastname.required' => 'لطفا نام خانوادگی خود را وارد نمایید',
     ];
 
     public function mount() {
         $this->getInitialValues();
+
+        $this->firstname = auth()->user()->firstname ?? '';
+        $this->lastname = auth()->user()->lastname ?? '';
     }
 
     private function getInitialValues() {
@@ -187,6 +197,11 @@ class Index extends Component
     public function save() {  
        
         $this->validate();
+
+        auth()->user()->update([
+            'firstname' => auth()->user()->firstname ?? Purify::clean(trim($this->firstname)),
+            'lastname' => auth()->user()->lastname ?? Purify::clean(trim($this->lastname)),
+        ]);
 
         $project = $this->isProjectOwner($this->projectId);
 

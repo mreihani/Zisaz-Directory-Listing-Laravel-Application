@@ -250,7 +250,11 @@
                                         </td>
                                         <td>
                                             @if(!is_null($visitItem->user))
-                                                {{$visitItem->user->firstname}} {{$visitItem->user->lastname}}
+                                                @if(empty($visitItem->user->firstname) || empty($visitItem->user->lastname))
+                                                    کاربر ناشناس
+                                                @else
+                                                    {{$visitItem->user->firstname}} {{$visitItem->user->lastname}}
+                                                @endif
                                             @else
                                                 کاربر میهمان
                                             @endif

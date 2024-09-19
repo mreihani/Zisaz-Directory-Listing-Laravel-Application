@@ -8,7 +8,7 @@
                         <div class="row gx-2 gx-md-4">
                             <div class="col-sm-12 mb-4">
                                 <label class="form-label" for="js-fn">کد تأیید را وارد نمایید *</label>
-                                <input autofocus class="form-control" name="verification_code_login" type="text" id="js-fn" placeholder="کد پیامک شده" required wire:model="verification_code_login">
+                                <input class="form-control" name="verification_code_login" type="text" id="js-fn" placeholder="کد پیامک شده" required wire:model="verification_code_login">
                                 @if($errors->has('verification_code_login'))
                                     <span class="text-danger mb-4">{{ $errors->first('verification_code_login') }}</span>
                                 @endif 
@@ -22,3 +22,16 @@
     </div>
 </div>
 
+@push('page-scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const interval = setInterval(() => {
+                var inputElement = document.getElementById('js-fn');
+                if (inputElement) {
+                    inputElement.focus();
+                    clearInterval(interval); // Stop the interval once the input field is focused
+                }
+            }, 100); // Check every 100 milliseconds
+        });
+    </script>
+@endpush

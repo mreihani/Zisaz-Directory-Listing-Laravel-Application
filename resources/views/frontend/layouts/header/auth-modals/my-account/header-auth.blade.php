@@ -8,9 +8,11 @@
             <div class="d-flex align-items-start border-bottom border-light px-3 py-1 mb-2" style="width: 16rem;">
                 <img class="rounded-circle" src="{{auth()->user()->avatar()}}" style="height: 48px; width:48px;">
                 <div class="ps-2 text-end">
-                    <h6 class="fs-base text-light mb-0"> 
-                        {{auth()->user()->firstname}} {{auth()->user()->lastname}} 
-                    </h6>
+                    @if(!empty(auth()->user()->firstname) && !empty(auth()->user()->lastname))
+                        <h6 class="fs-base text-dark mb-0"> 
+                            {{auth()->user()->firstname}} {{auth()->user()->lastname}} 
+                        </h6>
+                    @endif
                     <div class="fs-xs py-2">
                         {{auth()->user()->phone}}
                         <br>

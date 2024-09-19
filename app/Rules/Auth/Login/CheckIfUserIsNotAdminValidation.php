@@ -4,9 +4,10 @@ namespace App\Rules\Auth\Login;
 
 use Closure;
 use App\Models\User;
+use App\Models\Frontend\UserModels\ActiveCode;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class ValidPhoneLoginValidation implements ValidationRule
+class CheckIfUserIsNotAdminValidation implements ValidationRule
 {
     /**
      * Run the validation rule.
@@ -15,8 +16,10 @@ class ValidPhoneLoginValidation implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!User::where($attribute, $value)->whereIn('role', collect(config('jaban.user_roles'))->pluck('title')->toArray())->where('phone_verified', 1)->exists()) {
-            $fail('شماره تلفن مورد نظر در سامانه یافت نشد. لطفا شماره دیگری وارد نمایید.');
+        $user = User::where($attribute, $value)->first();
+
+        if(!in_array($user->role, collect(config('jaban.user_roles'))->pluck('title')->toArray())) {
+            $fail("کاربر مورد نظر دسترسی لازم را ندارد.");
         }
     }
 }
