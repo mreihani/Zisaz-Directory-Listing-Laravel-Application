@@ -18,6 +18,10 @@ class CheckIfUserIsNotAdminValidation implements ValidationRule
     {
         $user = User::where($attribute, $value)->first();
 
+        if(empty($user)) {
+            return;
+        }
+
         if(!in_array($user->role, collect(config('jaban.user_roles'))->pluck('title')->toArray())) {
             $fail("کاربر مورد نظر دسترسی لازم را ندارد.");
         }
