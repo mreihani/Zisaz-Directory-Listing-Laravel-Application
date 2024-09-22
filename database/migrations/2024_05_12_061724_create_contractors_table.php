@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('price')->nullable();
             $table->boolean('price_by_agreement')->default(0);
             $table->boolean('ads_have_discount')->default(0);
-            $table->foreign('city_id')->nullable();
+            $table->string('city_id')->nullable();
             $table->timestamps();
         });
     }
