@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardAdsSliderOneController;
 use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeSliderOneController;
 use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardHomeTopBannerController;
 use App\Http\Controllers\Dashboards\Admin\Banners\AdminDashboardPsiteSliderOneController;
@@ -29,4 +30,9 @@ Route::controller(AdminDashboardPsiteSliderOneController::class)->group(function
 Route::controller(AdminDashboardProjectSliderOneController::class)->group(function () {
     Route::get('/dashboard/dynamic-banners/project-slider-one-banner', 'index')->name('admin.dashboard.dynamic-banners.project-slider-one-banner.index');
     Route::post('/dashboard/dynamic-banners/project-slider-one-banner', 'store')->name('admin.dashboard.dynamic-banners.project-slider-one-banner.store');
+});
+
+Route::controller(AdminDashboardAdsSliderOneController::class)->group(function () {
+    Route::get('/dashboard/dynamic-banners/ads-slider-one-banner', 'index')->name('admin.dashboard.dynamic-banners.ads-slider-one-banner.index');
+    Route::post('/dashboard/dynamic-banners/ads-slider-one-banner', 'store')->name('admin.dashboard.dynamic-banners.ads-slider-one-banner.store');
 });

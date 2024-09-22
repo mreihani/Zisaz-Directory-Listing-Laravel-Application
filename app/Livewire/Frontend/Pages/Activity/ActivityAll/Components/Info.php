@@ -33,6 +33,6 @@ class Info extends Component
 
     public function render()
     {
-        return view('frontend.pages.activity.activity-all.livewire-components.info');
+        return view('frontend.pages.activity.activity-all.all-types.livewire-components.info');
     }
 }

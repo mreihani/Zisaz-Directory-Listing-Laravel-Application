@@ -3,7 +3,15 @@
         <button class="btn-close position-absolute top-0 end-0 mt-3 me-3" type="button" data-bs-dismiss="modal"></button>
         <div class="tab-content mt-4">
             <div class="tab-pane fade show active" id="job-seeker" role="tabpanel">
-                <div>
+                <div x-init="
+                    const interval = setInterval(() => {
+                        var inputElement = document.getElementById('js-fn');
+                        if (inputElement) {
+                            inputElement.focus();
+                            clearInterval(interval); 
+                        }
+                    }, 100); 
+                ">
                     <form wire:submit.prevent="loginUserVerificationCode" class="needs-validation" novalidate>
                         <div class="row gx-2 gx-md-4">
                             <div class="col-sm-12 mb-4">
@@ -22,16 +30,3 @@
     </div>
 </div>
 
-@push('page-scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const interval = setInterval(() => {
-                var inputElement = document.getElementById('js-fn');
-                if (inputElement) {
-                    inputElement.focus();
-                    clearInterval(interval); // Stop the interval once the input field is focused
-                }
-            }, 100); // Check every 100 milliseconds
-        });
-    </script>
-@endpush

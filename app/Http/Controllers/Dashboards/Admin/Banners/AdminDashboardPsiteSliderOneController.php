@@ -53,23 +53,23 @@ class AdminDashboardPsiteSliderOneController extends Controller
      
         // slide one operation
         $filenamePsiteSlideOne = $this->uploadSlideOneImageHandler($request->slider_image_one);
-        $this->isertIntoDbSlideOne($filenamePsiteSlideOne, $request);
+        $this->insertIntoDbSlideOne($filenamePsiteSlideOne, $request);
 
         // slide two operation
         $filenamePsiteSlideTwo = $this->uploadSlideTwoImageHandler($request->slider_image_two);
-        $this->isertIntoDbSlideTwo($filenamePsiteSlideTwo, $request);
+        $this->insertIntoDbSlideTwo($filenamePsiteSlideTwo, $request);
         
         // slide three operation
         $filenamePsiteSlideThree = $this->uploadSlideThreeImageHandler($request->slider_image_three);
-        $this->isertIntoDbSlideThree($filenamePsiteSlideThree, $request);
+        $this->insertIntoDbSlideThree($filenamePsiteSlideThree, $request);
 
         // slide four operation
         $filenamePsiteSlideFour = $this->uploadSlideFourImageHandler($request->slider_image_four);
-        $this->isertIntoDbSlideFour($filenamePsiteSlideFour, $request);
+        $this->insertIntoDbSlideFour($filenamePsiteSlideFour, $request);
 
         // slide five operation
         $filenamePsiteSlideFive = $this->uploadSlideFiveImageHandler($request->slider_image_five);
-        $this->isertIntoDbSlideFive($filenamePsiteSlideFive, $request);
+        $this->insertIntoDbSlideFive($filenamePsiteSlideFive, $request);
 
         return redirect(route('admin.dashboard.dynamic-banners.psite-slider-one-banner.index'))->with('success', 'تنظیمات مورد نظر با موفقیت ذخیره گردید.');
     }
@@ -97,7 +97,7 @@ class AdminDashboardPsiteSliderOneController extends Controller
       
         return $dir . '/' . $filenamePsiteSlideOne;
     }
-    private function isertIntoDbSlideOne($filenamePsiteSlideOne, $request) {
+    private function insertIntoDbSlideOne($filenamePsiteSlideOne, $request) {
         // slider crud operation
         if(!is_null($filenamePsiteSlideOne)) {
             // insert slider banner into db
@@ -144,7 +144,7 @@ class AdminDashboardPsiteSliderOneController extends Controller
       
         return $dir . '/' . $filenamePsiteSlideTwo;
     }
-    private function isertIntoDbSlideTwo($filenamePsiteSlideTwo, $request) {
+    private function insertIntoDbSlideTwo($filenamePsiteSlideTwo, $request) {
 
         // check if valid image has been uploaded
         $psiteFirstSliderSlideTwo = BannerPsitePage::where('position', 'psite_first_slider_slide_two')->first();
@@ -198,7 +198,7 @@ class AdminDashboardPsiteSliderOneController extends Controller
       
         return $dir . '/' . $filenamePsiteSlideThree;
     }
-    private function isertIntoDbSlideThree($filenamePsiteSlideThree, $request) {
+    private function insertIntoDbSlideThree($filenamePsiteSlideThree, $request) {
 
         // check if valid image has been uploaded
         $psiteFirstSliderSlideThree = BannerPsitePage::where('position', 'psite_first_slider_slide_three')->first();
@@ -252,7 +252,7 @@ class AdminDashboardPsiteSliderOneController extends Controller
       
         return $dir . '/' . $filenamePsiteSlideFour;
     }
-    private function isertIntoDbSlideFour($filenamePsiteSlideFour, $request) {
+    private function insertIntoDbSlideFour($filenamePsiteSlideFour, $request) {
 
         // check if valid image has been uploaded
         $psiteFirstSliderSlideFour = BannerPsitePage::where('position', 'psite_first_slider_slide_four')->first();
@@ -306,7 +306,7 @@ class AdminDashboardPsiteSliderOneController extends Controller
       
         return $dir . '/' . $filenamePsiteSlideFive;
     }
-    private function isertIntoDbSlideFive($filenamePsiteSlideFive, $request) {
+    private function insertIntoDbSlideFive($filenamePsiteSlideFive, $request) {
 
         // check if valid image has been uploaded
         $psiteFirstSliderSlideFive = BannerPsitePage::where('position', 'psite_first_slider_slide_five')->first();

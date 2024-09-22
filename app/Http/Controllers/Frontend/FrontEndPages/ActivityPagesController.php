@@ -37,6 +37,6 @@ class ActivityPagesController extends Controller
        
         $activities = Activity::with('subactivity')->latest()->get()->pluck('subactivity');
         
-        return view('frontend.pages.activity.activity-all.index', compact('activities'));
+        return view('frontend.pages.activity.activity-all.all-types.index', compact('activities'));
     }
 }

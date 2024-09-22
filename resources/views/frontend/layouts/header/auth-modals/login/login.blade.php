@@ -42,7 +42,7 @@
                                     </div>
                                 </form>
                             @endif
-
+                            
                             <!-- SMS Verification Modal-->
                             <div class="mb-4">
                                 @if($smsVerificationSectionVisible)
@@ -65,18 +65,6 @@
             myModal._element.addEventListener('shown.bs.modal', function () {
                 document.getElementById('user-login-phone').focus();
             });
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const interval = setInterval(() => {
-                var inputElement = document.getElementById('js-fn');
-                if (inputElement) {
-                    inputElement.focus();
-                    clearInterval(interval); // Stop the interval once the input field is focused
-                }
-            }, 100); // Check every 100 milliseconds
         });
     </script>
 @endpush

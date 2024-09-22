@@ -1,6 +1,6 @@
 <!-- List of all ads-->
 <div class="pb-2">
-    <h5 class="pb-3 pt-3">کلیه آگهی ها</h5>
+    <h5 class="pb-3">کلیه آگهی ها</h5>
    
     @if(count($activities))
         <div class="row row-cols-xl-3 row-cols-sm-2 row-cols-1 gy-4 gx-3 gx-xxl-4 py-4">

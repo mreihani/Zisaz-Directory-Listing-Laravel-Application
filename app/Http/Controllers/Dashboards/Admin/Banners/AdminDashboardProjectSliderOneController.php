@@ -54,23 +54,23 @@ class AdminDashboardProjectSliderOneController extends Controller
      
         // slide one operation
         $filenameProjectSlideOne = $this->uploadSlideOneImageHandler($request->slider_image_one);
-        $this->isertIntoDbSlideOne($filenameProjectSlideOne, $request);
+        $this->insertIntoDbSlideOne($filenameProjectSlideOne, $request);
 
         // slide two operation
         $filenameProjectSlideTwo = $this->uploadSlideTwoImageHandler($request->slider_image_two);
-        $this->isertIntoDbSlideTwo($filenameProjectSlideTwo, $request);
+        $this->insertIntoDbSlideTwo($filenameProjectSlideTwo, $request);
         
         // slide three operation
         $filenameProjectSlideThree = $this->uploadSlideThreeImageHandler($request->slider_image_three);
-        $this->isertIntoDbSlideThree($filenameProjectSlideThree, $request);
+        $this->insertIntoDbSlideThree($filenameProjectSlideThree, $request);
 
         // slide four operation
         $filenameProjectSlideFour = $this->uploadSlideFourImageHandler($request->slider_image_four);
-        $this->isertIntoDbSlideFour($filenameProjectSlideFour, $request);
+        $this->insertIntoDbSlideFour($filenameProjectSlideFour, $request);
 
         // slide five operation
         $filenameProjectSlideFive = $this->uploadSlideFiveImageHandler($request->slider_image_five);
-        $this->isertIntoDbSlideFive($filenameProjectSlideFive, $request);
+        $this->insertIntoDbSlideFive($filenameProjectSlideFive, $request);
 
         return redirect(route('admin.dashboard.dynamic-banners.project-slider-one-banner.index'))->with('success', 'تنظیمات مورد نظر با موفقیت ذخیره گردید.');
     }
@@ -98,7 +98,7 @@ class AdminDashboardProjectSliderOneController extends Controller
       
         return $dir . '/' . $filenameProjectSlideOne;
     }
-    private function isertIntoDbSlideOne($filenameProjectSlideOne, $request) {
+    private function insertIntoDbSlideOne($filenameProjectSlideOne, $request) {
         // slider crud operation
         if(!is_null($filenameProjectSlideOne)) {
             // insert slider banner into db
@@ -145,7 +145,7 @@ class AdminDashboardProjectSliderOneController extends Controller
       
         return $dir . '/' . $filenameProjectSlideTwo;
     }
-    private function isertIntoDbSlideTwo($filenameProjectSlideTwo, $request) {
+    private function insertIntoDbSlideTwo($filenameProjectSlideTwo, $request) {
 
         // check if valid image has been uploaded
         $projectFirstSliderSlideTwo = BannerProjectPage::where('position', 'project_first_slider_slide_two')->first();
@@ -199,7 +199,7 @@ class AdminDashboardProjectSliderOneController extends Controller
       
         return $dir . '/' . $filenameProjectSlideThree;
     }
-    private function isertIntoDbSlideThree($filenameProjectSlideThree, $request) {
+    private function insertIntoDbSlideThree($filenameProjectSlideThree, $request) {
 
         // check if valid image has been uploaded
         $projectFirstSliderSlideThree = BannerProjectPage::where('position', 'project_first_slider_slide_three')->first();
@@ -253,7 +253,7 @@ class AdminDashboardProjectSliderOneController extends Controller
       
         return $dir . '/' . $filenameProjectSlideFour;
     }
-    private function isertIntoDbSlideFour($filenameProjectSlideFour, $request) {
+    private function insertIntoDbSlideFour($filenameProjectSlideFour, $request) {
 
         // check if valid image has been uploaded
         $projectFirstSliderSlideFour = BannerProjectPage::where('position', 'project_first_slider_slide_four')->first();
@@ -307,7 +307,7 @@ class AdminDashboardProjectSliderOneController extends Controller
       
         return $dir . '/' . $filenameProjectSlideFive;
     }
-    private function isertIntoDbSlideFive($filenameProjectSlideFive, $request) {
+    private function insertIntoDbSlideFive($filenameProjectSlideFive, $request) {
 
         // check if valid image has been uploaded
         $projectFirstSliderSlideFive = BannerProjectPage::where('position', 'project_first_slider_slide_five')->first();

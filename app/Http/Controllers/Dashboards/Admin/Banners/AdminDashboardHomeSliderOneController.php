@@ -56,23 +56,23 @@ class AdminDashboardHomeSliderOneController extends Controller
      
         // slide one operation
         $filenameHomeSlideOne = $this->uploadSlideOneImageHandler($request->slider_image_one);
-        $this->isertIntoDbSlideOne($filenameHomeSlideOne, $request);
+        $this->insertIntoDbSlideOne($filenameHomeSlideOne, $request);
 
         // slide two operation
         $filenameHomeSlideTwo = $this->uploadSlideTwoImageHandler($request->slider_image_two);
-        $this->isertIntoDbSlideTwo($filenameHomeSlideTwo, $request);
+        $this->insertIntoDbSlideTwo($filenameHomeSlideTwo, $request);
         
         // slide three operation
         $filenameHomeSlideThree = $this->uploadSlideThreeImageHandler($request->slider_image_three);
-        $this->isertIntoDbSlideThree($filenameHomeSlideThree, $request);
+        $this->insertIntoDbSlideThree($filenameHomeSlideThree, $request);
 
         // slide four operation
         $filenameHomeSlideFour = $this->uploadSlideFourImageHandler($request->slider_image_four);
-        $this->isertIntoDbSlideFour($filenameHomeSlideFour, $request);
+        $this->insertIntoDbSlideFour($filenameHomeSlideFour, $request);
 
         // slide five operation
         $filenameHomeSlideFive = $this->uploadSlideFiveImageHandler($request->slider_image_five);
-        $this->isertIntoDbSlideFive($filenameHomeSlideFive, $request);
+        $this->insertIntoDbSlideFive($filenameHomeSlideFive, $request);
 
         return redirect(route('admin.dashboard.dynamic-banners.home-slider-one-banner.index'))->with('success', 'تنظیمات مورد نظر با موفقیت ذخیره گردید.');
     }
@@ -100,7 +100,7 @@ class AdminDashboardHomeSliderOneController extends Controller
       
         return $dir . '/' . $filenameHomeSlideOne;
     }
-    private function isertIntoDbSlideOne($filenameHomeSlideOne, $request) {
+    private function insertIntoDbSlideOne($filenameHomeSlideOne, $request) {
         // slider crud operation
         if(!is_null($filenameHomeSlideOne)) {
             // insert slider banner into db
@@ -147,7 +147,7 @@ class AdminDashboardHomeSliderOneController extends Controller
       
         return $dir . '/' . $filenameHomeSlideTwo;
     }
-    private function isertIntoDbSlideTwo($filenameHomeSlideTwo, $request) {
+    private function insertIntoDbSlideTwo($filenameHomeSlideTwo, $request) {
 
         // check if valid image has been uploaded
         $homeFirstSliderSlideTwo = BannerHomePage::where('position', 'home_first_slider_slide_two')->first();
@@ -201,7 +201,7 @@ class AdminDashboardHomeSliderOneController extends Controller
       
         return $dir . '/' . $filenameHomeSlideThree;
     }
-    private function isertIntoDbSlideThree($filenameHomeSlideThree, $request) {
+    private function insertIntoDbSlideThree($filenameHomeSlideThree, $request) {
 
         // check if valid image has been uploaded
         $homeFirstSliderSlideThree = BannerHomePage::where('position', 'home_first_slider_slide_three')->first();
@@ -255,7 +255,7 @@ class AdminDashboardHomeSliderOneController extends Controller
       
         return $dir . '/' . $filenameHomeSlideFour;
     }
-    private function isertIntoDbSlideFour($filenameHomeSlideFour, $request) {
+    private function insertIntoDbSlideFour($filenameHomeSlideFour, $request) {
 
         // check if valid image has been uploaded
         $homeFirstSliderSlideFour = BannerHomePage::where('position', 'home_first_slider_slide_four')->first();
@@ -309,7 +309,7 @@ class AdminDashboardHomeSliderOneController extends Controller
       
         return $dir . '/' . $filenameHomeSlideFive;
     }
-    private function isertIntoDbSlideFive($filenameHomeSlideFive, $request) {
+    private function insertIntoDbSlideFive($filenameHomeSlideFive, $request) {
 
         // check if valid image has been uploaded
         $homeFirstSliderSlideFive = BannerHomePage::where('position', 'home_first_slider_slide_five')->first();

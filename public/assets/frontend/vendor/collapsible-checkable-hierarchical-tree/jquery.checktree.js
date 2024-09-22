@@ -45,7 +45,7 @@ jQuery.fn.checkTree = function(settings) {
     $tree.find('div.checktree').remove();
 
     // Hide all checkbox inputs
-    $checkboxes.css('display', 'none');
+    $checkboxes.css('display', 'block');
 
     $lis.not(':has(.arrow)').each(function() {
         // This little piece here is by far the slowest.

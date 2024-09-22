@@ -234,6 +234,15 @@
                             </div>
                         </a>
                     </li>
+                    <li class="menu-item 
+                    {{Route::currentRouteName() == 'admin.dashboard.dynamic-banners.ads-slider-one-banner.index' ? 'active open' : ''}}
+                    " style="">
+                        <a class="menu-link" href="{{route('admin.dashboard.dynamic-banners.ads-slider-one-banner.index')}}">
+                            <div>
+                                اسلایدر صفحه آگهی ها
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <!-- End of home page dynamic banners section -->
