@@ -45,274 +45,41 @@
                         </div>
                     </div>
 
-                    <div class="card-body" wire:ignore>
-                        <h3 class="h5">دسته بندی آگهی</h3>
-                        
-                        <!-- فیلتر آگهی ها-->
-                        <ul class="tree list-unstyled p-0 mb-0" x-init="$(function(){$('ul.tree').checkTree()});">
-                            <li class="list-unstyled">
-                                <label>
-                                    فروش کالا
-                                </label>
-                                <ul class="category-filter-last-loop-ul">
-                                    @foreach($actGrpsShopArray as $actGrpsShopItem)
-                                        <li class="list-unstyled mt-2 d-flex">
-                                            <input class="me-1" type="checkbox" id="category_{{$actGrpsShopItem->id}}" wire:model="selectedSellingCategory.{{$actGrpsShopItem->id}}">
-                                            <label for="category_{{$actGrpsShopItem->id}}">
-                                                {{$actGrpsShopItem->title}}
-                                            </label>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-unstyled mt-2">
-                                <label>
-                                    کار و استخدام
-                                </label>
-                                <ul>
-                                    <li class="list-unstyled mt-2">
-                                        <label>
-                                            کارجو هستم
-                                        </label>
-                                        <ul>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    مهندسین
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsEngAdsArray as $actGrpsEngAdsItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_{{$actGrpsEngAdsItem->id}}" wire:model="selectedEmployeeCategory.{{$actGrpsEngAdsItem->id}}">
-                                                            <label for="category_{{$actGrpsEngAdsItem->id}}">
-                                                                {{$actGrpsEngAdsItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    مدیران و پرسنل اداری
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsManagerAdsArray as $actGrpsManagerAdsItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_{{$actGrpsManagerAdsItem->id}}" wire:model="selectedEmployeeCategory.{{$actGrpsManagerAdsItem->id}}">
-                                                            <label for="category_{{$actGrpsManagerAdsItem->id}}">
-                                                                {{$actGrpsManagerAdsItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    استادکاران و کارگران
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsTechnicalAdsArray as $actGrpsTechnicalAdsItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_{{$actGrpsTechnicalAdsItem->id}}" wire:model="selectedEmployeeCategory.{{$actGrpsTechnicalAdsItem->id}}">
-                                                            <label for="category_{{$actGrpsTechnicalAdsItem->id}}">
-                                                                {{$actGrpsTechnicalAdsItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="list-unstyled mt-2">
-                                        <label>
-                                            کارفرما هستم
-                                        </label>
-                                        <ul>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    مهندسین
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsEngAdsArray as $actGrpsEngAdsItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsEngAdsItem->id}}" wire:model="selectedEmployerCategory.{{$actGrpsEngAdsItem->id}}">
-                                                            <label for="category_emp_{{$actGrpsEngAdsItem->id}}">
-                                                                {{$actGrpsEngAdsItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    مدیران و پرسنل اداری
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsManagerAdsArray as $actGrpsManagerAdsItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsManagerAdsItem->id}}" wire:model="selectedEmployerCategory.{{$actGrpsManagerAdsItem->id}}">
-                                                            <label for="category_emp_{{$actGrpsManagerAdsItem->id}}">
-                                                                {{$actGrpsManagerAdsItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    استادکاران و کارگران
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsTechnicalAdsArray as $actGrpsTechnicalAdsItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsTechnicalAdsItem->id}}" wire:model="selectedEmployerCategory.{{$actGrpsTechnicalAdsItem->id}}">
-                                                            <label for="category_emp_{{$actGrpsTechnicalAdsItem->id}}">
-                                                                {{$actGrpsTechnicalAdsItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="list-unstyled mt-2">
-                                <label>
-                                    شراکت و سرمایه گذاری
-                                </label>
-                                <ul>
-                                    <li class="list-unstyled mt-2 d-flex">
-                                        <input class="me-1" type="checkbox" id="category_inv_1" wire:model="selectedInvested">
-                                        <label for="category_inv_1">
-                                            سرمایه پذیر هستم
-                                        </label>
-                                    </li>
-                                    <li class="list-unstyled mt-2 d-flex">
-                                        <input class="me-1" type="checkbox" id="category_inv_2" wire:model="selectedInvestor">
-                                        <label for="category_inv_2">
-                                            سرمایه گذار هستم
-                                        </label>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="list-unstyled mt-2">
-                                <label>
-                                    مزایده و مناقصه
-                                </label>
-                                <ul>
-                                    <li class="list-unstyled mt-2 d-flex">
-                                        <label>
-                                            مزایده
-                                        </label>
-                                        <ul class="category-filter-last-loop-ul">
-                                            @foreach($actGrpsAuctionArray as $actGrpsAuctionItem)
-                                                <li class="list-unstyled mt-2 d-flex">
-                                                    <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsAuctionItem->id}}" wire:model="selectedAuctionCategory.{{$actGrpsAuctionItem->id}}">
-                                                    <label for="category_emp_{{$actGrpsAuctionItem->id}}">
-                                                        {{$actGrpsAuctionItem->title}}
-                                                    </label>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    <li class="list-unstyled mt-2 d-flex">
-                                        <label>
-                                            مناقصه
-                                        </label>
-                                        <ul class="category-filter-last-loop-ul">
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    مناقصه خرید
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsTenderBuyArray as $actGrpsTenderBuyItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsTenderBuyItem->id}}" wire:model="selectedTenderBuyCategory.{{$actGrpsTenderBuyItem->id}}">
-                                                            <label for="category_emp_{{$actGrpsTenderBuyItem->id}}">
-                                                                {{$actGrpsTenderBuyItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li class="list-unstyled mt-2">
-                                                <label>
-                                                    مناقصه اجرای پروژه
-                                                </label>
-                                                <ul class="category-filter-last-loop-ul">
-                                                    @foreach($actGrpsTenderProjectArray as $actGrpsTenderProjectItem)
-                                                        <li class="list-unstyled mt-2 d-flex">
-                                                            <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsTenderProjectItem->id}}" wire:model="selectedTenderProjectCategory.{{$actGrpsTenderProjectItem->id}}">
-                                                            <label for="category_emp_{{$actGrpsTenderProjectItem->id}}">
-                                                                {{$actGrpsTenderProjectItem->title}}
-                                                            </label>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="list-unstyled mt-2">
-                                <label>
-                                    استعلام قیمت
-                                </label>
-                                <ul>
-                                    <li class="list-unstyled mt-2">
-                                        <label>
-                                            استعلام خرید
-                                        </label>
-                                        <ul class="category-filter-last-loop-ul">
-                                            @foreach($actGrpsInquiryBuyProjectArray as $actGrpsInquiryBuyProjectItem)
-                                                <li class="list-unstyled mt-2 d-flex">
-                                                    <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsInquiryBuyProjectItem->id}}" wire:model="selectedInquiryBuyProjectCategory.{{$actGrpsInquiryBuyProjectItem->id}}">
-                                                    <label for="category_emp_{{$actGrpsInquiryBuyProjectItem->id}}">
-                                                        {{$actGrpsInquiryBuyProjectItem->title}}
-                                                    </label>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    <li class="list-unstyled mt-2">
-                                        <label>
-                                            استعلام اجرای پروژه
-                                        </label>
-                                        <ul class="category-filter-last-loop-ul">
-                                            @foreach($actGrpsInquiryProjectArray as $actGrpsInquiryProjectItem)
-                                                <li class="list-unstyled mt-2 d-flex">
-                                                    <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsInquiryProjectItem->id}}" wire:model="selectedInquiryProjectCategory.{{$actGrpsInquiryProjectItem->id}}">
-                                                    <label for="category_emp_{{$actGrpsInquiryProjectItem->id}}">
-                                                        {{$actGrpsInquiryProjectItem->title}}
-                                                    </label>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="list-unstyled mt-2">
-                                <label>
-                                    خدمات مهندسی و پیمانکاری
-                                </label>
-                                <ul class="category-filter-last-loop-ul">
-                                    @foreach($actGrpsContractorArray as $actGrpsContractorItem)
-                                        <li class="list-unstyled mt-2 d-flex">
-                                            <input class="me-1" type="checkbox" id="category_emp_{{$actGrpsContractorItem->id}}" wire:model="selectedContractorCategory.{{$actGrpsContractorItem->id}}">
-                                            <label for="category_emp_{{$actGrpsContractorItem->id}}">
-                                                {{$actGrpsContractorItem->title}}
-                                            </label>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="card-body">
+                        <h3 class="h5">دسته بندی ها</h3>
 
+                        @if(!count($subCategories)) 
+                            <ul class="list-unstyled p-0 mb-0 cursor-pointer">
+                                @foreach($parentCategories as $parentCategory)
+                                    <li class="my-3" wire:click="selectedCategory({{$parentCategory->id}})">
+                                        @if(!empty($parentCategory->category_image)) <img class="category-image" src="{{asset($parentCategory->category_image)}}" alt=""> @endif
+                                        {{$parentCategory->category_name}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <div class="mb-3 cursor-pointer fw-bold" wire:click="showAllItems">
+                                <i class="fi-arrow-right"></i>
+                                همه آگهی ها
+                            </div>
+                            <ul class="list-unstyled p-0 mb-0">
+                                <li class="list-unstyled">
+                                    <label class="fw-bold">
+                                        {{$subCategories[0]->parentCategory->category_name}}
+                                    </label>
+                                    <ul class="list-unstyled pr-4 mb-0 cursor-pointer floating-right-border">
+                                        @foreach($subCategories as $subCategory)
+                                            <li class="my-3 mx-2" wire:click="selectedCategory({{$subCategory->id}})">
+                                                @if(!empty($subCategory->category_image)) <img class="category-image" src="{{asset($subCategory->category_image)}}" alt=""> @endif
+                                                {{$subCategory->category_name}}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            </ul>
+                        @endif
+                        
                         <div class="py-4">
-                            <button class="btn btn-sm btn-primary me-3" type="button" wire:click="handleFilterButton">
-                                <i class="fi-filter me-2"></i>
-                                اعمال فیلتر
-                            </button>
                             <button class="btn btn-sm btn-outline-secondary" type="button" wire:click="resetFilterButton" x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})">
                                 <i class="fi-rotate-right me-2"></i>
                                 حذف فیلتر

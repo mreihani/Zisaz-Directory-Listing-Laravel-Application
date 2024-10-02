@@ -10,20 +10,18 @@
                 ویرایش دسته بندی
             </h5>
 
-            <form action="{{route('admin.dashboard.category.update-actgrp')}}" method="POST">
+            <form action="{{route('admin.dashboard.category.update', $category)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" value="{{$actGrp->id}}" name="id">
-
                 <div class="card-body">
                     <div class="mb-3">
-                        <label class="form-label" for="category-title">
+                        <label class="form-label" for="category-name">
                             عنوان دسته بندی
                         </label>
                         <span class="text-danger">*</span>
-                        <input aria-describedby="defaultFormControlHelp" class="form-control" id="category-title" placeholder="عنوان" type="text" name="title" value="{{old('title', $actGrp->title)}}">
-                        @error("title")
+                        <input aria-describedby="defaultFormControlHelp" class="form-control" id="category-name" placeholder="عنوان" type="text" name="category_name" value="{{old('category_name', $category->category_name)}}">
+                        @error("category_name")
                             <span class="text-danger">
                                 {{ $message }}
                             </span>
@@ -34,20 +32,35 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label" for="formFile">انتخاب تصویر دسته بندی</label>
+                        <input class="form-control" id="formFile" type="file" name="img">
+                    </div>
+
+                    @if(!empty($category->category_image) && file_exists($category->category_image))
+                        <div class="d-flex justify-content-center">
+                            <img class="my-3" src="{{asset($category->category_image)}}" alt="تصویر دسته بندی">
+                        </div>
+                    @endif
+                    
+                    <div class="mb-3">
                         <label class="form-label" for="choose-sub-category">انتخاب دسته اصلی یا مادر</label>
                         <span class="text-danger">*</span>
-                        <select aria-label="انتخاب دسته اصلی" class="form-select" id="choose-sub-category" name='act_cat_id'>
-                            <option value="" selected="" disabled>دسته بندی اصلی را انتخاب نمایید</option>
-                            <option value="0">
+                        <select aria-label="انتخاب دسته اصلی" class="form-select" id="choose-sub-category" name='parent'>
+                            <option value="" selected disabled>دسته بندی اصلی را انتخاب نمایید</option>
+                            
+                            <option value="0" @if(empty($category->parentCategory) || $category->parentCategory->id === 0) selected @endif>
                                 دسته اصلی
                             </option>
-                            @foreach ($actCats as $actCatsItem)
-                                <option {{$actCatsItem->id == $actGrp->act_cat_id ? 'selected' : ''}} value="{{$actCatsItem->id}}">
-                                    {{$actCatsItem->title}}    
-                                </option>
+                        
+                            @foreach ($categories as $categoryItem)
+                                @if($categoryItem->id !== $category->id)
+                                    <option value="{{$categoryItem->id}}" @if($category->parentCategory && $category->parentCategory->id === $categoryItem->id) selected @endif>
+                                        {{$categoryItem->category_name}}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
-                        @error("act_cat_id")
+                        @error("parent")
                             <span class="text-danger">
                                 {{ $message }}
                             </span>

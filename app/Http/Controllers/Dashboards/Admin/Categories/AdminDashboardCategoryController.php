@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Dashboards\Admin\Categories;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
 use Stevebauman\Purify\Facades\Purify;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Frontend\ReferenceData\Category\Category;
+use App\Services\ImageResizeServices\ImageResizeService;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActCat;
 use App\Models\Frontend\ReferenceData\Construction\Skill\ActGrp;
 
@@ -16,9 +20,9 @@ class AdminDashboardCategoryController extends Controller
 {
     public function __construct() {
         $this->middleware('can:category_create,user')->only(['create','store']);
-        $this->middleware('can:category_edit,user')->only(['editActcat','editActgrp','updateActcat','updateActgrp']);
+        $this->middleware('can:category_edit,user')->only(['editCategory','updateCategory']);
         $this->middleware('can:category_index,user')->only(['index','showSubItem','search']);
-        $this->middleware('can:category_destroy,user')->only(['destroyActcat','destroyActgrp']);
+        $this->middleware('can:category_destroy,user')->only(['destroyCategory']);
     }
 
     /**
@@ -28,26 +32,9 @@ class AdminDashboardCategoryController extends Controller
     {
         $user = auth()->user();
 
-        $actCats = ActCat::with('activityGroup')->get();
+        $categories = Category::paginate(10);
 
-        // here we have a query of main actCats and merge sub-items with a foreach loop
-        $mergedArr = [];
-        array_push($mergedArr, $actCats);
-        foreach($actCats as $actCatItem) {
-            $mergedArr[] = $actCatItem->activityGroup;
-        }
-        $mergedCollection = collect($mergedArr)->flatten();
-
-        // use custom pagination
-        $totalGroup = count($mergedCollection);
-        $perPage = 10;
-        $page = Paginator::resolveCurrentPage('page');
-        $mergedCollection = new LengthAwarePaginator($mergedCollection->forPage($page, $perPage), $totalGroup, $perPage, $page, [
-            'path' => Paginator::resolveCurrentPath(),
-            'pageName' => 'page',
-        ]);
-
-        return view('dashboards.users.admin.pages.categories.index.index', compact('user', 'mergedCollection'));  
+        return view('dashboards.users.admin.pages.categories.index.index', compact('user', 'categories'));  
     }
 
     /**
@@ -57,9 +44,9 @@ class AdminDashboardCategoryController extends Controller
     {
         $user = auth()->user();
         
-        $actCats = ActCat::all();
+        $categories = Category::all();
 
-        return view('dashboards.users.admin.pages.categories.create.index', compact('user', 'actCats'));  
+        return view('dashboards.users.admin.pages.categories.create.index', compact('user', 'categories'));  
     }
 
     /**
@@ -68,23 +55,25 @@ class AdminDashboardCategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'act_cat_id' => 'required',
-        ],[
-            'title.required' => 'لطفا عنوان دسته بندی را وارد نمایید',
-            'act_cat_id.required' => 'لطفا دسته بندی اصلی را انتخاب نمایید'
+            'category_name' => ['required', Rule::unique('categories', 'category_name')],
+            'parent' => 'required'
+        ], [
+            'category_name.required' => 'لطفا نام دسته بندی را وارد نمایید.',
+            'category_name.unique' => 'نام دسته بندی قبلا ثبت شده است. لطفا یک نام دیگر وارد کنید.',
+            'parent.required' => 'دسته بندی اصلی را مشخص کنید'
         ]);
 
-        if($request->act_cat_id == "0") {
-            ActCat::create([
-                'title' => Purify::clean($request->title)
-            ]);
-        } else {
-            ActGrp::create([
-                'title' => Purify::clean($request->title),
-                'act_cat_id' => Purify::clean($request->act_cat_id),
-            ]);
+        if($request->img) {
+            $imageResizeService = new ImageResizeService($request->img, 'category-images/');
+            $category_image = $imageResizeService->resizeImage(100,100);
         }
+
+        Category::insert([
+            'category_name' => Purify::clean($validated['category_name']),
+            'category_slug' => strtolower(str_replace('', '-', Purify::clean($validated['category_name']))),
+            'parent' => Purify::clean($request->parent) == 0 ? 0 : Purify::clean($request->parent),
+            'category_image' => $request->img ? $category_image : null
+        ]);
 
         return redirect(route('admin.dashboard.category.index'))->with('success', 'دسته بندی مورد نظر با موفقیت ایجاد گردید.');
     }
@@ -98,125 +87,74 @@ class AdminDashboardCategoryController extends Controller
 
         $searchString = Purify::clean(trim($request->q));
 
-        $actCats = ActCat::where('title', 'like', '%' . $searchString . '%')->get();
-        $actGrps = ActGrp::where('title', 'like', '%' . $searchString . '%')->get();
+        $categories = Category::where([
+            ['category_name', 'like', "%{$searchString}%"],
+        ])->paginate(10);
 
-        $mergedCollection = $actCats->concat($actGrps);
-
-        // use custom pagination
-        $totalGroup = count($mergedCollection);
-        $perPage = 10;
-        $page = Paginator::resolveCurrentPage('page');
-        $mergedCollection = new LengthAwarePaginator($mergedCollection->forPage($page, $perPage), $totalGroup, $perPage, $page, [
-            'path' => route('admin.dashboard.category.search', ['q' => $searchString]),
-            'pageName' => 'page',
-        ]);
-
-        return view('dashboards.users.admin.pages.categories.search.index', compact('user', 'mergedCollection', 'searchString')); 
+        return view('dashboards.users.admin.pages.categories.search.index', compact('user', 'categories', 'searchString')); 
     }
 
     /**
      * Show the form for editing the ActCat resource.
      */
-    public function editActcat(Request $request, string $id)
+    public function editCategory(Request $request, Category $category)
     {
         $user = auth()->user();
+        $categories = Category::all();
         
-        $actCat = ActCat::findOrFail($id);
-
-        return view('dashboards.users.admin.pages.categories.edit.act-cat.index', compact('user', 'actCat'));  
-    }
-
-    /**
-     * Show the form for editing the ActGrp resource.
-     */
-    public function editActgrp(Request $request, string $id)
-    {
-        $user = auth()->user();
-        
-        $actCats = ActCat::all();
-        $actGrp = ActGrp::findOrFail($id);
-
-        return view('dashboards.users.admin.pages.categories.edit.act-grp.index', compact('user', 'actCats', 'actGrp'));  
+        return view('dashboards.users.admin.pages.categories.edit.index', compact('user', 'category', 'categories'));  
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function updateActcat(Request $request)
+    public function updateCategory(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'title' => 'required',
-        ],[
-            'title.required' => 'لطفا عنوان دسته بندی را وارد نمایید',
+            'category_name' => ['required', Rule::unique('categories', 'category_name')->ignore($category->id)],
+            'parent' => 'required'
+        ], [
+            'category_name.required' => 'لطفا نام دسته بندی را وارد نمایید.',
+            'category_name.unique' => 'نام دسته بندی قبلا ثبت شده است. لطفا یک نام دیگر وارد کنید.',
+            'parent.required' => 'دسته بندی اصلی را مشخص کنید'
         ]);
 
-        $actCat = ActCat::findOrFail($request->id);
+        if($request->img) {
+            $imageResizeService = new ImageResizeService($request->img, 'category-images/');
+            $category_image = $imageResizeService->resizeImage(100,100);
 
-        $actCat->update([
-            'title' => $request->title
-        ]);
-
-        return redirect(route('admin.dashboard.category.index'))->with('success', 'دسته بندی مورد نظر با موفقیت بروز رسانی گردید.');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function updateActgrp(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required',
-            'act_cat_id' => 'required',
-        ],[
-            'title.required' => 'لطفا عنوان دسته بندی را وارد نمایید',
-            'act_cat_id.required' => 'لطفا دسته بندی اصلی را انتخاب نمایید'
-        ]);
-
-        $actGrp = ActGrp::findOrFail($request->id);
-
-        $actGrp->update([
-            'title' => Purify::clean($request->title),
-            'act_cat_id' => Purify::clean($request->act_cat_id),
-        ]);
-
-        return redirect(route('admin.dashboard.category.index'))->with('success', 'دسته بندی مورد نظر با موفقیت بروز رسانی گردید.');
-    }
-
-    /**
-     * Remove the specified Actcat resource from storage.
-     */
-    public function destroyActcat(string $id)
-    {
-        $actCat = ActCat::findOrFail($id);
-        $actGrps = $actCat->activityGroup;
-        
-        foreach($actGrps as $actGrpItem) {
-            // remove all relavant activities from the DB
-            $actGrpItem->activity()->delete();
+            if(!empty($category->category_image)) {
+                unlink($category->category_image);
+            }
         }
 
-        // delete act grp from the db
-        $actCat->activityGroup()->delete();
+        $categoryData = [
+            'category_name' => Purify::clean($validated['category_name']),
+            'category_slug' => strtolower(str_replace('', '-', Purify::clean($validated['category_name']))),
+            'parent' => Purify::clean($request->parent) == 0 ? 0 : Purify::clean($request->parent),
+        ];
+        
+        if($request->img) {
+            $categoryData['category_image'] = $category_image;
+        }
 
-        // delete act cat from the db
-        $actCat->delete();
+        $category->update($categoryData);
 
-        return redirect(route('admin.dashboard.category.index'))->with('success', 'دسته بندی مورد نظر با موفقیت حذف گردید.');
+        return redirect(route('admin.dashboard.category.index'))->with('success', 'دسته بندی مورد نظر با موفقیت بروز رسانی گردید.');
     }
+
 
     /**
      * Remove the specified Actgrp resource from storage.
      */
-    public function destroyActgrp(string $id)
+    public function destroyCategory(Category $category)
     {
-        $actGrp = ActGrp::findOrFail($id);
-
-        // remove all relavant activities from the DB
-        $actGrp->activity()->delete();
+        if(!empty($category->category_image)) {
+            unlink($category->category_image);
+        }
 
         // delete act grp from the db
-        $actGrp->delete();
+        $category->delete();
 
         return redirect(route('admin.dashboard.category.index'))->with('success', 'دسته بندی مورد نظر با موفقیت حذف گردید.');
     }
@@ -224,20 +162,21 @@ class AdminDashboardCategoryController extends Controller
     /**
      * Show sub item
      */
-    public function showSubItem(string $id) {
+    public function showSubItem(Category $category) {
         $user = auth()->user();
 
-        $mergedCollection = ActCat::findOrFail($id)->activityGroup;
-       
-        // // use custom pagination
-        $totalGroup = count($mergedCollection);
-        $perPage = 10;
+        $categories = Category::allChildren($category->id);
+
+        // paginate results
+        $categories = new Collection(array_reverse($categories));
+        $totalGroup = count($categories);
+        $perPage = 40;
         $page = Paginator::resolveCurrentPage('page');
-        $mergedCollection = new LengthAwarePaginator($mergedCollection->forPage($page, $perPage), $totalGroup, $perPage, $page, [
+        $categories = new LengthAwarePaginator($categories->forPage($page, $perPage), $totalGroup, $perPage, $page, [
             'path' => Paginator::resolveCurrentPath(),
             'pageName' => 'page',
         ]);
 
-        return view('dashboards.users.admin.pages.categories.index.index', compact('user', 'mergedCollection'));  
+        return view('dashboards.users.admin.pages.categories.index.index', compact('user', 'categories'));  
     }
 }

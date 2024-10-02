@@ -172,3 +172,18 @@ input[type=number] {
 .zisaz-psite-navigation-btn {
   cursor: pointer;
 }
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.category-image {
+  width: 25px;
+  height: 25px;
+}
+
+.floating-right-border {
+  border-right: 1px solid rgba(128, 128, 128, 0.63);
+}
+
+

@@ -108,6 +108,7 @@ class AdminDashboardVisitController extends Controller
     }
 
     public function exportExcel(Request $request) {
+        
         if(empty($request->except('page'))) {
             // Retrieve all Visit records
             $visits = Visit::orderBy('created_at', 'desc')->get();

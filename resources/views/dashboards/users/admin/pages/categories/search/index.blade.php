@@ -87,20 +87,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($mergedCollection as $mergedCollectionKey => $mergedCollectionItem)
+                                @foreach ($categories as $categoryKey => $categoryItem)
                                     <tr>
                                         <td>
                                             <bdi>
-                                                {{($mergedCollectionKey + 1)}}
+                                                {{($categoryKey + 1)}}
                                             </bdi>
                                         </td>
                                         <td>
-                                            {{$mergedCollectionItem->title}}
+                                            {{$categoryItem->category_name}}
                                         </td>
                                         <td>
-                                            @if(isset($mergedCollectionItem->activityCategory))
+                                            @if($categoryItem->parent !== 0)
                                                 <span class="badge bg-label-dark">
-                                                    {{$mergedCollectionItem->activityCategory->title}}
+                                                    {{$categoryItem->parentCategory->category_name}}
                                                 </span>
                                             @else
                                                 <span class="badge bg-label-primary">
@@ -114,54 +114,35 @@
                                                     <i class="text-primary ti ti-dots-vertical"></i>
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end m-0">
-                                                    @if(!isset($mergedCollectionItem->activityCategory))
+                                                    @if($categoryItem->child->count())
                                                         <li>
-                                                            <a href="{{route('admin.dashboard.category.show-subitem', $mergedCollectionItem->id)}}" class="dropdown-item">
+                                                            <a href="{{route('admin.dashboard.category.subitem', $categoryItem->id)}}" class="dropdown-item">
                                                                 نمایش زیر دسته
                                                             </a>
                                                         </li>
                                                     @endif
                                                     @can('category_destroy')
-                                                        @if(isset($mergedCollectionItem->activityCategory))
-                                                            <li>
-                                                                <form action="{{route('admin.dashboard.category.destroy-actgrp', $mergedCollectionItem->id)}}" method="POST">
-                                                                    @method('delete')
-                                                                    @csrf
-                    
-                                                                    <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
-                                                                        حذف
-                                                                    </button>
-                                                                </form>
-                                                            </li>
-                                                        @else
-                                                            <li>
-                                                                <form action="{{route('admin.dashboard.category.destroy-actcat', $mergedCollectionItem->id)}}" method="POST">
-                                                                    @method('delete')
-                                                                    @csrf
-                    
-                                                                    <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
-                                                                        حذف
-                                                                    </button>
-                                                                </form>
-                                                            </li>
-                                                        @endif
+                                                        <li>
+                                                            <form action="{{route('admin.dashboard.category.destroy', $categoryItem->id)}}" method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                
+                                                                <button type="submit" class="dropdown-item text-danger" onclick ="return confirm('آیا برای انجام این کار اطمینان دارید؟ تمام فعالیت های مرتبط با این دسته بندی از سامانه حذف خواهد شد.')">
+                                                                    حذف
+                                                                </button>
+                                                            </form>
+                                                        </li>
                                                     @endcan    
                                                 </ul>
                                             </div>
                                             @can('category_edit')
-                                                @if(isset($mergedCollectionItem->activityCategory))
-                                                    <a href="{{route('admin.dashboard.category.edit-actgrp', $mergedCollectionItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                        <i class="text-primary ti ti-pencil"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="{{route('admin.dashboard.category.edit-actcat', $mergedCollectionItem->id)}}" class="btn btn-sm btn-icon item-edit">
-                                                        <i class="text-primary ti ti-pencil"></i>
-                                                    </a>
-                                                @endif
+                                                <a href="{{route('admin.dashboard.category.edit', $categoryItem->id)}}" class="btn btn-sm btn-icon item-edit">
+                                                    <i class="text-primary ti ti-pencil"></i>
+                                                </a>
                                             @endcan    
                                         </td>
                                     </tr>
-                                @endforeach        
+                                @endforeach       
                             </tbody>
                         </table>
                     </div>
@@ -170,7 +151,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                            {{$mergedCollection->links('vendor.pagination.dashboards-datatables')}}
+                            {{$categories->links('vendor.pagination.dashboards-datatables')}}
                         </div>
                     </div>
                 </div>
